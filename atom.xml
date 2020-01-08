@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.mnxd.xyz/"/>
-  <updated>2020-01-08T16:15:28.344Z</updated>
+  <updated>2020-01-08T16:55:04.107Z</updated>
   <id>https://www.mnxd.xyz/</id>
   
   <author>
@@ -17,11 +17,39 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>delete[]和delete</title>
+    <link href="https://www.mnxd.xyz/archives/8104acb6.html"/>
+    <id>https://www.mnxd.xyz/archives/8104acb6.html</id>
+    <published>2020-01-08T16:17:10.708Z</published>
+    <updated>2020-01-08T16:55:04.107Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;0-delete&quot;&gt;&lt;a href=&quot;#0-delete&quot; class=&quot;headerlink&quot; title=&quot;0. delete[]&quot;&gt;&lt;/a&gt;0.
+        
+      
+    
+    </summary>
+    
+      <category term="C++基础" scheme="https://www.mnxd.xyz/categories/C-%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="C++" scheme="https://www.mnxd.xyz/tags/C/"/>
+    
+      <category term="delete" scheme="https://www.mnxd.xyz/tags/delete/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Lambda和Mutable</title>
     <link href="https://www.mnxd.xyz/archives/ea0b20c.html"/>
     <id>https://www.mnxd.xyz/archives/ea0b20c.html</id>
     <published>2020-01-08T11:00:31.468Z</published>
-    <updated>2020-01-08T16:15:28.344Z</updated>
+    <updated>2020-01-08T16:15:47.375Z</updated>
     
     <summary type="html">
     
@@ -51,7 +79,7 @@
     <link href="https://www.mnxd.xyz/archives/3445ed2d.html"/>
     <id>https://www.mnxd.xyz/archives/3445ed2d.html</id>
     <published>2020-01-08T03:34:13.916Z</published>
-    <updated>2020-01-08T04:40:15.611Z</updated>
+    <updated>2020-01-08T16:15:47.373Z</updated>
     
     <summary type="html">
     

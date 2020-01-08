@@ -4,13 +4,14 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Noraml Map(法线贴图), SCU CG CompuerGraphics 码农 Ricardo 小杜 OpenGL GLSL HIVE 游戏引擎开发">
+    <meta name="keywords" content="delete[]和delete, SCU CG CompuerGraphics 码农 Ricardo 小杜 OpenGL GLSL HIVE 游戏引擎开发">
     <meta name="baidu-site-verification" content="1MqvQ6zfNJ">
     <meta name="google-site-verification" content="LYvzXgqPaMOwG9zUJOhjqbXhRknn5jNhZltznVcTbH8">
-    <meta name="description" content="在实验室HIVE底层基础上实现了PM+NM的效果，demo
-一、算法解决的问题：
- 解决了对于凹凸不平的复杂地形需要大量的片元才能体现高度落差效果的问题，提高了运行效率。
- 解决了对于凹凸不平、存在大量缝隙的复杂地形需要大量的片元才能体现高">
+    <meta name="description" content="0. delete[]这个问题其实来自于看到师兄师姐的面经里有提到一个问题
+delete[]是如何知道要delete的数组大小的？
+Type * pName = new Type[Size];
+
+在执行上述语句时，一开始我简单的以为C++编">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +19,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Noraml Map(法线贴图) | Ricardo&#39;s Blog</title>
+    <title>delete[]和delete | Ricardo&#39;s Blog</title>
     <link rel="icon" type="image/jpeg" href="/favicon.jpg">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -526,13 +527,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/cover.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/North.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Noraml Map(法线贴图)
+                        delete[]和delete
                     </div>
                 </div>
             </div>
@@ -554,12 +555,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/法线贴图/" target="_blank">
-                                <span class="chip bg-color">法线贴图</span>
+                            <a href="/tags/C/" target="_blank">
+                                <span class="chip bg-color">C++</span>
                             </a>
                         
-                            <a href="/tags/normalmap/" target="_blank">
-                                <span class="chip bg-color">normalmap</span>
+                            <a href="/tags/delete/" target="_blank">
+                                <span class="chip bg-color">delete</span>
                             </a>
                         
                     </div>
@@ -570,8 +571,8 @@
                     <div class="post-cate">
                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/图形学算法/" class="post-category" target="_blank">
-                                图形学算法
+                            <a href="/categories/C-基础/" class="post-category" target="_blank">
+                                C++基础
                             </a>
                         
                     </div>
@@ -582,7 +583,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-12-13
+                    2020-01-09
                 </div>
 
                 <div class="post-author info-break-policy">
@@ -596,14 +597,14 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.4k
+                        304
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        4 分
+                        1 分
                     </div>
                     
                 
@@ -620,51 +621,250 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>在实验室HIVE底层基础上实现了PM+NM的效果，<a href="https://github.com/ProgrammerRicardo/NormalMap-ParallaxMap" target="_blank" rel="noopener">demo</a></p>
-<p><strong>一、算法解决的问题：</strong></p>
-<p> 解决了对于凹凸不平的复杂地形需要大量的片元才能体现高度落差效果的问题，提高了运行效率。</p>
-<p> 解决了对于凹凸不平、存在大量缝隙的复杂地形需要大量的片元才能体现高度落差效果的问题，提高了运行效率。</p>
-<p> Normal Map就是通过读取一张存储着法线信息的纹理来计算光照（而不通过顶点法线的插值），这样可以增强图像的真实感。</p>
-<p>从光照算法的角度考虑，垂直于物体的法线向量决定了该物体的形状。对整个纹理表面使用相同的法线进行光照计算时，如下图左边模型，由于法线相同，物体表面会被视为完全平坦的表面来照亮。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/%E5%9B%BE%E5%BD%A2%E5%AD%A6/Normalmap/nm1.webp" alt="normalmodel.png"></p>
-<p> 如果对每一个fragment都通过自己的方向向量结合光照来计算光照表现，就能让光照再法线方向不同的fragment上有不同的表现从而极大提升纹理表面细节。</p>
-<p><strong>二、算法详解：</strong></p>
-<p> 切线空间：每一个fragment的法向量并不是始终指向世界坐标的正Z方向，所以从纹理法线贴图中采样到的法向量与模型实际的法向量的参考坐标系不一致。所以就需要将两者变换到同一坐标参考系下进行计算，这里我们引入切线空间的概念。</p>
-<p> 切线空间是位于三角形表面之上的空间，法线相对于单个三角形的本地参考框架。它就像法线贴图向量的本地空间。它们都被定义为指向正z方向，无论最终变换到什么方向。</p>
-<p> 如下图所示，当模型实际的法向量如图中SURFACE NORMAL方向所示时，纹理表面fragment的法向量与它的方向完全不一致，我们使用一种矩阵，把法线从切线空间变换到一个不同的空间，这样它们就能和表面法线方向对齐了：法线向量都会指向正y方向。这就是TBN矩阵。这三个字母分别代表tangent、bitangent和normal向量。这是建构这个矩阵所需的向量。要建构这样一个把切线空间转变为不同空间的变异矩阵，我们需要三个相互垂直的向量，它们沿一个表面的法线贴图对齐于：上、右、前。</p>
-<p> 我们有以下两种方法可以将纹理法向量与光照方向统一到同一坐标系中：</p>
-<p> （1）使用一个TBN矩阵我们将本地/切线空间中的法线向量转成世界或视图坐标，使它们转向到最终的贴图表面的方向。</p>
-<p> （2）使用TBN的逆矩阵将光照方向转换到切线空间中进行计算。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/%E5%9B%BE%E5%BD%A2%E5%AD%A6/Normalmap/nm2.webp" alt="NM1.png"></p>
-<p> NM的基本思想：使用一个2D纹理来储存法线数据（法线贴图），对法线贴图进行采样，将获取到的法向量从切线空间转换到世界空间中，再进行光照计算。</p>
-<p> 从法线贴图中获取到的法线向量是在切线空间中且永远指向切线空间的正z方向的。而在不同的fragment各自的切线空间正Z方向并不相同，在纹理贴图时，就需要使用TBN矩阵将本地/切线空间中的法线向量转到世界空间，使它们转向到最终的贴图表面的方向。</p>
-<p>算法流程：</p>
-<p>在顶点着色器中创建一个TBN矩阵；</p>
-<p>在片元着色器中，从Normal Map中读取法线向量；</p>
-<p>将法线向量从[0,1]重新映射回[-1,1]；</p>
-<p>使用TBN矩阵将法线向量从切线空间转换到世界空间；</p>
-<p>将法线向量应用于光照计算。</p>
-<p><strong>三、算法使用：</strong></p>
-<p>计算TBN矩阵：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/%E5%9B%BE%E5%BD%A2%E5%AD%A6/Normalmap/nm3.webp" alt="TBNcaculate.png"></p>
-<p> 其中的hive_ModelMatrix, _inVertexTangent, _inVertexBitangent, _inVertexNormal为HIVE底层导入模型时自动获取的数据。</p>
-<p>uniform变量：</p>
-<p>uTextureNormal0：纹理的法线贴图</p>
-<p>函数输入参数：</p>
-<p>vTexCoords：顶点着色器所传递的纹理坐标</p>
-<p>函数输出：</p>
-<p>Normal：转换到世界坐标系下的法向量</p>
-<p>效果图如下：普通纹理贴图：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/%E5%9B%BE%E5%BD%A2%E5%AD%A6/Normalmap/nm4.webp" alt="texture.png"></p>
-<p>采用NormalMap算法之后的砖墙细节表现：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/%E5%9B%BE%E5%BD%A2%E5%AD%A6/Normalmap/nm5.webp" alt="normalmap.png"></p>
-<p><strong>四、算法局限：</strong></p>
-<p> 事实上法线贴图仍然只是通过调整纹理细节处的光照明暗程度模拟纹理表面的缝隙和凹凸情况。它仍然存在一些问题：</p>
-<p>（1）纹理边缘凹凸细节没有得到优化。如下图所标注部分：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/%E5%9B%BE%E5%BD%A2%E5%AD%A6/Normalmap/nm6.webp" alt="NMlimitation1.png"></p>
-<p>（2）假设视线方向为e，与模拟凸起的砖块平面相交于蓝点，与原始平面纹理应当相交于黄点，若要真实的模拟砖块凸起，那么左模拟砖块截面图中红线部分应当属于被遮挡部分，但是在法线贴图中，黄点依然属于可见部分。即NM无法做到自遮蔽和自阴影。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/%E5%9B%BE%E5%BD%A2%E5%AD%A6/Normalmap/nm7.webp" alt="NMlimitation2desc.png"></p>
-<p> <img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/%E5%9B%BE%E5%BD%A2%E5%AD%A6/Normalmap/nm8.webp" alt="NMlimitation2.png"></p>
+                <h1 id="0-delete"><a href="#0-delete" class="headerlink" title="0. delete[]"></a>0. delete[]</h1><p>这个问题其实来自于看到师兄师姐的面经里有提到一个问题</p>
+<p><strong>delete[]是如何知道要delete的数组大小的？</strong></p>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">Type * pName = new Type[Size];
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>在执行上述语句时，一开始我简单的以为C++编译器内部实现了某种方法如</p>
+<ul>
+<li>申请pName指向的内存空间时会自动在sizeof(Type)*size前面+1块内存用来存储大小</li>
+<li><p><del>或者通过sizeof(theArray)/Sizeof[Type]得到数组大小</del>（错误想法）</p>
+</li>
+<li><p>内存管理库自己维护了一个列表,记录所有空间分配的位置和大小以及类型,delete的时候查一下这个列表就行了</p>
+</li>
+</ul>
+<h1 id="1-过分配内存方法"><a href="#1-过分配内存方法" class="headerlink" title="1.过分配内存方法"></a>1.过分配内存方法</h1><p>通过查阅资料，似乎在不同的编译器中都有对第一种方法的实现如下，</p>
+<p>以下内容来自知乎<a href="https://www.zhihu.com/question/25556263/answer/32589012" target="_blank" rel="noopener">夏华林的回答</a> ,这里抄过来做一下笔记。</p>
+<p>M$ 编译器 \ vc \include\ 目录下 malloc.h这一头文件 中 184 到 209 行的代码：</p>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">//这儿是根据不同的硬件平台的宏定义
+#if defined (_M_IX86)
+#define _ALLOCA_S_MARKER_SIZE   8
+#elif defined (_M_X64)
+#define _ALLOCA_S_MARKER_SIZE   16
+#elif defined (_M_ARM)
+#define _ALLOCA_S_MARKER_SIZE   8
+#elif !defined (RC_INVOKED)
+#error Unsupported target platform.
+#endif  /* !defined (RC_INVOKED) */
+
+_STATIC_ASSERT(sizeof(unsigned int) <= _ALLOCA_S_MARKER_SIZE);
+
+#if !defined (__midl) && !defined (RC_INVOKED)
+#pragma warning(push)
+#pragma warning(disable:6540)
+__inline void *_MarkAllocaS(_Out_opt_ __crt_typefix(unsigned int*) void *_Ptr, unsigned int _Marker)
+{
+    if (_Ptr)
+    {
+        *((unsigned int*)_Ptr) = _Marker;
+ //
+        _Ptr = (char*)_Ptr + _ALLOCA_S_MARKER_SIZE;
+ //最后返回给调用者的指针，是原始指针偏移了_ALLOCA_S_MARKER_SIZE的新指针，这也是刚才我将指针向后偏移，就能得到该指针所指向内存区块的大小的原因。
+    }
+    return _Ptr;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>而它的释放如下所示：</p>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">/* _freea must be in the header so that its allocator matches _malloca */
+#if !defined (__midl) && !defined (RC_INVOKED)
+#if !(defined (_DEBUG) && defined (_CRTDBG_MAP_ALLOC))
+#undef _freea
+__pragma(warning(push))
+__pragma(warning(disable: 6014))
+_CRTNOALIAS __inline void __CRTDECL _freea(_Pre_maybenull_ _Post_invalid_ void * _Memory)
+{
+    unsigned int _Marker;
+    if (_Memory)
+    {
+        _Memory = (char*)_Memory - _ALLOCA_S_MARKER_SIZE;
+//获得原始指针
+        _Marker = *(unsigned int *)_Memory;//得到指针所指区块的大小
+        if (_Marker == _ALLOCA_S_HEAP_MARKER)
+        {
+            free(_Memory);
+        }
+#if defined (_ASSERTE)
+        else if (_Marker != _ALLOCA_S_STACK_MARKER)
+        {
+            #pragma warning(suppress: 4548) /* expression before comma has no effect */
+            _ASSERTE(("Corrupted pointer passed to _freea", 0));
+        }
+#endif  /* defined (_ASSERTE) */
+    }
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>再来看看 SGI　STL标准库源码 stl_alloc.h 文件209 行到 246行 debug_alloc类模板的设计：</p>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">// Allocator adaptor to check size arguments for debugging.
+// Reports errors using assert.  Checking can be disabled with
+// NDEBUG, but it's far better to just use the underlying allocator
+// instead when no checking is desired.
+// There is some evidence that this can confuse Purify.
+template <class _Alloc>
+class debug_alloc {
+
+private:
+
+  enum {_S_extra = 8};  // Size of space used to store size.  Note
+                        // that this must be large enough to preserve
+                        // alignment.
+
+                        //这儿就像它所说的那样
+public:
+
+  static void* allocate(size_t __n)
+  {
+    // 这里实际申请的内存大小要多 8 个字节
+    char* __result = (char*)_Alloc::allocate(__n + (int) _S_extra);
+    *(size_t*)__result = __n;//前 4 个字节用于存储区块大小，后4个字节的空白区暂时不清楚是为什么。
+    return __result + (int) _S_extra;//最后返回相对于原始指针偏移8个字节的新指针
+  }
+
+  static void deallocate(void* __p, size_t __n)
+  {
+    char* __real_p = (char*)__p - (int) _S_extra;//获得原始指针
+    assert(*(size_t*)__real_p == __n);//这里增加了一个断言，防止析构了被破坏的指针
+    _Alloc::deallocate(__real_p, __n + (int) _S_extra);
+  }
+
+  static void* reallocate(void* __p, size_t __old_sz, size_t __new_sz)
+  {
+    char* __real_p = (char*)__p - (int) _S_extra;
+    assert(*(size_t*)__real_p == __old_sz);
+    char* __result = (char*)
+      _Alloc::reallocate(__real_p, __old_sz + (int) _S_extra,
+                                   __new_sz + (int) _S_extra);
+    *(size_t*)__result = __new_sz;
+    return __result + (int) _S_extra;
+  }
+
+};
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>gcc下其实也有同样的设计：</p>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">#if(defined(_X86_) && !defined(__x86_64))
+#define _ALLOCA_S_MARKER_SIZE 8
+#elif defined(__ia64__) || defined(__x86_64)
+#define _ALLOCA_S_MARKER_SIZE 16
+#endif
+
+#if !defined(RC_INVOKED)
+  static __inline void *_MarkAllocaS(void *_Ptr,unsigned int _Marker) {
+    if(_Ptr) {
+      *((unsigned int*)_Ptr) = _Marker;
+      _Ptr = (char*)_Ptr + _ALLOCA_S_MARKER_SIZE;
+    }
+    return _Ptr;
+  }
+#endif
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">#ifndef RC_INVOKED
+#undef _freea
+  static __inline void __cdecl _freea(void *_Memory) {
+    unsigned int _Marker;
+    if(_Memory) {
+      _Memory = (char*)_Memory - _ALLOCA_S_MARKER_SIZE;
+      _Marker = *(unsigned int *)_Memory;
+      if(_Marker==_ALLOCA_S_HEAP_MARKER) {
+    free(_Memory);
+      }
+#ifdef _ASSERTE
+      else if(_Marker!=_ALLOCA_S_STACK_MARKER) {
+    _ASSERTE(("Corrupted pointer passed to _freea",0));
+      }
+#endif
+    }
+  }
+#endif /* RC_INVOKED */
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="2-内存管理表方法"><a href="#2-内存管理表方法" class="headerlink" title="2.内存管理表方法"></a>2.内存管理表方法</h1><p>暂时不太明白反汇编部分，待后续完善，这里的论证方法来自百度得到的一篇博客，但是我得到的和作者的结果不一致，所以暂时不做论证，先挖坑，后面有时间看了汇编再来补充</p>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">int main(void)
+
+{
+
+int *pI = new int;
+
+int *pArray = new int[10];
+
+int size = *(pArray-1);
+
+delete pI;
+
+delete [] pArray; 
+
+return 0;
+
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>查看反汇编后代码得到：</p>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">int main(void)
+
+{
+00007FF799591840  push        rbp  
+00007FF799591842  push        rdi  
+00007FF799591843  sub         rsp,1C8h  
+00007FF79959184A  lea         rbp,[rsp+20h]  
+00007FF79959184F  mov         rdi,rsp  
+00007FF799591852  mov         ecx,72h  
+00007FF799591857  mov         eax,0CCCCCCCCh  
+00007FF79959185C  rep stos    dword ptr [rdi]  
+00007FF79959185E  lea         rcx,[__89D24A3F_main@cpp (07FF7995A1000h)]  
+00007FF799591865  call        __CheckForDebuggerJustMyCode (07FF7995910A5h)  
+
+    int *pI = new int;
+00007FF79959186A  mov         ecx,4  
+00007FF79959186F  call        operator new (07FF799591195h)  
+00007FF799591874  mov         qword ptr [rbp+128h],rax  
+00007FF79959187B  mov         rax,qword ptr [rbp+128h]  
+00007FF799591882  mov         qword ptr [pI],rax  
+
+    int *pArray = new int[10];
+00007FF799591886  mov         ecx,28h  
+00007FF79959188B  call        operator new[] (07FF799591375h)  
+00007FF799591890  mov         qword ptr [rbp+148h],rax  
+00007FF799591897  mov         rax,qword ptr [rbp+148h]  
+00007FF79959189E  mov         qword ptr [pArray],rax  
+
+    int size = *(pArray - 1);
+00007FF7995918A2  mov         rax,qword ptr [pArray]  
+00007FF7995918A6  mov         eax,dword ptr [rax-4]  
+00007FF7995918A9  mov         dword ptr [size],eax  
+
+    delete pI;
+00007FF7995918AC  mov         rax,qword ptr [pI]  
+00007FF7995918B0  mov         qword ptr [rbp+168h],rax  
+00007FF7995918B7  mov         edx,4  
+00007FF7995918BC  mov         rcx,qword ptr [rbp+168h]  
+00007FF7995918C3  call        operator delete (07FF799591087h)  
+00007FF7995918C8  cmp         qword ptr [rbp+168h],0  
+00007FF7995918D0  jne         main+9Fh (07FF7995918DFh)  
+00007FF7995918D2  mov         qword ptr [rbp+198h],0  
+00007FF7995918DD  jmp         main+0B2h (07FF7995918F2h)  
+00007FF7995918DF  mov         qword ptr [pI],8123h  
+00007FF7995918E7  mov         rax,qword ptr [pI]  
+00007FF7995918EB  mov         qword ptr [rbp+198h],rax  
+
+    delete[] pArray;
+00007FF7995918F2  mov         rax,qword ptr [pArray]  
+00007FF7995918F6  mov         qword ptr [rbp+188h],rax  
+00007FF7995918FD  mov         rcx,qword ptr [rbp+188h]  
+00007FF799591904  call        operator delete[] (07FF799591294h)  
+00007FF799591909  cmp         qword ptr [rbp+188h],0  
+00007FF799591911  jne         main+0E0h (07FF799591920h)  
+00007FF799591913  mov         qword ptr [rbp+198h],0  
+00007FF79959191E  jmp         main+0F3h (07FF799591933h)  
+00007FF799591920  mov         qword ptr [pArray],8123h  
+00007FF799591928  mov         rax,qword ptr [pArray]  
+00007FF79959192C  mov         qword ptr [rbp+198h],rax  
+
+
+    return 0;
+00007FF799591933  xor         eax,eax  
+
+}
+00007FF799591935  lea         rsp,[rbp+1A8h]  
+00007FF79959193C  pop         rdi  
+00007FF79959193D  pop         rbp  
+00007FF79959193E  ret
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -833,7 +1033,7 @@
                     </span>
                     <a href="https://www.mnxd.xyz" class="b-link-green">Ricardo's Blog</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/archives/61559.html" class="b-link-green">Noraml Map(法线贴图)</a>
+                    <a href="/archives/8104acb6.html" class="b-link-green">delete[]和delete</a>
                 </p>
             </div>
 
@@ -856,7 +1056,7 @@
         repo: 'mnxd.github.io',
         owner: 'mnxd',
         admin: ["mnxd"],
-        id: 'archives/61559.html',
+        id: 'archives/8104acb6.html',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -877,53 +1077,56 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/archives/39121.html">
+                <a href="/archives/8104acb6.html">
                     <div class="card-image">
                         
                         
-                        <img src="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/Sea.jpg" class="responsive-img" alt="Parallax Map(视差贴图)">
+                        <img src="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/North.jpg" class="responsive-img" alt="delete[]和delete">
                         
-                        <span class="card-title">Parallax Map(视差贴图)</span>
+                        <span class="card-title">delete[]和delete</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            在实验室HIVE底层基础上实现了PM+NM的效果，demo
-一、算法解决的问题：
- 优化了纹理边缘的凹凸细节部分，实现了Normal Map无法实现的自遮蔽。
- 法线贴图只能在明暗效果上作假（模拟凹凸），无法控制表面实际的凹凸程度。如下图红
+                            0. delete[]这个问题其实来自于看到师兄师姐的面经里有提到一个问题
+delete[]是如何知道要delete的数组大小的？
+Type * pName = new Type[Size];
+
+在执行上述语句时，一开始我简单的以为C++编
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-12-13
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-01-09
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/图形学算法/" class="post-category" target="_blank">
-                                    图形学算法
+                            <a href="/categories/C-基础/" class="post-category" target="_blank">
+                                    C++基础
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/视差贴图/" target="_blank">
-                        <span class="chip bg-color">视差贴图</span>
+                    <a href="/tags/C/" target="_blank">
+                        <span class="chip bg-color">C++</span>
                     </a>
                     
-                    <a href="/tags/ParallaxMap/" target="_blank">
-                        <span class="chip bg-color">ParallaxMap</span>
+                    <a href="/tags/delete/" target="_blank">
+                        <span class="chip bg-color">delete</span>
                     </a>
                     
                 </div>
@@ -937,25 +1140,27 @@
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/archives/46132.html">
+                <a href="/archives/ea0b20c.html">
                     <div class="card-image">
                         
                         
-                        <img src="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/North.jpg" class="responsive-img" alt="单例模式">
+                        <img src="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/Princess%20PSD%20file.jpg" class="responsive-img" alt="Lambda和Mutable">
                         
-                        <span class="card-title">单例模式</span>
+                        <span class="card-title">Lambda和Mutable</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            0.单例模式 概念：
-​    单例模式是一种常见的软件设计模式。它的核心结构只包含一个被称为单例的特殊类。它的目的是保证一个类仅有一个实例，并提供一个访问它的全局访问点，该实例被所有程序模块共享。通过单例模式可以保证系统中一个类只有一个实
+                            0. Lambda表达式lambda表达式是C++11引入的”新”技术，之所以加引号是因为实际上其他语言如C#、Python中已经有了，只是C++在11版本中才刚刚推出而已。
+1. 声明Lambda表达式先上实际代码：
+#include 
+
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-12-13
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-01-08
                             </span>
                         <span class="publish-author">
                             
@@ -963,10 +1168,6 @@
                             
                             <a href="/categories/C-基础/" class="post-category" target="_blank">
                                     C++基础
-                                </a>
-                            
-                            <a href="/categories/C-基础/设计模式/" class="post-category" target="_blank">
-                                    设计模式
                                 </a>
                             
                             
@@ -980,8 +1181,12 @@
                         <span class="chip bg-color">C++</span>
                     </a>
                     
-                    <a href="/tags/设计模式/" target="_blank">
-                        <span class="chip bg-color">设计模式</span>
+                    <a href="/tags/Lambda/" target="_blank">
+                        <span class="chip bg-color">Lambda</span>
+                    </a>
+                    
+                    <a href="/tags/Mutable/" target="_blank">
+                        <span class="chip bg-color">Mutable</span>
                     </a>
                     
                 </div>
