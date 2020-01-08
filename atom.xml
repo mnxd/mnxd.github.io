@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Ricardo&#39;s Blog</title>
+  
+  <subtitle>码农小杜的个人博客</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://www.mnxd.xyz/"/>
+  <updated>2020-01-08T16:15:28.344Z</updated>
+  <id>https://www.mnxd.xyz/</id>
+  
+  <author>
+    <name>Ricardo</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Lambda和Mutable</title>
+    <link href="https://www.mnxd.xyz/archives/ea0b20c.html"/>
+    <id>https://www.mnxd.xyz/archives/ea0b20c.html</id>
+    <published>2020-01-08T11:00:31.468Z</published>
+    <updated>2020-01-08T16:15:28.344Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;0-Lambda表达式&quot;&gt;&lt;a href=&quot;#0-Lambda表达式&quot; class=&quot;headerlink&quot; title=&quot;0. Lambda表达式&quot;&gt;&lt;/a&gt;0.
+        
+      
+    
+    </summary>
+    
+      <category term="C++基础" scheme="https://www.mnxd.xyz/categories/C-%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="C++" scheme="https://www.mnxd.xyz/tags/C/"/>
+    
+      <category term="Lambda" scheme="https://www.mnxd.xyz/tags/Lambda/"/>
+    
+      <category term="Mutable" scheme="https://www.mnxd.xyz/tags/Mutable/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>调试方法</title>
+    <link href="https://www.mnxd.xyz/archives/3445ed2d.html"/>
+    <id>https://www.mnxd.xyz/archives/3445ed2d.html</id>
+    <published>2020-01-08T03:34:13.916Z</published>
+    <updated>2020-01-08T04:40:15.611Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;0-Debug&quot;&gt;&lt;a href=&quot;#0-Debug&quot; class=&quot;headerlink&quot; title=&quot;0. Debug&quot;&gt;&lt;/a&gt;0. Debug&lt;/h1&gt;&lt;p&gt;​   
+        
+      
+    
+    </summary>
+    
+      <category term="C++基础" scheme="https://www.mnxd.xyz/categories/C-%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="C++" scheme="https://www.mnxd.xyz/tags/C/"/>
+    
+      <category term="Debug" scheme="https://www.mnxd.xyz/tags/Debug/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>射线和三角形相交判断</title>
+    <link href="https://www.mnxd.xyz/archives/14699.html"/>
+    <id>https://www.mnxd.xyz/archives/14699.html</id>
+    <published>2019-12-18T12:16:44.814Z</published>
+    <updated>2020-01-05T14:12:00.348Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;快速微内存开销的射线与三角形相交测试&quot;&gt;&lt;a href=&quot;#快速微内存开销的射线与三角形相交测试&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="图形学算法" scheme="https://www.mnxd.xyz/categories/%E5%9B%BE%E5%BD%A2%E5%AD%A6%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="相交" scheme="https://www.mnxd.xyz/tags/%E7%9B%B8%E4%BA%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>float精度问题</title>
+    <link href="https://www.mnxd.xyz/archives/24837.html"/>
+    <id>https://www.mnxd.xyz/archives/24837.html</id>
+    <published>2019-12-18T09:17:23.663Z</published>
+    <updated>2020-01-01T16:40:35.937Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;0-提要&quot;&gt;&lt;a href=&quot;#0-提要&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="C++基础" scheme="https://www.mnxd.xyz/categories/C-%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="C++" scheme="https://www.mnxd.xyz/tags/C/"/>
+    
+      <category term="float" scheme="https://www.mnxd.xyz/tags/float/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>重心和其坐标的计算</title>
+    <link href="https://www.mnxd.xyz/archives/19888.html"/>
+    <id>https://www.mnxd.xyz/archives/19888.html</id>
+    <published>2019-12-18T09:15:13.765Z</published>
+    <updated>2020-01-01T16:40:35.959Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;三角形重心坐标及最有效率的计算方法&quot;&gt;&lt;a href=&quot;#三角形重心坐标及最有效率的计算方法&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="图形学算法" scheme="https://www.mnxd.xyz/categories/%E5%9B%BE%E5%BD%A2%E5%AD%A6%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="三角形" scheme="https://www.mnxd.xyz/tags/%E4%B8%89%E8%A7%92%E5%BD%A2/"/>
+    
+      <category term="重心" scheme="https://www.mnxd.xyz/tags/%E9%87%8D%E5%BF%83/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>错误和解决办法总结</title>
+    <link href="https://www.mnxd.xyz/archives/44848.html"/>
+    <id>https://www.mnxd.xyz/archives/44848.html</id>
+    <published>2019-12-18T09:05:35.936Z</published>
+    <updated>2020-01-05T13:17:01.942Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;1-部署报错&quot;&gt;&lt;a href=&quot;#1-部署报错&quot; class=&quot;headerlink&quot; title=&quot;1 部署报错&quot;&gt;&lt;/a&gt;1 部署报错&lt;/h1&gt;&lt;h2 id=&quot;1-1&quot;&gt;&lt;a href=&quot;#1-1&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="工具使用" scheme="https://www.mnxd.xyz/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"/>
+    
+    
+      <category term="hexo" scheme="https://www.mnxd.xyz/tags/hexo/"/>
+    
+      <category term="错误总结" scheme="https://www.mnxd.xyz/tags/%E9%94%99%E8%AF%AF%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>out关键字</title>
+    <link href="https://www.mnxd.xyz/archives/25339.html"/>
+    <id>https://www.mnxd.xyz/archives/25339.html</id>
+    <published>2019-12-18T08:15:00.000Z</published>
+    <updated>2020-01-05T13:17:10.119Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;C-中的Out&quot;&gt;&lt;a href=&quot;#C-中的Out&quot; class=&quot;headerlink&quot; title=&quot;C#中的Out&quot;&gt;&lt;/a&gt;C#中的Out&lt;/h1&gt;&lt;p&gt;​   
+        
+      
+    
+    </summary>
+    
+      <category term="C#基础" scheme="https://www.mnxd.xyz/categories/C-%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="ref" scheme="https://www.mnxd.xyz/tags/ref/"/>
+    
+      <category term="out" scheme="https://www.mnxd.xyz/tags/out/"/>
+    
+      <category term="C#基础" scheme="https://www.mnxd.xyz/tags/C-%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Git的使用</title>
+    <link href="https://www.mnxd.xyz/archives/6724.html"/>
+    <id>https://www.mnxd.xyz/archives/6724.html</id>
+    <published>2019-12-16T12:29:57.000Z</published>
+    <updated>2020-01-05T13:17:29.299Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;0-前言&quot;&gt;&lt;a href=&quot;#0-前言&quot; class=&quot;headerlink&quot; title=&quot;0.前言&quot;&gt;&lt;/a&gt;0.前言&lt;/h1&gt;&lt;p&gt;
+        
+      
+    
+    </summary>
+    
+      <category term="工具使用" scheme="https://www.mnxd.xyz/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"/>
+    
+    
+      <category term="版本控制" scheme="https://www.mnxd.xyz/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/"/>
+    
+      <category term="Git" scheme="https://www.mnxd.xyz/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图形学算法参考资料</title>
+    <link href="https://www.mnxd.xyz/archives/19075.html"/>
+    <id>https://www.mnxd.xyz/archives/19075.html</id>
+    <published>2019-12-16T12:18:53.000Z</published>
+    <updated>2020-01-05T13:17:18.826Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;一、&lt;br&gt;名称：Atom sphere
+        
+      
+    
+    </summary>
+    
+      <category term="图形学算法" scheme="https://www.mnxd.xyz/categories/%E5%9B%BE%E5%BD%A2%E5%AD%A6%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="图形学" scheme="https://www.mnxd.xyz/tags/%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+      <category term="算法" scheme="https://www.mnxd.xyz/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Anisotropic Filtering</title>
+    <link href="https://www.mnxd.xyz/archives/61169.html"/>
+    <id>https://www.mnxd.xyz/archives/61169.html</id>
+    <published>2019-12-13T08:21:22.079Z</published>
+    <updated>2020-01-01T16:40:35.956Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;strong&gt;游戏引擎架构课程小组报告总结&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;texture filter（纹理过滤）：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;
+        
+      
+    
+    </summary>
+    
+      <category term="图形学算法" scheme="https://www.mnxd.xyz/categories/%E5%9B%BE%E5%BD%A2%E5%AD%A6%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="纹理过滤" scheme="https://www.mnxd.xyz/tags/%E7%BA%B9%E7%90%86%E8%BF%87%E6%BB%A4/"/>
+    
+      <category term="采样" scheme="https://www.mnxd.xyz/tags/%E9%87%87%E6%A0%B7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Parallax Map(视差贴图)</title>
+    <link href="https://www.mnxd.xyz/archives/39121.html"/>
+    <id>https://www.mnxd.xyz/archives/39121.html</id>
+    <published>2019-12-13T08:21:22.076Z</published>
+    <updated>2020-01-01T16:40:35.952Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;在实验室HIVE底层基础上实现了PM+NM的效果，&lt;a href=&quot;https://github.com/ProgrammerRicardo/NormalMap-ParallaxMap&quot; target=&quot;_blank&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="图形学算法" scheme="https://www.mnxd.xyz/categories/%E5%9B%BE%E5%BD%A2%E5%AD%A6%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="视差贴图" scheme="https://www.mnxd.xyz/tags/%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BE/"/>
+    
+      <category term="ParallaxMap" scheme="https://www.mnxd.xyz/tags/ParallaxMap/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Noraml Map(法线贴图)</title>
+    <link href="https://www.mnxd.xyz/archives/61559.html"/>
+    <id>https://www.mnxd.xyz/archives/61559.html</id>
+    <published>2019-12-13T08:21:22.072Z</published>
+    <updated>2020-01-05T13:21:46.769Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;在实验室HIVE底层基础上实现了PM+NM的效果，&lt;a href=&quot;https://github.com/ProgrammerRicardo/NormalMap-ParallaxMap&quot; target=&quot;_blank&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="图形学算法" scheme="https://www.mnxd.xyz/categories/%E5%9B%BE%E5%BD%A2%E5%AD%A6%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="法线贴图" scheme="https://www.mnxd.xyz/tags/%E6%B3%95%E7%BA%BF%E8%B4%B4%E5%9B%BE/"/>
+    
+      <category term="normalmap" scheme="https://www.mnxd.xyz/tags/normalmap/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>单例模式</title>
+    <link href="https://www.mnxd.xyz/archives/46132.html"/>
+    <id>https://www.mnxd.xyz/archives/46132.html</id>
+    <published>2019-12-13T08:21:22.068Z</published>
+    <updated>2020-01-01T16:40:35.948Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;0-单例模式&quot;&gt;&lt;a href=&quot;#0-单例模式&quot; class=&quot;headerlink&quot; title=&quot;0.单例模式&quot;&gt;&lt;/a&gt;0.单例模式&lt;/h1&gt;&lt;p&gt; &lt;strong&gt;概念：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;​   
+        
+      
+    
+    </summary>
+    
+      <category term="C++基础" scheme="https://www.mnxd.xyz/categories/C-%E5%9F%BA%E7%A1%80/"/>
+    
+      <category term="设计模式" scheme="https://www.mnxd.xyz/categories/C-%E5%9F%BA%E7%A1%80/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="C++" scheme="https://www.mnxd.xyz/tags/C/"/>
+    
+      <category term="设计模式" scheme="https://www.mnxd.xyz/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>指针和引用</title>
+    <link href="https://www.mnxd.xyz/archives/22647.html"/>
+    <id>https://www.mnxd.xyz/archives/22647.html</id>
+    <published>2019-12-13T08:21:22.066Z</published>
+    <updated>2020-01-01T16:40:35.949Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;指针和引用的知识点复习整理。大概复习了一下内存机制，指针和引用的定义，类型，用法等。包括悬挂指针、野指针、空指针、万能指针、多级指针等。&lt;/p&gt;
+&lt;h1 id=&quot;1-内存概述&quot;&gt;&lt;a href=&quot;#1-内存概述&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="C++基础" scheme="https://www.mnxd.xyz/categories/C-%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="C++" scheme="https://www.mnxd.xyz/tags/C/"/>
+    
+      <category term="指针" scheme="https://www.mnxd.xyz/tags/%E6%8C%87%E9%92%88/"/>
+    
+      <category term="引用" scheme="https://www.mnxd.xyz/tags/%E5%BC%95%E7%94%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>宏和内联函数</title>
+    <link href="https://www.mnxd.xyz/archives/20434.html"/>
+    <id>https://www.mnxd.xyz/archives/20434.html</id>
+    <published>2019-12-13T08:21:22.063Z</published>
+    <updated>2020-01-01T16:40:35.939Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;0-前言&quot;&gt;&lt;a href=&quot;#0-前言&quot; class=&quot;headerlink&quot; title=&quot;0.前言&quot;&gt;&lt;/a&gt;0.前言&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;
+        
+      
+    
+    </summary>
+    
+      <category term="C++基础" scheme="https://www.mnxd.xyz/categories/C-%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="C++" scheme="https://www.mnxd.xyz/tags/C/"/>
+    
+      <category term="宏" scheme="https://www.mnxd.xyz/tags/%E5%AE%8F/"/>
+    
+      <category term="内联函数" scheme="https://www.mnxd.xyz/tags/%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>左值右值</title>
+    <link href="https://www.mnxd.xyz/archives/3763.html"/>
+    <id>https://www.mnxd.xyz/archives/3763.html</id>
+    <published>2019-12-13T08:21:22.060Z</published>
+    <updated>2020-01-01T16:40:35.940Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;0-前言&quot;&gt;&lt;a href=&quot;#0-前言&quot; class=&quot;headerlink&quot; title=&quot;0.前言&quot;&gt;&lt;/a&gt;0.前言&lt;/h1&gt;&lt;p&gt;
+        
+      
+    
+    </summary>
+    
+      <category term="C++基础" scheme="https://www.mnxd.xyz/categories/C-%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="C++" scheme="https://www.mnxd.xyz/tags/C/"/>
+    
+      <category term="左值右值" scheme="https://www.mnxd.xyz/tags/%E5%B7%A6%E5%80%BC%E5%8F%B3%E5%80%BC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Compute Shader</title>
+    <link href="https://www.mnxd.xyz/archives/44586.html"/>
+    <id>https://www.mnxd.xyz/archives/44586.html</id>
+    <published>2019-12-13T08:21:22.057Z</published>
+    <updated>2020-01-05T13:19:12.387Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;0-前言&quot;&gt;&lt;a href=&quot;#0-前言&quot; class=&quot;headerlink&quot; title=&quot;0 前言&quot;&gt;&lt;/a&gt;0 前言&lt;/h1&gt;&lt;p&gt;​   
+        
+      
+    
+    </summary>
+    
+      <category term="C#基础" scheme="https://www.mnxd.xyz/categories/C-%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="C#" scheme="https://www.mnxd.xyz/tags/C/"/>
+    
+      <category term="GPU计算" scheme="https://www.mnxd.xyz/tags/GPU%E8%AE%A1%E7%AE%97/"/>
+    
+      <category term="ComputerShader" scheme="https://www.mnxd.xyz/tags/ComputerShader/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SSAO</title>
+    <link href="https://www.mnxd.xyz/archives/61840.html"/>
+    <id>https://www.mnxd.xyz/archives/61840.html</id>
+    <published>2019-12-13T08:21:22.013Z</published>
+    <updated>2020-01-01T16:40:35.951Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;strong&gt;一、算法解决的问题：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt; 实现了场景中的环境光遮蔽，有较好的细节表现，并且解决了传统AO不能实时的问题。&lt;/p&gt;
+&lt;p&gt; 由于性能的限制，我们在进行光照计算是通常不考虑环境光(Ambient
+        
+      
+    
+    </summary>
+    
+      <category term="图形学算法" scheme="https://www.mnxd.xyz/categories/%E5%9B%BE%E5%BD%A2%E5%AD%A6%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="环境光遮蔽" scheme="https://www.mnxd.xyz/tags/%E7%8E%AF%E5%A2%83%E5%85%89%E9%81%AE%E8%94%BD/"/>
+    
+      <category term="ssao" scheme="https://www.mnxd.xyz/tags/ssao/"/>
+    
+  </entry>
+  
+</feed>

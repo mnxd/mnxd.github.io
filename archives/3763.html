@@ -1,0 +1,1515 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+    
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="左值右值, SCU CG CompuerGraphics 码农 Ricardo 小杜 OpenGL GLSL HIVE 游戏引擎开发">
+    <meta name="baidu-site-verification" content="1MqvQ6zfNJ">
+    <meta name="google-site-verification" content="LYvzXgqPaMOwG9zUJOhjqbXhRknn5jNhZltznVcTbH8">
+    <meta name="description" content="0.前言 在实验室例会报告之前，我简单的将左值和右值解释为在c++中可以放在赋值操作符左边的是左值，可以放到赋值操作符右面的是右值。
+
+左值为Lvalue，L代表Location，表示内存可以寻址，可以赋值。
+右值为Rvalue，R代表Re">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>左值右值 | Ricardo&#39;s Blog</title>
+    <link rel="icon" type="image/jpeg" href="/favicon.jpg">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?46e79e71af0709a5b9106bf20cecc493";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+    
+    
+        <script>
+            (function(){
+                var bp = document.createElement('script');
+                var curProtocol = window.location.protocol.split(':')[0];
+                if (curProtocol === 'https') {
+                    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+                }
+                else {
+                    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+                }
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(bp, s);
+            })();
+        </script>
+    
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+    <body>
+
+        <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Ricardo's Blog</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于我</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/contact" class="waves-effect waves-light">
+            
+            <i class="fa fa-envelope"></i>
+            
+            <span>留言板</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性  -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+      <li class="hide-on-med-and-down nav-item" >
+
+        
+            <a href="/" class="waves-effect waves-light">
+              
+                <i class="fa fa-home"></i>
+              
+              <span>首页</span>
+            </a>
+
+            
+      </li>
+    
+      <li class="hide-on-med-and-down nav-item" >
+
+        
+            <a href="/tags" class="waves-effect waves-light">
+              
+                <i class="fa fa-tags"></i>
+              
+              <span>标签</span>
+            </a>
+
+            
+      </li>
+    
+      <li class="hide-on-med-and-down nav-item" >
+
+        
+            <a href="/categories" class="waves-effect waves-light">
+              
+                <i class="fa fa-bookmark"></i>
+              
+              <span>分类</span>
+            </a>
+
+            
+      </li>
+    
+      <li class="hide-on-med-and-down nav-item" >
+
+        
+            <a href="/archives" class="waves-effect waves-light">
+              
+                <i class="fa fa-archive"></i>
+              
+              <span>归档</span>
+            </a>
+
+            
+      </li>
+    
+      <li class="hide-on-med-and-down nav-item" >
+
+        
+            <a href="/about" class="waves-effect waves-light">
+              
+                <i class="fa fa-user-circle-o"></i>
+              
+              <span>关于我</span>
+            </a>
+
+            
+      </li>
+    
+      <li class="hide-on-med-and-down nav-item" >
+
+        
+            <a href="/contact" class="waves-effect waves-light">
+              
+                <i class="fa fa-envelope"></i>
+              
+              <span>留言板</span>
+            </a>
+
+            
+      </li>
+    
+      <li class="hide-on-med-and-down nav-item" >
+
+        
+            <a href="/friends" class="waves-effect waves-light">
+              
+                <i class="fa fa-address-book"></i>
+              
+              <span>友情链接</span>
+            </a>
+
+            
+      </li>
+    
+
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Ricardo's Blog</div>
+        <div class="logo-desc">
+            
+            四川大学 | 计算机技术 | 图形学 | 游戏引擎
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于我
+            </a>
+        </li>
+        
+        <li>
+            <a href="/contact" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-envelope"></i>
+                
+                留言板
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/mnxd" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+
+   
+   
+<!-- 支持二级菜单特性 -->
+<!-- <ul class="menu-list mobile-menu-list">
+    
+        <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+              
+            </li>
+        
+        <li class="m-nav-item">
+                
+                    <a href="/tags" class="waves-effect waves-light">
+                        
+                        <i class="fa fa-fw fa-tags"></i>
+                        
+                        标签
+                    </a>
+              
+            </li>
+        
+        <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                        <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+              
+            </li>
+        
+        <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                        <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+              
+            </li>
+        
+        <li class="m-nav-item">
+                
+                    <a href="/about" class="waves-effect waves-light">
+                        
+                        <i class="fa fa-fw fa-user-circle-o"></i>
+                        
+                        关于我
+                    </a>
+              
+            </li>
+        
+        <li class="m-nav-item">
+                
+                    <a href="/contact" class="waves-effect waves-light">
+                        
+                        <i class="fa fa-fw fa-envelope"></i>
+                        
+                        留言板
+                    </a>
+              
+            </li>
+        
+        <li class="m-nav-item">
+                
+                    <a href="/friends" class="waves-effect waves-light">
+                        
+                        <i class="fa fa-fw fa-address-book"></i>
+                        
+                        友情链接
+                    </a>
+              
+            </li>
+        
+
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/mnxd" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul> -->
+
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/mnxd" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+        
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/c%2B%2B.webp')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        左值右值
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="container content">
+
+    
+    <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/C/" target="_blank">
+                                <span class="chip bg-color">C++</span>
+                            </a>
+                        
+                            <a href="/tags/左值右值/" target="_blank">
+                                <span class="chip bg-color">左值右值</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/C-基础/" class="post-category" target="_blank">
+                                C++基础
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-12-13
+                </div>
+
+                <div class="post-author info-break-policy">
+                    <i class="fa fa-user-o fa-fw"></i>作者:&nbsp;&nbsp;
+                    
+                        Ricardo
+                    
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        996
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        3 分
+                    </div>
+                    
+                
+                
+                
+                        <span id="busuanzi_container_site_pv" style='display:none'></span>
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv" ></span>
+    
+                
+
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h1><p> 在实验室例会报告之前，我简单的将左值和右值解释为在c++中可以放在赋值操作符左边的是左值，可以放到赋值操作符右面的是右值。</p>
+<ul>
+<li>左值为Lvalue，L代表Location，表示内存可以寻址，可以赋值。</li>
+<li>右值为Rvalue，R代表Read,就是可以知道它的值。</li>
+</ul>
+<p>比如:int temp = 10; temp在内存中有地址，10没有，但是可以Read到它的值。<br>​ 但是实验室的同学提到了几个新的概念：std::move std::forward和右值引用。所以我又重新查找资料学习了一下。整理笔记如下：</p>
+<p>#1.左值右值<br>​ 左值与右值是C++中表达式的属性，在C++11中，每个表达式有两个属性：类型（type，除去引用特性，用于类型检查）和值类型（value category，用于语法检查，比如一个表达式结果是否能被赋值）。<br>​ 值类型包括3个基本类型：lvalue、prvalue与xrvalue。后两者又统称为rvalue。lvalue我们称为左值，你可以将左值看成是一个可以获取地址的量，它可以用来标识一个对象或函数。rvalue称为右值，你可以认为所有不是左值的量就是右值，这是最简单的解释。<br>​ <a href="https://en.cppreference.com/w/cpp/language/value_category" target="_blank" rel="noopener">cppreference</a>有关于lvalue，prvalue，xrvalue的详细划分。其中要准确区分出右值中的prvalue和xrvalue并不容易：大概前者就是纯粹的右值，比如字面量，表达式（true,a++）等等，后者指的是可以被重用的临时对象比如一个数组，或者一个对象的成员（a[n]，a.m）等等</p>
+<h1 id="2-左值引用"><a href="#2-左值引用" class="headerlink" title="2.左值引用"></a>2.左值引用</h1><p> 在C++11之前就已经有了左值引用，有时候我们简称为引用，其语法很简单：</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">int x = 20;int& rx = x;   // 定义引用时必须初始化
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p> 但是引用也分为const引用与non-const引用，对于non-const引用，其只能用non-const左值来初始化：</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">int x = 20;int& rx1 = x;   // non-const引用可以被non-const左值初始化
+const int y = 10;
+int& rx2 = y;  // 非法：non-const引用不能被const左值初始化
+int& rx3 = 10;      // 非法：non-const引用不能被右值初始化
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>但是const引用限制就少了：int x = 10;</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">const int cx = 20;const int& rx1 = x;   // const引用可以被non-const左值初始化
+const int& rx2 = cx;  // const引用可以被const左值初始化
+const int& rx3 = 9;   // const引用可以被右值初始化
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>理解上面并不难，因为你只要想着这样初始化不会造成矛盾就好了，特别注意的是const左值引用可以接收右值（这点很重要，后面会说）。</p>
+<h1 id="3-右值引用"><a href="#3-右值引用" class="headerlink" title="3.右值引用"></a>3.右值引用</h1><p> C++11以前，右值被认为是无用的资源，所以在C++11中引入了右值引用，就是为了重用右值。定义右值引用需要使用&amp;&amp;：</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">int&& rrx = 200;
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>右值引用一定不能被左值所初始化，只能用右值初始化：</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">int x = 20;    // 左值
+int&& rrx1 = x;   // 非法：右值引用无法被左值初始化
+const int&& rrx2 = x;  // 非法：右值引用无法被左值初始化
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>那么为什么呢？因为右值引用的目的是为了延长用来初始化对象的生命周期，对于左值，其生命周期与其作用域有关，你没有必要去延长。既然是延长，那么就出现了下面的情况：</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">int x = 20;   // 左值
+int&& rx = x * 2;  // x*2的结果是一个右值，rx延长其生命周期
+int y = rx + 2;   // 因此你可以重用它：42
+rx = 100;         // 一旦你初始化一个右值引用变量，该变量就成为了一个左值，可以被赋值
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这点很重要，初始化之后的右值引用将变成一个左值，如果是non-const还可以被赋值！右值引用还可以用于函数参数：</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">// 接收左值
+void fun(int& lref){  
+    cout << "l-value reference\n";
+}
+
+// 接收右值
+void fun(int&& rref){  
+    cout << "r-value reference\n";
+}
+int main(){   
+    int x = 10;  
+    fun(x);  // output: l-value reference   
+    fun(10);  // output: r-value reference
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以看到，函数参数要区分开右值引用与左值引用，这是两个不同的重载版本。还有，如果你定义了下面的函数：</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">void fun(const int& clref){ 
+    cout << "l-value const reference\n";
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>但是其实它不仅可以接收左值，而且可以接收右值（如果你没有提供接收右值引用的重载版本）。</p>
+<h1 id="4-移动语义和完美转发"><a href="#4-移动语义和完美转发" class="headerlink" title="4.移动语义和完美转发"></a>4.移动语义和完美转发</h1><p> 在C++11之后引入了新的技术：<strong>右值引用</strong>，这也是<strong>移动语义（Move semantics）</strong>和<strong>完美转发（Perfect forwarding）</strong>的基石。。</p>
+<ul>
+<li><strong>移动语义</strong>：将内存的所有权从一个对象转移到另外一个对象，高效的移动用来替换效率低下的复制，对象的移动语义需要实现移动构造函数（move constructor）和移动赋值运算符（move assignment operator）。</li>
+<li><p><strong>完美转发</strong>：定义一个函数模板，该函数模板可以接收任意类型参数，然后将参数转发给其它目标函数，且保证目标函数接受的参数其类型与传递给模板函数的类型相同。</p>
+<p>在理解右值引用的基础上，就可以理解移动语义了。前面说过，一个对象的移动语义的实现是通过移动构造函数与移动赋值运算符来实现的。所以，为了理解移动语义，我们从一个对象出发，下面创建一个动态数组类</p>
+</li>
+</ul>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">template <typename T>
+class DynamicArray
+{
+    public:    explicit DynamicArray(int size) :   
+    m_size{ size }, m_array{ new T[size] }  
+    {   
+        cout << "Constructor: dynamic array is created!\n";  
+    }   
+    virtual ~DynamicArray()   
+    {        
+        delete[] m_array;      
+        cout << "Destructor: dynamic array is destroyed!\n";  
+    }   
+    // 复制构造函数    
+    DynamicArray(const DynamicArray& rhs) :  
+    m_size{ rhs.m_size }   
+    {    
+        m_array = new T[m_size];      
+        for (int i = 0; i < m_size; ++i)          
+        m_array[i] = rhs.m_array[i];       
+        cout << "Copy constructor: dynamic array is created!\n";  
+    }    
+    // 复制赋值操作符   
+    DynamicArray& operator=(const DynamicArray& rhs)  
+    {       
+        cout << "Copy assignment operator is called\n";    
+        if (this == &rhs)     
+            return *this;     
+        delete[] m_array;       
+        m_size = rhs.m_size;      
+        m_array = new T[m_size];   
+        for (int i = 0; i < m_size; ++i)   
+            m_array[i] = rhs.m_array[i];     
+        return *this;   
+    }    
+    // 索引运算符   
+    T& operator[](int index)
+    {     
+        // 不进行边界检查   
+        return m_array[index];  
+    }   
+    const T& operator[](int index) const  
+    {    
+        return m_array[index];  
+    }   
+    int size() const { return m_size; }
+    private:  
+    T* m_array;   
+    int m_size;
+};
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p> 我们通过在堆上动态分配内存来实现动态数组类，类中实现复制构造函数、复制赋值操作符以及索引操作符。假如我们定义一个生产动态数组的工厂函数：</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">// 生产int动态数组的工厂函数
+DynamicArray<int> arrayFactor(int size)
+{  
+    DynamicArray<int> arr{ size };  
+    return arr;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后我们用下面的代码进行测试：</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">int main(){  
+    { 
+    DynamicArray<int> arr = arrayFactor(10); 
+    }  
+    return 0;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其输出为：</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">Constructor: dynamic array is created!
+Copy constructor: dynamic array is created!
+Destructor: dynamic array is destroyed!
+Destructor: dynamic array is destroyed!
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p> 此时，我们来解读这个输出。首先，你调用arrayFactor函数，内部创建了一个动态数组，所以普通构造函数被调用。然后将这个动态数组返回，但是这个对象是函数内部的，函数外是无法获得的，所以要生成一个临时对象，然后用这个动态数组初始化，函数最终返回的是临时对象。<br>​ 我们知道这个动态数组即将消亡，所以其是右值，那么在构建临时对象时，会调用复制构造函数（没有右值的版本，但是右值可以传递给const左值引用参数）。但是问题又来了，因为你返回的这个临时对象又拿去初始化另外一个对象arr，当然调用也是复制构造函数。调用两次复制构造函数完全没有必要，编译器也会这么想，所以将其优化：直接拿函数内部创建的动态数组去初始化arr。所以仅有一次复制构造函数被调用，但是一旦完成arr的创建，那个动态数组对象就被析构了。最后arr离开其作用域被析构。我们看到编译器尽管做了优化，但是还是导致对象被创建了两次，函数内部创建的动态数组仅仅是一个中间对象，用完后就被析构了，有没有可能直接将其申请的空间直接转移到arr，那么资源得以重用，实际上只用申请一份内存。但是问题的关键是复制构造函数执行的是复制，不是转移，无法实现这样的功能。此时，你需要移动构造函数：</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">template <typename T>
+class DynamicArray
+{
+    public:        
+    // ...其它省略  
+    // 移动构造函数   
+    DynamicArray(DynamicArray&& rhs) :     
+    m_size{ rhs.m_size }, m_array{rhs.m_array} 
+    {      
+        rhs.m_size = 0;      
+        rhs.m_array = nullptr;    
+        cout << "Move constructor: dynamic array is moved!\n";   
+    }    
+    // 移动赋值操作符   
+    DynamicArray& operator=(DynamicArray&& rhs)  
+    { 
+        cout << "Move assignment operator is called\n";  
+        if (this == &rhs)   
+            return *this;     
+        delete[] m_array;    
+        m_size = rhs.m_size;   
+        m_array = rhs.m_array;  
+        rhs.m_size = 0;     
+        rhs.m_array = nullptr; 
+        return *this;  
+    }};
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上面是移动构造函数与移动赋值操作符的实现，相比复制构造函数与复制赋值操作符，前者没有再分配内存，而是实现内存所有权转移。那么测试相同的代码，其结果是：</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">Constructor: dynamic array is created!
+Move constructor: dynamic array is moved!
+Destructor: dynamic array is destroyed!
+Destructor: dynamic array is destroyed!
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以看到，调用的是移动构造函数，那么函数内部申请的动态数组直接被转移到arr。从而减少了一份相同内存的申请与释放。注意析构函数被调用两次，这是因为尽管内部进行了内存转移，但是临时对象依然存在，只不过第一次析构函数析构的是一个nullptr，这不会对程序有影响。其实通过这个例子，我们也可以看到，一旦你已经自己创建了复制构造函数与复制赋值运算符后，编译器不会创建默认的移动构造函数和移动赋值运算符，这点要注意。最好的话，这个4个函数一旦自己实现一个，就应该养成实现另外3个的习惯。这就是移动语义，用移动而不是复制来避免无必要的资源浪费，从而提升程序的运行效率。其实在C++11中，STL的容器都实现了移动构造函数与移动赋值运算符，这将大大优化STL容器。std::move移动语义前面已经介绍了，我们知道对象的移动语义的实现是依靠移动构造函数和移动赋值操作符。但是前提是你传入的必须是右值，但是有时候你需要将一个左值也进行移动语义（因为你已经知道这个左值后面不再使用），那么就必须提供一个机制来将左值转化为右值。在C++中，std::move就是专为此而生，看下面的例子：</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">vector<int> v1{1, 2, 3, 4};
+vector<int> v2 = v1;             // 此时调用复制构造函数，v2是v1的副本
+vector<int> v3 = std::move(v1);  // 此时调用移动构造函数，v3与v1交换：v1为空，v3为{1, 2, 3, 4}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>可以看到，我们通过std::move将v1转化为右值，从激发v3的移动构造函数，实现移动语义。C++中利用std::move实现移动语义的一个典型函数是std::swap：实现两个对象的交换。C++11之前，std::swap的实现如下：</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">template <typename T>
+void swap(T& a, T& b)
+{  
+    T tmp{a};  // 调用复制构造函数 
+    a = b;     // 复制赋值运算符  
+    b = tmp;     // 复制赋值运算符
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>从上面的实现可以看到：共进行了3次复制。如果类型T比较占内存，那么交换的代价是非常昂贵的。但是利用移动语义，我们可以更加高效地交换两个对象：</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">template <typename T>
+void swap(T& a, T& b){  
+    T temp{std::move(a)};   // 调用移动构造函数 
+    a = std::move(b);       // 调用移动赋值运算符  
+    b = std::move(tmp);     // 调用移动赋值运算符
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>仅通过三次移动，实现两个对象的交换，由于没有复制，效率更高！你可能会想，std::move函数内部到底是怎么实现的。其实std::move函数并不“移动”，它仅仅进行了类型转换。下面给出一个简化版本的std::move:</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">template <typename T>
+typename remove_reference<T>::type&& move(T&& param){ 
+    using ReturnType = typename remove_reference<T>::type&&;  
+    return static_cast<ReturnType>(param);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>代码很短，但是估计很难懂。首先看一下函数的返回类型，remove_reference在头文件中，remove_reference有一个成员type，是T去除引用后的类型，所以remove_reference::type&amp;&amp;一定是右值引用，对于返回类型为右值的函数其返回值是一个右值（准确地说是xvalue）。所以，知道了std::move函数的返回值是一个右值。然后，我们看一下函数的参数，使用的是通用引用类型（&amp;&amp;），意味者其可以接收左值，也可以接收右值。其推导规则如下：如果实参是左值，推导后的形参是左值引用，如果是右值，推导出来的是右值引用（感兴趣的话可以看看reference collapsing）。但是不管怎么推导，ReturnType的类型一定是右值引用，最后std::move函数只是简单地调用static_cast将参数转化为右值引用。所以，std::move什么也没有做，只是告诉编译器将传入的参数无条件地转化为一个右值。所以，当你使用std::move作用于一个对象时，你只是告诉编译器这个对象要转化为右值，然后就有资格进行移动语义了！下面举一个由于误用std::move而无效的例子。假如你在设计一个标注类，其构造函数接收一个string类型参数作为标注文本，你不希望它被修改，所以标注为const，然后将其复制给其的一个数据成员，你可能会使用移动语义：</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">class Annotation
+{
+    public:  
+    explicit Annotation(const string& text):   
+    m_text {std::move(text)}  
+    { }    
+    const string& getText() const { return m_text; }private:  
+    string m_text;
+};
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后你高高兴兴地去测试：</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">int main(){ 
+    string text{ "hello" };   
+    Annotation ant{ text };   
+    cout << ant.getText() << endl;  // output: hello  
+    cout << text << endl;           // output: hello 不是空，移动语义没有实现 
+    return 0;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>你发现移动语义并没有被实现，这是为什么呢？首先，从直观上看，假如你移动语义成功了，那么text会发生改变，这会违反其const属性。所以，你不大可能成功！其实，std::move函数会在推导形参时会保持形参的const属性，所以其最终返回的是一个const右值引用类型，那么m_text{std::move(text)}到底会调用什么构造函数呢？我们知道string的内部有两个构造函数可能会匹配：</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">class string{    // ...    string(const string& rhs);   // 复制构造函数    string(string&& rhs);    // 移动构造函数}
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>那么到底会匹配哪个呢？肯定的是移动构造函数不会被匹配，因为不接受const对象，复制构造函数会匹配吗？答案是可以，因为前面我们讲过const左值引用可以接收右值，const右值更可以！所以，你其实调用了复制构造函数，那么移动语义当然无法实现。所以，如果你想接下来进行移动，那不要把std::move引用在const对象上！std::forward与完美转发前面已经讲过，完美转发就是创建一个函数，该函数可以接收任意类型的参数，然后将这些参数按原来的类型转发给目标函数，完美转发的实现要依靠std::forward函数。下面就定义了这样一个函数：</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">// 目标函数
+void foo(const string& str);   // 接收左值
+void foo(string&& str);        // 接收右值
+template <typename T>
+void wrapper(T&& param)
+{   
+    foo(std::forward<T>(param));  // 完美转发
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>首先要有一点要明确，不论传入wrapper的参数是左值还是右值，一旦传入之后，param一定是左值，然后我们来具体分析这个函数：当一个类型为string类型的右值传递给wrapper时，T被推导为string，param为右值引用类型，但是一旦传入后，param就变成了左值，所以你直接转发给foo函数，将丢失param的右值属性，那么std::forward就确保传入foo的值还是一个右值；当类型为const string的左值传递给wrapper时，T被推导为const string&amp;，param为const左值引用类型，传入后，param仍为const左值类型，所以你直接转发给foo函数，没有问题，此时应用std::forward函数可以看成什么也没有做；当类型为string的左值传递给wrapper时，T被推导为string&amp;，param为左值引用类型，传入后，param仍为左值类型，所以你直接转发给foo函数，没有问题，此时应用std::forward函数可以看成什么也没有做；所以wrapper函数可以实现完美转发，其关键点在于使用了std::forward函数确保传入的右值依然转发为右值，而对左值传入不做处理。那么，std::forward到底怎么处理，其实现如下：</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">template<typename T>
+T&& forward(typename remove_reference<T>::type& param)
+{  
+    return static_cast<T&&>(param);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>代码依然与std::move一样简洁，我们结合wrapper来看，如果传入wrapper函数中的是string左值，那么推导出T是string&amp;，那么将调用std::foward<string&>，根据std::foward的实现，其实例化为：</string&></p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">string& && forward(typename remove_reference<string&>::type& param)
+{  
+    return static_cast<string& &&>(param);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>连续出现3个&amp;符号有点奇怪，我们知道C++不允许引用的引用，那么其实编译器这里进行是引用折叠（reference collapsing，大致就是后面的引用消掉），因此，变成：</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">string& forward(string& param){
+    return static_cast<string&>(param);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>上面的代码就很清晰了，一个左值引用的参数，然后还是返回左值引用，此时的std::foward就是什么也没有做，因为传入与返回完全一样。那么如果传入wrapper函数中的是string右值，那么推导出T是string，那么将调用std::foward，根据std::foward的实现，其实例化为：</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">string && forward(typename remove_reference<string>::type& param)
+{ 
+    return static_cast<string&&>(param);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>继续简化，变成：</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">string&& forward(string& param)
+{  
+    return static_cast<string&&>(param);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>参数依然是左值引用（这点是一致的，因为前面说过传入std:;forward中的实参一直是左值），但是返回的是右值引用，此时的std::foward就是将一个左值转化了右值，这样保证传入目标函数的实参是右值！综上，可以看到std::foward函数是有条件地将传入的参数转化为右值，而std::move无条件地将参数转化为右值，这是两者的区别。但是本质上，两者什么没有做，做多就是进行了一次类型转换。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+            <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.88rem;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-large waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fa fa-close"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力!</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            
+            
+            
+            <div class="reprint1">
+                <p>
+                    <span class="reprint1-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="https://www.mnxd.xyz" class="b-link-green">Ricardo's Blog</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/archives/3763.html" class="b-link-green">左值右值</a>
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '80e7d8b92e13f751b060',
+        clientSecret: '94415e4ffa537a01384f052877e4f23966def980',
+        repo: 'mnxd.github.io',
+        owner: 'mnxd',
+        admin: ["mnxd"],
+        id: 'archives/3763.html',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/archives/20434.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/9.jpg" class="responsive-img" alt="宏和内联函数">
+                        
+                        <span class="card-title">宏和内联函数</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            0.前言 c++从c中继承的一个重要特征就是效率。假如c++的效率明显低于c的效率，那么就会有很大的一批程序员不去使用c++了。
+​    在c中我们经常把一些短并且执行频繁的计算写成宏，而不是函数，这样做的理由是为了执行效率，宏可以避免函
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-12-13
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/C-基础/" class="post-category" target="_blank">
+                                    C++基础
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C/" target="_blank">
+                        <span class="chip bg-color">C++</span>
+                    </a>
+                    
+                    <a href="/tags/宏/" target="_blank">
+                        <span class="chip bg-color">宏</span>
+                    </a>
+                    
+                    <a href="/tags/内联函数/" target="_blank">
+                        <span class="chip bg-color">内联函数</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/archives/44586.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/9.jpg" class="responsive-img" alt="Compute Shader">
+                        
+                        <span class="card-title">Compute Shader</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            0 前言​    在毕设项目中，需要动态的绘制上万乃至数十万个粒子球体，所以我们在重构中将原先的粒子位置计算和绘制过程改到了GPU上进行。
+​    比较重要的一个东西就是Compute Shader，
+
+        document.
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-12-13
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/C-基础/" class="post-category" target="_blank">
+                                    C#基础
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C/" target="_blank">
+                        <span class="chip bg-color">C#</span>
+                    </a>
+                    
+                    <a href="/tags/GPU计算/" target="_blank">
+                        <span class="chip bg-color">GPU计算</span>
+                    </a>
+                    
+                    <a href="/tags/ComputerShader/" target="_blank">
+                        <span class="chip bg-color">ComputerShader</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Ricardo's Blog<br />'
+            + '作者: Ricardo<br />'
+            + '链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+    
+
+</main>
+
+
+        <footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&copy; 2019 Ricardo/码农小杜. 
+
+            <br>
+            <span id="sitetime"></span><span class="my-face">ღゝ◡╹)ノ♡</span>
+            <br>
+
+            
+
+            
+                    
+                        <span id="busuanzi_container_site_pv" style='display:none'></span>
+                        总访问量: <span id="busuanzi_value_site_pv" class="white-color"></span>
+                    
+        
+                    
+                        <span id="busuanzi_container_site_uv" style='display:none'></span>
+                        人次&nbsp; | &nbsp;访客人数: <span id="busuanzi_value_site_uv" class="white-color"></span> 人
+                    
+    
+            
+
+            
+                &nbsp; | &nbsp;字数统计:&nbsp;
+                <span class="white-color">18.9k</span> 字
+            
+
+            
+            <br>
+
+        </div>
+
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/mnxd" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+ 
+    <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=dpc372ricardo@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+    <a href="https://zhihu.com/people/丑鬼" class="tooltipped" target="_blank" data-tooltip="访问我的知乎" data-position="top" data-delay="50">
+        <i class="fa fa-inverse">知</i>
+    </a>
+
+
+
+    <a href="http://wpa.qq.com/msgrd?v=3&uin=1021678461&site=qq&menu=yes" class="tooltipped" target="_blank" data-tooltip="访问我的QQ空间" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+
+    <a href="https://weibo.com/饼干先生Ricardo" class="tooltipped" target="_blank" data-tooltip="关注我的微博" data-position="top" data-delay="50">
+        <i class="fa fa-weibo"></i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+<script src="https://www.example.com/path/to/live2d-widget/autoload.js"></script>
+<script language=javascript>
+    function siteTime() {
+        window.setTimeout("siteTime()", 1000);
+        var seconds = 1000;
+        var minutes = seconds * 60;
+        var hours = minutes * 60;
+        var days = hours * 24;
+        var years = days * 365;
+        var today = new Date();
+        var todayYear = today.getFullYear();
+        var todayMonth = today.getMonth() + 1;
+        var todayDate = today.getDate();
+        var todayHour = today.getHours();
+        var todayMinute = today.getMinutes();
+        var todaySecond = today.getSeconds();
+
+        /* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+        year - 作为date对象的年份，为4位年份值
+        month - 0-11之间的整数，做为date对象的月份
+        day - 1-31之间的整数，做为date对象的天数
+        hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+        minutes - 0-59之间的整数，做为date对象的分钟数
+        seconds - 0-59之间的整数，做为date对象的秒数
+        microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+
+        var t1 = Date.UTC(2019, 12, 12, 00, 00, 00); //北京时间2019-8-1 00:00:00
+        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+        var diff = t2 - t1;
+        var diffYears = Math.floor(diff / years);
+        var diffDays = Math.floor((diff / days) - diffYears * 365);
+        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes *
+            minutes) / seconds);
+        document.getElementById("sitetime").innerHTML = "本站已勉强运行 " + diffYears + " 年 " + diffDays + " 天 " + diffHours +
+            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒" ;
+    } 
+    siteTime();
+</script>
+
+
+
+
+        <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+        <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+        <script src="/libs/materialize/materialize.min.js"></script>
+        <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+        <script src="/libs/aos/aos.js"></script>
+        <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+        <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+        <script src="/js/matery.js"></script>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=LYvzXgqPaMOwG9zUJOhjqbXhRknn5jNhZltznVcTbH8"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'LYvzXgqPaMOwG9zUJOhjqbXhRknn5jNhZltznVcTbH8');
+</script>
+
+
+
+        
+            <script src="/libs/others/clicklove.js"></script>
+        
+
+        
+            <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+        
+
+        <!-- 洪卫  -->
+        <script type="text/javascript">
+            var OriginTitile = document.title,
+                st;
+            document.addEventListener("visibilitychange", function () {
+                document.hidden ? (document.title = "Ricardo's Blog", clearTimeout(st)) : (document.title =
+                    "码农小杜的博客", st = setTimeout(function () {
+                        document.title = OriginTitile
+                    }, 3e3))
+            })
+        </script>
+
+        <!-- 鼠标点击烟花爆炸效果  -->
+        
+
+        <!-- 背景雪花飘落特效-->
+        
+
+        <!-- 鼠标点击文字特效 -->
+        
+
+        <!-- 背景雪花飘落特效  -->
+        
+
+        <!-- 在线聊天工具   -->
+        
+            <script src="//code.tidio.co/dvladrg9uaqax2eakammzbnvibz0uq7l.js"></script>
+            <!--  在线聊天位置自定义   -->
+            <script> 
+                $(document).ready(function () {
+
+                    setInterval(change_Tidio, 50);  
+                    function change_Tidio() { 
+
+                        var tidio=$("#tidio-chat iframe");
+                        if(tidio.css("display")=="block"&& $(window).width()>977 ){
+                            document.getElementById("tidio-chat-iframe").style.bottom= ($("div#backTop.top-scroll").css("display")=="none" &&$(window).width()>977)>0? "-40px" : ($("div.toc-title").length&&$(window).width()>977)>0?"80px":"20px";   
+                            document.getElementById("tidio-chat-iframe").style.right="-15px";   
+                            document.getElementById("tidio-chat-iframe").style.height=parseInt(tidio.css("height"))>=520?"520px":tidio.css("height");
+                            document.getElementById("tidio-chat-iframe").style.zIndex="997";
+                        } 
+                        else if(tidio.css("display")=="block"&&$(window).width()>601 &&$(window).width()<992 ){
+                            document.getElementById("tidio-chat-iframe").style.bottom= ($("div#backTop.top-scroll").css("display")=="none" && 601< $(window).width()<992)>0? "-40px":"20px" ;   
+                            document.getElementById("tidio-chat-iframe").style.right="-15px"; 
+                            document.getElementById("tidio-chat-iframe").style.zIndex="997";
+                        }
+                        else if(tidio.css("display")=="block"&&$(window).width()<601 && parseInt(tidio.css("height"))<230){
+                            document.getElementById("tidio-chat-iframe").style.bottom= ($("div#backTop.top-scroll").css("display")=="none" && $(window).width()<601)>0? "-10px":"45px" ;   
+                            document.getElementById("tidio-chat-iframe").style.zIndex="997";
+                        }
+
+                        if( tidio.css("display")=="block"&&$(window).width()<601 && parseInt(tidio.css("height"))>=230){
+                            document.getElementById("tidio-chat-iframe").style.zIndex="998";
+                        }
+                    } 
+                }); 
+            </script>
+        
+
+        <!-- 背景 canvas-nest  -->
+        
+
+        <!-- 背景静止彩带  -->
+        
+
+        <!-- 背景动态彩带 -->
+        
+            <script type="text/javascript">
+            var windowWidth = $(window).width();
+            if (windowWidth > 992) {
+                document.write('<script type="text/javascript" src="/libs/background/ribbon-dynamic.js"><\/script>');
+            }
+            </script>
+        
+
+    <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":210,"height":280},"mobile":{"show":false},"react":{"opacity":0.7}});</script><script>!function(e){var r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function t(){for(var c=0;c<r.length;c++)t=r[c],void 0,0<=(n=t.getBoundingClientRect()).top&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=r[c];t=o,n=function(){r=r.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}t(),e.addEventListener("scroll",function(){!function(t,n){clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)}(t,e)})}(this);</script></body>
+</html>
