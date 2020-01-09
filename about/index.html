@@ -794,7 +794,7 @@ $('.bg-cover').css('background-image', 'url(https://blog-1257951283.cos.ap-cheng
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"C#基础","value":2},{"name":"C++基础","value":8},{"name":"设计模式","value":1},{"name":"图形学算法","value":7},{"name":"工具使用","value":2}],
+                data: [{"name":"C#基础","value":2},{"name":"C++基础","value":8},{"name":"图形学算法","value":7},{"name":"设计模式","value":1},{"name":"工具使用","value":2}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -818,7 +818,7 @@ $('.bg-cover').css('background-image', 'url(https://blog-1257951283.cos.ap-cheng
         xAxis: [
             {
                 type: 'category',
-                data: ["C++","C#","GPU计算","ComputerShader","float","ref","out","C#基础","左值右值","宏"]
+                data: ["C++","C#","GPU计算","ComputerShader","ref","out","C#基础","左值右值","float","宏"]
             }
         ],
         yAxis: [
@@ -1017,14 +1017,6 @@ $('.bg-cover').css('background-image', 'url(https://blog-1257951283.cos.ap-cheng
             
             
             
-            
-            
-            <a href="/tags/float/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">float</span>
-            </a>
-            
-            
-            
             <a href="/tags/ref/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">ref</span>
             </a>
@@ -1043,8 +1035,16 @@ $('.bg-cover').css('background-image', 'url(https://blog-1257951283.cos.ap-cheng
             
             
             
+            
+            
             <a href="/tags/左值右值/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">左值右值</span>
+            </a>
+            
+            
+            
+            <a href="/tags/float/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">float</span>
             </a>
             
             
@@ -1057,6 +1057,18 @@ $('.bg-cover').css('background-image', 'url(https://blog-1257951283.cos.ap-cheng
             
             <a href="/tags/内联函数/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">内联函数</span>
+            </a>
+            
+            
+            
+            <a href="/tags/指针/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">指针</span>
+            </a>
+            
+            
+            
+            <a href="/tags/引用/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">引用</span>
             </a>
             
             
@@ -1081,18 +1093,6 @@ $('.bg-cover').css('background-image', 'url(https://blog-1257951283.cos.ap-cheng
             
             <a href="/tags/Mutable/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">Mutable</span>
-            </a>
-            
-            
-            
-            <a href="/tags/指针/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">指针</span>
-            </a>
-            
-            
-            
-            <a href="/tags/引用/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">引用</span>
             </a>
             
             
@@ -1155,18 +1155,6 @@ $('.bg-cover').css('background-image', 'url(https://blog-1257951283.cos.ap-cheng
             
             
             
-            <a href="/tags/三角形/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">三角形</span>
-            </a>
-            
-            
-            
-            <a href="/tags/重心/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">重心</span>
-            </a>
-            
-            
-            
             <a href="/tags/相交/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">相交</span>
             </a>
@@ -1181,6 +1169,18 @@ $('.bg-cover').css('background-image', 'url(https://blog-1257951283.cos.ap-cheng
             
             <a href="/tags/错误总结/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">错误总结</span>
+            </a>
+            
+            
+            
+            <a href="/tags/三角形/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">三角形</span>
+            </a>
+            
+            
+            
+            <a href="/tags/重心/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">重心</span>
             </a>
             
             
@@ -1224,25 +1224,7 @@ $('.bg-cover').css('background-image', 'url(https://blog-1257951283.cos.ap-cheng
 <li><strong>Shader编程学习中…</strong></li>
 <li><strong>C#编程学习中…<a href="https://github.com/ProgrammerRicardo/ShowPicture" target="_blank" rel="noopener">小组开发基于HTCvive的VR照片墙</a></strong></li>
 </ul>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
                         </div>
                 </div>
             </div>
@@ -1276,7 +1258,7 @@ $('.bg-cover').css('background-image', 'url(https://blog-1257951283.cos.ap-cheng
 
             
                 &nbsp; | &nbsp;字数统计:&nbsp;
-                <span class="white-color">19.2k</span> 字
+                <span class="white-color">18.5k</span> 字
             
 
             

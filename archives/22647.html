@@ -964,7 +964,7 @@ int main()
 <p>n 不能返回局部变量的引用。</p>
 <p>n 函数当左值，必须返回引用。</p>
 <h2 id="3-3-引用的本质"><a href="#3-3-引用的本质" class="headerlink" title="3.3 引用的本质"></a>3.3 引用的本质</h2><p><strong>引用的本质在c++内部实现是一个指针常量.</strong></p>
-<p>Type<strong>&amp;</strong> ref <strong>=</strong> val<strong>;</strong> // Type* const ref = &amp;val;</p>
+<p>Type<strong>&amp;</strong> ref <strong>=</strong> val<strong>;</strong> // Type* const ref = &val;</p>
 <p>c++编译器在编译过程中使用常指针作为引用的内部实现，因此引用所占用的空间大小与指针相同，只是这个过程是编译器内部实现，用户不可见。</p>
 <pre class="line-numbers language-lang-C++"><code class="language-lang-C++">//发现是引用，转换为 int* const ref = &a;
 void testFunc(int& ref)
@@ -1064,25 +1064,7 @@ void ShowVal(const int& param)
 </ul>
 <p>为了进一步加深大家对指针和引用的区别，下面我从编译的角度来阐述它们之间的区别：</p>
 <p>程序在编译时分别将指 针和引用添加到<strong>符号表</strong>上，符号表上记录的是变量名及变量所对应地址。指针变量在符号表上对应的地址值为指针变量的地址值，而引用在符号表上对应的地址值为 引用对象的地址值。符号表生成后就不会再改，因此指针可以改变其指向的对象（指针变量中的值可以改），而引用对象则不能修改。</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
             </div>
             <hr/>
 
@@ -1464,7 +1446,7 @@ void ShowVal(const int& param)
 
             
                 &nbsp; | &nbsp;字数统计:&nbsp;
-                <span class="white-color">19.2k</span> 字
+                <span class="white-color">18.5k</span> 字
             
 
             

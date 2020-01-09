@@ -885,25 +885,7 @@ T&& forward(typename remove_reference<T>::type& param)
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>参数依然是左值引用（这点是一致的，因为前面说过传入std:;forward中的实参一直是左值），但是返回的是右值引用，此时的std::foward就是将一个左值转化了右值，这样保证传入目标函数的实参是右值！综上，可以看到std::foward函数是有条件地将传入的参数转化为右值，而std::move无条件地将参数转化为右值，这是两者的区别。但是本质上，两者什么没有做，做多就是进行了一次类型转换。</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
             </div>
             <hr/>
 
@@ -1174,7 +1156,6 @@ T&& forward(typename remove_reference<T>::type& param)
                             0 前言​    在毕设项目中，需要动态的绘制上万乃至数十万个粒子球体，所以我们在重构中将原先的粒子位置计算和绘制过程改到了GPU上进行。
 ​    比较重要的一个东西就是Compute Shader，
 
-        document.
                         
                     </div>
                     <div class="publish-info">
@@ -1287,7 +1268,7 @@ T&& forward(typename remove_reference<T>::type& param)
 
             
                 &nbsp; | &nbsp;字数统计:&nbsp;
-                <span class="white-color">19.2k</span> 字
+                <span class="white-color">18.5k</span> 字
             
 
             

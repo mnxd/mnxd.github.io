@@ -727,25 +727,7 @@
 <p>十四、<br>名称：Rendering_LLL<br>简介：实现透明几何光照和粒子效果的光照<br>实现：将动态光照存储在游戏场景中所有元素的每个像素可访问的一个链表中。屏幕上每个像素仅存储重叠的灯光，在相机空间中存储最小和最大深度。<br>参考：理论：GPU Pro 6 Chapter: Real-Time Lighting via Light Linked List<br>​ SIGGRAPH 2014 Course <a href="http://advances.realtimerendering.com/s2014/index.html" target="_blank" rel="noopener">http://advances.realtimerendering.com/s2014/index.html</a><br>​ 辅助资料：红宝书OIT顺序无关的透明渲染 数据结构图例可当作重要参考<br>​ Github DX实现 <a href="https://github.com/wolfgangfengel/GPU-Pro-6/tree/master/03_Lighting" target="_blank" rel="noopener">https://github.com/wolfgangfengel/GPU-Pro-6/tree/master/03_Lighting</a></p>
 <p>十五、<br>名称：SSAO<br>简介：利用屏幕空间环境光遮蔽来模拟光的散射，使场景中的兔子在模型的褶皱与孔洞处变暗<br>实现：对于铺屏四边形上的每一个片段，根据周边深度值计算一个遮蔽因子，使用遮蔽因子减少或者抵消片段的环境光照分量。遮蔽因子是通过采集片段周围球型核心(Kernel)的多个深度样本，并和当前片段深度值对比而得到的。高于片段深度值样本的个数就是我们想要的遮蔽因子。<br>参考：网页：<a href="https://learnopengl-cn.github.io/05 Advanced Lighting/09 SSAO/" target="_blank" rel="noopener">https://learnopengl-cn.github.io/05%20Advanced%20Lighting/09%20SSAO/</a></p>
 <p>十六、<br>名称：Temporal Anti Aliasing<br>简介：通过混叠的手段抗锯齿<br>实现：把样本分布到过去的N帧中去，然后每一帧从过去的N帧中取得样本信息然后Filter，达到N倍Super Sampling的效果。<br>参考：理论：<a href="http://advances.realtimerendering.com/s2014/" target="_blank" rel="noopener">High-Quality Temporal Super Sampling[Siggraph 2014]</a><br>​ <a href="https://bartwronski.com/2014/03/15/temporal-supersampling-and-antialiasing/" target="_blank" rel="noopener">Temporal Super Sampling and Antialiasing[2014]</a><br>​ <a href="http://twvideo01.ubm-us.net/o1/vault/gdc2016/Presentations/Pedersen_LasseJonFuglsang_TemporalReprojectionAntiAliasing.pdf" target="_blank" rel="noopener">Temporal Reprojection Anti-Aliasing in INSIDE[GDC][2016]</a><br>​ <a href="https://developer.download.nvidia.com/gameworks/events/GDC2016/msalvi_temporal_supersampling.pdf" target="_blank" rel="noopener">An Excursion in Temporal Super Sampling[GDC][2016]</a><br>​ <a href="https://dl.acm.org/citation.cfm?id=1618481" target="_blank" rel="noopener">Amortized Super Sampling[Siggraph Asia 2009]</a></p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
             </div>
             <hr/>
 
@@ -1212,7 +1194,7 @@ texture filter（纹理过滤）：
 
             
                 &nbsp; | &nbsp;字数统计:&nbsp;
-                <span class="white-color">19.2k</span> 字
+                <span class="white-color">18.5k</span> 字
             
 
             

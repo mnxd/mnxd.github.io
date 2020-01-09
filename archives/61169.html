@@ -595,7 +595,7 @@ texture filter（纹理过滤）：
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.3k
+                        1.2k
                     </div>
                     
 
@@ -637,25 +637,7 @@ texture filter（纹理过滤）：
 <p> 各向异性本身是指物体的部分或者全部的物理或化学性质会随着方向的不同而有所变化的特性。而在图形学（纹理）中，我们认为，当所要贴图的像素点与屏幕成一定夹角时则为各向异性，否则为各向同性。也可以这样理解，当一个texture贴到三维表面上从Camera看来没有变形，投射到屏幕空间中后U方向和V方向比例仍然是一样的，便可以理解成各向同性。反之则认为是各向异性。如下图机场道路所示，</p>
 <p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/%E5%9B%BE%E5%BD%A2%E5%AD%A6/%E5%90%84%E5%90%91%E5%BC%82%E6%80%A7/1.webp" alt="三线性与各向异性对比.jpg"></p>
 <p>可以近似的将道路尽头远处看作向屏幕远处的延申，亦即与屏幕成一定的夹角，此时则为各向异性，纹理贴图时远处的像素点piexl与屏幕成一定夹角，可以明显得见道路远处的像素细节较差，纹理整体较为模糊。这是由于线性过滤（双线性与三线性）纹理贴图方式本身的缺陷所导致的。<br>​ 而各向异性过滤把纹理与屏幕空间的角度这个因素考虑时去。简单地说，它会考滤一个pixel(x:y=1:1)对应到纹理空间中在u和v方向上u和v的比例关系，当u:v不是1:1时，将会按比例在各方向上采样不同数量的点来计算最终的结果(这时采样就有可能是长方形区域)。<br>​ 注：事实上各向异性过滤具体还是由硬件实现，这里所讲的还是他的采样方法。各向异性过滤本身相对于双线性与三线性来说并非相互独立的关系，各向异性过滤是在线性过滤的基础上。对采样方法的一种改进。</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
             </div>
             <hr/>
 
@@ -1030,7 +1012,7 @@ texture filter（纹理过滤）：
 
             
                 &nbsp; | &nbsp;字数统计:&nbsp;
-                <span class="white-color">19.2k</span> 字
+                <span class="white-color">18.5k</span> 字
             
 
             

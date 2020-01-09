@@ -682,7 +682,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        2.9k
+                        2.8k
                     </div>
                     
 
@@ -711,8 +711,8 @@
 <p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/Git/git1.webp" alt="git安装1.png"></p>
 <p> 因为git是分布式版本控制系统，所以每个机器都必须有自己的标识（用户名和邮箱），所以通过如下语句进行配置。</p>
 <pre><code>$ git config --global 参数
-$ git config --global user.name "Your Name"
-$ git config --global user.email "Email@example.com"
+$ git config --global user.name &quot;Your Name&quot;
+$ git config --global user.email &quot;Email@example.com&quot;
 </code></pre><h2 id="1-2本地库操作"><a href="#1-2本地库操作" class="headerlink" title="1.2本地库操作"></a>1.2本地库操作</h2><p> 在完成了安装和初始化之后，进入工作文件目录，打开git bash，进行以下步骤：</p>
 <ul>
 <li><p>git init 初始化一个git 的版本库</p>
@@ -728,7 +728,7 @@ $ git config --global user.email "Email@example.com"
 <p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/Git/git2.webp" alt="git2.png"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/Git/git3.webp" alt="1553668148293.png"></p>
 <p> 现在就已经把最初的版本提交到版本库了，之后我进行任何版本都只用执行以下三步就可以在版本库里提交了。</p>
-<pre><code>$ git status$ git add .$ git commit -m "message"
+<pre><code>$ git status$ git add .$ git commit -m &quot;message&quot;
 </code></pre><p> 当然如果当前版本的功能不需要想要回退到之前版本，也可以通过git log 打开版本信息并通过git reset命令回退。</p>
 <pre><code>$ git log $ git reset --hard HEAD^(或者是版本号回退到指定版本)、
 </code></pre><p> 当然如果有了比较稳定的版本，也可以通过tag标签的方式给某些版本特殊的命名如v1.0等，具体方法在后续补充里，这里先不提。</p>
@@ -790,25 +790,7 @@ $ git push -u origin master
 <h1 id="5-补充"><a href="#5-补充" class="headerlink" title="5.补充"></a>5.补充</h1><p> git概念理解和学习推荐 <a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">廖雪峰的官方网站</a>。</p>
 <p> <a href="https://www.cnblogs.com/Gxiaopan/p/6714539.html" target="_blank" rel="noopener">git常用命令大全</a></p>
 <p> <a href="https://learngitbranching.js.org/" target="_blank" rel="noopener">可视化的游戏模式学习git的一些基本操作网站</a></p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
             </div>
             <hr/>
 
@@ -1278,7 +1260,7 @@ $ git push -u origin master
 
             
                 &nbsp; | &nbsp;字数统计:&nbsp;
-                <span class="white-color">19.2k</span> 字
+                <span class="white-color">18.5k</span> 字
             
 
             

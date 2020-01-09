@@ -651,36 +651,10 @@ $('.bg-cover').css('background-image', 'url(https://blog-1257951283.cos.ap-cheng
                         0 前言​    在毕设项目中，需要动态的绘制上万乃至数十万个粒子球体，所以我们在重构中将原先的粒子位置计算和绘制过程改到了GPU上进行。
 ​    比较重要的一个东西就是Compute Shader，
 
-        document.
                     
                     </div>
                     <div class="cover-btns">
                         <a href="/archives/44586.html" class="waves-effect waves-light btn" target="_blank">
-                            <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    
-    <div class="carousel-item amber white-text carousel-post bg-cover"
-            style="background-image: url('/images/1.jpg');">
-        <div class="container">
-            <div class="row">
-                <div class="col s10 offset-s1">
-                    <div class="title center-align">float精度问题</div>
-                    <div class="description center-align">
-                    
-                        0.提要在做体素化部分的时候由于是通过先体素化表面模型再从前往后插值的方法进行实体化，由于初版算法的不精确性，导致出现了大量的重复点，在去重的时候采用了以下笨方法：
-struct MyPoint
-{
-    float voxelPosit
-                    
-                    </div>
-                    <div class="cover-btns">
-                        <a href="/archives/24837.html" class="waves-effect waves-light btn" target="_blank">
                             <i class="icon fa fa-eye fa-fw"></i>阅读更多
                         </a>
                     </div>
@@ -720,6 +694,31 @@ struct MyPoint
         <div class="container">
             <div class="row">
                 <div class="col s10 offset-s1">
+                    <div class="title center-align">float精度问题</div>
+                    <div class="description center-align">
+                    
+                        0.提要在做体素化部分的时候由于是通过先体素化表面模型再从前往后插值的方法进行实体化，由于初版算法的不精确性，导致出现了大量的重复点，在去重的时候采用了以下笨方法：
+struct MyPoint
+{
+    float voxelPosit
+                    
+                    </div>
+                    <div class="cover-btns">
+                        <a href="/archives/24837.html" class="waves-effect waves-light btn" target="_blank">
+                            <i class="icon fa fa-eye fa-fw"></i>阅读更多
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="carousel-item amber white-text carousel-post bg-cover"
+            style="background-image: url('/images/1.jpg');">
+        <div class="container">
+            <div class="row">
+                <div class="col s10 offset-s1">
                     <div class="title center-align">宏和内联函数</div>
                     <div class="description center-align">
                     
@@ -729,6 +728,31 @@ struct MyPoint
                     </div>
                     <div class="cover-btns">
                         <a href="/archives/20434.html" class="waves-effect waves-light btn" target="_blank">
+                            <i class="icon fa fa-eye fa-fw"></i>阅读更多
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="carousel-item amber white-text carousel-post bg-cover"
+            style="background-image: url('/images/1.jpg');">
+        <div class="container">
+            <div class="row">
+                <div class="col s10 offset-s1">
+                    <div class="title center-align">指针和引用</div>
+                    <div class="description center-align">
+                    
+                        指针和引用的知识点复习整理。大概复习了一下内存机制，指针和引用的定义，类型，用法等。包括悬挂指针、野指针、空指针、万能指针、多级指针等。
+1.内存概述1.1 内存内存含义：
+
+存储器：计算机的组成中，用来存储程序和数据，辅助CPU进行运算处
+                    
+                    </div>
+                    <div class="cover-btns">
+                        <a href="/archives/22647.html" class="waves-effect waves-light btn" target="_blank">
                             <i class="icon fa fa-eye fa-fw"></i>阅读更多
                         </a>
                     </div>
@@ -800,31 +824,6 @@ struct MyPoint
                     </div>
                     <div class="cover-btns">
                         <a href="/archives/ea0b20c.html" class="waves-effect waves-light btn" target="_blank">
-                            <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    
-    <div class="carousel-item amber white-text carousel-post bg-cover"
-            style="background-image: url('/images/1.jpg');">
-        <div class="container">
-            <div class="row">
-                <div class="col s10 offset-s1">
-                    <div class="title center-align">指针和引用</div>
-                    <div class="description center-align">
-                    
-                        指针和引用的知识点复习整理。大概复习了一下内存机制，指针和引用的定义，类型，用法等。包括悬挂指针、野指针、空指针、万能指针、多级指针等。
-1.内存概述1.1 内存内存含义：
-
-存储器：计算机的组成中，用来存储程序和数据，辅助CPU进行运算处
-                    
-                    </div>
-                    <div class="cover-btns">
-                        <a href="/archives/22647.html" class="waves-effect waves-light btn" target="_blank">
                             <i class="icon fa fa-eye fa-fw"></i>阅读更多
                         </a>
                     </div>
@@ -963,17 +962,18 @@ texture filter（纹理过滤）：
         <div class="container">
             <div class="row">
                 <div class="col s10 offset-s1">
-                    <div class="title center-align">重心和其坐标的计算</div>
+                    <div class="title center-align">射线和三角形相交判断</div>
                     <div class="description center-align">
                     
-                        三角形重心坐标及最有效率的计算方法抄录自Christer Ericson的《实时碰撞检测》：
-函数功能：计算点P相对于三角形（a,b,c）的重心坐标。
-输入：点P，三角形三个顶点：a,b,c
-输出：u,v,w（代码中传入的引用，实际上可以从
+                        快速微内存开销的射线与三角形相交测试原作者：Tomas Möller 
+0.摘要本文提出了一种确定光线是否插入三角形的清晰算法,
+该算法主要思想是：平移射线的原点，然后改变该向量的底，从而产生一个向量
+
+\mathbf{（t,u,v）}^\
                     
                     </div>
                     <div class="cover-btns">
-                        <a href="/archives/19888.html" class="waves-effect waves-light btn" target="_blank">
+                        <a href="/archives/14699.html" class="waves-effect waves-light btn" target="_blank">
                             <i class="icon fa fa-eye fa-fw"></i>阅读更多
                         </a>
                     </div>
@@ -988,18 +988,17 @@ texture filter（纹理过滤）：
         <div class="container">
             <div class="row">
                 <div class="col s10 offset-s1">
-                    <div class="title center-align">射线和三角形相交判断</div>
+                    <div class="title center-align">重心和其坐标的计算</div>
                     <div class="description center-align">
                     
-                        快速微内存开销的射线与三角形相交测试原作者：Tomas Möller 
-0.摘要本文提出了一种确定光线是否插入三角形的清晰算法,
-该算法主要思想是：平移射线的原点，然后改变该向量的底，从而产生一个向量
-
-\mathbf{（t,u,v）}^\
+                        三角形重心坐标及最有效率的计算方法抄录自Christer Ericson的《实时碰撞检测》：
+函数功能：计算点P相对于三角形（a,b,c）的重心坐标。
+输入：点P，三角形三个顶点：a,b,c
+输出：u,v,w（代码中传入的引用，实际上可以从
                     
                     </div>
                     <div class="cover-btns">
-                        <a href="/archives/14699.html" class="waves-effect waves-light btn" target="_blank">
+                        <a href="/archives/19888.html" class="waves-effect waves-light btn" target="_blank">
                             <i class="icon fa fa-eye fa-fw"></i>阅读更多
                         </a>
                     </div>
@@ -1877,7 +1876,7 @@ texture filter（纹理过滤）：
 
             
                 &nbsp; | &nbsp;字数统计:&nbsp;
-                <span class="white-color">19.2k</span> 字
+                <span class="white-color">18.5k</span> 字
             
 
             
