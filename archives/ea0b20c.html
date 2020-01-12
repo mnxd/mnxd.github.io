@@ -9,8 +9,7 @@
     <meta name="google-site-verification" content="LYvzXgqPaMOwG9zUJOhjqbXhRknn5jNhZltznVcTbH8">
     <meta name="description" content="0. Lambda表达式lambda表达式是C++11引入的”新”技术，之所以加引号是因为实际上其他语言如C#、Python中已经有了，只是C++在11版本中才刚刚推出而已。
 1. 声明Lambda表达式先上实际代码：
-#include 
-">
+#include &amp;">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -600,14 +599,14 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        983
+                        2.4k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        3 分
+                        9 分
                     </div>
                     
                 
@@ -626,25 +625,12 @@
             <div id="articleContent">
                 <h1 id="0-Lambda表达式"><a href="#0-Lambda表达式" class="headerlink" title="0. Lambda表达式"></a>0. Lambda表达式</h1><p>lambda表达式是C++11引入的”新”技术，之所以加引号是因为实际上其他语言如C#、Python中已经有了，只是C++在11版本中才刚刚推出而已。</p>
 <h1 id="1-声明Lambda表达式"><a href="#1-声明Lambda表达式" class="headerlink" title="1. 声明Lambda表达式"></a>1. 声明Lambda表达式</h1><p>先上实际代码：</p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">#include <iostream>
-
-int main ()
-{
-    int a =1;
-    int b =2;
-
-    auto func = [=,&b](int c)->int{return b+=a+c;};
-
-    return 0;
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a =<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> b =<span class="number">2</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">auto</span> func = [=,&amp;b](<span class="keyword">int</span> c)-&gt;<span class="keyword">int</span>&#123;<span class="keyword">return</span> b+=a+c;&#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>​    简单的来说上面这段代码定义了两个变量a,b并分别赋值为1,2 。然后定义了一个auto类型的func变量，赋值为右侧的</p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">[=,&b](int c)->int{return b+=a+c;}
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">[=,&amp;b](<span class="keyword">int</span> c)-&gt;<span class="keyword">int</span>&#123;<span class="keyword">return</span> b+=a+c;&#125;</span><br></pre></td></tr></table></figure>
 <p>​    这段代码也就是一个基本的lambda表达式，它以[]作为表达式的开始，{}作为表达式的结束。<strong>[]中的=，&amp;b表示，通过引用的方式传入b变量，其余变量通过值传递的方法传入。</strong>c是传入的形参（一个整型变量）， -&gt;int 表示当前返回值因为Int类型，也就是说前面的auto在当前表达式里 可以替换成int， return b+=a+c;这是执行语句，也就是函数体。</p>
 <p>Lambda表达式的完整声明如下：</p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">[capture list] (params list) mutable exception-> return type { function body }
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">[capture <span class="built_in">list</span>] (params <span class="built_in">list</span>) <span class="keyword">mutable</span> exception-&gt; <span class="keyword">return</span> type &#123; function body &#125;</span><br></pre></td></tr></table></figure>
 <p>其中：</p>
 <ul>
 <li>capture list：捕获外部变量列表</li>
@@ -702,44 +688,9 @@ int main ()
 <li>[&amp;,&amp;this]这里&amp;已经以引用传递方式捕捉了所有变量，再捕捉this也是一种重复。</li>
 </ul>
 <p>下面用一个简单的例子来说明：</p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">#include <iostream>
-int main()
-{
-    int a = 1;
-    int b = 2;
-
-    auto f = [&a,b]()
-    {
-        a++;
-        b++;
-        std::cout << a << "," << b << std::endl;
-    };
-    f();
-    std::cin.get();
-    return 0;
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">int</span> b = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">auto</span> f = [&amp;a,b]()</span><br><span class="line">	&#123;</span><br><span class="line">		a++;</span><br><span class="line">		b++;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="string">","</span> &lt;&lt; b &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	&#125;;</span><br><span class="line">	f();</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cin</span>.get();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这里在实际开发环境中，b++语句报错的原因是变量b的捕获方式为值传递，这里没有传递一块内存地址给到lambda表达式里，而是取出了b的值2传入，所以这里如果想要正确执行b++并输出的话应该改成：</p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">#include <iostream>
-int main()
-{
-    int a = 1;
-    int b = 2;
-
-    auto f = [&a,b]()
-    {
-        a++;
-        auto c = b;
-        c++;
-        std::cout << a << "," << c << std::endl;
-    };
-    f();
-    std::cout << a << "," << b << std::endl;
-
-    std::cin.get();
-    return 0;
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">int</span> b = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">auto</span> f = [&amp;a,b]()</span><br><span class="line">	&#123;</span><br><span class="line">		a++;</span><br><span class="line">		<span class="keyword">auto</span> c = b;</span><br><span class="line">		c++;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="string">","</span> &lt;&lt; c &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	&#125;;</span><br><span class="line">    f();</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="string">","</span> &lt;&lt; b &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cin</span>.get();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>现在我们给代码打上断点并F5执行，如图可知lambda语句中a传入的是引用,而b则是一个整型变量，</p>
 <p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/C%2B%2B/Lambda/1.png" alt></p>
 <p>F10继续执行可以看到此时变量a的值仍然为1，b的值为2，而传入lambda表达式中的a引用所指向的内存地址中所存的仍然是01 00 00 00，</p>
@@ -749,9 +700,7 @@ int main()
 <p>继续执行，成功将c的类型设置为int,值设置为b变量的值2，</p>
 <p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/C%2B%2B/Lambda/4.png" alt></p>
 <p>继续执行，命令行窗口输出为</p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">2,3
-2,2
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="number">2</span>,<span class="number">3</span></span><br><span class="line"><span class="number">2</span>,<span class="number">2</span></span><br></pre></td></tr></table></figure>
 <p>第一行输出是lambda表达式中传入a的引用再执行a++后a为2,将b的值传入并赋值给c再执行c++后c为3所以输出2,3</p>
 <p>而第2行则是因为由于lambda表达式中改变了a的值，但并未改变b的值所以输出2,2</p>
 <p>如下图所示，c变量在离开lambda表达式函数域后被销毁。</p>
@@ -760,157 +709,25 @@ int main()
 <p>但是，如果我非要在lambda表达式中修改值传递变量的值呢？</p>
 <p>也是可以做到的，只要在lambda表达式中加上一个mutable关键字就可以 了，如下所示：</p>
 <p><strong>注：mutable关键字在后面补充讲到它主要的用处。</strong></p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">#include <iostream>
-int main()
-{
-    int a = 1;
-    int b = 2;
-
-    auto f = [&a,b]() mutable
-    {
-        a++;
-        b++;
-    };
-    f();
-
-    std::cin.get();
-    return 0;
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">int</span> b = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">auto</span> f = [&amp;a,b]() <span class="keyword">mutable</span></span><br><span class="line">	&#123;</span><br><span class="line">		a++;</span><br><span class="line">		b++;</span><br><span class="line">	&#125;;</span><br><span class="line">	f();</span><br><span class="line"></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cin</span>.get();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>同样，打上断点，F5，此时a++语句已经执行结束，a==b==2,</p>
 <p>F10,b的值成功完成自加操作被修改成了3，</p>
 <p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/C%2B%2B/Lambda/6.png" alt></p>
 <p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/C%2B%2B/Lambda/6.png" alt></p>
 <h1 id="3-lambda的使用"><a href="#3-lambda的使用" class="headerlink" title="3. lambda的使用"></a>3. lambda的使用</h1><h2 id="3-1-个人理解：匿名函数对象"><a href="#3-1-个人理解：匿名函数对象" class="headerlink" title="3.1 个人理解：匿名函数对象"></a>3.1 个人理解：匿名函数对象</h2><p>我个人理解可以把lambda当做匿名函数对象来使用，如下代码,将要对IntArray数组所有元素执行的一个相同函数操作sum += x;作为参数传入std::for_each中：</p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">#include<iostream>
-#include <vector>
-#include <algorithm>
-
-int main()
-{
-
-    int sum = 0;
-    std::vector<int> IntArray = { 1,2,3,4,5 };
-    std::for_each(begin(IntArray), end(IntArray), [&sum](int x) {sum += x; });
-
-    std::cin.get();
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; IntArray = &#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span> &#125;;</span><br><span class="line">	<span class="built_in">std</span>::for_each(begin(IntArray), end(IntArray), [&amp;sum](<span class="keyword">int</span> x) &#123;sum += x; &#125;);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cin</span>.get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>关于for_each中使lambda表达式和直接用for循环操作他们的区别以及为什么要使用for_each知乎上有一位大神举了个<a href="C++ STL中 for_each 算法存在的意义是什么？ - 邱昊宇的回答 - 知乎 https://www.zhihu.com/question/54671272/answer/140868554">发苹果的例子</a>，非常生动形象。</p>
 <h2 id="3-2-让代码更简洁"><a href="#3-2-让代码更简洁" class="headerlink" title="3.2  让代码更简洁"></a>3.2  让代码更简洁</h2><p>有了Lambda表达式，更多的方便了我们去写代码。比如以下代码：</p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">#include<iostream>
-
-typedef enum
-{
-    add = 0,
-    sub,
-    mul,
-    divi
-}ECalculateType;
-
-class CCalculate
-{
-public:
-    CCalculate(int x, int y) :m_x(x), m_y(y) {}
-
-    int operator()(ECalculateType i)
-    {
-        switch (i)
-        {
-        case add:
-            return m_x + m_y;
-        case sub:
-            return m_x - m_y;
-        case mul:
-            return m_x * m_y;
-        case divi:
-            return m_x / m_y;
-        }
-    }
-
-private:
-    int m_x;
-    int m_y;
-};
-
-int main()
-{
-    CCalculate addObj(10, 20);
-    std::cout << addObj(add) << std::endl;
-    std::cin.get();
-    return 0;
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span></span><br><span class="line">&#123;</span><br><span class="line">	add = <span class="number">0</span>,</span><br><span class="line">	sub,</span><br><span class="line">	mul,</span><br><span class="line">	divi</span><br><span class="line">&#125;ECalculateType;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CCalculate</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	CCalculate(<span class="keyword">int</span> x, <span class="keyword">int</span> y) :m_x(x), m_y(y) &#123;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">operator</span><span class="params">()</span><span class="params">(ECalculateType i)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">switch</span> (i)</span><br><span class="line">		&#123;</span><br><span class="line">		<span class="keyword">case</span> add:</span><br><span class="line">			<span class="keyword">return</span> m_x + m_y;</span><br><span class="line">		<span class="keyword">case</span> sub:</span><br><span class="line">			<span class="keyword">return</span> m_x - m_y;</span><br><span class="line">		<span class="keyword">case</span> mul:</span><br><span class="line">			<span class="keyword">return</span> m_x * m_y;</span><br><span class="line">		<span class="keyword">case</span> divi:</span><br><span class="line">			<span class="keyword">return</span> m_x / m_y;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">int</span> m_x;</span><br><span class="line">	<span class="keyword">int</span> m_y;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="function">CCalculate <span class="title">addObj</span><span class="params">(<span class="number">10</span>, <span class="number">20</span>)</span></span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; addObj(add) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span>.get();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>​    在有了lambda之后，我们可以将上述代码改写为：</p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">#include<iostream>
-
-typedef enum
-{
-    add = 0,
-    sub,
-    mul,
-    divi
-}ECalculateType;
-
-
-int main()
-{
-    int a = 10;
-    int b = 20;
-
-    auto func = [=](ECalculateType i)->int {
-        switch (i)
-        {
-        case add:
-            return a + b;
-        case sub:
-            return a - b;
-        case mul:
-            return a * b;
-        case divi:
-            return a / b;
-        }
-    };
-
-    std::cout << func(add) << std::endl;
-    std::cin.get();
-    return 0;
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span></span><br><span class="line">&#123;</span><br><span class="line">	add = <span class="number">0</span>,</span><br><span class="line">	sub,</span><br><span class="line">	mul,</span><br><span class="line">	divi</span><br><span class="line">&#125;ECalculateType;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">int</span> b = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">auto</span> func = [=](ECalculateType i)-&gt;<span class="keyword">int</span> &#123;</span><br><span class="line">		<span class="keyword">switch</span> (i)</span><br><span class="line">		&#123;</span><br><span class="line">		<span class="keyword">case</span> add:</span><br><span class="line">			<span class="keyword">return</span> a + b;</span><br><span class="line">		<span class="keyword">case</span> sub:</span><br><span class="line">			<span class="keyword">return</span> a - b;</span><br><span class="line">		<span class="keyword">case</span> mul:</span><br><span class="line">			<span class="keyword">return</span> a * b;</span><br><span class="line">		<span class="keyword">case</span> divi:</span><br><span class="line">			<span class="keyword">return</span> a / b;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; func(add) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cin</span>.get();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="4-mutable"><a href="#4-mutable" class="headerlink" title="4. mutable"></a>4. mutable</h1><p>​    mutable关键字的作用是将一个变量设置为可修改的，它主要用来解决有些const带来的问题。</p>
 <p>​    <strong>const意思是“这个函数不修改对象内部状态”。</strong></p>
 <p>为了保证这一点，编译器也会主动替你检查，确保你没有修改对象成员变量——否则内部状态就变了。</p>
 <p>​    <strong>mutable意思是“这个成员变量不算对象内部状态”。</strong></p>
 <p>如下代码所示，定义了一个CCountDebug的类，该类提供了一个getName的方法用来返回私有成员m_DebuggerName的值，一个m_DebugCount用来统计某个对象的访问次数（比如供debug用）。它变成什么显然并不影响对象功用，但编译器并不知道：它仍然会阻止一个声明为const的函数修改这个变量。</p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">#include <iostream>
-#include <string>
-
-class CCountDebug
-{
-public:
-    const std::string& getName() const
-    {
-        m_DebugCount++; //报错  正在通过常量对象访问m_DebugCount，所以无法对其进行修改
-        return m_DebuggerName;
-    }
-
-private:
-    std::string m_DebuggerName;
-    int m_DebugCount = 0;
-
-};
-
-int main()
-{
-
-    CCountDebug CountDebug;
-    CountDebug.getName();
-
-    std::cin.get();
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">    const std::string& getName() const
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CCountDebug</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">const</span> <span class="built_in">std</span>::<span class="function"><span class="built_in">string</span>&amp; <span class="title">getName</span><span class="params">()</span> <span class="keyword">const</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		m_DebugCount++; <span class="comment">//报错  正在通过常量对象访问m_DebugCount，所以无法对其进行修改</span></span><br><span class="line">		<span class="keyword">return</span> m_DebuggerName;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> m_DebuggerName;</span><br><span class="line">	<span class="keyword">int</span> m_DebugCount = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">	CCountDebug CountDebug;</span><br><span class="line">	CountDebug.getName();</span><br><span class="line"></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cin</span>.get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="built_in">std</span>::<span class="function"><span class="built_in">string</span>&amp; <span class="title">getName</span><span class="params">()</span> <span class="keyword">const</span></span></span><br></pre></td></tr></table></figure>
 <p>这句代码中的第二个const表面getName方法是通过常量对象的形式进行访问的，并不能修改m_DebugCount的值。<br>要解决这个问题，只需要将m_DebugCount的声明改为 mutable int m_DebugCount = 0;即可，把这个计数变量声明为mutable，编译器就明白了：这个变量不算对象内部状态，修改它并不影响const语义，所以就不需要禁止const函数修改它了。</p>
 
             </div>
@@ -1401,8 +1218,7 @@ int main()
                             0. delete[]这个问题其实来自于看到师兄师姐的面经里有提到一个问题
 delete[]是如何知道要delete的数组大小的？
 Type * pName = new Type[Size];
-
-在执行上述语句时，一开始我简单的以为C++编
+在执行上述语句时，一开始我简单的以为C++编译
                         
                     </div>
                     <div class="publish-info">
@@ -1565,7 +1381,7 @@ Type * pName = new Type[Size];
 
             
                 &nbsp; | &nbsp;字数统计:&nbsp;
-                <span class="white-color">18.5k</span> 字
+                <span class="white-color">33.8k</span> 字
             
 
             
@@ -1789,5 +1605,5 @@ $(function () {
             </script>
         
 
-    <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":210,"height":280},"mobile":{"show":false},"react":{"opacity":0.7}});</script><script>!function(e){var r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function t(){for(var c=0;c<r.length;c++)t=r[c],void 0,0<=(n=t.getBoundingClientRect()).top&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=r[c];t=o,n=function(){r=r.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}t(),e.addEventListener("scroll",function(){!function(t,n){clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)}(t,e)})}(this);</script></body>
+    <script>!function(e){var r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function t(){for(var c=0;c<r.length;c++)t=r[c],void 0,0<=(n=t.getBoundingClientRect()).top&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=r[c];t=o,n=function(){r=r.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}t(),e.addEventListener("scroll",function(){!function(t,n){clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)}(t,e)})}(this);</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":210,"height":280},"mobile":{"show":false},"react":{"opacity":0.7}});</script></body>
 </html>

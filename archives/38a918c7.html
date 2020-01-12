@@ -4,13 +4,27 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Noraml Map(法线贴图), SCU CG CompuerGraphics 码农 Ricardo 小杜 OpenGL GLSL HIVE 游戏引擎开发">
+    <meta name="keywords" content="智能指针, SCU CG CompuerGraphics 码农 Ricardo 小杜 OpenGL GLSL HIVE 游戏引擎开发">
     <meta name="baidu-site-verification" content="1MqvQ6zfNJ">
     <meta name="google-site-verification" content="LYvzXgqPaMOwG9zUJOhjqbXhRknn5jNhZltznVcTbH8">
-    <meta name="description" content="在实验室HIVE底层基础上实现了PM+NM的效果，demo
-一、算法解决的问题：
- 解决了对于凹凸不平的复杂地形需要大量的片元才能体现高度落差效果的问题，提高了运行效率。
- 解决了对于凹凸不平、存在大量缝隙的复杂地形需要大量的片元才能体现高">
+    <meta name="description" content="STL 的智能指针为了减少出现内存泄露的情况，STL中使用智能指针来减少泄露。STL中一般有四种智能指针:
+
+
+
+
+指针类别
+支持
+备注
+
+
+
+
+unique_ptr
+C++ 11
+拥有独有对象所有权语义的智能指针
+
+
+shared_ptr">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +32,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Noraml Map(法线贴图) | Ricardo&#39;s Blog</title>
+    <title>智能指针 | Ricardo&#39;s Blog</title>
     <link rel="icon" type="image/jpeg" href="/favicon.jpg">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -532,7 +546,7 @@
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Noraml Map(法线贴图)
+                        智能指针
                     </div>
                 </div>
             </div>
@@ -554,12 +568,20 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/法线贴图/" target="_blank">
-                                <span class="chip bg-color">法线贴图</span>
+                            <a href="/tags/C/" target="_blank">
+                                <span class="chip bg-color">C++</span>
                             </a>
                         
-                            <a href="/tags/normalmap/" target="_blank">
-                                <span class="chip bg-color">normalmap</span>
+                            <a href="/tags/智能指针/" target="_blank">
+                                <span class="chip bg-color">智能指针</span>
+                            </a>
+                        
+                            <a href="/tags/unique-ptr/" target="_blank">
+                                <span class="chip bg-color">unique_ptr</span>
+                            </a>
+                        
+                            <a href="/tags/shared-ptr/" target="_blank">
+                                <span class="chip bg-color">shared_ptr</span>
                             </a>
                         
                     </div>
@@ -570,8 +592,8 @@
                     <div class="post-cate">
                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/图形学算法/" class="post-category" target="_blank">
-                                图形学算法
+                            <a href="/categories/C-基础/" class="post-category" target="_blank">
+                                C++基础
                             </a>
                         
                     </div>
@@ -582,7 +604,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-12-13
+                    2020-01-12
                 </div>
 
                 <div class="post-author info-break-policy">
@@ -596,14 +618,14 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.3k
+                        2.2k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        4 分
+                        8 分
                     </div>
                     
                 
@@ -620,51 +642,117 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>在实验室HIVE底层基础上实现了PM+NM的效果，<a href="https://github.com/ProgrammerRicardo/NormalMap-ParallaxMap" target="_blank" rel="noopener">demo</a></p>
-<p><strong>一、算法解决的问题：</strong></p>
-<p> 解决了对于凹凸不平的复杂地形需要大量的片元才能体现高度落差效果的问题，提高了运行效率。</p>
-<p> 解决了对于凹凸不平、存在大量缝隙的复杂地形需要大量的片元才能体现高度落差效果的问题，提高了运行效率。</p>
-<p> Normal Map就是通过读取一张存储着法线信息的纹理来计算光照（而不通过顶点法线的插值），这样可以增强图像的真实感。</p>
-<p>从光照算法的角度考虑，垂直于物体的法线向量决定了该物体的形状。对整个纹理表面使用相同的法线进行光照计算时，如下图左边模型，由于法线相同，物体表面会被视为完全平坦的表面来照亮。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/%E5%9B%BE%E5%BD%A2%E5%AD%A6/Normalmap/nm1.webp" alt="normalmodel.png"></p>
-<p> 如果对每一个fragment都通过自己的方向向量结合光照来计算光照表现，就能让光照再法线方向不同的fragment上有不同的表现从而极大提升纹理表面细节。</p>
-<p><strong>二、算法详解：</strong></p>
-<p> 切线空间：每一个fragment的法向量并不是始终指向世界坐标的正Z方向，所以从纹理法线贴图中采样到的法向量与模型实际的法向量的参考坐标系不一致。所以就需要将两者变换到同一坐标参考系下进行计算，这里我们引入切线空间的概念。</p>
-<p> 切线空间是位于三角形表面之上的空间，法线相对于单个三角形的本地参考框架。它就像法线贴图向量的本地空间。它们都被定义为指向正z方向，无论最终变换到什么方向。</p>
-<p> 如下图所示，当模型实际的法向量如图中SURFACE NORMAL方向所示时，纹理表面fragment的法向量与它的方向完全不一致，我们使用一种矩阵，把法线从切线空间变换到一个不同的空间，这样它们就能和表面法线方向对齐了：法线向量都会指向正y方向。这就是TBN矩阵。这三个字母分别代表tangent、bitangent和normal向量。这是建构这个矩阵所需的向量。要建构这样一个把切线空间转变为不同空间的变异矩阵，我们需要三个相互垂直的向量，它们沿一个表面的法线贴图对齐于：上、右、前。</p>
-<p> 我们有以下两种方法可以将纹理法向量与光照方向统一到同一坐标系中：</p>
-<p> （1）使用一个TBN矩阵我们将本地/切线空间中的法线向量转成世界或视图坐标，使它们转向到最终的贴图表面的方向。</p>
-<p> （2）使用TBN的逆矩阵将光照方向转换到切线空间中进行计算。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/%E5%9B%BE%E5%BD%A2%E5%AD%A6/Normalmap/nm2.webp" alt="NM1.png"></p>
-<p> NM的基本思想：使用一个2D纹理来储存法线数据（法线贴图），对法线贴图进行采样，将获取到的法向量从切线空间转换到世界空间中，再进行光照计算。</p>
-<p> 从法线贴图中获取到的法线向量是在切线空间中且永远指向切线空间的正z方向的。而在不同的fragment各自的切线空间正Z方向并不相同，在纹理贴图时，就需要使用TBN矩阵将本地/切线空间中的法线向量转到世界空间，使它们转向到最终的贴图表面的方向。</p>
-<p>算法流程：</p>
-<p>在顶点着色器中创建一个TBN矩阵；</p>
-<p>在片元着色器中，从Normal Map中读取法线向量；</p>
-<p>将法线向量从[0,1]重新映射回[-1,1]；</p>
-<p>使用TBN矩阵将法线向量从切线空间转换到世界空间；</p>
-<p>将法线向量应用于光照计算。</p>
-<p><strong>三、算法使用：</strong></p>
-<p>计算TBN矩阵：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/%E5%9B%BE%E5%BD%A2%E5%AD%A6/Normalmap/nm3.webp" alt="TBNcaculate.png"></p>
-<p> 其中的hive_ModelMatrix, _inVertexTangent, _inVertexBitangent, _inVertexNormal为HIVE底层导入模型时自动获取的数据。</p>
-<p>uniform变量：</p>
-<p>uTextureNormal0：纹理的法线贴图</p>
-<p>函数输入参数：</p>
-<p>vTexCoords：顶点着色器所传递的纹理坐标</p>
-<p>函数输出：</p>
-<p>Normal：转换到世界坐标系下的法向量</p>
-<p>效果图如下：普通纹理贴图：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/%E5%9B%BE%E5%BD%A2%E5%AD%A6/Normalmap/nm4.webp" alt="texture.png"></p>
-<p>采用NormalMap算法之后的砖墙细节表现：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/%E5%9B%BE%E5%BD%A2%E5%AD%A6/Normalmap/nm5.webp" alt="normalmap.png"></p>
-<p><strong>四、算法局限：</strong></p>
-<p> 事实上法线贴图仍然只是通过调整纹理细节处的光照明暗程度模拟纹理表面的缝隙和凹凸情况。它仍然存在一些问题：</p>
-<p>（1）纹理边缘凹凸细节没有得到优化。如下图所标注部分：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/%E5%9B%BE%E5%BD%A2%E5%AD%A6/Normalmap/nm6.webp" alt="NMlimitation1.png"></p>
-<p>（2）假设视线方向为e，与模拟凸起的砖块平面相交于蓝点，与原始平面纹理应当相交于黄点，若要真实的模拟砖块凸起，那么左模拟砖块截面图中红线部分应当属于被遮挡部分，但是在法线贴图中，黄点依然属于可见部分。即NM无法做到自遮蔽和自阴影。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/%E5%9B%BE%E5%BD%A2%E5%AD%A6/Normalmap/nm7.webp" alt="NMlimitation2desc.png"></p>
-<p> <img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/%E5%9B%BE%E5%BD%A2%E5%AD%A6/Normalmap/nm8.webp" alt="NMlimitation2.png"></p>
+                <h1 id="STL-的智能指针"><a href="#STL-的智能指针" class="headerlink" title="STL 的智能指针"></a>STL 的智能指针</h1><p>为了减少出现内存泄露的情况，<code>STL</code>中使用智能指针来减少泄露。<code>STL</code>中一般有四种智能指针:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>指针类别</th>
+<th>支持</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>unique_ptr</code></td>
+<td>C++ 11</td>
+<td>拥有独有对象所有权语义的智能指针</td>
+</tr>
+<tr>
+<td><code>shared_ptr</code></td>
+<td>C++ 11</td>
+<td>拥有共享对象所有权语义的智能指针</td>
+</tr>
+<tr>
+<td><code>weak_ptr</code></td>
+<td>C++ 11</td>
+<td>到 std::shared_ptr 所管理对象的弱引用</td>
+</tr>
+<tr>
+<td><code>auto_ptr</code></td>
+<td>C++ 17中移除</td>
+<td>拥有严格对象所有权语义的智能指针</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p> <del><code>auto_ptr</code> 已经在 C++ 17 中移除，所以这里不做讨论。</del> 而 <code>weak_ptr</code>是<code>shared_ptr</code>的弱引用，所以，主要的只能指针分为两个<code>unique_ptr</code>和<code>shared_ptr</code>。</p>
+<h2 id="std-unique-ptr"><a href="#std-unique-ptr" class="headerlink" title="std::unique_ptr"></a>std::unique_ptr</h2><p><code>std::unique_ptr</code>通过指针占有并管理另一对象，并在 <code>unique_ptr</code> 离开作用域时释放该对象的智能指针。在下列两者之一发生时用关联的删除器释放对象：</p>
+<ul>
+<li>销毁了管理的<code>unique_ptr</code>对象</li>
+<li>通过 <code>operator=</code>或 <code>reset()</code> 赋值另一指针给管理的<code>unique_ptr</code> 对象。</li>
+</ul>
+<p>如下代码所示，在main函数里，为了简单的做个示例，所以我将<code>unique_ptr</code>的构造放到了一个{}作用域里，</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CTestSmartPtr</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">	CTestSmartPtr()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Created CtestSmartPtr!"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	~CTestSmartPtr()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Destroyed CtestSmartPtr!"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">PrintSmartPtr</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">unique_ptr</span>&lt;CTestSmartPtr&gt; testUniquePtr = <span class="built_in">std</span>::make_unique&lt;CTestSmartPtr&gt;();</span><br><span class="line">		testUniquePtr-&gt;PrintSmartPtr();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cin</span>.get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>打上断点，调试，可以看到首先调用了<code>CTestSmartPtr</code>的构造函数来构建了一个由<code>unique_ptr</code>指向的对象，然后在离开{}作用域时，自动调用了<code>CTestSmartPtr</code>的析构函数将<code>testUniquePtr</code>对象销毁。这就是一个简单的<code>unique_ptr</code>的用法。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/C%2B%2B/%E6%8C%87%E9%92%88/s1.png" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/C%2B%2B/%E6%8C%87%E9%92%88/s2.png" alt></p>
+<p>​    而且<code>unique_ptr</code>拥有<strong>独有</strong>对象所有权语义的智能指针，所以如下图所示当我们试图复制该指针时，编译器报错。(这里严格来说是不可以使用 = 操作和拷贝构造函数，仅能使用移动语义，但是因为是简单的举例说明<code>unique_ptr</code>所以没有进一步完善)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/C%2B%2B/%E6%8C%87%E9%92%88/s3.png" alt></p>
+<h2 id="std-shared-ptr"><a href="#std-shared-ptr" class="headerlink" title="std::shared_ptr"></a>std::shared_ptr</h2><p><code>std::shared_ptr</code> 是通过指针保持对象共享所有权的智能指针。多个 <code>shared_ptr</code>对象可占有同一对象。下列情况之一出现时销毁对象并解分配其内存：</p>
+<ul>
+<li>最后剩下的占有对象的<code>shared_ptr</code> 被销毁；</li>
+<li>最后剩下的占有对象的 <code>shared_ptr</code>被通过<code>operator=</code>或<code>reset()</code>赋值为另一指针。</li>
+</ul>
+<p><code>std::shared_ptr</code>实际上是一种（引用，计数）的形式，<code>std::shared_ptr</code>会自动分配内存并保存引用计数，当n个<code>std::shared_ptr</code>指向同一个对象时，计数为n，只有当n减少到0时，才会调用该对象的析构函数来销毁对象。</p>
+<p>同样，如下代码所示，我在{}作用域外再加了一个{}作用域，并声明了一个<code>testCopySharedPtr</code>用来测试<code>shared_ptr</code>的构造于析构。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;		</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;CTestSmartPtr&gt; testCopySharedPtr;</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;CTestSmartPtr&gt; testSharedPtr = <span class="built_in">std</span>::make_shared&lt;CTestSmartPtr&gt;();</span><br><span class="line">			testCopySharedPtr = testSharedPtr;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cin</span>.get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>打上断点，调试，可以看到此时<code>testSharedptr</code>调用构造函数，</p>
+<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/C%2B%2B/%E6%8C%87%E9%92%88/s4.png" alt="函数"></p>
+<p><code>F10</code>,当离开第一个（里面的）{}作用域时，由于<code>testCopySharedPtr</code>是在这个{}作用域外声明，而且在这个{}里<code>testSharedPtr</code>被赋值给了<code>testCopySharedPtr</code>，所以在离开这个作用域时，虽然<code>testSharedPtr</code>已经被销毁了，但是<code>testCopySharedPtr</code>仍然指向了<code>std::make_shared&lt;CTestSmartPtr&gt;()</code>所构造出来的<code>CTestSmartPtr</code>对象，所以<code>CTestSmartPtr</code>对象并没有被析构</p>
+<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/C%2B%2B/%E6%8C%87%E9%92%88/s5.png" alt></p>
+<p>再次<code>F10</code>,当离开第二个（外面的）{}作用域之后，<code>testCopySharedPtr</code>被销毁，此时才调用了<code>CTestSmartPtr</code>的析构函数。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/C%2B%2B/%E6%8C%87%E9%92%88/s6.png" alt></p>
+<h2 id="std-weak-ptr"><a href="#std-weak-ptr" class="headerlink" title="std::weak_ptr"></a>std::weak_ptr</h2><p><code>std::weak_ptr</code>在我的理解来说其实就是解决<code>std::shared_ptr</code> 的一些问题，因为<code>std::shared_ptr</code> 实际上是（引用，计数 ）的形式，也就是说每一次增加一个新的<code>std::shared_ptr</code> 指向当前对象，就需要先复制引用，再计数+1。但有时候如果你只是想暂时使用一下该对象，并不想进行复制引用和增加计数的操作，就可以使用<code>std::weak_ptr</code>。</p>
+<p>代码如下所示，相对于<code>std::shared_ptr</code>来说仅仅只是改变了一下外部{}作用域里的指针类型：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;		</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">std</span>::weak_ptr&lt;CTestSmartPtr&gt; testCopyWeakPtr;</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;CTestSmartPtr&gt; testSharedPtr = <span class="built_in">std</span>::make_shared&lt;CTestSmartPtr&gt;();</span><br><span class="line">			testCopyWeakPtr = testSharedPtr;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cin</span>.get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>调试，可以看到此时同样调用构造函数，</p>
+<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/C%2B%2B/%E6%8C%87%E9%92%88/s7.png" alt></p>
+<p><code>F10</code>，当离开第一个{}作用域时，就调用了<code>CTestSmartPtr</code>对象的析构函数，这就是因为实际上<code>std::weak_ptr</code>并没有复制指向该对象的指针引用，也没有计数+1，所以离开第一个{}作用域前，指向<code>CTestSmartPtr</code>对象的<code>std::shared_ptr</code>计数仍然为1，而离开后，<code>testSharedPtr</code>被销毁，计数-1变成了0，所以此时<code>CTestSmartPtr</code>对象也被销毁。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/C%2B%2B/%E6%8C%87%E9%92%88/s8.png" alt></p>
+<h2 id="注意（来自掘金文章）："><a href="#注意（来自掘金文章）：" class="headerlink" title="注意（来自掘金文章）："></a><strong>注意（来自<a href="https://juejin.im/post/5dcaa857e51d457f7675360b" target="_blank" rel="noopener">掘金文章</a>）：</strong></h2><p>有一些智能指针的方法和函数可以直接<code>f12</code>查看其实现，这里不一一列举。只是看到了一些相关文章里总结的比较好的使用智能指针时的注意事项所以摘抄在这里以供自己学习：</p>
+<ol>
+<li>尽量用make_shared/make_unique，少用new</li>
+</ol>
+<blockquote>
+<p><code>std::shared_ptr</code>在实现的时候使用的ref-count技术，因此内部会有一个计数器（控制块，用来管理数据）和一个指针，指向数据。因此在执行<code>std::shared_ptr p2(new A)</code> 的时候，首先会申请数据的内存，然后申请内控制块，因此是两次内存申请，而<code>std::make_shared()</code>则是只执行一次内存申请，将数据和控制块的申请放到一起。</p>
+</blockquote>
+<ol>
+<li><p>不要使用相同的内置指针来初始化(或者reset)多个智能指针</p>
+</li>
+<li><p>不要delete get()返回的指针</p>
+</li>
+<li><p>不要用get()初始化/reset另一个智能指针</p>
+</li>
+<li><p>智能指针管理的资源它只会默认删除new分配的内存,如果不是new分配的则要传递给其一个删除器</p>
+</li>
+<li><p>不要把this指针交给智能指针管理</p>
+<blockquote>
+<p>以下代码发生了什么事情呢？还是同样的错误。把原生指针 this 同时交付给了 m_sp 和 p 管理，这样会导致 this 指针被 delete 两次。 这里值得注意的是：以上所说的交付给m_sp 和 p 管理不对，并不是指不能多个shared_ptr同时占有同一类资源。shared_ptr之间的资源共享是通过shared_ptr智能指针拷贝、赋值实现的，因为这样可以引起计数器的更新；而如果直接通过原生指针来初始化，就会导致m_sp和p都根本不知道对方的存在，然而却两者都管理同一块地方。相当于”一间庙里请了两尊神”。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Do</span><span class="params">()</span></span>&#123;  m_sp =  <span class="built_in">shared_ptr</span>&lt;Test&gt;(<span class="keyword">this</span>);  &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">shared_ptr</span>&lt;Test&gt; m_sp;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Test* t = <span class="keyword">new</span> Test;</span><br><span class="line">    <span class="built_in">shared_ptr</span>&lt;Test&gt; p(t);</span><br><span class="line">    p-&gt;Do();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不要把一个原生指针给多个shared_ptr或者unique_ptr管理</p>
+</li>
+</ol>
+<blockquote>
+<p>我们知道，在使用原生指针对智能指针初始化的时候，智能指针对象都视原生指针为自己管理的资源。换句话意思就说：初始化多个智能指针之后，这些智能指针都担负起释放内存的作用。那么就会导致该原生指针会被释放多次！！</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">int</span>* ptr = <span class="keyword">new</span> <span class="keyword">int</span>;</span><br><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p1(ptr);</span><br><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p2(ptr);</span><br><span class="line"><span class="comment">//p1,p2析构的时候都会释放ptr，同一内存被释放多次！</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>不是使用new出来的空间要自定义删除器</li>
+</ol>
+<blockquote>
+<p>以下代码试图将malloc产生的动态内存交给shared_ptr管理；显然是有问题的，delete 和 malloc 牛头不对马嘴！！！ 所以我们需要自定义删除器<a href="int* p"></a>{ free(p); }传递给shared_ptr。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>* pi = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(<span class="number">4</span> * <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">    <span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; sp(pi);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>尽量不要使用 get()</li>
+</ol>
+<blockquote>
+<p>智能指针设计者之处提供get()接口是为了使得智能指针也能够适配原生指针使用的相关函数。这个设计可以说是个好的设计，也可以说是个失败的设计。因为根据封装的封闭原则，我们将原生指针交付给智能指针管理，我们就不应该也不能得到原生指针了；因为原生指针唯一的管理者就应该是智能指针。而不是客户逻辑区的其他什么代码。 所以我们在使用get()的时候要额外小心，禁止使用get()返回的原生指针再去初始化其他智能指针或者释放。(只能够被使用，不能够被管理)。而下面这段代码就违反了这个规定：</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; sp(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">4</span>));</span><br><span class="line">    <span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; pp(sp.get());</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
             </div>
             <hr/>
@@ -815,7 +903,7 @@
                     </span>
                     <a href="https://www.mnxd.xyz" class="b-link-green">Ricardo's Blog</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/archives/61559.html" class="b-link-green">Noraml Map(法线贴图)</a>
+                    <a href="/archives/38a918c7.html" class="b-link-green">智能指针</a>
                 </p>
             </div>
 
@@ -1135,53 +1223,77 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/archives/39121.html">
+                <a href="/archives/38a918c7.html">
                     <div class="card-image">
                         
                         
-                        <img src="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/Sea.jpg" class="responsive-img" alt="Parallax Map(视差贴图)">
+                        <img src="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/cover.jpg" class="responsive-img" alt="智能指针">
                         
-                        <span class="card-title">Parallax Map(视差贴图)</span>
+                        <span class="card-title">智能指针</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            在实验室HIVE底层基础上实现了PM+NM的效果，demo
-一、算法解决的问题：
- 优化了纹理边缘的凹凸细节部分，实现了Normal Map无法实现的自遮蔽。
- 法线贴图只能在明暗效果上作假（模拟凹凸），无法控制表面实际的凹凸程度。如下图红
+                            STL 的智能指针为了减少出现内存泄露的情况，STL中使用智能指针来减少泄露。STL中一般有四种智能指针:
+
+
+
+
+指针类别
+支持
+备注
+
+
+
+
+unique_ptr
+C++ 11
+拥有独有对象所有权语义的智能指针
+
+
+shared_ptr
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-12-13
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-01-12
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/图形学算法/" class="post-category" target="_blank">
-                                    图形学算法
+                            <a href="/categories/C-基础/" class="post-category" target="_blank">
+                                    C++基础
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/视差贴图/" target="_blank">
-                        <span class="chip bg-color">视差贴图</span>
+                    <a href="/tags/C/" target="_blank">
+                        <span class="chip bg-color">C++</span>
                     </a>
                     
-                    <a href="/tags/ParallaxMap/" target="_blank">
-                        <span class="chip bg-color">ParallaxMap</span>
+                    <a href="/tags/智能指针/" target="_blank">
+                        <span class="chip bg-color">智能指针</span>
+                    </a>
+                    
+                    <a href="/tags/unique-ptr/" target="_blank">
+                        <span class="chip bg-color">unique_ptr</span>
+                    </a>
+                    
+                    <a href="/tags/shared-ptr/" target="_blank">
+                        <span class="chip bg-color">shared_ptr</span>
                     </a>
                     
                 </div>
@@ -1195,25 +1307,27 @@
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/archives/46132.html">
+                <a href="/archives/8104acb6.html">
                     <div class="card-image">
                         
                         
-                        <img src="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/North.jpg" class="responsive-img" alt="单例模式">
+                        <img src="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/North.jpg" class="responsive-img" alt="delete[]和delete">
                         
-                        <span class="card-title">单例模式</span>
+                        <span class="card-title">delete[]和delete</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            0.单例模式 概念：
-​    单例模式是一种常见的软件设计模式。它的核心结构只包含一个被称为单例的特殊类。它的目的是保证一个类仅有一个实例，并提供一个访问它的全局访问点，该实例被所有程序模块共享。通过单例模式可以保证系统中一个类只有一个实
+                            0. delete[]这个问题其实来自于看到师兄师姐的面经里有提到一个问题
+delete[]是如何知道要delete的数组大小的？
+Type * pName = new Type[Size];
+在执行上述语句时，一开始我简单的以为C++编译
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-12-13
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-01-09
                             </span>
                         <span class="publish-author">
                             
@@ -1221,10 +1335,6 @@
                             
                             <a href="/categories/C-基础/" class="post-category" target="_blank">
                                     C++基础
-                                </a>
-                            
-                            <a href="/categories/C-基础/设计模式/" class="post-category" target="_blank">
-                                    设计模式
                                 </a>
                             
                             
@@ -1238,8 +1348,8 @@
                         <span class="chip bg-color">C++</span>
                     </a>
                     
-                    <a href="/tags/设计模式/" target="_blank">
-                        <span class="chip bg-color">设计模式</span>
+                    <a href="/tags/delete/" target="_blank">
+                        <span class="chip bg-color">delete</span>
                     </a>
                     
                 </div>

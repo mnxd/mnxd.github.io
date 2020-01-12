@@ -8,9 +8,7 @@
     <meta name="baidu-site-verification" content="1MqvQ6zfNJ">
     <meta name="google-site-verification" content="LYvzXgqPaMOwG9zUJOhjqbXhRknn5jNhZltznVcTbH8">
     <meta name="description" content="0.提要在做体素化部分的时候由于是通过先体素化表面模型再从前往后插值的方法进行实体化，由于初版算法的不精确性，导致出现了大量的重复点，在去重的时候采用了以下笨方法：
-struct MyPoint
-{
-    float voxelPosit">
+struct MyPoint&amp;#123;	float voxelPosit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -596,7 +594,7 @@ struct MyPoint
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        557
+                        595
                     </div>
                     
 
@@ -621,93 +619,11 @@ struct MyPoint
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="0-提要"><a href="#0-提要" class="headerlink" title="0.提要"></a>0.提要</h1><p>在做体素化部分的时候由于是通过先体素化表面模型再从前往后插值的方法进行实体化，由于初版算法的不精确性，导致出现了大量的重复点，在去重的时候采用了以下笨方法：</p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">struct MyPoint
-{
-    float voxelPosition_x;
-    float voxelPosition_y;
-    float voxelPosition_z;
-
-};
-bool isequel(MyPoint a, MyPoint b)
-{
-    return a.voxelPosition_x == b.voxelPosition_x && a.voxelPosition_y ==  b.voxelPosition_y &&a.voxelPosition_z == b.voxelPosition_z;
-
-}
-
-for (int i = 0; i < Points.size(); ++i)
-{
-    bool flag = true;
-    point.voxelPosition_x = Points.at(i).voxelPosition_x;
-    point.voxelPosition_y = Points.at(i).voxelPosition_y;
-    point.voxelPosition_z = Points.at(i).voxelPosition_z;
-    if (i == 0)
-    {
-        newPoints.push_back(point);
-    }
-    else
-    {
-        for (int k = 0; k < newPoints.size(); ++k)
-        {
-            newpoint.voxelPosition_x = newPoints.at(k).voxelPosition_x;
-            newpoint.voxelPosition_y = newPoints.at(k).voxelPosition_y;
-            newpoint.voxelPosition_z = newPoints.at(k).voxelPosition_z;
-            if (isequel(newpoint, point))
-            {
-                flag = false;
-                break;
-            }
-        }
-        if (flag)
-        {
-            newPoints.push_back(point);
-        }
-    }
-
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MyPoint</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">float</span> voxelPosition_x;</span><br><span class="line">	<span class="keyword">float</span> voxelPosition_y;</span><br><span class="line">	<span class="keyword">float</span> voxelPosition_z;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isequel</span><span class="params">(MyPoint a, MyPoint b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.voxelPosition_x == b.voxelPosition_x &amp;&amp; a.voxelPosition_y ==  b.voxelPosition_y &amp;&amp;a.voxelPosition_z == b.voxelPosition_z;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; Points.size(); ++i)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">    point.voxelPosition_x = Points.at(i).voxelPosition_x;</span><br><span class="line">    point.voxelPosition_y = Points.at(i).voxelPosition_y;</span><br><span class="line">    point.voxelPosition_z = Points.at(i).voxelPosition_z;</span><br><span class="line">    <span class="keyword">if</span> (i == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        newPoints.push_back(point);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; newPoints.size(); ++k)</span><br><span class="line">        &#123;</span><br><span class="line">            newpoint.voxelPosition_x = newPoints.at(k).voxelPosition_x;</span><br><span class="line">            newpoint.voxelPosition_y = newPoints.at(k).voxelPosition_y;</span><br><span class="line">            newpoint.voxelPosition_z = newPoints.at(k).voxelPosition_z;</span><br><span class="line">            <span class="keyword">if</span> (isequel(newpoint, point))</span><br><span class="line">            &#123;</span><br><span class="line">                flag = <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (flag)</span><br><span class="line">        &#123;</span><br><span class="line">            newPoints.push_back(point);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>但实际上struct中存储的float型变量x,y,z的精度很大，而且在存储过程中会出现实际上同为0.1但是却存储为0.09999和0.10001的情况，如果按照上述代码中的isequel方法进行判断则会出现这两个值不相等的结果，而事实上，在进行体素化划分时 是以0.1为最小单位进行划分，也就意味着并不会应该出现0.09999这种精度的数，所以目前暂时的做法是对float 保留两位有效数字，如下：</p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">
-bool isequel(MyPoint a, MyPoint b)
-{
-    return Round( a.voxelPosition_x, 2) == Round(  b.voxelPosition_x, 2) &&Round(  a.voxelPosition_y, 2) == Round(  b.voxelPosition_y, 2) &&Round(  a.voxelPosition_z, 2) == Round( b.voxelPosition_z, 2);
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isequel</span><span class="params">(MyPoint a, MyPoint b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> Round( a.voxelPosition_x, <span class="number">2</span>) == Round(  b.voxelPosition_x, <span class="number">2</span>) &amp;&amp;Round(  a.voxelPosition_y, <span class="number">2</span>) == Round(  b.voxelPosition_y, <span class="number">2</span>) &amp;&amp;Round(  a.voxelPosition_z, <span class="number">2</span>) == Round( b.voxelPosition_z, <span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>其中Round方法的作用是为传入变量保留相对应位有效数字：</p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">float Round(_In_ float dSrc, _In_ int iBit)
-{
-    float retVal = 0.0;
-    int  intTmp = 0;
-
-
-    // 若保留小数位数不正确
-    if (0 > iBit)
-    {
-        return 0;
-    }
-
-    //  若 为负数
-    if (0 > dSrc)
-    {
-        // 首先转为正数
-        dSrc *= -1;
-
-        intTmp = (int)((dSrc + 0.5 / pow(10.0, iBit)) * pow(10.0, iBit));
-        retVal = (float)intTmp / pow(10.0, iBit);
-
-        // 再转为 负数
-        retVal *= -1;
-    }
-    // 若为非负数
-    else
-    {
-        intTmp = (int)((dSrc + 0.5 / pow(10.0, iBit)) * pow(10.0, iBit));
-        retVal = (float)intTmp / pow(10.0, iBit);
-    }
-
-    // 返回计算结果
-    return retVal;
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">Round</span><span class="params">(_In_ <span class="keyword">float</span> dSrc, _In_ <span class="keyword">int</span> iBit)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">float</span> retVal = <span class="number">0.0</span>;</span><br><span class="line">	<span class="keyword">int</span>  intTmp = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 若保留小数位数不正确</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="number">0</span> &gt; iBit)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//  若 为负数</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="number">0</span> &gt; dSrc)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 首先转为正数</span></span><br><span class="line">		dSrc *= <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">		intTmp = (<span class="keyword">int</span>)((dSrc + <span class="number">0.5</span> / <span class="built_in">pow</span>(<span class="number">10.0</span>, iBit)) * <span class="built_in">pow</span>(<span class="number">10.0</span>, iBit));</span><br><span class="line">		retVal = (<span class="keyword">float</span>)intTmp / <span class="built_in">pow</span>(<span class="number">10.0</span>, iBit);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 再转为 负数</span></span><br><span class="line">		retVal *= <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 若为非负数</span></span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		intTmp = (<span class="keyword">int</span>)((dSrc + <span class="number">0.5</span> / <span class="built_in">pow</span>(<span class="number">10.0</span>, iBit)) * <span class="built_in">pow</span>(<span class="number">10.0</span>, iBit));</span><br><span class="line">		retVal = (<span class="keyword">float</span>)intTmp / <span class="built_in">pow</span>(<span class="number">10.0</span>, iBit);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 返回计算结果</span></span><br><span class="line">	<span class="keyword">return</span> retVal;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这个问题到目前暂时算是解决了，但是只是从问题的角度的解决问题，而没有从产生问题的源头出发。但是因为这版代码被弃用了，所以暂时放在这里，有空再回头想办法。</p>
 
             </div>
@@ -1360,7 +1276,7 @@ bool isequel(MyPoint a, MyPoint b)
 
             
                 &nbsp; | &nbsp;字数统计:&nbsp;
-                <span class="white-color">18.5k</span> 字
+                <span class="white-color">33.8k</span> 字
             
 
             
@@ -1584,5 +1500,5 @@ $(function () {
             </script>
         
 
-    <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":210,"height":280},"mobile":{"show":false},"react":{"opacity":0.7}});</script><script>!function(e){var r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function t(){for(var c=0;c<r.length;c++)t=r[c],void 0,0<=(n=t.getBoundingClientRect()).top&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=r[c];t=o,n=function(){r=r.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}t(),e.addEventListener("scroll",function(){!function(t,n){clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)}(t,e)})}(this);</script></body>
+    <script>!function(e){var r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function t(){for(var c=0;c<r.length;c++)t=r[c],void 0,0<=(n=t.getBoundingClientRect()).top&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=r[c];t=o,n=function(){r=r.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}t(),e.addEventListener("scroll",function(){!function(t,n){clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)}(t,e)})}(this);</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":210,"height":280},"mobile":{"show":false},"react":{"opacity":0.7}});</script></body>
 </html>

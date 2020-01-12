@@ -593,14 +593,14 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        851
+                        530
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        3 分
+                        1 分
                     </div>
                     
                 
@@ -684,63 +684,7 @@ P =(D\times E_2)，Q = T \times E_1</script><p>在我们的实现中，我们重
 <p>该守则的某些方面值得特别注意。 边向量的计算可以作为一个前处理来完成，用边1和边2来代替vert1和vert2来进行其它计算，并且当顶点位置数据在三角形之间不共享时，不需要用边1和边2来代替vert1和vert2。</p>
 <p>为了保证数值稳定性，消除平行射线的测试必须将其与ZERO周围的一个小间隔进行比较。 在适当调整EPSILON值的情况下，该算法是非常稳定的，如果只测试正面三角形，行列式可以与EPSILON进行比较，而不是与0进行比较（负行列式表示bach正面三角形）</p>
 <p>u的值与三角形的一条边(u=0)比较，也与平行于该边但通过三角形的相对点的一条线(u=1)比较。 虽然实际上没有测试三角形的边，但是该第二个测试有效地排除了许多交点，而无需进一步的计算</p>
-<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">#include <math.h>
-
-#define EPSILON 0.000001
-#define CROSS(dest,v1,v2) \
-          dest[0]=v1[1]*v2[2]-v1[2]*v2[1]; \
-          dest[1]=v1[2]*v2[0]-v1[0]*v2[2]; \
-          dest[2]=v1[0]*v2[1]-v1[1]*v2[0];
-#define DOT(v1,v2) (v1[0]*v2[0]+v1[1]*v2[1]+v1[2]*v2[2])
-#define SUB(dest,v1,v2) \
-          dest[0]=v1[0]-v2[0]; \
-          dest[1]=v1[1]-v2[1]; \
-          dest[2]=v1[2]-v2[2]; 
-
-/*原始jgt代码*/
-int intersect_triangle(double orig[3], double dir[3],
-               double vert0[3], double vert1[3], double vert2[3],
-               double *t, double *u, double *v)
-{
-   double edge1[3], edge2[3], tvec[3], pvec[3], qvec[3];
-   double det,inv_det;
-
-   /*查找共享vert0的两条边的向量*/
-   SUB(edge1, vert1, vert0);
-   SUB(edge2, vert2, vert0);
-
-  /*开始计算行列式-也用于计算U参数*/
-   CROSS(pvec, dir, edge2);
-
-   /*若行列式接近零，则射线位于三角形平面内*/
-   det = DOT(edge1, pvec);
-
-   if (det > -EPSILON && det < EPSILON)
-     return 0;
-   inv_det = 1.0 / det;
-
-  /*计算从vert0到光线原点的距离*/
-   SUB(tvec, orig, vert0);
-
-    /*计算U参数和测试界限*/
-   *u = DOT(tvec, pvec) * inv_det;
-   if (*u < 0.0 || *u > 1.0)
-     return 0;
-
-   /*准备测试V参数*/
-   CROSS(qvec, tvec, edge1);
-
-    /*计算V参数和测试界限*/
-   *v = DOT(dir, qvec) * inv_det;
-   if (*v < 0.0 || *u + *v > 1.0)
-     return 0;
-
-   /*计算t，射线与三角形相交*/
-   *t = DOT(edge2, qvec) * inv_det;
-
-   return 1;
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+   <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EPSILON 0.000001</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CROSS(dest,v1,v2) \</span></span><br><span class="line">          dest[<span class="number">0</span>]=v1[<span class="number">1</span>]*v2[<span class="number">2</span>]-v1[<span class="number">2</span>]*v2[<span class="number">1</span>]; \</span><br><span class="line">          dest[<span class="number">1</span>]=v1[<span class="number">2</span>]*v2[<span class="number">0</span>]-v1[<span class="number">0</span>]*v2[<span class="number">2</span>]; \</span><br><span class="line">          dest[<span class="number">2</span>]=v1[<span class="number">0</span>]*v2[<span class="number">1</span>]-v1[<span class="number">1</span>]*v2[<span class="number">0</span>];</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DOT(v1,v2) (v1[0]*v2[0]+v1[1]*v2[1]+v1[2]*v2[2])</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SUB(dest,v1,v2) \</span></span><br><span class="line">          dest[<span class="number">0</span>]=v1[<span class="number">0</span>]-v2[<span class="number">0</span>]; \</span><br><span class="line">          dest[<span class="number">1</span>]=v1[<span class="number">1</span>]-v2[<span class="number">1</span>]; \</span><br><span class="line">          dest[<span class="number">2</span>]=v1[<span class="number">2</span>]-v2[<span class="number">2</span>]; </span><br><span class="line"></span><br><span class="line"><span class="comment">/*原始jgt代码*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">intersect_triangle</span><span class="params">(<span class="keyword">double</span> orig[<span class="number">3</span>], <span class="keyword">double</span> dir[<span class="number">3</span>],</span></span></span><br><span class="line"><span class="function"><span class="params">		       <span class="keyword">double</span> vert0[<span class="number">3</span>], <span class="keyword">double</span> vert1[<span class="number">3</span>], <span class="keyword">double</span> vert2[<span class="number">3</span>],</span></span></span><br><span class="line"><span class="function"><span class="params">		       <span class="keyword">double</span> *t, <span class="keyword">double</span> *u, <span class="keyword">double</span> *v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">double</span> edge1[<span class="number">3</span>], edge2[<span class="number">3</span>], tvec[<span class="number">3</span>], pvec[<span class="number">3</span>], qvec[<span class="number">3</span>];</span><br><span class="line">   <span class="keyword">double</span> det,inv_det;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/*查找共享vert0的两条边的向量*/</span></span><br><span class="line">   SUB(edge1, vert1, vert0);</span><br><span class="line">   SUB(edge2, vert2, vert0);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/*开始计算行列式-也用于计算U参数*/</span></span><br><span class="line">   CROSS(pvec, dir, edge2);</span><br><span class="line"></span><br><span class="line">   <span class="comment">/*若行列式接近零，则射线位于三角形平面内*/</span></span><br><span class="line">   det = DOT(edge1, pvec);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (det &gt; -EPSILON &amp;&amp; det &lt; EPSILON)</span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">   inv_det = <span class="number">1.0</span> / det;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/*计算从vert0到光线原点的距离*/</span></span><br><span class="line">   SUB(tvec, orig, vert0);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*计算U参数和测试界限*/</span></span><br><span class="line">   *u = DOT(tvec, pvec) * inv_det;</span><br><span class="line">   <span class="keyword">if</span> (*u &lt; <span class="number">0.0</span> || *u &gt; <span class="number">1.0</span>)</span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/*准备测试V参数*/</span></span><br><span class="line">   CROSS(qvec, tvec, edge1);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*计算V参数和测试界限*/</span></span><br><span class="line">   *v = DOT(dir, qvec) * inv_det;</span><br><span class="line">   <span class="keyword">if</span> (*v &lt; <span class="number">0.0</span> || *u + *v &gt; <span class="number">1.0</span>)</span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/*计算t，射线与三角形相交*/</span></span><br><span class="line">   *t = DOT(edge2, qvec) * inv_det;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="4-结果"><a href="#4-结果" class="headerlink" title="4.结果"></a>4.结果</h1><p>在[？]中（论文引用错误），给出了一个射线/三角形求交的程序，该程序可同时计算质心坐标。 我们把那个方法和我们的方法作了比较。 这两种非剔除方法是在一个有效的射线跟踪器中实现的。图2给出了在hewlett-packard 9000/735工作站上对图中所示的三种模型进行射线跟踪的运行时间。在这个特定的实现中，这两种方法的性能大致相当（详细的统计数据可在网上获得）</p>
 <p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/%E5%9B%BE%E5%BD%A2%E5%AD%A6/raytri/figure2.png" alt="图2"></p>
 <h1 id="5-结论"><a href="#5-结论" class="headerlink" title="5.结论"></a>5.结论</h1><p>本文提出了一种射线/三角形求交的算法，该算法通过避免存储三角形平面方程，在速度上与以前的方法相当，同时显著地降低了存储开销。</p>
@@ -1288,9 +1232,7 @@ int intersect_triangle(double orig[3], double dir[3],
                     <div class="summary block-with-text">
                         
                             0.提要在做体素化部分的时候由于是通过先体素化表面模型再从前往后插值的方法进行实体化，由于初版算法的不精确性，导致出现了大量的重复点，在去重的时候采用了以下笨方法：
-struct MyPoint
-{
-    float voxelPosit
+struct MyPoint&#123;	float voxelPosit
                         
                     </div>
                     <div class="publish-info">
@@ -1406,7 +1348,7 @@ struct MyPoint
 
             
                 &nbsp; | &nbsp;字数统计:&nbsp;
-                <span class="white-color">18.5k</span> 字
+                <span class="white-color">33.8k</span> 字
             
 
             
@@ -1630,5 +1572,5 @@ $(function () {
             </script>
         
 
-    <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":210,"height":280},"mobile":{"show":false},"react":{"opacity":0.7}});</script><script>!function(e){var r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function t(){for(var c=0;c<r.length;c++)t=r[c],void 0,0<=(n=t.getBoundingClientRect()).top&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=r[c];t=o,n=function(){r=r.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}t(),e.addEventListener("scroll",function(){!function(t,n){clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)}(t,e)})}(this);</script></body>
+    <script>!function(e){var r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function t(){for(var c=0;c<r.length;c++)t=r[c],void 0,0<=(n=t.getBoundingClientRect()).top&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=r[c];t=o,n=function(){r=r.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}t(),e.addEventListener("scroll",function(){!function(t,n){clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)}(t,e)})}(this);</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":210,"height":280},"mobile":{"show":false},"react":{"opacity":0.7}});</script></body>
 </html>

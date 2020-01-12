@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.mnxd.xyz/"/>
-  <updated>2020-01-08T16:55:09.479Z</updated>
+  <updated>2020-01-12T07:38:15.615Z</updated>
   <id>https://www.mnxd.xyz/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>智能指针</title>
+    <link href="https://www.mnxd.xyz/archives/38a918c7.html"/>
+    <id>https://www.mnxd.xyz/archives/38a918c7.html</id>
+    <published>2020-01-12T05:42:32.047Z</published>
+    <updated>2020-01-12T07:38:15.615Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;STL-的智能指针&quot;&gt;&lt;a href=&quot;#STL-的智能指针&quot; class=&quot;headerlink&quot; title=&quot;STL 的智能指针&quot;&gt;&lt;/a&gt;STL
+        
+      
+    
+    </summary>
+    
+      <category term="C++基础" scheme="https://www.mnxd.xyz/categories/C-%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="C++" scheme="https://www.mnxd.xyz/tags/C/"/>
+    
+      <category term="智能指针" scheme="https://www.mnxd.xyz/tags/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/"/>
+    
+      <category term="unique_ptr" scheme="https://www.mnxd.xyz/tags/unique-ptr/"/>
+    
+      <category term="shared_ptr" scheme="https://www.mnxd.xyz/tags/shared-ptr/"/>
+    
+  </entry>
   
   <entry>
     <title>delete[]和delete</title>

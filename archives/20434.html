@@ -598,14 +598,14 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        466
+                        2k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        7 分
                     </div>
                     
                 
@@ -633,48 +633,22 @@
 <p>​    内联函数为了继承宏函数的效率，没有函数调用时开销，然后又可以像普通函数那样，可以进行参数，返回值类型的安全检查，又可以作为成员函数。</p>
 <h1 id="预处理宏的缺陷"><a href="#预处理宏的缺陷" class="headerlink" title="预处理宏的缺陷"></a>预处理宏的缺陷</h1><p>​    预处理器宏存在问题的关键是我们可能认为预处理器的行为和编译器的行为是一样的。当然也是由于宏函数调用和函数调用在外表看起来是一样的，因为也容易被混淆。但是其中也会有一些微妙的问题出现:</p>
 <p>问题一：</p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">#define ADD(x,y) x+yinline 
-int Add(int x,int y){
-    return x + y;
-}
-void test(){
-    int ret1 = ADD(10, 20) * 10; //希望的结果是300    
-    int ret2 = Add(10, 20) * 10; //希望结果也是300    
-    cout << "ret1:" << ret1 << endl; //210    
-    cout << "ret2:" << ret2 << endl; //300
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ADD(x,y) x+yinline </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Add</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ret1 = ADD(<span class="number">10</span>, <span class="number">20</span>) * <span class="number">10</span>; <span class="comment">//希望的结果是300	</span></span><br><span class="line">    <span class="keyword">int</span> ret2 = Add(<span class="number">10</span>, <span class="number">20</span>) * <span class="number">10</span>; <span class="comment">//希望结果也是300	</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"ret1:"</span> &lt;&lt; ret1 &lt;&lt; <span class="built_in">endl</span>; <span class="comment">//210	</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"ret2:"</span> &lt;&lt; ret2 &lt;&lt; <span class="built_in">endl</span>; <span class="comment">//300</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>问题二：</p>
-<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">#define COMPARE(x,y) ((x) < (y) ? (x) : (y))
-int Compare(int x,int y){    
-    return x < y ? x : y;
-}
-void test02(){
-    int a = 1;    
-    int b = 3;    
-    //cout << "COMPARE(++a, b):" << COMPARE(++a, b) << endl; // 3    
-    cout << "Compare(int x,int y):" << Compare(++a, b) << endl; //2
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> COMPARE(x,y) ((x) &lt; (y) ? (x) : (y))</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Compare</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;	</span><br><span class="line">    <span class="keyword">return</span> x &lt; y ? x : y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test02</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">1</span>;	</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">3</span>;	</span><br><span class="line">    <span class="comment">//cout &lt;&lt; "COMPARE(++a, b):" &lt;&lt; COMPARE(++a, b) &lt;&lt; endl; // 3	</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Compare(int x,int y):"</span> &lt;&lt; Compare(++a, b) &lt;&lt; <span class="built_in">endl</span>; <span class="comment">//2</span></span><br></pre></td></tr></table></figure>
 <p> 问题三：</p>
 <p>​    预定义宏函数没有作用域概念，无法作为一个类的成员函数，也就是说预定义宏没有办法表示类的范围</p>
 <h1 id="内联函数"><a href="#内联函数" class="headerlink" title="内联函数"></a>内联函数</h1><h2 id="内联函数基本概念"><a href="#内联函数基本概念" class="headerlink" title="内联函数基本概念"></a>内联函数基本概念</h2><p> 在c++中，预定义宏的概念是用内联函数来实现的，而<strong>内联函数本身也是一个真正的函数</strong>。内联函数具有普通函数的所有行为。唯一不同之处在于内联函数会在适当的地方像预定义宏一样展开，所以不需要函数调用的开销。因此应该不使用宏，使用内联函数。</p>
 <ul>
 <li>在普通函数(非成员函数)函数前面加上inline关键字使之成为内联函数。但是必须注意必须函数体和声明结合在一起，否则编译器将它作为普通函数来对待。</li>
 </ul>
-<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">inline void func(int a);
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> a)</span></span>;</span><br></pre></td></tr></table></figure>
 <p>以上写法没有任何效果，仅仅是声明函数，应该如下方式来做:</p>
-<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">inline int func(int a){return ++;}
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> a)</span></span>&#123;<span class="keyword">return</span> ++;&#125;</span><br></pre></td></tr></table></figure>
 <p> 注意: 编译器将会检查函数参数列表使用是否正确，并返回值(进行必要的转换)。这些事预处理器无法完成的。</p>
 <p> 内联函数的确占用空间，但是内联函数相对于普通函数的优势只是省去了函数调用时候的压栈，跳转，返回的开销。我们可以理解为内联函数是以<strong>空间换时间</strong>。</p>
 <h2 id="类内部的内联函数"><a href="#类内部的内联函数" class="headerlink" title="类内部的内联函数"></a>类内部的内联函数</h2><p>为了定义内联函数，通常必须在函数定义前面放一个inline关键字。但是在类内部定义内联函数时并不是必须的。任何在类内部定义的函数自动成为内联函数。</p>
-<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">class Person{
-public:    
-    Person(){cout << "构造函数!" << endl; }    
-    void PrintPerson(){ cout << "输出Person!" << endl; }
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:	</span><br><span class="line">	Person()&#123;<span class="built_in">cout</span> &lt;&lt; <span class="string">"构造函数!"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;	</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">PrintPerson</span><span class="params">()</span></span>&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"输出Person!"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>构造函数Person，成员函数PrintPerson在类的内部定义，自动成为内联函数。</p>
 <h2 id="内联函数和编译器"><a href="#内联函数和编译器" class="headerlink" title="内联函数和编译器"></a>内联函数和编译器</h2><p> 内联函数并不是何时何地都有效，为了理解内联函数何时有效，应该要知道编译器碰到内联函数会怎么处理？</p>
 <p> 对于任何类型的函数，编译器会将函数类型(包括函数名字，参数类型，返回值类型)放入到符号表中。同样，当编译器看到内联函数，并且对内联函数体进行分析没有发现错误时，也会将内联函数放入符号表。</p>
@@ -1354,7 +1328,7 @@ public:
 
             
                 &nbsp; | &nbsp;字数统计:&nbsp;
-                <span class="white-color">18.5k</span> 字
+                <span class="white-color">33.8k</span> 字
             
 
             
@@ -1578,5 +1552,5 @@ $(function () {
             </script>
         
 
-    <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":210,"height":280},"mobile":{"show":false},"react":{"opacity":0.7}});</script><script>!function(e){var r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function t(){for(var c=0;c<r.length;c++)t=r[c],void 0,0<=(n=t.getBoundingClientRect()).top&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=r[c];t=o,n=function(){r=r.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}t(),e.addEventListener("scroll",function(){!function(t,n){clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)}(t,e)})}(this);</script></body>
+    <script>!function(e){var r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function t(){for(var c=0;c<r.length;c++)t=r[c],void 0,0<=(n=t.getBoundingClientRect()).top&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=r[c];t=o,n=function(){r=r.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}t(),e.addEventListener("scroll",function(){!function(t,n){clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)}(t,e)})}(this);</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":210,"height":280},"mobile":{"show":false},"react":{"opacity":0.7}});</script></body>
 </html>

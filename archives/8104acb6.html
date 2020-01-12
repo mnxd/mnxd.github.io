@@ -10,8 +10,7 @@
     <meta name="description" content="0. delete[]这个问题其实来自于看到师兄师姐的面经里有提到一个问题
 delete[]是如何知道要delete的数组大小的？
 Type * pName = new Type[Size];
-
-在执行上述语句时，一开始我简单的以为C++编">
+在执行上述语句时，一开始我简单的以为C++编译">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -597,14 +596,14 @@ Type * pName = new Type[Size];
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        304
+                        1.4k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        6 分
                     </div>
                     
                 
@@ -623,8 +622,7 @@ Type * pName = new Type[Size];
             <div id="articleContent">
                 <h1 id="0-delete"><a href="#0-delete" class="headerlink" title="0. delete[]"></a>0. delete[]</h1><p>这个问题其实来自于看到师兄师姐的面经里有提到一个问题</p>
 <p><strong>delete[]是如何知道要delete的数组大小的？</strong></p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">Type * pName = new Type[Size];
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Type * pName = <span class="keyword">new</span> Type[Size];</span><br></pre></td></tr></table></figure>
 <p>在执行上述语句时，一开始我简单的以为C++编译器内部实现了某种方法如</p>
 <ul>
 <li>申请pName指向的内存空间时会自动在sizeof(Type)*size前面+1块内存用来存储大小</li>
@@ -636,235 +634,18 @@ Type * pName = new Type[Size];
 <h1 id="1-过分配内存方法"><a href="#1-过分配内存方法" class="headerlink" title="1.过分配内存方法"></a>1.过分配内存方法</h1><p>通过查阅资料，似乎在不同的编译器中都有对第一种方法的实现如下，</p>
 <p>以下内容来自知乎<a href="https://www.zhihu.com/question/25556263/answer/32589012" target="_blank" rel="noopener">夏华林的回答</a> ,这里抄过来做一下笔记。</p>
 <p>M$ 编译器 \ vc \include\ 目录下 malloc.h这一头文件 中 184 到 209 行的代码：</p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">//这儿是根据不同的硬件平台的宏定义
-#if defined (_M_IX86)
-#define _ALLOCA_S_MARKER_SIZE   8
-#elif defined (_M_X64)
-#define _ALLOCA_S_MARKER_SIZE   16
-#elif defined (_M_ARM)
-#define _ALLOCA_S_MARKER_SIZE   8
-#elif !defined (RC_INVOKED)
-#error Unsupported target platform.
-#endif  /* !defined (RC_INVOKED) */
-
-_STATIC_ASSERT(sizeof(unsigned int) <= _ALLOCA_S_MARKER_SIZE);
-
-#if !defined (__midl) && !defined (RC_INVOKED)
-#pragma warning(push)
-#pragma warning(disable:6540)
-__inline void *_MarkAllocaS(_Out_opt_ __crt_typefix(unsigned int*) void *_Ptr, unsigned int _Marker)
-{
-    if (_Ptr)
-    {
-        *((unsigned int*)_Ptr) = _Marker;
- //
-        _Ptr = (char*)_Ptr + _ALLOCA_S_MARKER_SIZE;
- //最后返回给调用者的指针，是原始指针偏移了_ALLOCA_S_MARKER_SIZE的新指针，这也是刚才我将指针向后偏移，就能得到该指针所指向内存区块的大小的原因。
-    }
-    return _Ptr;
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//这儿是根据不同的硬件平台的宏定义</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> defined (_M_IX86)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _ALLOCA_S_MARKER_SIZE   8</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> defined (_M_X64)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _ALLOCA_S_MARKER_SIZE   16</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> defined (_M_ARM)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _ALLOCA_S_MARKER_SIZE   8</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> !defined (RC_INVOKED)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">error</span> Unsupported target platform.</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span>  <span class="comment">/* !defined (RC_INVOKED) */</span></span></span><br><span class="line"></span><br><span class="line">_STATIC_ASSERT(<span class="keyword">sizeof</span>(<span class="keyword">unsigned</span> <span class="keyword">int</span>) &lt;= _ALLOCA_S_MARKER_SIZE);</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> !defined (__midl) &amp;&amp; !defined (RC_INVOKED)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> <span class="meta-keyword">warning</span>(push)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> <span class="meta-keyword">warning</span>(disable:6540)</span></span><br><span class="line">__inline <span class="keyword">void</span> *_MarkAllocaS(_Out_opt_ __crt_typefix(<span class="keyword">unsigned</span> <span class="keyword">int</span>*) <span class="keyword">void</span> *_Ptr, <span class="keyword">unsigned</span> <span class="keyword">int</span> _Marker)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (_Ptr)</span><br><span class="line">    &#123;</span><br><span class="line">        *((<span class="keyword">unsigned</span> <span class="keyword">int</span>*)_Ptr) = _Marker;</span><br><span class="line"> <span class="comment">//</span></span><br><span class="line">        _Ptr = (<span class="keyword">char</span>*)_Ptr + _ALLOCA_S_MARKER_SIZE;</span><br><span class="line"> <span class="comment">//最后返回给调用者的指针，是原始指针偏移了_ALLOCA_S_MARKER_SIZE的新指针，这也是刚才我将指针向后偏移，就能得到该指针所指向内存区块的大小的原因。</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _Ptr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>而它的释放如下所示：</p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">/* _freea must be in the header so that its allocator matches _malloca */
-#if !defined (__midl) && !defined (RC_INVOKED)
-#if !(defined (_DEBUG) && defined (_CRTDBG_MAP_ALLOC))
-#undef _freea
-__pragma(warning(push))
-__pragma(warning(disable: 6014))
-_CRTNOALIAS __inline void __CRTDECL _freea(_Pre_maybenull_ _Post_invalid_ void * _Memory)
-{
-    unsigned int _Marker;
-    if (_Memory)
-    {
-        _Memory = (char*)_Memory - _ALLOCA_S_MARKER_SIZE;
-//获得原始指针
-        _Marker = *(unsigned int *)_Memory;//得到指针所指区块的大小
-        if (_Marker == _ALLOCA_S_HEAP_MARKER)
-        {
-            free(_Memory);
-        }
-#if defined (_ASSERTE)
-        else if (_Marker != _ALLOCA_S_STACK_MARKER)
-        {
-            #pragma warning(suppress: 4548) /* expression before comma has no effect */
-            _ASSERTE(("Corrupted pointer passed to _freea", 0));
-        }
-#endif  /* defined (_ASSERTE) */
-    }
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* _freea must be in the header so that its allocator matches _malloca */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> !defined (__midl) &amp;&amp; !defined (RC_INVOKED)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> !(defined (_DEBUG) &amp;&amp; defined (_CRTDBG_MAP_ALLOC))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">undef</span> _freea</span></span><br><span class="line">__pragma(warning(push))</span><br><span class="line">__pragma(warning(disable: <span class="number">6014</span>))</span><br><span class="line">_CRTNOALIAS __inline <span class="keyword">void</span> __CRTDECL _freea(_Pre_maybenull_ _Post_invalid_ <span class="keyword">void</span> * _Memory)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> _Marker;</span><br><span class="line">    <span class="keyword">if</span> (_Memory)</span><br><span class="line">    &#123;</span><br><span class="line">        _Memory = (<span class="keyword">char</span>*)_Memory - _ALLOCA_S_MARKER_SIZE;</span><br><span class="line"><span class="comment">//获得原始指针</span></span><br><span class="line">        _Marker = *(<span class="keyword">unsigned</span> <span class="keyword">int</span> *)_Memory;<span class="comment">//得到指针所指区块的大小</span></span><br><span class="line">        <span class="keyword">if</span> (_Marker == _ALLOCA_S_HEAP_MARKER)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">free</span>(_Memory);</span><br><span class="line">        &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> defined (_ASSERTE)</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (_Marker != _ALLOCA_S_STACK_MARKER)</span><br><span class="line">        &#123;</span><br><span class="line">            #pragma warning(suppress: <span class="number">4548</span>) <span class="comment">/* expression before comma has no effect */</span></span><br><span class="line">            _ASSERTE((<span class="string">"Corrupted pointer passed to _freea"</span>, <span class="number">0</span>));</span><br><span class="line">        &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span>  <span class="comment">/* defined (_ASSERTE) */</span></span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>再来看看 SGI　STL标准库源码 stl_alloc.h 文件209 行到 246行 debug_alloc类模板的设计：</p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">// Allocator adaptor to check size arguments for debugging.
-// Reports errors using assert.  Checking can be disabled with
-// NDEBUG, but it's far better to just use the underlying allocator
-// instead when no checking is desired.
-// There is some evidence that this can confuse Purify.
-template <class _Alloc>
-class debug_alloc {
-
-private:
-
-  enum {_S_extra = 8};  // Size of space used to store size.  Note
-                        // that this must be large enough to preserve
-                        // alignment.
-
-                        //这儿就像它所说的那样
-public:
-
-  static void* allocate(size_t __n)
-  {
-    // 这里实际申请的内存大小要多 8 个字节
-    char* __result = (char*)_Alloc::allocate(__n + (int) _S_extra);
-    *(size_t*)__result = __n;//前 4 个字节用于存储区块大小，后4个字节的空白区暂时不清楚是为什么。
-    return __result + (int) _S_extra;//最后返回相对于原始指针偏移8个字节的新指针
-  }
-
-  static void deallocate(void* __p, size_t __n)
-  {
-    char* __real_p = (char*)__p - (int) _S_extra;//获得原始指针
-    assert(*(size_t*)__real_p == __n);//这里增加了一个断言，防止析构了被破坏的指针
-    _Alloc::deallocate(__real_p, __n + (int) _S_extra);
-  }
-
-  static void* reallocate(void* __p, size_t __old_sz, size_t __new_sz)
-  {
-    char* __real_p = (char*)__p - (int) _S_extra;
-    assert(*(size_t*)__real_p == __old_sz);
-    char* __result = (char*)
-      _Alloc::reallocate(__real_p, __old_sz + (int) _S_extra,
-                                   __new_sz + (int) _S_extra);
-    *(size_t*)__result = __new_sz;
-    return __result + (int) _S_extra;
-  }
-
-};
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Allocator adaptor to check size arguments for debugging.</span></span><br><span class="line"><span class="comment">// Reports errors using assert.  Checking can be disabled with</span></span><br><span class="line"><span class="comment">// NDEBUG, but it's far better to just use the underlying allocator</span></span><br><span class="line"><span class="comment">// instead when no checking is desired.</span></span><br><span class="line"><span class="comment">// There is some evidence that this can confuse Purify.</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> _<span class="title">Alloc</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">debug_alloc</span> &#123;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line"></span><br><span class="line">  <span class="keyword">enum</span> &#123;_S_extra = <span class="number">8</span>&#125;;  <span class="comment">// Size of space used to store size.  Note</span></span><br><span class="line">                        <span class="comment">// that this must be large enough to preserve</span></span><br><span class="line">                        <span class="comment">// alignment.</span></span><br><span class="line"></span><br><span class="line">                        <span class="comment">//这儿就像它所说的那样</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">static</span> <span class="keyword">void</span>* <span class="title">allocate</span><span class="params">(<span class="keyword">size_t</span> __n)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="comment">// 这里实际申请的内存大小要多 8 个字节</span></span><br><span class="line">    <span class="keyword">char</span>* __result = (<span class="keyword">char</span>*)_Alloc::allocate(__n + (<span class="keyword">int</span>) _S_extra);</span><br><span class="line">    *(<span class="keyword">size_t</span>*)__result = __n;<span class="comment">//前 4 个字节用于存储区块大小，后4个字节的空白区暂时不清楚是为什么。</span></span><br><span class="line">    <span class="keyword">return</span> __result + (<span class="keyword">int</span>) _S_extra;<span class="comment">//最后返回相对于原始指针偏移8个字节的新指针</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">deallocate</span><span class="params">(<span class="keyword">void</span>* __p, <span class="keyword">size_t</span> __n)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="keyword">char</span>* __real_p = (<span class="keyword">char</span>*)__p - (<span class="keyword">int</span>) _S_extra;<span class="comment">//获得原始指针</span></span><br><span class="line">    assert(*(<span class="keyword">size_t</span>*)__real_p == __n);<span class="comment">//这里增加了一个断言，防止析构了被破坏的指针</span></span><br><span class="line">    _Alloc::deallocate(__real_p, __n + (<span class="keyword">int</span>) _S_extra);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">static</span> <span class="keyword">void</span>* <span class="title">reallocate</span><span class="params">(<span class="keyword">void</span>* __p, <span class="keyword">size_t</span> __old_sz, <span class="keyword">size_t</span> __new_sz)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="keyword">char</span>* __real_p = (<span class="keyword">char</span>*)__p - (<span class="keyword">int</span>) _S_extra;</span><br><span class="line">    assert(*(<span class="keyword">size_t</span>*)__real_p == __old_sz);</span><br><span class="line">    <span class="keyword">char</span>* __result = (<span class="keyword">char</span>*)</span><br><span class="line">      _Alloc::reallocate(__real_p, __old_sz + (<span class="keyword">int</span>) _S_extra,</span><br><span class="line">                                   __new_sz + (<span class="keyword">int</span>) _S_extra);</span><br><span class="line">    *(<span class="keyword">size_t</span>*)__result = __new_sz;</span><br><span class="line">    <span class="keyword">return</span> __result + (<span class="keyword">int</span>) _S_extra;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>gcc下其实也有同样的设计：</p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">#if(defined(_X86_) && !defined(__x86_64))
-#define _ALLOCA_S_MARKER_SIZE 8
-#elif defined(__ia64__) || defined(__x86_64)
-#define _ALLOCA_S_MARKER_SIZE 16
-#endif
-
-#if !defined(RC_INVOKED)
-  static __inline void *_MarkAllocaS(void *_Ptr,unsigned int _Marker) {
-    if(_Ptr) {
-      *((unsigned int*)_Ptr) = _Marker;
-      _Ptr = (char*)_Ptr + _ALLOCA_S_MARKER_SIZE;
-    }
-    return _Ptr;
-  }
-#endif
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">#ifndef RC_INVOKED
-#undef _freea
-  static __inline void __cdecl _freea(void *_Memory) {
-    unsigned int _Marker;
-    if(_Memory) {
-      _Memory = (char*)_Memory - _ALLOCA_S_MARKER_SIZE;
-      _Marker = *(unsigned int *)_Memory;
-      if(_Marker==_ALLOCA_S_HEAP_MARKER) {
-    free(_Memory);
-      }
-#ifdef _ASSERTE
-      else if(_Marker!=_ALLOCA_S_STACK_MARKER) {
-    _ASSERTE(("Corrupted pointer passed to _freea",0));
-      }
-#endif
-    }
-  }
-#endif /* RC_INVOKED */
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">if</span>(defined(_X86_) &amp;&amp; !defined(__x86_64))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _ALLOCA_S_MARKER_SIZE 8</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> defined(__ia64__) || defined(__x86_64)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _ALLOCA_S_MARKER_SIZE 16</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> !defined(RC_INVOKED)</span></span><br><span class="line">  <span class="keyword">static</span> __inline <span class="keyword">void</span> *_MarkAllocaS(<span class="keyword">void</span> *_Ptr,<span class="keyword">unsigned</span> <span class="keyword">int</span> _Marker) &#123;</span><br><span class="line">    <span class="keyword">if</span>(_Ptr) &#123;</span><br><span class="line">      *((<span class="keyword">unsigned</span> <span class="keyword">int</span>*)_Ptr) = _Marker;</span><br><span class="line">      _Ptr = (<span class="keyword">char</span>*)_Ptr + _ALLOCA_S_MARKER_SIZE;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _Ptr;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> RC_INVOKED</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">undef</span> _freea</span></span><br><span class="line">  <span class="keyword">static</span> __inline <span class="keyword">void</span> __cdecl _freea(<span class="keyword">void</span> *_Memory) &#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> _Marker;</span><br><span class="line">    <span class="keyword">if</span>(_Memory) &#123;</span><br><span class="line">      _Memory = (<span class="keyword">char</span>*)_Memory - _ALLOCA_S_MARKER_SIZE;</span><br><span class="line">      _Marker = *(<span class="keyword">unsigned</span> <span class="keyword">int</span> *)_Memory;</span><br><span class="line">      <span class="keyword">if</span>(_Marker==_ALLOCA_S_HEAP_MARKER) &#123;</span><br><span class="line">	<span class="built_in">free</span>(_Memory);</span><br><span class="line">      &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _ASSERTE</span></span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span>(_Marker!=_ALLOCA_S_STACK_MARKER) &#123;</span><br><span class="line">	_ASSERTE((<span class="string">"Corrupted pointer passed to _freea"</span>,<span class="number">0</span>));</span><br><span class="line">      &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* RC_INVOKED */</span></span></span><br></pre></td></tr></table></figure>
 <h1 id="2-内存管理表方法"><a href="#2-内存管理表方法" class="headerlink" title="2.内存管理表方法"></a>2.内存管理表方法</h1><p>暂时不太明白反汇编部分，待后续完善，这里的论证方法来自百度得到的一篇博客，但是我得到的和作者的结果不一致，所以暂时不做论证，先挖坑，后面有时间看了汇编再来补充</p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">int main(void)
-
-{
-
-int *pI = new int;
-
-int *pArray = new int[10];
-
-int size = *(pArray-1);
-
-delete pI;
-
-delete [] pArray; 
-
-return 0;
-
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> *pI = <span class="keyword">new</span> <span class="keyword">int</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> *pArray = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> size = *(pArray<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> pI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> [] pArray; </span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>查看反汇编后代码得到：</p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">int main(void)
-
-{
-00007FF799591840  push        rbp  
-00007FF799591842  push        rdi  
-00007FF799591843  sub         rsp,1C8h  
-00007FF79959184A  lea         rbp,[rsp+20h]  
-00007FF79959184F  mov         rdi,rsp  
-00007FF799591852  mov         ecx,72h  
-00007FF799591857  mov         eax,0CCCCCCCCh  
-00007FF79959185C  rep stos    dword ptr [rdi]  
-00007FF79959185E  lea         rcx,[__89D24A3F_main@cpp (07FF7995A1000h)]  
-00007FF799591865  call        __CheckForDebuggerJustMyCode (07FF7995910A5h)  
-
-    int *pI = new int;
-00007FF79959186A  mov         ecx,4  
-00007FF79959186F  call        operator new (07FF799591195h)  
-00007FF799591874  mov         qword ptr [rbp+128h],rax  
-00007FF79959187B  mov         rax,qword ptr [rbp+128h]  
-00007FF799591882  mov         qword ptr [pI],rax  
-
-    int *pArray = new int[10];
-00007FF799591886  mov         ecx,28h  
-00007FF79959188B  call        operator new[] (07FF799591375h)  
-00007FF799591890  mov         qword ptr [rbp+148h],rax  
-00007FF799591897  mov         rax,qword ptr [rbp+148h]  
-00007FF79959189E  mov         qword ptr [pArray],rax  
-
-    int size = *(pArray - 1);
-00007FF7995918A2  mov         rax,qword ptr [pArray]  
-00007FF7995918A6  mov         eax,dword ptr [rax-4]  
-00007FF7995918A9  mov         dword ptr [size],eax  
-
-    delete pI;
-00007FF7995918AC  mov         rax,qword ptr [pI]  
-00007FF7995918B0  mov         qword ptr [rbp+168h],rax  
-00007FF7995918B7  mov         edx,4  
-00007FF7995918BC  mov         rcx,qword ptr [rbp+168h]  
-00007FF7995918C3  call        operator delete (07FF799591087h)  
-00007FF7995918C8  cmp         qword ptr [rbp+168h],0  
-00007FF7995918D0  jne         main+9Fh (07FF7995918DFh)  
-00007FF7995918D2  mov         qword ptr [rbp+198h],0  
-00007FF7995918DD  jmp         main+0B2h (07FF7995918F2h)  
-00007FF7995918DF  mov         qword ptr [pI],8123h  
-00007FF7995918E7  mov         rax,qword ptr [pI]  
-00007FF7995918EB  mov         qword ptr [rbp+198h],rax  
-
-    delete[] pArray;
-00007FF7995918F2  mov         rax,qword ptr [pArray]  
-00007FF7995918F6  mov         qword ptr [rbp+188h],rax  
-00007FF7995918FD  mov         rcx,qword ptr [rbp+188h]  
-00007FF799591904  call        operator delete[] (07FF799591294h)  
-00007FF799591909  cmp         qword ptr [rbp+188h],0  
-00007FF799591911  jne         main+0E0h (07FF799591920h)  
-00007FF799591913  mov         qword ptr [rbp+198h],0  
-00007FF79959191E  jmp         main+0F3h (07FF799591933h)  
-00007FF799591920  mov         qword ptr [pArray],8123h  
-00007FF799591928  mov         rax,qword ptr [pArray]  
-00007FF79959192C  mov         qword ptr [rbp+198h],rax  
-
-
-    return 0;
-00007FF799591933  xor         eax,eax  
-
-}
-00007FF799591935  lea         rsp,[rbp+1A8h]  
-00007FF79959193C  pop         rdi  
-00007FF79959193D  pop         rbp  
-00007FF79959193E  ret
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="number">00007F</span>F799591840  push        rbp  </span><br><span class="line"><span class="number">00007F</span>F799591842  push        rdi  </span><br><span class="line"><span class="number">00007F</span>F799591843  sub         rsp,<span class="number">1</span>C8h  </span><br><span class="line"><span class="number">00007F</span>F79959184A  lea         rbp,[rsp+<span class="number">20</span>h]  </span><br><span class="line"><span class="number">00007F</span>F79959184F  mov         rdi,rsp  </span><br><span class="line"><span class="number">00007F</span>F799591852  mov         ecx,<span class="number">72</span>h  </span><br><span class="line"><span class="number">00007F</span>F799591857  mov         eax,<span class="number">0</span>CCCCCCCCh  </span><br><span class="line"><span class="number">00007F</span>F79959185C  rep stos    dword ptr [rdi]  </span><br><span class="line"><span class="number">00007F</span>F79959185E  lea         rcx,[__89D24A3F_main@cpp (<span class="number">07F</span>F7995A1000h)]  </span><br><span class="line"><span class="number">00007F</span>F799591865  call        __CheckForDebuggerJustMyCode (<span class="number">07F</span>F7995910A5h)  </span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> *pI = <span class="keyword">new</span> <span class="keyword">int</span>;</span><br><span class="line"><span class="number">00007F</span>F79959186A  mov         ecx,<span class="number">4</span>  </span><br><span class="line"><span class="number">00007F</span><span class="function">F79959186F  call        <span class="keyword">operator</span> <span class="title">new</span> <span class="params">(<span class="number">07F</span>F799591195h)</span>  </span></span><br><span class="line">00007FF799591874  mov         qword ptr [rbp+128h],rax  </span><br><span class="line"><span class="number">00007F</span>F79959187B  mov         rax,qword ptr [rbp+<span class="number">128</span>h]  </span><br><span class="line"><span class="number">00007F</span>F799591882  mov         qword ptr [pI],rax  </span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> *pArray = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span><br><span class="line"><span class="number">00007F</span>F799591886  mov         ecx,<span class="number">28</span>h  </span><br><span class="line"><span class="number">00007F</span>F79959188B  call        <span class="keyword">operator</span> <span class="keyword">new</span>[] (<span class="number">07F</span>F799591375h)  </span><br><span class="line"><span class="number">00007F</span>F799591890  mov         qword ptr [rbp+<span class="number">148</span>h],rax  </span><br><span class="line"><span class="number">00007F</span>F799591897  mov         rax,qword ptr [rbp+<span class="number">148</span>h]  </span><br><span class="line"><span class="number">00007F</span>F79959189E  mov         qword ptr [pArray],rax  </span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> size = *(pArray - <span class="number">1</span>);</span><br><span class="line"><span class="number">00007F</span>F7995918A2  mov         rax,qword ptr [pArray]  </span><br><span class="line"><span class="number">00007F</span>F7995918A6  mov         eax,dword ptr [rax<span class="number">-4</span>]  </span><br><span class="line"><span class="number">00007F</span>F7995918A9  mov         dword ptr [size],eax  </span><br><span class="line"></span><br><span class="line">	<span class="keyword">delete</span> pI;</span><br><span class="line"><span class="number">00007F</span>F7995918AC  mov         rax,qword ptr [pI]  </span><br><span class="line"><span class="number">00007F</span>F7995918B0  mov         qword ptr [rbp+<span class="number">168</span>h],rax  </span><br><span class="line"><span class="number">00007F</span>F7995918B7  mov         edx,<span class="number">4</span>  </span><br><span class="line"><span class="number">00007F</span>F7995918BC  mov         rcx,qword ptr [rbp+<span class="number">168</span>h]  </span><br><span class="line"><span class="number">00007F</span><span class="function">F7995918C3  call        <span class="keyword">operator</span> <span class="title">delete</span> <span class="params">(<span class="number">07F</span>F799591087h)</span>  </span></span><br><span class="line">00007FF7995918C8  cmp         qword ptr [rbp+168h],0  </span><br><span class="line"><span class="number">00007F</span>F7995918D0  jne         main+<span class="number">9F</span>h (<span class="number">07F</span>F7995918DFh)  </span><br><span class="line"><span class="number">00007F</span>F7995918D2  mov         qword ptr [rbp+<span class="number">198</span>h],<span class="number">0</span>  </span><br><span class="line"><span class="number">00007F</span>F7995918DD  jmp         main+<span class="number">0B</span>2h (<span class="number">07F</span>F7995918F2h)  </span><br><span class="line"><span class="number">00007F</span>F7995918DF  mov         qword ptr [pI],<span class="number">8123</span>h  </span><br><span class="line"><span class="number">00007F</span>F7995918E7  mov         rax,qword ptr [pI]  </span><br><span class="line"><span class="number">00007F</span>F7995918EB  mov         qword ptr [rbp+<span class="number">198</span>h],rax  </span><br><span class="line"></span><br><span class="line">	<span class="keyword">delete</span>[] pArray;</span><br><span class="line"><span class="number">00007F</span>F7995918F2  mov         rax,qword ptr [pArray]  </span><br><span class="line"><span class="number">00007F</span>F7995918F6  mov         qword ptr [rbp+<span class="number">188</span>h],rax  </span><br><span class="line"><span class="number">00007F</span>F7995918FD  mov         rcx,qword ptr [rbp+<span class="number">188</span>h]  </span><br><span class="line"><span class="number">00007F</span>F799591904  call        <span class="keyword">operator</span> <span class="keyword">delete</span>[] (<span class="number">07F</span>F799591294h)  </span><br><span class="line"><span class="number">00007F</span>F799591909  cmp         qword ptr [rbp+<span class="number">188</span>h],<span class="number">0</span>  </span><br><span class="line"><span class="number">00007F</span>F799591911  jne         main+<span class="number">0E0</span>h (<span class="number">07F</span>F799591920h)  </span><br><span class="line"><span class="number">00007F</span>F799591913  mov         qword ptr [rbp+<span class="number">198</span>h],<span class="number">0</span>  </span><br><span class="line"><span class="number">00007F</span>F79959191E  jmp         main+<span class="number">0F</span>3h (<span class="number">07F</span>F799591933h)  </span><br><span class="line"><span class="number">00007F</span>F799591920  mov         qword ptr [pArray],<span class="number">8123</span>h  </span><br><span class="line"><span class="number">00007F</span>F799591928  mov         rax,qword ptr [pArray]  </span><br><span class="line"><span class="number">00007F</span>F79959192C  mov         qword ptr [rbp+<span class="number">198</span>h],rax  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"><span class="number">00007F</span>F799591933  xor         eax,eax  </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="number">00007F</span>F799591935  lea         rsp,[rbp+<span class="number">1</span>A8h]  </span><br><span class="line"><span class="number">00007F</span>F79959193C  pop         rdi  </span><br><span class="line"><span class="number">00007F</span>F79959193D  pop         rbp  </span><br><span class="line"><span class="number">00007F</span>F79959193E  ret</span><br></pre></td></tr></table></figure>
 
             </div>
             <hr/>
@@ -1335,34 +1116,46 @@ return 0;
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
-            </div>
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/archives/8104acb6.html">
+                <a href="/archives/38a918c7.html">
                     <div class="card-image">
                         
                         
-                        <img src="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/North.jpg" class="responsive-img" alt="delete[]和delete">
+                        <img src="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/cover.jpg" class="responsive-img" alt="智能指针">
                         
-                        <span class="card-title">delete[]和delete</span>
+                        <span class="card-title">智能指针</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            0. delete[]这个问题其实来自于看到师兄师姐的面经里有提到一个问题
-delete[]是如何知道要delete的数组大小的？
-Type * pName = new Type[Size];
+                            STL 的智能指针为了减少出现内存泄露的情况，STL中使用智能指针来减少泄露。STL中一般有四种智能指针:
 
-在执行上述语句时，一开始我简单的以为C++编
+
+
+
+指针类别
+支持
+备注
+
+
+
+
+unique_ptr
+C++ 11
+拥有独有对象所有权语义的智能指针
+
+
+shared_ptr
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-01-09
-                            </span>
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-01-12
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -1375,7 +1168,6 @@ Type * pName = new Type[Size];
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -1383,8 +1175,16 @@ Type * pName = new Type[Size];
                         <span class="chip bg-color">C++</span>
                     </a>
                     
-                    <a href="/tags/delete/" target="_blank">
-                        <span class="chip bg-color">delete</span>
+                    <a href="/tags/智能指针/" target="_blank">
+                        <span class="chip bg-color">智能指针</span>
+                    </a>
+                    
+                    <a href="/tags/unique-ptr/" target="_blank">
+                        <span class="chip bg-color">unique_ptr</span>
+                    </a>
+                    
+                    <a href="/tags/shared-ptr/" target="_blank">
+                        <span class="chip bg-color">shared_ptr</span>
                     </a>
                     
                 </div>
@@ -1412,8 +1212,7 @@ Type * pName = new Type[Size];
                         
                             0. Lambda表达式lambda表达式是C++11引入的”新”技术，之所以加引号是因为实际上其他语言如C#、Python中已经有了，只是C++在11版本中才刚刚推出而已。
 1. 声明Lambda表达式先上实际代码：
-#include 
-
+#include &
                         
                     </div>
                     <div class="publish-info">
@@ -1526,7 +1325,7 @@ Type * pName = new Type[Size];
 
             
                 &nbsp; | &nbsp;字数统计:&nbsp;
-                <span class="white-color">18.5k</span> 字
+                <span class="white-color">33.8k</span> 字
             
 
             
@@ -1750,5 +1549,5 @@ $(function () {
             </script>
         
 
-    <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":210,"height":280},"mobile":{"show":false},"react":{"opacity":0.7}});</script><script>!function(e){var r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function t(){for(var c=0;c<r.length;c++)t=r[c],void 0,0<=(n=t.getBoundingClientRect()).top&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=r[c];t=o,n=function(){r=r.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}t(),e.addEventListener("scroll",function(){!function(t,n){clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)}(t,e)})}(this);</script></body>
+    <script>!function(e){var r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function t(){for(var c=0;c<r.length;c++)t=r[c],void 0,0<=(n=t.getBoundingClientRect()).top&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=r[c];t=o,n=function(){r=r.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}t(),e.addEventListener("scroll",function(){!function(t,n){clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)}(t,e)})}(this);</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":210,"height":280},"mobile":{"show":false},"react":{"opacity":0.7}});</script></body>
 </html>
