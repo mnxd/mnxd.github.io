@@ -600,14 +600,14 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        6k
+                        1k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        23 分
+                        3 分
                     </div>
                     
                 
@@ -651,10 +651,41 @@
 <font color="red">**如果通过普通指针创建了一个指向某个对象的指针，那么在使用完这个对象之后需要通过delete删除它**</font>
 
 <p> <strong>“*”取值符操作的是指针变量指向的内存空间，“&amp;“取址符操作的是取出该变量的在内存空间中所在的位置</strong>（&amp;可以取得一个变量在内存中的地址。但是，不能取寄存器变量，因为寄存器变量不在内存里，而在CPU里面，所以是没有地址的。）</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt; </span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span>&#123; </span><br><span class="line">    <span class="keyword">int</span>  var = <span class="number">20</span>;   <span class="comment">// 实际变量的声明  </span></span><br><span class="line">    <span class="keyword">int</span>  *ip;        <span class="comment">// 指针变量的声明  </span></span><br><span class="line">    ip = &amp;var;       <span class="comment">// 在指针变量中存储 var 的地址  </span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Value of var variable: "</span>;  </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; var &lt;&lt; <span class="built_in">endl</span>;    <span class="comment">// 输出在指针变量中存储的地址   </span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Address stored in ip variable: "</span>;  </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ip &lt;&lt; <span class="built_in">endl</span>;    <span class="comment">// 访问指针中地址的值  </span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Value of *ip variable: "</span>;   </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; *ip &lt;&lt; <span class="built_in">endl</span>;   </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面的代码编译和执行后产生的结果如下：<br><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Value of var variable: <span class="number">20</span></span><br><span class="line">Address stored in ip variable: <span class="number">0xbfc601ac</span></span><br><span class="line">Value of *ip variable: <span class="number">20</span></span><br></pre></td></tr></table></figure></p>
-<p><strong>在C++中，除了后边将要提到的两种特殊情况以外，其他所有<font color="red">指针的类型都要和他所指向的对象严格匹配：</font></strong><br><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">double</span> dval;</span><br><span class="line"><span class="keyword">double</span> *pd = &amp;dval;	<span class="comment">//正确：初始值是double型对象的地址</span></span><br><span class="line"><span class="keyword">double</span> *pd2 = pd;	<span class="comment">//正确：初始值是指向一个double对象的指针</span></span><br><span class="line"><span class="keyword">int</span> *pi = pd;<span class="comment">//错误：指针pi的类型是Int 但是pd的类型是double，类型不匹配</span></span><br><span class="line">pi = &amp;dval;	<span class="comment">//错误：试图把double型对象的地址赋给int类型指针</span></span><br></pre></td></tr></table></figure></p>
-<p><strong><font color="red">特殊情况1：允许令一个指向常量的指针指向一个非常量对象：</font></strong><br><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> pi =<span class="number">3.14</span>;	<span class="comment">//pi是一个不能改变其值的常量</span></span><br><span class="line"><span class="keyword">double</span> *ptr = &amp;pi;		<span class="comment">//错误：ptr是一个普通指针，要存放常量对象地址只能 使用指向常量的指针							         </span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> *cptr = &amp;pi;<span class="comment">//正确：指向常量的指针cptr存放一个双精度常量地</span></span><br><span class="line">*cptr = <span class="number">42</span>;				<span class="comment">//错误：const常量值无法修改，也就无法赋值</span></span><br><span class="line"><span class="keyword">double</span> dval = <span class="number">3.14</span>;		<span class="comment">//dval是一个双精度浮点型常量，他的值可以被改变</span></span><br><span class="line">cptr = &amp;dval			<span class="comment">//正确：但是不能通过cptr去改变dval的值</span></span><br></pre></td></tr></table></figure></p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">#include <iostream> 
+using namespace std; 
+int main (){ 
+    int  var = 20;   // 实际变量的声明  
+    int  *ip;        // 指针变量的声明  
+    ip = &var;       // 在指针变量中存储 var 的地址  
+    cout << "Value of var variable: ";  
+    cout << var << endl;    // 输出在指针变量中存储的地址   
+    cout << "Address stored in ip variable: ";  
+    cout << ip << endl;    // 访问指针中地址的值  
+    cout << "Value of *ip variable: ";   
+    cout << *ip << endl;   
+    return 0;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上面的代码编译和执行后产生的结果如下：</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">Value of var variable: 20
+Address stored in ip variable: 0xbfc601ac
+Value of *ip variable: 20
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><strong>在C++中，除了后边将要提到的两种特殊情况以外，其他所有<font color="red">指针的类型都要和他所指向的对象严格匹配：</font></strong></p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">double dval;
+double *pd = &dval;    //正确：初始值是double型对象的地址
+double *pd2 = pd;    //正确：初始值是指向一个double对象的指针
+int *pi = pd;//错误：指针pi的类型是Int 但是pd的类型是double，类型不匹配
+pi = &dval;    //错误：试图把double型对象的地址赋给int类型指针
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong><font color="red">特殊情况1：允许令一个指向常量的指针指向一个非常量对象：</font></strong></p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">const double pi =3.14;    //pi是一个不能改变其值的常量
+double *ptr = &pi;        //错误：ptr是一个普通指针，要存放常量对象地址只能 使用指向常量的指针                                     
+const double *cptr = &pi;//正确：指向常量的指针cptr存放一个双精度常量地
+*cptr = 42;                //错误：const常量值无法修改，也就无法赋值
+double dval = 3.14;        //dval是一个双精度浮点型常量，他的值可以被改变
+cptr = &dval            //正确：但是不能通过cptr去改变dval的值
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong><font color="red">特殊情况2：存在继承关系的类：</font></strong></p>
 <p>可以将基类的指针或引用绑定到派生类对象上，当使用基类的引用或指针时，实际上使用者并不清楚该引用或指针所绑定的对象的真实类型，该对象可能是基类的对象也有可能是派生类的对象</p>
 <h2 id="2-3指针类型"><a href="#2-3指针类型" class="headerlink" title="2.3指针类型"></a>2.3指针类型</h2><h3 id="2-3-1-失控指针"><a href="#2-3-1-失控指针" class="headerlink" title="2.3.1 失控指针"></a>2.3.1 失控指针</h3><p>失控指针：也称迷途指针、野指针、悬浮指针，<strong>指的是不指向任何合法的对象的指针，可以指向任何地址，并且对该地址的数值进行修改或删除，可能会造成意想不到的后果。</strong></p>
@@ -662,13 +693,54 @@
 <p>若操作系统将这部分已经释放的内存重新分配给另外一个进程，而原来的程序重新引用现在的迷途指针，则将产生无法预料的后果。因为此时迷途指针所指向的内存现在包含的已经完全是不同的数据。通常来说，若原来的程序继续往迷途指针所指向的内存地址写入数据，这些和原来程序不相关的数据将被损坏，进而导致不可预料的程序错误。</p>
 <p>这种类型的程序错误，不容易找到问题的原因，通常会导致段错误（Linux系统中）和一般保护错误（Windows系统中）。如果操作系统的内存分配器将已经被覆盖的数据区域再分配，就可能会影响系统的稳定性。</p>
 <h3 id="2-3-3-野指针"><a href="#2-3-3-野指针" class="headerlink" title="2.3.3 野指针"></a>2.3.3 野指针</h3><p>野指针：<strong>未被初始化的指针</strong>，野指针所导致的错误和迷途指针非常相似，但野指针的问题更容易被发现。</p>
-<p>指针变量也是变量，是变量就可以任意赋值，不要越界即可（32位为4字节，64位为8字节），但是，任意数值赋值给指针变量没有意义，因为这样的指针就成了野指针，此指针指向的区域是未知(操作系统不允许操作此指针指向的内存区域)。所以，野指针不会直接引发错误，操作野指针指向的内存区域才会出问题。<br><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">100</span>;  </span><br><span class="line"><span class="keyword">int</span> *p;   </span><br><span class="line">p = a; <span class="comment">//把a的值赋值给指针变量p，p为野指针，不会有问题，但没有意义  </span></span><br><span class="line">p = <span class="number">0x12345678</span>; <span class="comment">//给指针变量p赋值，p为野指针，不会有问题，但没有意义    </span></span><br><span class="line">*p = <span class="number">1000</span>;  <span class="comment">//操作野指针指向未知区域，内存出问题，err</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="2-3-4-空指针"><a href="#2-3-4-空指针" class="headerlink" title="2.3.4 空指针"></a>2.3.4 空指针</h3><p>空指针：就是一个<strong>被赋值为0的指针</strong>，它不指向任何的对象或者函数。得到空指针最直接的办法就是用字面值nullptr来初始化指针。<br><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> *p1 = <span class="literal">nullptr</span>; <span class="comment">//等价于int *p1=0;</span></span><br><span class="line"><span class="keyword">int</span> *p2 = <span class="number">0</span>;		<span class="comment">//需要首先#include cstdlib</span></span><br><span class="line"><span class="keyword">int</span> p3 = BULL;		<span class="comment">//等价于int *p3=0;</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="2-3-5万能指针（泛型指针）void"><a href="#2-3-5万能指针（泛型指针）void" class="headerlink" title="2.3.5万能指针（泛型指针）void *"></a>2.3.5万能指针（泛型指针）void *</h3><p>void *指针可以用来存放任意对象的地址：（使用有限）<br><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">double</span> obj = <span class="number">3.14</span>,*pd = &amp;obj; <span class="comment">//正确：void*能存放任意类型的地址对象 </span></span><br><span class="line"><span class="keyword">void</span> *pv = &amp;obj;			<span class="comment">//obj可以是任意类型的对象</span></span><br><span class="line">pv=pd;						<span class="comment">//pv可以存放任意类型的指针</span></span><br></pre></td></tr></table></figure></p>
+<p>指针变量也是变量，是变量就可以任意赋值，不要越界即可（32位为4字节，64位为8字节），但是，任意数值赋值给指针变量没有意义，因为这样的指针就成了野指针，此指针指向的区域是未知(操作系统不允许操作此指针指向的内存区域)。所以，野指针不会直接引发错误，操作野指针指向的内存区域才会出问题。</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">int a = 100;  
+int *p;   
+p = a; //把a的值赋值给指针变量p，p为野指针，不会有问题，但没有意义  
+p = 0x12345678; //给指针变量p赋值，p为野指针，不会有问题，但没有意义    
+*p = 1000;  //操作野指针指向未知区域，内存出问题，err
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="2-3-4-空指针"><a href="#2-3-4-空指针" class="headerlink" title="2.3.4 空指针"></a>2.3.4 空指针</h3><p>空指针：就是一个<strong>被赋值为0的指针</strong>，它不指向任何的对象或者函数。得到空指针最直接的办法就是用字面值nullptr来初始化指针。</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">int *p1 = nullptr; //等价于int *p1=0;
+int *p2 = 0;        //需要首先#include cstdlib
+int p3 = BULL;        //等价于int *p3=0;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="2-3-5万能指针（泛型指针）void"><a href="#2-3-5万能指针（泛型指针）void" class="headerlink" title="2.3.5万能指针（泛型指针）void *"></a>2.3.5万能指针（泛型指针）void *</h3><p>void *指针可以用来存放任意对象的地址：（使用有限）</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">  double obj = 3.14,*pd = &obj; //正确：void*能存放任意类型的地址对象 
+  void *pv = &obj;            //obj可以是任意类型的对象
+  pv=pd;                        //pv可以存放任意类型的指针
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <h3 id="2-3-6-重踏指针"><a href="#2-3-6-重踏指针" class="headerlink" title="2.3.6 重踏指针"></a>2.3.6 重踏指针</h3><p>重踏指针：<strong>被释放后的指针不置为空指针，不再指向任何合法的内存，它仍可能指向原来的内存块，此时再定义一个新的指针，两个指针都指向同一块内存。</strong></p>
-<p>经典重踏指针程序实例：<br><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">short</span> <span class="keyword">int</span> USHORT;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">USHORT *pShort = <span class="keyword">new</span> USHORT;  </span><br><span class="line">*pShort = <span class="number">10</span>;  </span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;<span class="string">"pShort = "</span>&lt;&lt;pShort&lt;&lt;<span class="built_in">endl</span>; </span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;<span class="string">"*pShort = "</span>&lt;&lt;*pShort&lt;&lt;<span class="built_in">endl</span>;  </span><br><span class="line"><span class="keyword">delete</span> pShort;  <span class="comment">// 释放pShort指针指向的内存空间//  </span></span><br><span class="line">pShort = <span class="number">0</span>;  <span class="comment">// 把这句注释掉，pShort将成为一个重踏指针  </span></span><br><span class="line"><span class="keyword">long</span> *pLong = <span class="keyword">new</span> <span class="keyword">long</span>;  <span class="comment">// pLong指针指向的是pShort原来指向的内存块 </span></span><br><span class="line">*pLong = <span class="number">90000</span>;   </span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;<span class="string">"pLong = "</span>&lt;&lt;pLong&lt;&lt;<span class="built_in">endl</span>;   </span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;<span class="string">"*pLong = "</span>&lt;&lt;*pLong&lt;&lt;<span class="built_in">endl</span>;  </span><br><span class="line">*pShort = <span class="number">20</span>;    </span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;<span class="string">"*pShort = "</span>&lt;&lt;*pShort&lt;&lt;<span class="built_in">endl</span>;  </span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;<span class="string">"*pLong = "</span>&lt;&lt;*pLong&lt;&lt;<span class="built_in">endl</span>;  </span><br><span class="line"><span class="keyword">delete</span> pLong;  </span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;<span class="number">1234567891011121314151617181920212223</span></span><br></pre></td></tr></table></figure></p>
+<p>经典重踏指针程序实例：</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">#include <iostream>
+using namespace std;
+typedef unsigned short int USHORT;
+int main() {  
+USHORT *pShort = new USHORT;  
+*pShort = 10;  
+cout<<"pShort = "<<pShort<<endl; 
+cout<<"*pShort = "<<*pShort<<endl;  
+delete pShort;  // 释放pShort指针指向的内存空间//  
+pShort = 0;  // 把这句注释掉，pShort将成为一个重踏指针  
+long *pLong = new long;  // pLong指针指向的是pShort原来指向的内存块 
+*pLong = 90000;   
+cout<<"pLong = "<<pLong<<endl;   
+cout<<"*pLong = "<<*pLong<<endl;  
+*pShort = 20;    
+cout<<"*pShort = "<<*pShort<<endl;  
+cout<<"*pLong = "<<*pLong<<endl;  
+delete pLong;  
+return 0;
+}1234567891011121314151617181920212223
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">pShort = <span class="number">0x4d11c8</span></span><br><span class="line">*pShort = <span class="number">10</span></span><br><span class="line">pLong = <span class="number">0x4d11c8</span></span><br><span class="line">*pLong = <span class="number">90000</span>*</span><br><span class="line">pShort = <span class="number">20</span></span><br><span class="line">*pLong = <span class="number">65556</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">pShort = 0x4d11c8
+*pShort = 10
+pLong = 0x4d11c8
+*pLong = 90000*
+pShort = 20
+*pLong = 65556
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="2-3-7-const修饰的指针变量"><a href="#2-3-7-const修饰的指针变量" class="headerlink" title="2.3.7 const修饰的指针变量"></a>2.3.7 const修饰的指针变量</h3><p>const指针是指针变量的值一经初始化，就不可以改变指向，初始化是必要的。其定义形式如下：</p>
 <p>type *const 指针名称;</p>
 <p>　　声明指针时，可以在类型前或后使用关键字const，也可在两个位置都使用。例如，下面都是合法的声明，但是含义大不同：</p>
@@ -676,13 +748,28 @@
 <p>int <em> const pTwo; //指向整形的<em>*常量指针</em></em> ，它不能在指向别的变量，但指向（变量）的值可以修改。</p>
 <p>const int <em>const pThree; //指向<strong>整形常量</strong> 的<em>*常量指针</em></em> 。它既不能再指向别的常量，指向的值也不能修改。</p>
 <p>理解这些声明的技巧在于，查看关键字const右边来确定什么被声明为常量 ，如果该关键字的右边是类型，则值是常量；如果关键字的右边是指针变量，则指针本身是常量。下面的代码有助于说明这一点：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">	<span class="keyword">int</span> a = <span class="number">100</span>;  </span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">200</span>; <span class="comment">//指向常量的指针      </span></span><br><span class="line">    <span class="comment">//修饰*，指针指向内存区域不能修改，指针指向可以变      </span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> *p1 = &amp;a; <span class="comment">//等价于int const *p1 = &amp;a;     </span></span><br><span class="line">    <span class="comment">//*p1 = 111; //err   </span></span><br><span class="line">    p1 = &amp;b; <span class="comment">//ok</span></span><br><span class="line"><span class="comment">//指针常量      </span></span><br><span class="line">    <span class="comment">//修饰p1，指针指向不能变，指针指向的内存可以修改   </span></span><br><span class="line">    <span class="keyword">int</span> * <span class="keyword">const</span> p2 = &amp;a;     </span><br><span class="line">    <span class="comment">//p2 = &amp;b; //err      </span></span><br><span class="line">    *p2 = <span class="number">222</span>; <span class="comment">//ok</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-3-8-智能指针"><a href="#2-3-8-智能指针" class="headerlink" title="2.3.8 智能指针"></a>2.3.8 智能指针</h3><p>智能指针稍微有一点复杂，单独写一篇来讲：智能指针</p>
-<p>TODO:写完智能指针来补链接。</p>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">    int a = 100;  
+    int b = 200; //指向常量的指针      
+    //修饰*，指针指向内存区域不能修改，指针指向可以变      
+    const int *p1 = &a; //等价于int const *p1 = &a;     
+    //*p1 = 111; //err   
+    p1 = &b; //ok
+//指针常量      
+    //修饰p1，指针指向不能变，指针指向的内存可以修改   
+    int * const p2 = &a;     
+    //p2 = &b; //err      
+    *p2 = 222; //ok
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="2-3-8-智能指针"><a href="#2-3-8-智能指针" class="headerlink" title="2.3.8 智能指针"></a>2.3.8 智能指针</h3><p>智能指针稍微有一点复杂，单独写一篇来讲：<a href="http://mnxd.xyz/archives/38a918c7.html" target="_blank" rel="noopener">智能指针</a>。</p>
 <h3 id="2-3-9多级指针"><a href="#2-3-9多级指针" class="headerlink" title="2.3.9多级指针"></a>2.3.9多级指针</h3><p>C语言允许有多级指针存在，在实际的程序中一级指针最常用，其次是二级指针。</p>
 <p>二级指针就是指向一个一级指针变量地址的指针。多级指针的结构如下图（来源网络）所示：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/C%2B%2B/%E6%8C%87%E9%92%88/zz3.jpg" alt="图3"></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">10</span>;       </span><br><span class="line"><span class="keyword">int</span> *p = &amp;a; <span class="comment">//一级指针    </span></span><br><span class="line">p = <span class="number">100</span>; <span class="comment">//p就是a        </span></span><br><span class="line"><span class="keyword">int</span> **q = &amp;p;       <span class="comment">//*q就是p    **q就是a      </span></span><br><span class="line"><span class="keyword">int</span> ***t = &amp;q;       <span class="comment">//*t就是q   **t就是p   ***t就是a</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">int a = 10;       
+int *p = &a; //一级指针    
+p = 100; //p就是a        
+int **q = &p;       //*q就是p    **q就是a      
+int ***t = &q;       //*t就是q   **t就是p   ***t就是a
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="2-4指针小结"><a href="#2-4指针小结" class="headerlink" title="2.4指针小结"></a>2.4指针小结</h2><div class="table-container">
 <table>
 <thead>
@@ -731,7 +818,8 @@
 </ul>
 <p><strong>对一段连续的内存空间只能取一个别名吗？</strong>   c++中新增了引用的概念，引用可以作为一个已定义变量的别名。   </p>
 <p>基本语法:</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Type&amp; ref   = val;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">Type& ref   = val;
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><strong>注意事项：</strong></p>
 <ul>
 <li><p>&amp;在此不是求地址运算，而是起标识作用。</p>
@@ -747,36 +835,217 @@
 <li><p><strong>可以建立对数组的引用。</strong></p>
 </li>
 </ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">  <span class="comment">//1. 认识引用</span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> a = <span class="number">10</span>;	<span class="comment">//给变量a取一个别名b</span></span><br><span class="line">  <span class="keyword">int</span>&amp; b = a;	</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"a:"</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;	</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"b:"</span> &lt;&lt; b &lt;&lt; <span class="built_in">endl</span>;	</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"------------"</span> &lt;&lt; <span class="built_in">endl</span>;	<span class="comment">//操作b就相当于操作a本身	</span></span><br><span class="line">  b = <span class="number">100</span>;	</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"a:"</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"b:"</span> &lt;&lt; b &lt;&lt; <span class="built_in">endl</span>;	</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"------------"</span> &lt;&lt; <span class="built_in">endl</span>;	<span class="comment">//一个变量可以有n个别名	</span></span><br><span class="line">  <span class="keyword">int</span>&amp; c = a;	</span><br><span class="line">  c = <span class="number">200</span>;	</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"a:"</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"b:"</span> &lt;&lt; b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"c:"</span> &lt;&lt; c &lt;&lt; <span class="built_in">endl</span>;	</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"------------"</span> &lt;&lt; <span class="built_in">endl</span>;	<span class="comment">//a,b,c的地址都是相同的</span></span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"a:"</span> &lt;&lt; &amp;a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"b:"</span> &lt;&lt; &amp;b &lt;&lt; <span class="built_in">endl</span>;	</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"c:"</span> &lt;&lt; &amp;c &lt;&lt; <span class="built_in">endl</span>;&#125;</span><br><span class="line"><span class="comment">//2. 使用引用注意事项</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test02</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line"><span class="comment">//1) 引用必须初始化	</span></span><br><span class="line"><span class="comment">//int&amp; ref; //报错:必须初始化引用	</span></span><br><span class="line"><span class="comment">//2) 引用一旦初始化，不能改变引用	</span></span><br><span class="line">  <span class="keyword">int</span> a = <span class="number">10</span>;	</span><br><span class="line">  <span class="keyword">int</span> b = <span class="number">20</span>;</span><br><span class="line">  <span class="keyword">int</span>&amp; ref = a;	</span><br><span class="line">  ref = b; <span class="comment">//不能改变引用	</span></span><br><span class="line"><span class="comment">//3) 不能对数组建立引用	</span></span><br><span class="line">  <span class="keyword">int</span> arr[<span class="number">10</span>];	<span class="comment">//int&amp; ref3[10] = arr;</span></span><br><span class="line">&#125;	</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//1. 建立数组引用方法一	</span></span><br><span class="line">  <span class="keyword">typedef</span> <span class="keyword">int</span> ArrRef[<span class="number">10</span>];	</span><br><span class="line">  <span class="keyword">int</span> arr[<span class="number">10</span>];	</span><br><span class="line">  ArrRef&amp; aRef = arr;	</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>;i ++)</span><br><span class="line">  &#123;</span><br><span class="line">  aRef[i] = i+<span class="number">1</span>;	</span><br><span class="line">  &#125;	</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>;i++)</span><br><span class="line">  &#123;		</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; arr[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">  &#125;	</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;	</span><br><span class="line">  <span class="comment">//2. 建立数组引用方法二	</span></span><br><span class="line">  <span class="keyword">int</span>(&amp;f)[<span class="number">10</span>] = arr;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">  &#123;	</span><br><span class="line">    f[i] = i+<span class="number">10</span>;</span><br><span class="line">  &#125;	</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">  &#123;	</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; arr[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">  &#125;	</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">  //1. 认识引用
+  void test01(){
+  int a = 10;    //给变量a取一个别名b
+  int& b = a;    
+  cout << "a:" << a << endl;    
+  cout << "b:" << b << endl;    
+  cout << "------------" << endl;    //操作b就相当于操作a本身    
+  b = 100;    
+  cout << "a:" << a << endl;
+  cout << "b:" << b << endl;    
+  cout << "------------" << endl;    //一个变量可以有n个别名    
+  int& c = a;    
+  c = 200;    
+  cout << "a:" << a << endl;
+  cout << "b:" << b << endl;
+  cout << "c:" << c << endl;    
+  cout << "------------" << endl;    //a,b,c的地址都是相同的
+  cout << "a:" << &a << endl;
+  cout << "b:" << &b << endl;    
+  cout << "c:" << &c << endl;}
+//2. 使用引用注意事项
+void test02()
+{    
+//1) 引用必须初始化    
+//int& ref; //报错:必须初始化引用    
+//2) 引用一旦初始化，不能改变引用    
+  int a = 10;    
+  int b = 20;
+  int& ref = a;    
+  ref = b; //不能改变引用    
+//3) 不能对数组建立引用    
+  int arr[10];    //int& ref3[10] = arr;
+}    
+
+  //1. 建立数组引用方法一    
+  typedef int ArrRef[10];    
+  int arr[10];    
+  ArrRef& aRef = arr;    
+  for (int i = 0; i < 10;i ++)
+  {
+  aRef[i] = i+1;    
+  }    
+  for (int i = 0; i < 10;i++)
+  {        
+  cout << arr[i] << " ";
+  }    
+  cout << endl;    
+  //2. 建立数组引用方法二    
+  int(&f)[10] = arr;
+  for (int i = 0; i < 10; i++)
+  {    
+    f[i] = i+10;
+  }    
+  for (int i = 0; i < 10; i++)
+  {    
+    cout << arr[i] << " ";
+  }    
+  cout << endl;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="3-2-函数中的引用"><a href="#3-2-函数中的引用" class="headerlink" title="3.2 函数中的引用"></a>3.2 函数中的引用</h2><p>最常见看见引用的地方是在函数参数和返回值中。当引用被用作函数参数的时，在函数内对任何引用的修改，将对还函数外的参数产生改变。当然，可以通过传递一个指针来做相同的事情，但引用具有更清晰的语法。</p>
 <p>如果从函数中返回一个引用，必须像从函数中返回一个指针一样对待。当函数返回值时，引用关联的内存一定要存在。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//值传递</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ValueSwap</span><span class="params">(<span class="keyword">int</span> m,<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> temp = m;</span><br><span class="line">  m = n;</span><br><span class="line">  n = temp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//地址传递</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PointerSwap</span><span class="params">(<span class="keyword">int</span>* m,<span class="keyword">int</span>* n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> temp = *m;</span><br><span class="line">  *m = *n;</span><br><span class="line">  *n = temp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//引用传递</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ReferenceSwap</span><span class="params">(<span class="keyword">int</span>&amp; m,<span class="keyword">int</span>&amp; n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> temp = m;	</span><br><span class="line">  m = n;</span><br><span class="line">  n = temp;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> a = <span class="number">10</span>;	</span><br><span class="line">  <span class="keyword">int</span> b = <span class="number">20</span>;	</span><br><span class="line">  <span class="comment">//值传递	</span></span><br><span class="line">  ValueSwap(a, b);	</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"a:"</span> &lt;&lt; a &lt;&lt; <span class="string">" b:"</span> &lt;&lt; b &lt;&lt; <span class="built_in">endl</span>;	</span><br><span class="line">  <span class="comment">//地址传递</span></span><br><span class="line">  PointerSwap(&amp;a, &amp;b);</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"a:"</span> &lt;&lt; a &lt;&lt; <span class="string">" b:"</span> &lt;&lt; b &lt;&lt; <span class="built_in">endl</span>;	</span><br><span class="line">  <span class="comment">//引用传递</span></span><br><span class="line">  ReferenceSwap(a, b);	</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"a:"</span> &lt;&lt; a &lt;&lt; <span class="string">" b:"</span> &lt;&lt; b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">//值传递
+void ValueSwap(int m,int n)
+{
+  int temp = m;
+  m = n;
+  n = temp;
+}
+//地址传递
+void PointerSwap(int* m,int* n)
+{
+  int temp = *m;
+  *m = *n;
+  *n = temp;
+}
+//引用传递
+void ReferenceSwap(int& m,int& n)
+{
+  int temp = m;    
+  m = n;
+  n = temp;
+  }
+void test()
+{
+  int a = 10;    
+  int b = 20;    
+  //值传递    
+  ValueSwap(a, b);    
+  cout << "a:" << a << " b:" << b << endl;    
+  //地址传递
+  PointerSwap(&a, &b);
+  cout << "a:" << a << " b:" << b << endl;    
+  //引用传递
+  ReferenceSwap(a, b);    
+  cout << "a:" << a << " b:" << b << endl;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>通过引用参数产生的效果同按地址传递是一样的。引用的语法更清楚简单：</p>
 <p>1) 函数调用时传递的实参不必加“&amp;”符</p>
 <p>2) 在被调函数中不必在参数前加“*”符</p>
 <p>引用作为其它变量的别名而存在，因此在一些场合可以代替指针。C++主张用引用传递取代地址传递的方式，因为引用语法容易且不易出错。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//返回局部变量引用</span></span><br><span class="line"><span class="function"><span class="keyword">int</span>&amp; <span class="title">TestFun01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> a = <span class="number">10</span>; <span class="comment">//局部变量</span></span><br><span class="line">  <span class="keyword">return</span> a;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="comment">//返回静态变量引用</span></span><br><span class="line"><span class="function"><span class="keyword">int</span>&amp; <span class="title">TestFunc02</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">int</span> a = <span class="number">20</span>;	</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"static int a : "</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">  <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="comment">//不能返回局部变量的引用</span></span><br><span class="line">  <span class="keyword">int</span>&amp; ret01 = TestFun01();	</span><br><span class="line">  <span class="comment">//如果函数做左值，那么必须返回引用</span></span><br><span class="line">  TestFunc02();	</span><br><span class="line">  TestFunc02() = <span class="number">100</span>;	</span><br><span class="line">  TestFunc02();	</span><br><span class="line">  <span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">//返回局部变量引用
+int& TestFun01()
+{
+  int a = 10; //局部变量
+  return a;
+  }
+//返回静态变量引用
+int& TestFunc02()
+{    
+  static int a = 20;    
+  cout << "static int a : " << a << endl;
+  return a;
+}
+int main()
+{
+//不能返回局部变量的引用
+  int& ret01 = TestFun01();    
+  //如果函数做左值，那么必须返回引用
+  TestFunc02();    
+  TestFunc02() = 100;    
+  TestFunc02();    
+  return EXIT_SUCCESS;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>n 不能返回局部变量的引用。</p>
 <p>n 函数当左值，必须返回引用。</p>
 <h2 id="3-3-引用的本质"><a href="#3-3-引用的本质" class="headerlink" title="3.3 引用的本质"></a>3.3 引用的本质</h2><p><strong>引用的本质在c++内部实现是一个指针常量.</strong></p>
 <p>Type<strong>&amp;</strong> ref <strong>=</strong> val<strong>;</strong> // Type* const ref = &val;</p>
 <p>c++编译器在编译过程中使用常指针作为引用的内部实现，因此引用所占用的空间大小与指针相同，只是这个过程是编译器内部实现，用户不可见。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//发现是引用，转换为 int* const ref = &amp;a;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">testFunc</span><span class="params">(<span class="keyword">int</span>&amp; ref)</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">  ref = <span class="number">100</span>; <span class="comment">// ref是引用，转换为*ref = 100</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">  <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">  <span class="keyword">int</span>&amp; aRef = a; <span class="comment">//自动转换为 int* const aRef = &amp;a;这也能说明引用为什么必须初始化	</span></span><br><span class="line">  aRef = <span class="number">20</span>; <span class="comment">//内部发现aRef是引用，自动帮我们转换为: *aRef = 20;</span></span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"a:"</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;	</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"aRef:"</span> &lt;&lt; aRef &lt;&lt; <span class="built_in">endl</span>;	</span><br><span class="line">  testFunc(a);</span><br><span class="line">  <span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">//发现是引用，转换为 int* const ref = &a;
+void testFunc(int& ref)
+{    
+  ref = 100; // ref是引用，转换为*ref = 100
+}
+int main()
+{    
+  int a = 10;
+  int& aRef = a; //自动转换为 int* const aRef = &a;这也能说明引用为什么必须初始化    
+  aRef = 20; //内部发现aRef是引用，自动帮我们转换为: *aRef = 20;
+  cout << "a:" << a << endl;    
+  cout << "aRef:" << aRef << endl;    
+  testFunc(a);
+  return EXIT_SUCCESS;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="3-4-指针引用"><a href="#3-4-指针引用" class="headerlink" title="3.4 指针引用"></a>3.4 指针引用</h2><p>在c语言中如果想改变一个指针的指向而不是它所指向的内容，函数声明可能这样:</p>
 <p>void fun<strong>(</strong>int<strong><em>\</em>);</strong></p>
 <p>给指针变量取一个别名。</p>
 <p>Type<strong>*</strong> pointer <strong>=</strong> <strong>NULL**</strong>; Type  <strong>&amp;</strong>= <strong>pointer</strong>;</p>
 <p>Type <em>pointer = NULL; Type</em>&amp; = pointer;</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Teacher</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">int</span> mAge;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//指针间接修改teacher的年龄</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AllocateAndInitByPointer</span><span class="params">(Teacher** teacher)</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">  *teacher = (Teacher*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Teacher));	</span><br><span class="line">  (*teacher)-&gt;mAge = <span class="number">200</span>;  </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//引用修改teacher年龄</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AllocateAndInitByReference</span><span class="params">(Teacher*&amp; teacher)</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">  teacher-&gt;mAge = <span class="number">300</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">  <span class="comment">//创建Teacher</span></span><br><span class="line">  Teacher* teacher = <span class="literal">NULL</span>;</span><br><span class="line">  <span class="comment">//指针间接赋值	</span></span><br><span class="line">  AllocateAndInitByPointer(&amp;teacher);</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"AllocateAndInitByPointer:"</span> &lt;&lt; teacher-&gt;mAge &lt;&lt; <span class="built_in">endl</span>;	</span><br><span class="line">  <span class="comment">//引用赋值,将teacher本身传到ChangeAgeByReference函数中	</span></span><br><span class="line">  AllocateAndInitByReference(teacher);	</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"AllocateAndInitByReference:"</span> &lt;&lt; teacher-&gt;mAge &lt;&lt; <span class="built_in">endl</span>;	</span><br><span class="line">  <span class="built_in">free</span>(teacher);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">struct Teacher
+{
+  int mAge;
+};
+//指针间接修改teacher的年龄
+void AllocateAndInitByPointer(Teacher** teacher)
+{    
+  *teacher = (Teacher*)malloc(sizeof(Teacher));    
+  (*teacher)->mAge = 200;  
+}
+//引用修改teacher年龄
+void AllocateAndInitByReference(Teacher*& teacher)
+{    
+  teacher->mAge = 300;
+}
+void test()
+{    
+  //创建Teacher
+  Teacher* teacher = NULL;
+  //指针间接赋值    
+  AllocateAndInitByPointer(&teacher);
+  cout << "AllocateAndInitByPointer:" << teacher->mAge << endl;    
+  //引用赋值,将teacher本身传到ChangeAgeByReference函数中    
+  AllocateAndInitByReference(teacher);    
+  cout << "AllocateAndInitByReference:" << teacher->mAge << endl;    
+  free(teacher);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>对于c++中的定义那个，语法清晰多了。函数参数变成指针的引用，用不着取得指针的地址。</p>
 <h2 id="3-5-常量引用"><a href="#3-5-常量引用" class="headerlink" title="3.5 常量引用"></a>3.5 常量引用</h2><p>常量引用的定义格式:</p>
 <p>const Type <strong>&amp;</strong>  ref <strong>=</strong> val<strong>;</strong></p>
 <p>常量引用注意：</p>
 <p>n 字面量不能赋给引用，但是可以赋给const引用</p>
 <p>n const修饰的引用，不能修改。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">  <span class="keyword">int</span> a = <span class="number">100</span>;</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">int</span>&amp; aRef = a; <span class="comment">//此时aRef就是a	</span></span><br><span class="line">  <span class="comment">//aRef = 200; 不能通过aRef的值	</span></span><br><span class="line">  a = <span class="number">100</span>; <span class="comment">//OK	</span></span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"a:"</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"aRef:"</span> &lt;&lt; aRef &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test02</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">//不能把一个字面量赋给引用	</span></span><br><span class="line">  <span class="comment">//int&amp; ref = 100;	</span></span><br><span class="line">  <span class="comment">//但是可以把一个字面量赋给常引用	</span></span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">int</span>&amp; ref = <span class="number">100</span>; </span><br><span class="line">  <span class="comment">//int temp = 200; </span></span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">int</span>&amp; ret = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">void test01()
+{    
+  int a = 100;
+  const int& aRef = a; //此时aRef就是a    
+  //aRef = 200; 不能通过aRef的值    
+  a = 100; //OK    
+  cout << "a:" << a << endl;
+  cout << "aRef:" << aRef << endl;
+}
+void test02()
+{
+  //不能把一个字面量赋给引用    
+  //int& ref = 100;    
+  //但是可以把一个字面量赋给常引用    
+  const int& ref = 100; 
+  //int temp = 200; 
+  const int& ret = temp;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>[const 引用使用场景]</strong>       常量引用主要用在函数的形参，尤其是类的拷贝/复制构造函数。   将函数的形参定义为常量引用的好处:   Ø    引用不产生新的变量，减少形参与实参传递时的开销。   Ø    由于引用可能导致实参随形参改变而改变，将其定义为常量引用可以消除这种副作用。       如果希望实参随着形参的改变而改变，那么使用一般的引用，如果不希望实参随着形参改变，那么使用常引用。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//const int&amp; param防止函数中意外修改数据</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ShowVal</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>&amp; param)</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"param:"</span> &lt;&lt; param &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">//const int& param防止函数中意外修改数据
+void ShowVal(const int& param)
+{    
+  cout << "param:" << param << endl;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h1 id="4-指针和引用的区别-来源网络"><a href="#4-指针和引用的区别-来源网络" class="headerlink" title="4.指针和引用的区别(来源网络)"></a>4.指针和引用的区别(<a href="https://blog.csdn.net/weikangc/article/details/49762929" target="_blank" rel="noopener">来源网络</a>)</h1><p>指针和引用主要有以下区别：**</p>
 <ol>
 <li>引用必须被初始化，但是不分配存储空间。指针不声明时初始化，在初始化的时候需要分配存储空间。</li>
@@ -1452,7 +1721,7 @@
 
             
                 &nbsp; | &nbsp;字数统计:&nbsp;
-                <span class="white-color">33.8k</span> 字
+                <span class="white-color">18.8k</span> 字
             
 
             

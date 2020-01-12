@@ -687,14 +687,14 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        485
+                        465
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        2 分
+                        1 分
                     </div>
                     
                 
@@ -715,10 +715,89 @@
 <p>比如我们需要将一个float型数切割成整数部分和小数部分，此时除了用特定的数据结构存储以外，还可以通过out关键字。</p>
 <p><strong>注意，out关键字修饰的变量在进入函数执行之前可以不赋初值，但是在函数体执行结束之前必须要赋值。</strong></p>
 <p>用法如下：</p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> System.Linq;</span><br><span class="line"><span class="keyword">using</span> System.Text;</span><br><span class="line"><span class="keyword">using</span> System.IO;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title">Testout</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getParts</span>(<span class="params"><span class="keyword">double</span> n, <span class="keyword">out</span> <span class="keyword">double</span> frac</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">int</span> whole;</span><br><span class="line"></span><br><span class="line">            whole = (<span class="keyword">int</span>)n;</span><br><span class="line"></span><br><span class="line">            frac = n - whole; <span class="comment">//frac返回小数部分 </span></span><br><span class="line">            <span class="keyword">return</span> whole;     <span class="comment">//return 返回整数部分   </span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">class</span> <span class="title">UseOut</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            Testout Tout = <span class="keyword">new</span> Testout();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> integerPart;</span><br><span class="line">            <span class="keyword">double</span> fracPart;</span><br><span class="line"></span><br><span class="line">            integerPart = Tout.getParts(<span class="number">1234.05067891023343</span>, <span class="keyword">out</span> fracPart);</span><br><span class="line"></span><br><span class="line">            Console.WriteLine(<span class="string">"整数部分："</span> + integerPart);</span><br><span class="line">            Console.WriteLine(<span class="string">"小数部分："</span> + fracPart);</span><br><span class="line">            Console.ReadKey();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-c#"><code class="language-lang-c#">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.IO;
+
+namespace MonoBehaviour
+{
+    class Testout
+    {
+        public int getParts(double n, out double frac)
+        {
+            int whole;
+
+            whole = (int)n;
+
+            frac = n - whole; //frac返回小数部分 
+            return whole;     //return 返回整数部分   
+        }
+    }
+
+    class UseOut
+    {
+        static void Main()
+        {
+            Testout Tout = new Testout();
+
+            int integerPart;
+            double fracPart;
+
+            integerPart = Tout.getParts(1234.05067891023343, out fracPart);
+
+            Console.WriteLine("整数部分：" + integerPart);
+            Console.WriteLine("小数部分：" + fracPart);
+            Console.ReadKey();
+
+
+        }
+    }
+
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h1 id="C-中的ref"><a href="#C-中的ref" class="headerlink" title="C#中的ref"></a>C#中的ref</h1><p>其实同样的需求，也可以通过ref来实现，类似于C++里的引用，在传入参数之前必须对参数赋初值，因为可以简单的理解为传入的并不是值，而是值存放的地址。</p>
 <p>不同于out关键字方法的是：<strong>传入ref的时候要求在传入函数体之前必须对参数赋初值。</strong></p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> System.Linq;</span><br><span class="line"><span class="keyword">using</span> System.Text;</span><br><span class="line"><span class="keyword">using</span> System.IO;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title">Testout</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getParts</span>(<span class="params"><span class="keyword">double</span> n, <span class="keyword">ref</span> <span class="keyword">int</span> whole, <span class="keyword">ref</span> <span class="keyword">double</span> frac</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            whole = (<span class="keyword">int</span>)n;</span><br><span class="line">            frac = n - whole; <span class="comment">//frac返回小数部分 </span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">class</span> <span class="title">UseOut</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            Testout Tout = <span class="keyword">new</span> Testout();</span><br><span class="line">			<span class="keyword">int</span> integerPart = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">double</span> fracPart = <span class="number">0.0f</span>;</span><br><span class="line">            </span><br><span class="line">			Tout.getParts(<span class="number">1234.05067891023343</span>, <span class="keyword">ref</span> integerPart, <span class="keyword">out</span> fracPart);</span><br><span class="line">            </span><br><span class="line">            Console.WriteLine(<span class="string">"整数部分："</span> + integerPart );</span><br><span class="line">            Console.WriteLine(<span class="string">"小数部分："</span> + fracPart);</span><br><span class="line">            Console.ReadKey();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-c#"><code class="language-lang-c#">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.IO;
+
+namespace MonoBehaviour
+{
+    class Testout
+    {
+        public void getParts(double n, ref int whole, ref double frac)
+        {
+            whole = (int)n;
+            frac = n - whole; //frac返回小数部分 
+        }
+    }
+
+    class UseOut
+    {
+        static void Main()
+        {
+            Testout Tout = new Testout();
+            int integerPart = 0;
+            double fracPart = 0.0f;
+
+            Tout.getParts(1234.05067891023343, ref integerPart, out fracPart);
+
+            Console.WriteLine("整数部分：" + integerPart );
+            Console.WriteLine("小数部分：" + fracPart);
+            Console.ReadKey();
+
+
+        }
+    }
+
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
             </div>
             <hr/>
@@ -1463,7 +1542,7 @@
 
             
                 &nbsp; | &nbsp;字数统计:&nbsp;
-                <span class="white-color">33.8k</span> 字
+                <span class="white-color">18.8k</span> 字
             
 
             

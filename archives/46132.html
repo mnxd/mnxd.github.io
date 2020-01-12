@@ -598,14 +598,14 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        766
+                        319
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        2 分
+                        1 分
                     </div>
                     
                 
@@ -627,13 +627,66 @@
 <p> <strong>应用场景：</strong></p>
 <p>​    有一些对象只需要一个，如：对话框、系统日志、显卡等设备的驱动程序对象、一台PC连接一个键盘。<br> <strong>单例模式有3种实现方式：懒汉式、饿汉式和双重锁的形式。</strong></p>
 <h1 id="1-懒汉式"><a href="#1-懒汉式" class="headerlink" title="1.懒汉式"></a>1.懒汉式</h1><p> 构造函数声明为private或者protect防止被外部函数实例化，内部保存一个private static的类指针保存唯一的实例，实例的动作有一个public的类方法实现。代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CTestSinglePrinter</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:	</span><br><span class="line">    <span class="function"><span class="keyword">static</span> CTestSinglePrinter* <span class="title">getInstance</span><span class="params">()</span>	</span></span><br><span class="line"><span class="function">    </span>&#123;		</span><br><span class="line">        <span class="keyword">if</span> (m_pSinglePrinter == <span class="literal">NULL</span>) m_pSinglePrinter = <span class="keyword">new</span> CTestSinglePrinter;	</span><br><span class="line">        <span class="keyword">return</span> m_pSinglePrinter;	</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:	</span><br><span class="line">    CTestSinglePrinter() &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"构造单例模式对象"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;;	</span><br><span class="line">    <span class="keyword">static</span> CTestSinglePrinter* m_pSinglePrinter;</span><br><span class="line">&#125;;</span><br><span class="line">CTestSinglePrinter* CTestSinglePrinter::m_pSinglePrinter = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123; CTestSinglePrinter * m_pSinglePrinternter = CTestSinglePrinter::getInstance(); &#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">    test();	</span><br><span class="line">    system(<span class="string">"pause"</span>);	</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">#include <iostream>
+using namespace std;
+
+class CTestSinglePrinter{
+public:    
+    static CTestSinglePrinter* getInstance()    
+    {        
+        if (m_pSinglePrinter == NULL) m_pSinglePrinter = new CTestSinglePrinter;    
+        return m_pSinglePrinter;    
+    }
+private:    
+    CTestSinglePrinter() { cout << "构造单例模式对象" << endl; };    
+    static CTestSinglePrinter* m_pSinglePrinter;
+};
+CTestSinglePrinter* CTestSinglePrinter::m_pSinglePrinter = nullptr;
+
+void test() { CTestSinglePrinter * m_pSinglePrinternter = CTestSinglePrinter::getInstance(); }
+int main()
+{    
+    test();    
+    system("pause");    
+    return 0;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p> 缺点：这个实现在单线程下是正确的，但在多线程情况下，如果两个线程同时首次调用GetInstance方法且同时检测到Instance是NULL，则两个线程会同时构造一个实例给Instance，这样就会发生错误。</p>
 <h1 id="2-改进的懒汉式（双重检查锁）"><a href="#2-改进的懒汉式（双重检查锁）" class="headerlink" title="2. 改进的懒汉式（双重检查锁）"></a>2. 改进的懒汉式（双重检查锁）</h1><p> 思路：只有在第一次创建的时候进行加锁，当Instance不为空的时候就不需要进行加锁的操作。代码如下：　</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CTestSinglePrinter</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:	</span><br><span class="line">    <span class="function"><span class="keyword">static</span> CTestSinglePrinter* <span class="title">getInstance</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;		</span><br><span class="line">        Lock();<span class="comment">//这里实验室的HIVE 是通过Boost来实现的。	</span></span><br><span class="line">        <span class="keyword">if</span> (m_pSinglePrinter == <span class="literal">NULL</span>)		</span><br><span class="line">        &#123;			</span><br><span class="line">            m_pSinglePrinter = <span class="keyword">new</span> CTestSinglePrinter;	</span><br><span class="line">        &#125;		</span><br><span class="line">        UnLock();	</span><br><span class="line">        <span class="keyword">return</span> m_pSinglePrinter;	</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:	</span><br><span class="line">    CTestSinglePrinter() &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"构造单例模式对象"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;;	</span><br><span class="line">    <span class="keyword">static</span> CTestSinglePrinter* m_pSinglePrinter;</span><br><span class="line">&#125;;</span><br><span class="line">CTestSinglePrinter* CTestSinglePrinter::m_pSinglePrinter = <span class="literal">nullptr</span>;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">#include <iostream>
+using namespace std;
+
+class CTestSinglePrinter{
+public:    
+    static CTestSinglePrinter* getInstance()
+    {        
+        Lock();//这里实验室的HIVE 是通过Boost来实现的。    
+        if (m_pSinglePrinter == NULL)        
+        {            
+            m_pSinglePrinter = new CTestSinglePrinter;    
+        }        
+        UnLock();    
+        return m_pSinglePrinter;    
+    }
+private:    
+    CTestSinglePrinter() { cout << "构造单例模式对象" << endl; };    
+    static CTestSinglePrinter* m_pSinglePrinter;
+};
+CTestSinglePrinter* CTestSinglePrinter::m_pSinglePrinter = nullptr;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p> 这里实用双重所来保证线程安全，但是如果处理大量数据时，该锁才成为严重的性能瓶颈。</p>
 <h1 id="3-饿汉式"><a href="#3-饿汉式" class="headerlink" title="3.饿汉式"></a>3.饿汉式</h1><p> 饿汉式的特点是一开始就加载了，如果说懒汉式是“时间换空间”，那么饿汉式就是“空间换时间”，因为一开始就创建了实例，所以每次用到的之后直接返回就好了。饿汉模式是线程安全的。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CTestSinglePrinter</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:	</span><br><span class="line">    <span class="function"><span class="keyword">static</span> CTestSinglePrinter* <span class="title">getInstance</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;	</span><br><span class="line">        <span class="keyword">static</span> CTestSinglePrinter m_pSinglePrinter;	</span><br><span class="line">        <span class="keyword">return</span> &amp;m_pSinglePrinter;	</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:	</span><br><span class="line">    CTestSinglePrinter() &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"构造单例模式对象"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">class CTestSinglePrinter{
+public:    
+    static CTestSinglePrinter* getInstance()
+    {    
+        static CTestSinglePrinter m_pSinglePrinter;    
+        return &m_pSinglePrinter;    
+    }
+private:    
+    CTestSinglePrinter() { cout << "构造单例模式对象" << endl; };
+};
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h1 id="4-后续补充："><a href="#4-后续补充：" class="headerlink" title="4.后续补充："></a>4.后续补充：</h1><p> 这里之提供了基本的三种方式，c++11中的类模板已经可以对单例模式 进行改进，这里只提到了基础性的三种基本方式，后续待补充改进</p>
 
             </div>
@@ -1293,7 +1346,7 @@
 
             
                 &nbsp; | &nbsp;字数统计:&nbsp;
-                <span class="white-color">33.8k</span> 字
+                <span class="white-color">18.8k</span> 字
             
 
             

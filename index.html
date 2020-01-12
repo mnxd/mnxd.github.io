@@ -669,6 +669,31 @@ $('.bg-cover').css('background-image', 'url(https://blog-1257951283.cos.ap-cheng
         <div class="container">
             <div class="row">
                 <div class="col s10 offset-s1">
+                    <div class="title center-align">float精度问题</div>
+                    <div class="description center-align">
+                    
+                        0.提要在做体素化部分的时候由于是通过先体素化表面模型再从前往后插值的方法进行实体化，由于初版算法的不精确性，导致出现了大量的重复点，在去重的时候采用了以下笨方法：
+struct MyPoint
+{
+    float voxelPosit
+                    
+                    </div>
+                    <div class="cover-btns">
+                        <a href="/archives/24837.html" class="waves-effect waves-light btn" target="_blank">
+                            <i class="icon fa fa-eye fa-fw"></i>阅读更多
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="carousel-item amber white-text carousel-post bg-cover"
+            style="background-image: url('/images/1.jpg');">
+        <div class="container">
+            <div class="row">
+                <div class="col s10 offset-s1">
                     <div class="title center-align">宏和内联函数</div>
                     <div class="description center-align">
                     
@@ -692,15 +717,17 @@ $('.bg-cover').css('background-image', 'url(https://blog-1257951283.cos.ap-cheng
         <div class="container">
             <div class="row">
                 <div class="col s10 offset-s1">
-                    <div class="title center-align">float精度问题</div>
+                    <div class="title center-align">左值右值</div>
                     <div class="description center-align">
                     
-                        0.提要在做体素化部分的时候由于是通过先体素化表面模型再从前往后插值的方法进行实体化，由于初版算法的不精确性，导致出现了大量的重复点，在去重的时候采用了以下笨方法：
-struct MyPoint&#123;	float voxelPosit
+                        0.前言 在实验室例会报告之前，我简单的将左值和右值解释为在c++中可以放在赋值操作符左边的是左值，可以放到赋值操作符右面的是右值。
+
+左值为Lvalue，L代表Location，表示内存可以寻址，可以赋值。
+右值为Rvalue，R代表Re
                     
                     </div>
                     <div class="cover-btns">
-                        <a href="/archives/24837.html" class="waves-effect waves-light btn" target="_blank">
+                        <a href="/archives/3763.html" class="waves-effect waves-light btn" target="_blank">
                             <i class="icon fa fa-eye fa-fw"></i>阅读更多
                         </a>
                     </div>
@@ -711,21 +738,21 @@ struct MyPoint&#123;	float voxelPosit
     
     
     <div class="carousel-item amber white-text carousel-post bg-cover"
-            style="background-image: url('https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/North.jpg');">
+            style="background-image: url('/images/1.jpg');">
         <div class="container">
             <div class="row">
                 <div class="col s10 offset-s1">
-                    <div class="title center-align">delete[]和delete</div>
+                    <div class="title center-align">指针和引用</div>
                     <div class="description center-align">
                     
-                        0. delete[]这个问题其实来自于看到师兄师姐的面经里有提到一个问题
-delete[]是如何知道要delete的数组大小的？
-Type * pName = new Type[Size];
-在执行上述语句时，一开始我简单的以为C++编译
+                        指针和引用的知识点复习整理。大概复习了一下内存机制，指针和引用的定义，类型，用法等。包括悬挂指针、野指针、空指针、万能指针、多级指针等。
+1.内存概述1.1 内存内存含义：
+
+存储器：计算机的组成中，用来存储程序和数据，辅助CPU进行运算处
                     
                     </div>
                     <div class="cover-btns">
-                        <a href="/archives/8104acb6.html" class="waves-effect waves-light btn" target="_blank">
+                        <a href="/archives/22647.html" class="waves-effect waves-light btn" target="_blank">
                             <i class="icon fa fa-eye fa-fw"></i>阅读更多
                         </a>
                     </div>
@@ -749,6 +776,80 @@ Type * pName = new Type[Size];
                     </div>
                     <div class="cover-btns">
                         <a href="/archives/46132.html" class="waves-effect waves-light btn" target="_blank">
+                            <i class="icon fa fa-eye fa-fw"></i>阅读更多
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="carousel-item amber white-text carousel-post bg-cover"
+            style="background-image: url('https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/nightmare_by_wlop-d84nslc.jpg');">
+        <div class="container">
+            <div class="row">
+                <div class="col s10 offset-s1">
+                    <div class="title center-align">调试方法</div>
+                    <div class="description center-align">
+                    
+                        0. Debug​    毋庸置疑，debug对一个程序员来说几乎是最重要的事情，作为C++入门选手，之前一直简单的打断点看参数，最近学到了直接查看内存的方法，两者结合起来，wow~
+1.断点1.1 设置断点在一行代码的左侧点击(或者鼠标光
+                    
+                    </div>
+                    <div class="cover-btns">
+                        <a href="/archives/3445ed2d.html" class="waves-effect waves-light btn" target="_blank">
+                            <i class="icon fa fa-eye fa-fw"></i>阅读更多
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="carousel-item amber white-text carousel-post bg-cover"
+            style="background-image: url('https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/Princess%20PSD%20file.jpg');">
+        <div class="container">
+            <div class="row">
+                <div class="col s10 offset-s1">
+                    <div class="title center-align">Lambda和Mutable</div>
+                    <div class="description center-align">
+                    
+                        0. Lambda表达式lambda表达式是C++11引入的”新”技术，之所以加引号是因为实际上其他语言如C#、Python中已经有了，只是C++在11版本中才刚刚推出而已。
+1. 声明Lambda表达式先上实际代码：
+#include 
+
+                    
+                    </div>
+                    <div class="cover-btns">
+                        <a href="/archives/ea0b20c.html" class="waves-effect waves-light btn" target="_blank">
+                            <i class="icon fa fa-eye fa-fw"></i>阅读更多
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="carousel-item amber white-text carousel-post bg-cover"
+            style="background-image: url('https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/North.jpg');">
+        <div class="container">
+            <div class="row">
+                <div class="col s10 offset-s1">
+                    <div class="title center-align">delete[]和delete</div>
+                    <div class="description center-align">
+                    
+                        0. delete[]这个问题其实来自于看到师兄师姐的面经里有提到一个问题
+delete[]是如何知道要delete的数组大小的？
+Type * pName = new Type[Size];
+
+在执行上述语句时，一开始我简单的以为C++编
+                    
+                    </div>
+                    <div class="cover-btns">
+                        <a href="/archives/8104acb6.html" class="waves-effect waves-light btn" target="_blank">
                             <i class="icon fa fa-eye fa-fw"></i>阅读更多
                         </a>
                     </div>
@@ -802,103 +903,6 @@ shared_ptr
         <div class="container">
             <div class="row">
                 <div class="col s10 offset-s1">
-                    <div class="title center-align">左值右值</div>
-                    <div class="description center-align">
-                    
-                        0.前言 在实验室例会报告之前，我简单的将左值和右值解释为在c++中可以放在赋值操作符左边的是左值，可以放到赋值操作符右面的是右值。
-
-左值为Lvalue，L代表Location，表示内存可以寻址，可以赋值。
-右值为Rvalue，R代表Re
-                    
-                    </div>
-                    <div class="cover-btns">
-                        <a href="/archives/3763.html" class="waves-effect waves-light btn" target="_blank">
-                            <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    
-    <div class="carousel-item amber white-text carousel-post bg-cover"
-            style="background-image: url('https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/nightmare_by_wlop-d84nslc.jpg');">
-        <div class="container">
-            <div class="row">
-                <div class="col s10 offset-s1">
-                    <div class="title center-align">调试方法</div>
-                    <div class="description center-align">
-                    
-                        0. Debug​    毋庸置疑，debug对一个程序员来说几乎是最重要的事情，作为C++入门选手，之前一直简单的打断点看参数，最近学到了直接查看内存的方法，两者结合起来，wow~
-1.断点1.1 设置断点在一行代码的左侧点击(或者鼠标光
-                    
-                    </div>
-                    <div class="cover-btns">
-                        <a href="/archives/3445ed2d.html" class="waves-effect waves-light btn" target="_blank">
-                            <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    
-    <div class="carousel-item amber white-text carousel-post bg-cover"
-            style="background-image: url('https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/Princess%20PSD%20file.jpg');">
-        <div class="container">
-            <div class="row">
-                <div class="col s10 offset-s1">
-                    <div class="title center-align">Lambda和Mutable</div>
-                    <div class="description center-align">
-                    
-                        0. Lambda表达式lambda表达式是C++11引入的”新”技术，之所以加引号是因为实际上其他语言如C#、Python中已经有了，只是C++在11版本中才刚刚推出而已。
-1. 声明Lambda表达式先上实际代码：
-#include &
-                    
-                    </div>
-                    <div class="cover-btns">
-                        <a href="/archives/ea0b20c.html" class="waves-effect waves-light btn" target="_blank">
-                            <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    
-    <div class="carousel-item amber white-text carousel-post bg-cover"
-            style="background-image: url('/images/1.jpg');">
-        <div class="container">
-            <div class="row">
-                <div class="col s10 offset-s1">
-                    <div class="title center-align">指针和引用</div>
-                    <div class="description center-align">
-                    
-                        指针和引用的知识点复习整理。大概复习了一下内存机制，指针和引用的定义，类型，用法等。包括悬挂指针、野指针、空指针、万能指针、多级指针等。
-1.内存概述1.1 内存内存含义：
-
-存储器：计算机的组成中，用来存储程序和数据，辅助CPU进行运算处
-                    
-                    </div>
-                    <div class="cover-btns">
-                        <a href="/archives/22647.html" class="waves-effect waves-light btn" target="_blank">
-                            <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    
-    <div class="carousel-item amber white-text carousel-post bg-cover"
-            style="background-image: url('/images/1.jpg');">
-        <div class="container">
-            <div class="row">
-                <div class="col s10 offset-s1">
                     <div class="title center-align">Noraml Map(法线贴图)</div>
                     <div class="description center-align">
                     
@@ -924,16 +928,17 @@ shared_ptr
         <div class="container">
             <div class="row">
                 <div class="col s10 offset-s1">
-                    <div class="title center-align">Anisotropic Filtering</div>
+                    <div class="title center-align">Parallax Map(视差贴图)</div>
                     <div class="description center-align">
                     
-                        游戏引擎架构课程小组报告总结
-texture filter（纹理过滤）：
- 纹理是要贴到三维图形表面的，而如下图所示，三维图形上的pixel中心和纹理上的texel中心并不一至（pixel不一定对应texture上的采样中心texel），大
+                        在实验室HIVE底层基础上实现了PM+NM的效果，demo
+一、算法解决的问题：
+ 优化了纹理边缘的凹凸细节部分，实现了Normal Map无法实现的自遮蔽。
+ 法线贴图只能在明暗效果上作假（模拟凹凸），无法控制表面实际的凹凸程度。如下图红
                     
                     </div>
                     <div class="cover-btns">
-                        <a href="/archives/61169.html" class="waves-effect waves-light btn" target="_blank">
+                        <a href="/archives/39121.html" class="waves-effect waves-light btn" target="_blank">
                             <i class="icon fa fa-eye fa-fw"></i>阅读更多
                         </a>
                     </div>
@@ -997,18 +1002,16 @@ texture filter（纹理过滤）：
         <div class="container">
             <div class="row">
                 <div class="col s10 offset-s1">
-                    <div class="title center-align">射线和三角形相交判断</div>
+                    <div class="title center-align">Anisotropic Filtering</div>
                     <div class="description center-align">
                     
-                        快速微内存开销的射线与三角形相交测试原作者：Tomas Möller 
-0.摘要本文提出了一种确定光线是否插入三角形的清晰算法,
-该算法主要思想是：平移射线的原点，然后改变该向量的底，从而产生一个向量
-
-\mathbf{（t,u,v）}^\
+                        游戏引擎架构课程小组报告总结
+texture filter（纹理过滤）：
+ 纹理是要贴到三维图形表面的，而如下图所示，三维图形上的pixel中心和纹理上的texel中心并不一至（pixel不一定对应texture上的采样中心texel），大
                     
                     </div>
                     <div class="cover-btns">
-                        <a href="/archives/14699.html" class="waves-effect waves-light btn" target="_blank">
+                        <a href="/archives/61169.html" class="waves-effect waves-light btn" target="_blank">
                             <i class="icon fa fa-eye fa-fw"></i>阅读更多
                         </a>
                     </div>
@@ -1023,17 +1026,18 @@ texture filter（纹理过滤）：
         <div class="container">
             <div class="row">
                 <div class="col s10 offset-s1">
-                    <div class="title center-align">Parallax Map(视差贴图)</div>
+                    <div class="title center-align">射线和三角形相交判断</div>
                     <div class="description center-align">
                     
-                        在实验室HIVE底层基础上实现了PM+NM的效果，demo
-一、算法解决的问题：
- 优化了纹理边缘的凹凸细节部分，实现了Normal Map无法实现的自遮蔽。
- 法线贴图只能在明暗效果上作假（模拟凹凸），无法控制表面实际的凹凸程度。如下图红
+                        快速微内存开销的射线与三角形相交测试原作者：Tomas Möller 
+0.摘要本文提出了一种确定光线是否插入三角形的清晰算法,
+该算法主要思想是：平移射线的原点，然后改变该向量的底，从而产生一个向量
+
+\mathbf{（t,u,v）}^\
                     
                     </div>
                     <div class="cover-btns">
-                        <a href="/archives/39121.html" class="waves-effect waves-light btn" target="_blank">
+                        <a href="/archives/14699.html" class="waves-effect waves-light btn" target="_blank">
                             <i class="icon fa fa-eye fa-fw"></i>阅读更多
                         </a>
                     </div>
@@ -1127,6 +1131,30 @@ $(function () {
     
     
     <div class="col s12" >
+        <div class="post-card" style="background-image: url('https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/Sea.jpg')">
+            <div class="post-body">
+                <div class="post-categories">
+                    
+                    <a href="/categories/图形学算法/" class="category" target="_blank">图形学算法</a>
+                    
+                </div>
+                <a href="/archives/39121.html" target="_blank">
+                    <h3 class="post-title">Parallax Map(视差贴图)</h3>
+                </a>
+                <p class="post-description">在实验室HIVE底层基础上实现了PM+NM的效果，demo
+一、算法解决的问题：
+ 优化了纹理边缘的凹凸细节部分，实现了Normal Map无法实现的自遮蔽。
+ 法线贴图</p>
+                <a href="/archives/39121.html" target="_blank"
+                        class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #FF5E3A 0%, #FF2A68 100%)">
+                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="col s12 m6" data-aos="zoom-in-up">
         <div class="post-card" style="background-image: url('https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/we_were_angels-%20Wallpaper.jpg')">
             <div class="post-body">
                 <div class="post-categories">
@@ -1139,9 +1167,9 @@ $(function () {
                 </a>
                 <p class="post-description">一、算法解决的问题：
  实现了场景中的环境光遮蔽，有较好的细节表现，并且解决了传统AO不能实时的问题。
- 由于性能的限制，我们在进行光照计算是通常不考虑环境光(Ambie</p>
+ 由于性能的限制，我们在进行光照计算</p>
                 <a href="/archives/61840.html" target="_blank"
-                        class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #FF5E3A 0%, #FF2A68 100%)">
+                        class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #EF4DB6 0%, #C643FC 100%)">
                     <i class="icon fa fa-eye fa-fw"></i>阅读更多
                 </a>
             </div>
@@ -1164,29 +1192,6 @@ $(function () {
 0.摘要本文提出了一种确定光线是否插入三角形的清晰算法,
 该算法主要</p>
                 <a href="/archives/14699.html" target="_blank"
-                        class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #EF4DB6 0%, #C643FC 100%)">
-                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                </a>
-            </div>
-        </div>
-    </div>
-    
-    
-    <div class="col s12 m6" data-aos="zoom-in-up">
-        <div class="post-card" style="background-image: url('https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/Sea.jpg')">
-            <div class="post-body">
-                <div class="post-categories">
-                    
-                    <a href="/categories/图形学算法/" class="category" target="_blank">图形学算法</a>
-                    
-                </div>
-                <a href="/archives/39121.html" target="_blank">
-                    <h3 class="post-title">Parallax Map(视差贴图)</h3>
-                </a>
-                <p class="post-description">在实验室HIVE底层基础上实现了PM+NM的效果，demo
-一、算法解决的问题：
- 优化了纹理边缘的凹凸细节部分，实现了Normal Map</p>
-                <a href="/archives/39121.html" target="_blank"
                         class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #1AD6FD 0%, #1D62F0 100%)">
                     <i class="icon fa fa-eye fa-fw"></i>阅读更多
                 </a>
@@ -1305,7 +1310,8 @@ shared_ptr
                             0. delete[]这个问题其实来自于看到师兄师姐的面经里有提到一个问题
 delete[]是如何知道要delete的数组大小的？
 Type * pName = new Type[Size];
-在执行上述语句时，一开始我简单的以为C++编译
+
+在执行上述语句时，一开始我简单的以为C++编
                             
                         </div>
                         <div class="publish-info">
@@ -1358,7 +1364,8 @@ Type * pName = new Type[Size];
                             
                             0. Lambda表达式lambda表达式是C++11引入的”新”技术，之所以加引号是因为实际上其他语言如C#、Python中已经有了，只是C++在11版本中才刚刚推出而已。
 1. 声明Lambda表达式先上实际代码：
-#include &
+#include 
+
                             
                         </div>
                         <div class="publish-info">
@@ -1517,7 +1524,9 @@ Type * pName = new Type[Size];
                         <div class="summary block-with-text">
                             
                             0.提要在做体素化部分的时候由于是通过先体素化表面模型再从前往后插值的方法进行实体化，由于初版算法的不精确性，导致出现了大量的重复点，在去重的时候采用了以下笨方法：
-struct MyPoint&#123;	float voxelPosit
+struct MyPoint
+{
+    float voxelPosit
                             
                         </div>
                         <div class="publish-info">
@@ -1928,7 +1937,7 @@ texture filter（纹理过滤）：
 
             
                 &nbsp; | &nbsp;字数统计:&nbsp;
-                <span class="white-color">33.8k</span> 字
+                <span class="white-color">18.8k</span> 字
             
 
             

@@ -596,7 +596,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        368
+                        359
                     </div>
                     
 
@@ -624,11 +624,44 @@
 <p><strong>函数功能：</strong>计算点P相对于三角形（a,b,c）的重心坐标。</p>
 <p><strong>输入：</strong>点P，三角形三个顶点：a,b,c</p>
 <p><strong>输出：</strong>u,v,w（代码中传入的引用，实际上可以从逻辑上理解为输出值。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Barycentric</span><span class="params">(Point p, Point a, Point b, Point c, <span class="keyword">float</span> &amp;u, <span class="keyword">float</span> &amp;v, <span class="keyword">float</span> &amp;w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Vector v0 = b - a, v1 = c - a, v2 = p - a;</span><br><span class="line">    <span class="keyword">float</span> d00 = Dot(v0, v0);</span><br><span class="line">    <span class="keyword">float</span> d01 = Dot(v0, v1);</span><br><span class="line">    <span class="keyword">float</span> d11 = Dot(v1, v1);</span><br><span class="line">    <span class="keyword">float</span> d20 = Dot(v2, v0);</span><br><span class="line">    <span class="keyword">float</span> d21 = Dot(v2, v1);</span><br><span class="line">    <span class="keyword">float</span> denom = d00 * d11 - d01 * d01;</span><br><span class="line">    v = (d11 * d20 - d01 * d21) / denom;</span><br><span class="line">    w = (d00 * d21 - d01 * d20) / denom;</span><br><span class="line">    u = <span class="number">1.0f</span> - v - w;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">void Barycentric(Point p, Point a, Point b, Point c, float &u, float &v, float &w)
+{
+    Vector v0 = b - a, v1 = c - a, v2 = p - a;
+    float d00 = Dot(v0, v0);
+    float d01 = Dot(v0, v1);
+    float d11 = Dot(v1, v1);
+    float d20 = Dot(v2, v0);
+    float d21 = Dot(v2, v1);
+    float denom = d00 * d11 - d01 * d01;
+    v = (d11 * d20 - d01 * d21) / denom;
+    w = (d00 * d21 - d01 * d20) / denom;
+    u = 1.0f - v - w;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p> 求解线性系统的有效的Cramer法则。</p>
 <p>注意，这里有相当数量的值是独立于p的—如果需要，它们可以与三角形一起缓存  。</p>
 <p>在我们项目中，实际上的需求是<strong>根据重心坐标来获取uv坐标，并取得颜色值</strong>（开发平台为unity,C#）</p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Vector2 <span class="title">GetUV</span>(<span class="params">Vector3 p, Vector2 uva, Vector2 uvb, Vector2 uvc</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">float</span> u, v, w;</span><br><span class="line">    Barycentric(p, <span class="keyword">out</span> u, <span class="keyword">out</span> v, <span class="keyword">out</span> w);</span><br><span class="line">    <span class="keyword">return</span> uva * u + uvb * v + uvc * w;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Barycentric</span>(<span class="params">Vector3 p, <span class="keyword">out</span> <span class="keyword">float</span> u, <span class="keyword">out</span> <span class="keyword">float</span> v, <span class="keyword">out</span> <span class="keyword">float</span> w</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Vector3 v0 = b - a, v1 = c - a, v2 = p - a;</span><br><span class="line">    <span class="keyword">float</span> d00 = Vector3.Dot(v0, v0);</span><br><span class="line">    <span class="keyword">float</span> d01 = Vector3.Dot(v0, v1);</span><br><span class="line">    <span class="keyword">float</span> d11 = Vector3.Dot(v1, v1);</span><br><span class="line">    <span class="keyword">float</span> d20 = Vector3.Dot(v2, v0);</span><br><span class="line">    <span class="keyword">float</span> d21 = Vector3.Dot(v2, v1);</span><br><span class="line">    <span class="keyword">float</span> denom = <span class="number">1f</span> / (d00 * d11 - d01 * d01);</span><br><span class="line">    v = (d11 * d20 - d01 * d21) * denom;</span><br><span class="line">    w = (d00 * d21 - d01 * d20) * denom;</span><br><span class="line">    u = <span class="number">1.0f</span> - v - w;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-c#"><code class="language-lang-c#">    public Vector2 GetUV(Vector3 p, Vector2 uva, Vector2 uvb, Vector2 uvc)
+    {
+        float u, v, w;
+        Barycentric(p, out u, out v, out w);
+        return uva * u + uvb * v + uvc * w;
+    }
+
+    public void Barycentric(Vector3 p, out float u, out float v, out float w)
+    {
+        Vector3 v0 = b - a, v1 = c - a, v2 = p - a;
+        float d00 = Vector3.Dot(v0, v0);
+        float d01 = Vector3.Dot(v0, v1);
+        float d11 = Vector3.Dot(v1, v1);
+        float d20 = Vector3.Dot(v2, v0);
+        float d21 = Vector3.Dot(v2, v1);
+        float denom = 1f / (d00 * d11 - d01 * d01);
+        v = (d11 * d20 - d01 * d21) * denom;
+        w = (d00 * d21 - d01 * d20) * denom;
+        u = 1.0f - v - w;
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
             </div>
             <hr/>
@@ -1116,7 +1149,9 @@
                     <div class="summary block-with-text">
                         
                             0.提要在做体素化部分的时候由于是通过先体素化表面模型再从前往后插值的方法进行实体化，由于初版算法的不精确性，导致出现了大量的重复点，在去重的时候采用了以下笨方法：
-struct MyPoint&#123;	float voxelPosit
+struct MyPoint
+{
+    float voxelPosit
                         
                     </div>
                     <div class="publish-info">
@@ -1281,7 +1316,7 @@ struct MyPoint&#123;	float voxelPosit
 
             
                 &nbsp; | &nbsp;字数统计:&nbsp;
-                <span class="white-color">33.8k</span> 字
+                <span class="white-color">18.8k</span> 字
             
 
             

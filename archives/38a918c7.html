@@ -618,14 +618,14 @@ shared_ptr">
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        2.2k
+                        293
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        8 分
+                        1 分
                     </div>
                     
                 
@@ -683,7 +683,38 @@ shared_ptr">
 <li>通过 <code>operator=</code>或 <code>reset()</code> 赋值另一指针给管理的<code>unique_ptr</code> 对象。</li>
 </ul>
 <p>如下代码所示，在main函数里，为了简单的做个示例，所以我将<code>unique_ptr</code>的构造放到了一个{}作用域里，</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CTestSmartPtr</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">	CTestSmartPtr()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Created CtestSmartPtr!"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	~CTestSmartPtr()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Destroyed CtestSmartPtr!"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">PrintSmartPtr</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">unique_ptr</span>&lt;CTestSmartPtr&gt; testUniquePtr = <span class="built_in">std</span>::make_unique&lt;CTestSmartPtr&gt;();</span><br><span class="line">		testUniquePtr-&gt;PrintSmartPtr();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cin</span>.get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">#include <iostream>
+#include <memory>
+
+class CTestSmartPtr
+{
+public:
+
+    CTestSmartPtr()
+    {
+        std::cout << "Created CtestSmartPtr!" << std::endl;
+    }
+
+    ~CTestSmartPtr()
+    {
+        std::cout << "Destroyed CtestSmartPtr!" << std::endl;
+    }
+
+    void PrintSmartPtr()
+    {
+
+    }
+};
+
+int main()
+{
+    {
+        std::unique_ptr<CTestSmartPtr> testUniquePtr = std::make_unique<CTestSmartPtr>();
+        testUniquePtr->PrintSmartPtr();
+    }
+    std::cin.get();
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>打上断点，调试，可以看到首先调用了<code>CTestSmartPtr</code>的构造函数来构建了一个由<code>unique_ptr</code>指向的对象，然后在离开{}作用域时，自动调用了<code>CTestSmartPtr</code>的析构函数将<code>testUniquePtr</code>对象销毁。这就是一个简单的<code>unique_ptr</code>的用法。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/C%2B%2B/%E6%8C%87%E9%92%88/s1.png" alt></p>
 <p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/C%2B%2B/%E6%8C%87%E9%92%88/s2.png" alt></p>
@@ -696,7 +727,18 @@ shared_ptr">
 </ul>
 <p><code>std::shared_ptr</code>实际上是一种（引用，计数）的形式，<code>std::shared_ptr</code>会自动分配内存并保存引用计数，当n个<code>std::shared_ptr</code>指向同一个对象时，计数为n，只有当n减少到0时，才会调用该对象的析构函数来销毁对象。</p>
 <p>同样，如下代码所示，我在{}作用域外再加了一个{}作用域，并声明了一个<code>testCopySharedPtr</code>用来测试<code>shared_ptr</code>的构造于析构。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;		</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;CTestSmartPtr&gt; testCopySharedPtr;</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;CTestSmartPtr&gt; testSharedPtr = <span class="built_in">std</span>::make_shared&lt;CTestSmartPtr&gt;();</span><br><span class="line">			testCopySharedPtr = testSharedPtr;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cin</span>.get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">int main()
+{        
+    {
+        std::shared_ptr<CTestSmartPtr> testCopySharedPtr;
+        {
+            std::shared_ptr<CTestSmartPtr> testSharedPtr = std::make_shared<CTestSmartPtr>();
+            testCopySharedPtr = testSharedPtr;
+        }
+    }
+    std::cin.get();
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>打上断点，调试，可以看到此时<code>testSharedptr</code>调用构造函数，</p>
 <p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/C%2B%2B/%E6%8C%87%E9%92%88/s4.png" alt="函数"></p>
 <p><code>F10</code>,当离开第一个（里面的）{}作用域时，由于<code>testCopySharedPtr</code>是在这个{}作用域外声明，而且在这个{}里<code>testSharedPtr</code>被赋值给了<code>testCopySharedPtr</code>，所以在离开这个作用域时，虽然<code>testSharedPtr</code>已经被销毁了，但是<code>testCopySharedPtr</code>仍然指向了<code>std::make_shared&lt;CTestSmartPtr&gt;()</code>所构造出来的<code>CTestSmartPtr</code>对象，所以<code>CTestSmartPtr</code>对象并没有被析构</p>
@@ -705,18 +747,46 @@ shared_ptr">
 <p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/C%2B%2B/%E6%8C%87%E9%92%88/s6.png" alt></p>
 <h2 id="std-weak-ptr"><a href="#std-weak-ptr" class="headerlink" title="std::weak_ptr"></a>std::weak_ptr</h2><p><code>std::weak_ptr</code>在我的理解来说其实就是解决<code>std::shared_ptr</code> 的一些问题，因为<code>std::shared_ptr</code> 实际上是（引用，计数 ）的形式，也就是说每一次增加一个新的<code>std::shared_ptr</code> 指向当前对象，就需要先复制引用，再计数+1。但有时候如果你只是想暂时使用一下该对象，并不想进行复制引用和增加计数的操作，就可以使用<code>std::weak_ptr</code>。</p>
 <p>代码如下所示，相对于<code>std::shared_ptr</code>来说仅仅只是改变了一下外部{}作用域里的指针类型：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;		</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">std</span>::weak_ptr&lt;CTestSmartPtr&gt; testCopyWeakPtr;</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;CTestSmartPtr&gt; testSharedPtr = <span class="built_in">std</span>::make_shared&lt;CTestSmartPtr&gt;();</span><br><span class="line">			testCopyWeakPtr = testSharedPtr;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cin</span>.get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">int main()
+{        
+    {
+        std::weak_ptr<CTestSmartPtr> testCopyWeakPtr;
+        {
+            std::shared_ptr<CTestSmartPtr> testSharedPtr = std::make_shared<CTestSmartPtr>();
+            testCopyWeakPtr = testSharedPtr;
+        }
+    }
+    std::cin.get();
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>调试，可以看到此时同样调用构造函数，</p>
 <p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/C%2B%2B/%E6%8C%87%E9%92%88/s7.png" alt></p>
 <p><code>F10</code>，当离开第一个{}作用域时，就调用了<code>CTestSmartPtr</code>对象的析构函数，这就是因为实际上<code>std::weak_ptr</code>并没有复制指向该对象的指针引用，也没有计数+1，所以离开第一个{}作用域前，指向<code>CTestSmartPtr</code>对象的<code>std::shared_ptr</code>计数仍然为1，而离开后，<code>testSharedPtr</code>被销毁，计数-1变成了0，所以此时<code>CTestSmartPtr</code>对象也被销毁。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/C%2B%2B/%E6%8C%87%E9%92%88/s8.png" alt></p>
 <h2 id="注意（来自掘金文章）："><a href="#注意（来自掘金文章）：" class="headerlink" title="注意（来自掘金文章）："></a><strong>注意（来自<a href="https://juejin.im/post/5dcaa857e51d457f7675360b" target="_blank" rel="noopener">掘金文章</a>）：</strong></h2><p>有一些智能指针的方法和函数可以直接<code>f12</code>查看其实现，这里不一一列举。只是看到了一些相关文章里总结的比较好的使用智能指针时的注意事项所以摘抄在这里以供自己学习：</p>
-<ol>
-<li>尽量用make_shared/make_unique，少用new</li>
-</ol>
+<p><strong>尽量用make_shared/make_unique，少用new。《modern effective C++》第21条</strong></p>
+<ul>
+<li>更加快速</li>
+</ul>
 <blockquote>
 <p><code>std::shared_ptr</code>在实现的时候使用的ref-count技术，因此内部会有一个计数器（控制块，用来管理数据）和一个指针，指向数据。因此在执行<code>std::shared_ptr p2(new A)</code> 的时候，首先会申请数据的内存，然后申请内控制块，因此是两次内存申请，而<code>std::make_shared()</code>则是只执行一次内存申请，将数据和控制块的申请放到一起。</p>
 </blockquote>
+<ul>
+<li><p>避免内存泄漏</p>
+<p>比如一个函数传进去一个智能指针，如果采用如下形式：</p>
+</li>
+</ul>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">fun(shared_ptr<T>(new T), compute());
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这个就和编译器有关了，因为函数的参数必须在函数被调用前被估值，所以在调用fun时，会先new<br>所以执行如下操作：</p>
+<ul>
+<li>new T</li>
+<li>shared_ptr的构造函数必须被执行</li>
+<li>计算compute()<br>但是不一定会按照上面的顺序来执行，可能先执行1步，再执行3步，最后执行2步。但是如果2步此时出现了错误，就会导致第一步分配的T泄露了，永远不会被删除。而采用make_shared就能避免这种情况：</li>
+</ul>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">fun(make_shared<T>(), compute());
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>不论上面两个参数哪个先执行，都不会导致内存泄漏。make_unique同理</p>
 <ol>
 <li><p>不要使用相同的内置指针来初始化(或者reset)多个智能指针</p>
 </li>
@@ -730,7 +800,20 @@ shared_ptr">
 <blockquote>
 <p>以下代码发生了什么事情呢？还是同样的错误。把原生指针 this 同时交付给了 m_sp 和 p 管理，这样会导致 this 指针被 delete 两次。 这里值得注意的是：以上所说的交付给m_sp 和 p 管理不对，并不是指不能多个shared_ptr同时占有同一类资源。shared_ptr之间的资源共享是通过shared_ptr智能指针拷贝、赋值实现的，因为这样可以引起计数器的更新；而如果直接通过原生指针来初始化，就会导致m_sp和p都根本不知道对方的存在，然而却两者都管理同一块地方。相当于”一间庙里请了两尊神”。</p>
 </blockquote>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Do</span><span class="params">()</span></span>&#123;  m_sp =  <span class="built_in">shared_ptr</span>&lt;Test&gt;(<span class="keyword">this</span>);  &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">shared_ptr</span>&lt;Test&gt; m_sp;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Test* t = <span class="keyword">new</span> Test;</span><br><span class="line">    <span class="built_in">shared_ptr</span>&lt;Test&gt; p(t);</span><br><span class="line">    p-&gt;Do();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">class Test{
+public:
+    void Do(){  m_sp =  shared_ptr<Test>(this);  }
+private:
+    shared_ptr<Test> m_sp;
+};
+int main()
+{
+    Test* t = new Test;
+    shared_ptr<Test> p(t);
+    p->Do();
+    return 0;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>不要把一个原生指针给多个shared_ptr或者unique_ptr管理</p>
 </li>
@@ -738,21 +821,37 @@ shared_ptr">
 <blockquote>
 <p>我们知道，在使用原生指针对智能指针初始化的时候，智能指针对象都视原生指针为自己管理的资源。换句话意思就说：初始化多个智能指针之后，这些智能指针都担负起释放内存的作用。那么就会导致该原生指针会被释放多次！！</p>
 </blockquote>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">int</span>* ptr = <span class="keyword">new</span> <span class="keyword">int</span>;</span><br><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p1(ptr);</span><br><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p2(ptr);</span><br><span class="line"><span class="comment">//p1,p2析构的时候都会释放ptr，同一内存被释放多次！</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">int* ptr = new int;
+shared_ptr<int> p1(ptr);
+shared_ptr<int> p2(ptr);
+//p1,p2析构的时候都会释放ptr，同一内存被释放多次！
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ol>
 <li>不是使用new出来的空间要自定义删除器</li>
 </ol>
 <blockquote>
 <p>以下代码试图将malloc产生的动态内存交给shared_ptr管理；显然是有问题的，delete 和 malloc 牛头不对马嘴！！！ 所以我们需要自定义删除器<a href="int* p"></a>{ free(p); }传递给shared_ptr。</p>
 </blockquote>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>* pi = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(<span class="number">4</span> * <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">    <span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; sp(pi);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">int main()
+{
+    int* pi = (int*)malloc(4 * sizeof(int));
+    shared_ptr<int> sp(pi);
+    return 0;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ol>
 <li>尽量不要使用 get()</li>
 </ol>
 <blockquote>
 <p>智能指针设计者之处提供get()接口是为了使得智能指针也能够适配原生指针使用的相关函数。这个设计可以说是个好的设计，也可以说是个失败的设计。因为根据封装的封闭原则，我们将原生指针交付给智能指针管理，我们就不应该也不能得到原生指针了；因为原生指针唯一的管理者就应该是智能指针。而不是客户逻辑区的其他什么代码。 所以我们在使用get()的时候要额外小心，禁止使用get()返回的原生指针再去初始化其他智能指针或者释放。(只能够被使用，不能够被管理)。而下面这段代码就违反了这个规定：</p>
 </blockquote>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; sp(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">4</span>));</span><br><span class="line">    <span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; pp(sp.get());</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">int main()
+{
+    shared_ptr<int> sp(new int(4));
+    shared_ptr<int> pp(sp.get());
+    return 0;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
             </div>
             <hr/>
@@ -1322,7 +1421,8 @@ shared_ptr
                             0. delete[]这个问题其实来自于看到师兄师姐的面经里有提到一个问题
 delete[]是如何知道要delete的数组大小的？
 Type * pName = new Type[Size];
-在执行上述语句时，一开始我简单的以为C++编译
+
+在执行上述语句时，一开始我简单的以为C++编
                         
                     </div>
                     <div class="publish-info">
@@ -1431,7 +1531,7 @@ Type * pName = new Type[Size];
 
             
                 &nbsp; | &nbsp;字数统计:&nbsp;
-                <span class="white-color">33.8k</span> 字
+                <span class="white-color">18.8k</span> 字
             
 
             
