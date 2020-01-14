@@ -626,21 +626,23 @@
 <li>右值为Rvalue，R代表Read,就是可以知道它的值。</li>
 </ul>
 <p>比如:int temp = 10; temp在内存中有地址，10没有，但是可以Read到它的值。<br>​ 但是实验室的同学提到了几个新的概念：std::move std::forward和右值引用。所以我又重新查找资料学习了一下。整理笔记如下：</p>
-<p>#1.左值右值<br>​ 左值与右值是C++中表达式的属性，在C++11中，每个表达式有两个属性：类型（type，除去引用特性，用于类型检查）和值类型（value category，用于语法检查，比如一个表达式结果是否能被赋值）。<br>​ 值类型包括3个基本类型：lvalue、prvalue与xrvalue。后两者又统称为rvalue。lvalue我们称为左值，你可以将左值看成是一个可以获取地址的量，它可以用来标识一个对象或函数。rvalue称为右值，你可以认为所有不是左值的量就是右值，这是最简单的解释。<br>​ <a href="https://en.cppreference.com/w/cpp/language/value_category" target="_blank" rel="noopener">cppreference</a>有关于lvalue，prvalue，xrvalue的详细划分。其中要准确区分出右值中的prvalue和xrvalue并不容易：大概前者就是纯粹的右值，比如字面量，表达式（true,a++）等等，后者指的是可以被重用的临时对象比如一个数组，或者一个对象的成员（a[n]，a.m）等等</p>
+<h1 id="1-左值右值"><a href="#1-左值右值" class="headerlink" title="1.左值右值"></a>1.左值右值</h1><p> 左值与右值是C++中表达式的属性，在C++11中，每个表达式有两个属性：类型（type，除去引用特性，用于类型检查）和值类型（value category，用于语法检查，比如一个表达式结果是否能被赋值）。<br>​ 值类型包括3个基本类型：lvalue、prvalue与xrvalue。后两者又统称为rvalue。lvalue我们称为左值，你可以将左值看成是一个可以获取地址的量，它可以用来标识一个对象或函数。rvalue称为右值，你可以认为所有不是左值的量就是右值，这是最简单的解释。<br>​ <a href="https://en.cppreference.com/w/cpp/language/value_category" target="_blank" rel="noopener">cppreference</a>有关于lvalue，prvalue，xrvalue的详细划分。其中要准确区分出右值中的prvalue和xrvalue并不容易：大概前者就是纯粹的右值，比如字面量，表达式（true,a++）等等，后者指的是可以被重用的临时对象比如一个数组，或者一个对象的成员（a[n]，a.m）等等</p>
 <h1 id="2-左值引用"><a href="#2-左值引用" class="headerlink" title="2.左值引用"></a>2.左值引用</h1><p> 在C++11之前就已经有了左值引用，有时候我们简称为引用，其语法很简单：</p>
 <pre class="line-numbers language-lang-c++"><code class="language-lang-c++">int x = 20;int& rx = x;   // 定义引用时必须初始化
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p> 但是引用也分为const引用与non-const引用，对于non-const引用，其只能用non-const左值来初始化：</p>
-<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">int x = 20;int& rx1 = x;   // non-const引用可以被non-const左值初始化
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">int x = 20;
+int& rx1 = x;   // non-const引用可以被non-const左值初始化
 const int y = 10;
 int& rx2 = y;  // 非法：non-const引用不能被const左值初始化
 int& rx3 = 10;      // 非法：non-const引用不能被右值初始化
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>但是const引用限制就少了：int x = 10;</p>
-<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">const int cx = 20;const int& rx1 = x;   // const引用可以被non-const左值初始化
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">const int cx = 20;
+const int& rx1 = x;   // const引用可以被non-const左值初始化
 const int& rx2 = cx;  // const引用可以被const左值初始化
 const int& rx3 = 9;   // const引用可以被右值初始化
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>理解上面并不难，因为你只要想着这样初始化不会造成矛盾就好了，特别注意的是const左值引用可以接收右值（这点很重要，后面会说）。</p>
 <h1 id="3-右值引用"><a href="#3-右值引用" class="headerlink" title="3.右值引用"></a>3.右值引用</h1><p> C++11以前，右值被认为是无用的资源，所以在C++11中引入了右值引用，就是为了重用右值。定义右值引用需要使用&amp;&amp;：</p>
 <pre class="line-numbers language-lang-c++"><code class="language-lang-c++">int&& rrx = 200;
@@ -688,8 +690,8 @@ int main(){
 <pre class="line-numbers language-lang-c++"><code class="language-lang-c++">template <typename T>
 class DynamicArray
 {
-    public:    explicit DynamicArray(int size) :   
-    m_size{ size }, m_array{ new T[size] }  
+    public:    
+    explicit DynamicArray(int size)：m_size{ size }, m_array{ new T[size] }  
     {   
         cout << "Constructor: dynamic array is created!\n";  
     }   
@@ -699,8 +701,7 @@ class DynamicArray
         cout << "Destructor: dynamic array is destroyed!\n";  
     }   
     // 复制构造函数    
-    DynamicArray(const DynamicArray& rhs) :  
-    m_size{ rhs.m_size }   
+    DynamicArray(const DynamicArray& rhs) ： m_size{ rhs.m_size }   
     {    
         m_array = new T[m_size];      
         for (int i = 0; i < m_size; ++i)          
@@ -735,7 +736,7 @@ class DynamicArray
     T* m_array;   
     int m_size;
 };
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p> 我们通过在堆上动态分配内存来实现动态数组类，类中实现复制构造函数、复制赋值操作符以及索引操作符。假如我们定义一个生产动态数组的工厂函数：</p>
 <pre class="line-numbers language-lang-c++"><code class="language-lang-c++">// 生产int动态数组的工厂函数
 DynamicArray<int> arrayFactor(int size)
@@ -1544,7 +1545,7 @@ T&& forward(typename remove_reference<T>::type& param)
 
             
                 &nbsp; | &nbsp;字数统计:&nbsp;
-                <span class="white-color">18.8k</span> 字
+                <span class="white-color">18.9k</span> 字
             
 
             
