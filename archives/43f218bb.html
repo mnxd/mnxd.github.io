@@ -4,14 +4,11 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="delete[]和delete, SCU CG CompuerGraphics 码农 Ricardo 小杜 OpenGL GLSL HIVE 游戏引擎开发">
+    <meta name="keywords" content="OpenGL笔记杂记, SCU CG CompuerGraphics 码农 Ricardo 小杜 OpenGL GLSL HIVE 游戏引擎开发">
     <meta name="baidu-site-verification" content="1MqvQ6zfNJ">
     <meta name="google-site-verification" content="LYvzXgqPaMOwG9zUJOhjqbXhRknn5jNhZltznVcTbH8">
-    <meta name="description" content="0. delete[]这个问题其实来自于看到师兄师姐的面经里有提到一个问题
-delete[]是如何知道要delete的数组大小的？
-Type * pName = new Type[Size];
-
-在执行上述语句时，一开始我简单的以为C++编">
+    <meta name="description" content="0. 法线矩阵​    如果模型矩阵执行了不等比缩放，顶点的改变会导致法向量不再垂直于表面了。
+所以有一个专门为法向量定制的模型矩阵：法线矩阵，定义为「模型矩阵左上角的逆矩阵的转置矩阵。在顶点着色器中，可以使用inverse和transpo">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +16,7 @@ Type * pName = new Type[Size];
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>delete[]和delete | Ricardo&#39;s Blog</title>
+    <title>OpenGL笔记杂记 | Ricardo&#39;s Blog</title>
     <link rel="icon" type="image/jpeg" href="/favicon.jpg">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -527,13 +524,13 @@ Type * pName = new Type[Size];
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/North.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/Coronation.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        delete[]和delete
+                        OpenGL笔记杂记
                     </div>
                 </div>
             </div>
@@ -559,8 +556,8 @@ Type * pName = new Type[Size];
                                 <span class="chip bg-color">C++</span>
                             </a>
                         
-                            <a href="/tags/delete/" target="_blank">
-                                <span class="chip bg-color">delete</span>
+                            <a href="/tags/OpenGL/" target="_blank">
+                                <span class="chip bg-color">OpenGL</span>
                             </a>
                         
                     </div>
@@ -571,8 +568,8 @@ Type * pName = new Type[Size];
                     <div class="post-cate">
                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/C-基础/" class="post-category" target="_blank">
-                                C++基础
+                            <a href="/categories/OpenGL/" class="post-category" target="_blank">
+                                OpenGL
                             </a>
                         
                     </div>
@@ -583,7 +580,7 @@ Type * pName = new Type[Size];
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-01-09
+                    2020-01-30
                 </div>
 
                 <div class="post-author info-break-policy">
@@ -597,14 +594,14 @@ Type * pName = new Type[Size];
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        304
+                        1.8k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        8 分
                     </div>
                     
                 
@@ -621,251 +618,326 @@ Type * pName = new Type[Size];
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="0-delete"><a href="#0-delete" class="headerlink" title="0. delete[]"></a>0. delete[]</h1><p>这个问题其实来自于看到师兄师姐的面经里有提到一个问题</p>
-<p><strong>delete[]是如何知道要delete的数组大小的？</strong></p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">Type * pName = new Type[Size];
+                <h1 id="0-法线矩阵"><a href="#0-法线矩阵" class="headerlink" title="0. 法线矩阵"></a>0. 法线矩阵</h1><p>​    如果模型矩阵执行了不等比缩放，顶点的改变会导致法向量不再垂直于表面了。</p>
+<p>所以有一个专门为法向量定制的模型矩阵：法线矩阵，定义为「模型矩阵左上角的逆矩阵的转置矩阵。在顶点着色器中，可以使用inverse和transpose函数自己生成这个法线矩阵，这两个函数对所有类型矩阵都有效。</p>
+<pre class="line-numbers language-lang-glsl"><code class="language-lang-glsl">Normal = mat3(transpose(inverse(model))) * aNormal;
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>在执行上述语句时，一开始我简单的以为C++编译器内部实现了某种方法如</p>
+<h1 id="1-光照计算"><a href="#1-光照计算" class="headerlink" title="1. 光照计算"></a>1. 光照计算</h1><p>​    我们选择在世界空间进行光照计算，但是大多数人趋向于在观察空间进行光照计算。在观察空间计算的好处是，观察者的位置总是(0, 0, 0)，所以这样你直接就获得了观察者位置。可是我发现在学习的时候在世界空间中计算光照更符合直觉。如果你仍然希望在观察空间计算光照的话，你需要将所有相关的向量都用观察矩阵进行变换（记得也要改变法线矩阵）。</p>
+<h1 id="2-运算符"><a href="#2-运算符" class="headerlink" title="2.*运算符"></a>2.*运算符</h1><p><code>GLSL</code>中向量间的<em>运算符指的是分量之间相乘（和向量间加法类似），不是点乘也不是矩阵乘法。只有与矩阵相关的一些</em>运算才定义为矩阵乘法。如果要点乘的话可以使用dot(v1,v2)。</p>
+<h1 id="3-点光源光照衰减公式"><a href="#3-点光源光照衰减公式" class="headerlink" title="3.点光源光照衰减公式"></a>3.点光源光照衰减公式</h1><p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="C:\Users\10216\Desktop\TIM图片20200130204845.png" alt></p>
+<p>在这里d代表了片段距光源的距离。接下来为了计算衰减值，我们定义3个（可配置的）项：常数项Kc、一次项Kl和二次项Kq。</p>
 <ul>
-<li>申请pName指向的内存空间时会自动在sizeof(Type)*size前面+1块内存用来存储大小</li>
-<li><p><del>或者通过sizeof(theArray)/Sizeof[Type]得到数组大小</del>（错误想法）</p>
-</li>
-<li><p>内存管理库自己维护了一个列表,记录所有空间分配的位置和大小以及类型,delete的时候查一下这个列表就行了</p>
-</li>
+<li>常数项通常保持为1.0，它的主要作用是保证分母永远不会比1小，否则的话在某些距离上它反而会增加强度，这肯定不是我们想要的效果。</li>
+<li>一次项会与距离值相乘，以线性的方式减少强度。</li>
+<li>二次项会与距离的平方相乘，让光源以二次递减的方式减少强度。二次项在距离比较小的时候影响会比一次项小很多，但当距离值比较大的时候它就会比一次项更大了。</li>
 </ul>
-<h1 id="1-过分配内存方法"><a href="#1-过分配内存方法" class="headerlink" title="1.过分配内存方法"></a>1.过分配内存方法</h1><p>通过查阅资料，似乎在不同的编译器中都有对第一种方法的实现如下，</p>
-<p>以下内容来自知乎<a href="https://www.zhihu.com/question/25556263/answer/32589012" target="_blank" rel="noopener">夏华林的回答</a> ,这里抄过来做一下笔记。</p>
-<p>M$ 编译器 \ vc \include\ 目录下 malloc.h这一头文件 中 184 到 209 行的代码：</p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">//这儿是根据不同的硬件平台的宏定义
-#if defined (_M_IX86)
-#define _ALLOCA_S_MARKER_SIZE   8
-#elif defined (_M_X64)
-#define _ALLOCA_S_MARKER_SIZE   16
-#elif defined (_M_ARM)
-#define _ALLOCA_S_MARKER_SIZE   8
-#elif !defined (RC_INVOKED)
-#error Unsupported target platform.
-#endif  /* !defined (RC_INVOKED) */
+<h1 id="4-多光源"><a href="#4-多光源" class="headerlink" title="4. 多光源"></a>4. 多光源</h1><pre class="line-numbers language-lang-GLSL"><code class="language-lang-GLSL">#version 330 core
+out vec4 FragColor;
 
-_STATIC_ASSERT(sizeof(unsigned int) <= _ALLOCA_S_MARKER_SIZE);
+struct Material {
+    sampler2D diffuse;
+    sampler2D specular;    
+    float shininess;
+}; 
 
-#if !defined (__midl) && !defined (RC_INVOKED)
-#pragma warning(push)
-#pragma warning(disable:6540)
-__inline void *_MarkAllocaS(_Out_opt_ __crt_typefix(unsigned int*) void *_Ptr, unsigned int _Marker)
-{
-    if (_Ptr)
-    {
-        *((unsigned int*)_Ptr) = _Marker;
- //
-        _Ptr = (char*)_Ptr + _ALLOCA_S_MARKER_SIZE;
- //最后返回给调用者的指针，是原始指针偏移了_ALLOCA_S_MARKER_SIZE的新指针，这也是刚才我将指针向后偏移，就能得到该指针所指向内存区块的大小的原因。
-    }
-    return _Ptr;
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>而它的释放如下所示：</p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">/* _freea must be in the header so that its allocator matches _malloca */
-#if !defined (__midl) && !defined (RC_INVOKED)
-#if !(defined (_DEBUG) && defined (_CRTDBG_MAP_ALLOC))
-#undef _freea
-__pragma(warning(push))
-__pragma(warning(disable: 6014))
-_CRTNOALIAS __inline void __CRTDECL _freea(_Pre_maybenull_ _Post_invalid_ void * _Memory)
-{
-    unsigned int _Marker;
-    if (_Memory)
-    {
-        _Memory = (char*)_Memory - _ALLOCA_S_MARKER_SIZE;
-//获得原始指针
-        _Marker = *(unsigned int *)_Memory;//得到指针所指区块的大小
-        if (_Marker == _ALLOCA_S_HEAP_MARKER)
-        {
-            free(_Memory);
-        }
-#if defined (_ASSERTE)
-        else if (_Marker != _ALLOCA_S_STACK_MARKER)
-        {
-            #pragma warning(suppress: 4548) /* expression before comma has no effect */
-            _ASSERTE(("Corrupted pointer passed to _freea", 0));
-        }
-#endif  /* defined (_ASSERTE) */
-    }
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>再来看看 SGI　STL标准库源码 stl_alloc.h 文件209 行到 246行 debug_alloc类模板的设计：</p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">// Allocator adaptor to check size arguments for debugging.
-// Reports errors using assert.  Checking can be disabled with
-// NDEBUG, but it's far better to just use the underlying allocator
-// instead when no checking is desired.
-// There is some evidence that this can confuse Purify.
-template <class _Alloc>
-class debug_alloc {
+struct DirectionLight {
+    vec3 direction;
 
-private:
-
-  enum {_S_extra = 8};  // Size of space used to store size.  Note
-                        // that this must be large enough to preserve
-                        // alignment.
-
-                        //这儿就像它所说的那样
-public:
-
-  static void* allocate(size_t __n)
-  {
-    // 这里实际申请的内存大小要多 8 个字节
-    char* __result = (char*)_Alloc::allocate(__n + (int) _S_extra);
-    *(size_t*)__result = __n;//前 4 个字节用于存储区块大小，后4个字节的空白区暂时不清楚是为什么。
-    return __result + (int) _S_extra;//最后返回相对于原始指针偏移8个字节的新指针
-  }
-
-  static void deallocate(void* __p, size_t __n)
-  {
-    char* __real_p = (char*)__p - (int) _S_extra;//获得原始指针
-    assert(*(size_t*)__real_p == __n);//这里增加了一个断言，防止析构了被破坏的指针
-    _Alloc::deallocate(__real_p, __n + (int) _S_extra);
-  }
-
-  static void* reallocate(void* __p, size_t __old_sz, size_t __new_sz)
-  {
-    char* __real_p = (char*)__p - (int) _S_extra;
-    assert(*(size_t*)__real_p == __old_sz);
-    char* __result = (char*)
-      _Alloc::reallocate(__real_p, __old_sz + (int) _S_extra,
-                                   __new_sz + (int) _S_extra);
-    *(size_t*)__result = __new_sz;
-    return __result + (int) _S_extra;
-  }
-
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
 };
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>gcc下其实也有同样的设计：</p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">#if(defined(_X86_) && !defined(__x86_64))
-#define _ALLOCA_S_MARKER_SIZE 8
-#elif defined(__ia64__) || defined(__x86_64)
-#define _ALLOCA_S_MARKER_SIZE 16
-#endif
 
-#if !defined(RC_INVOKED)
-  static __inline void *_MarkAllocaS(void *_Ptr,unsigned int _Marker) {
-    if(_Ptr) {
-      *((unsigned int*)_Ptr) = _Marker;
-      _Ptr = (char*)_Ptr + _ALLOCA_S_MARKER_SIZE;
-    }
-    return _Ptr;
-  }
-#endif
+struct PointLight {
+     vec3  position;
+     vec3 color;
+     vec3 ambient;
+     vec3 diffuse;
+     vec3 specular;
+
+     float constant;
+     float linear;
+     float quadratic;
+};
+
+struct SpotLight {
+   vec3  position;
+   vec3  direction;
+   float cutOff;
+   float outerCutOff;
+
+   vec3 ambient;
+   vec3 diffuse;
+   vec3 specular;
+
+   float constant;
+   float linear;
+   float quadratic;
+};
+
+#define NR_POINT_LIGHTS 4
+
+in vec3 FragPos;  
+in vec3 Normal;  
+in vec2 TexCoords;
+
+uniform vec3 viewPos;
+uniform Material material;
+uniform DirectionLight dirlight;
+uniform PointLight pointLights[NR_POINT_LIGHTS];
+uniform SpotLight spotLight;
+
+vec3 caculDirLight(DirectionLight light,vec3 normal,vec3 viewDir);
+vec3 caculPointLight(PointLight light,vec3 normal,vec3 fragPos,vec3 viewDir);
+vec3 caculSpotLight(SpotLight light,vec3 normal,vec3 fragPos,vec3 viewDir);
+
+void main()
+{
+    vec3 norm = normalize(Normal);
+    vec3 viewDir = normalize(viewPos - FragPos);
+
+    vec3 result = caculDirLight(dirlight,norm,viewDir);
+    for(int i = 0; i < NR_POINT_LIGHTS; i++)
+        result += caculPointLight(pointLights[i],norm,FragPos,viewDir);
+    result += caculSpotLight(spotLight,norm,FragPos,viewDir);
+
+    FragColor = vec4(result, 1.0);
+} 
+
+vec3 caculDirLight(DirectionLight light,vec3 normal,vec3 viewDir)
+{
+    // ambient
+    vec3 ambient    = light.ambient * texture(material.diffuse, TexCoords).rgb;
+
+    // diffuse 
+    vec3 lightDir = normalize(-light.direction);
+    float diff        = max(dot(normal, lightDir), 0.0);
+    vec3 diffuse    = light.diffuse * diff * texture(material.diffuse, TexCoords).rgb;  
+
+    // specular
+    vec3 reflectDir = reflect(-lightDir, normal);  
+    float spec        = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+    vec3 specular    = light.specular * spec * texture(material.specular, TexCoords).rgb;  
+
+    return(ambient + diffuse + specular);
+}
+
+vec3 caculPointLight(PointLight light,vec3 normal,vec3 fragPos,vec3 viewDir)
+{
+    float distance    = length(light.position - fragPos);
+    float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
+
+    // ambient
+    vec3 ambient      = light.ambient * texture(material.diffuse, TexCoords).rgb;
+
+    // diffuse 
+    vec3 lightDir     = normalize(light.position - fragPos);
+    float diff        = max(dot(normal, lightDir), 0.0);
+    vec3 diffuse      = light.diffuse * diff * (texture(material.diffuse, TexCoords).rgb + light.color);  
+
+    // specular
+    vec3 reflectDir   = reflect(-lightDir, normal);  
+    float spec        = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+    vec3 specular     = light.specular * spec * texture(material.specular, TexCoords).rgb;  
+
+    ambient           *= attenuation; 
+    diffuse              *= attenuation;
+    specular          *= attenuation;
+    return(ambient + diffuse + specular);
+}
+
+vec3 caculSpotLight(SpotLight light,vec3 normal,vec3 fragPos,vec3 viewDir)
+{
+    vec3 lightDir        = normalize(light.position - fragPos);
+    float theta            = dot(lightDir, normalize(-light.direction));
+    float epsilon        = light.cutOff - light.outerCutOff;
+    float intensity        = clamp((theta - light.outerCutOff) / epsilon, 0.0, 1.0); 
+
+    float distance        = length(light.position - fragPos);
+    float attenuation    = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
+
+    // ambient
+    vec3 ambient        = light.ambient * texture(material.diffuse, TexCoords).rgb;
+
+    // diffuse 
+    float diff            = max(dot(normal, lightDir), 0.0);
+    vec3 diffuse        = light.diffuse * diff * texture(material.diffuse, TexCoords).rgb;  
+
+    // specular
+    vec3 reflectDir        = reflect(-lightDir, normal);  
+    float spec            = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+    vec3 specular        = light.specular * spec * texture(material.specular, TexCoords).rgb;  
+
+    ambient                *= attenuation; 
+    diffuse                *= attenuation;
+    specular            *= attenuation;
+    diffuse                *= intensity;
+    specular            *= intensity;
+    return (ambient + diffuse + specular);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="5-模型加载"><a href="#5-模型加载" class="headerlink" title="5.模型加载"></a>5.模型加载</h1><p>assimp</p>
+<p>model.h 可以直接通过:</p>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">Model ourModel("../resource/objects/nanosuit/nanosuit.obj");
+......
+设置model,view,projection 矩阵之后
+......
+ourModel.Draw(stencilShader);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="6-深度测试"><a href="#6-深度测试" class="headerlink" title="6. 深度测试"></a>6. 深度测试</h1><pre class="line-numbers language-lang-GLSL"><code class="language-lang-GLSL">    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h1 id="7-模版测试"><a href="#7-模版测试" class="headerlink" title="7.模版测试"></a>7.模版测试</h1><p>模型边框效果：</p>
+<pre class="line-numbers language-lang-GLSL"><code class="language-lang-GLSL">    glEnable(GL_STENCIL_TEST);
+    glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+    glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+//绘制物体原型
+        glStencilFunc(GL_ALWAYS, 1, 0xFF);
+        glStencilMask(0xFF);
+        ...shader.use()....
+
+//绘制边框
+        glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+        glStencilMask(0x00);
+        glDisable(GL_DEPTH_TEST);
+        ...shader.use()...
+        glStencilMask(0xFF);
+        glEnable(GL_DEPTH_TEST);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">#ifndef RC_INVOKED
-#undef _freea
-  static __inline void __cdecl _freea(void *_Memory) {
-    unsigned int _Marker;
-    if(_Memory) {
-      _Memory = (char*)_Memory - _ALLOCA_S_MARKER_SIZE;
-      _Marker = *(unsigned int *)_Memory;
-      if(_Marker==_ALLOCA_S_HEAP_MARKER) {
-    free(_Memory);
-      }
-#ifdef _ASSERTE
-      else if(_Marker!=_ALLOCA_S_STACK_MARKER) {
-    _ASSERTE(("Corrupted pointer passed to _freea",0));
-      }
-#endif
-    }
-  }
-#endif /* RC_INVOKED */
+<h1 id="8-面剔除"><a href="#8-面剔除" class="headerlink" title="8.面剔除"></a>8.面剔除</h1><p>​    三角形点的顺序为逆时针，然后在要使用面剔除的物体处:</p>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">glEnable(GL_CULL_FACE);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="9-帧缓冲"><a href="#9-帧缓冲" class="headerlink" title="9.帧缓冲"></a>9.帧缓冲</h1><p>帧缓冲的使用，首先就创建对应的帧缓冲对象，然后给它添加对应的附件，比如颜色附件或者深度附件等。</p>
+<p>接着就是切换到帧缓冲渲染，在帧缓冲中进行绘制，此时绘制的内容都是记录在上一步添加的颜色附件或者深度附件上了。</p>
+<p>然后切换到屏幕的缓冲区，这时可以把帧缓冲中记录的颜色或者深度信息取出来，再把他们绘制到屏幕上。</p>
+<p>帧缓冲的使用看似很简单，但是用处却很普遍，使用帧缓冲可以在一些相机应用中做美颜处理、滤镜处理，也可以用来作贴纸等等效果。</p>
+<p><strong>首先：</strong></p>
+<p>建立一个用于绘制帧缓冲中的VAO,VBO，（将要绘制的帧储存为纹理信息再绘制一编纹理）</p>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">float quadVertices[] = { // vertex attributes for a quad that fills the entire screen in Normalized Device Coordinates.
+        // positions   // texCoords
+        -1.0f,  1.0f,  0.0f, 1.0f,
+        -1.0f, -1.0f,  0.0f, 0.0f,
+         1.0f, -1.0f,  1.0f, 0.0f,
+
+        -1.0f,  1.0f,  0.0f, 1.0f,
+         1.0f, -1.0f,  1.0f, 0.0f,
+         1.0f,  1.0f,  1.0f, 1.0f
+    };
+
+//Screen quad VAO
+    unsigned int quadVAO, quadVBO;
+    glGenVertexArrays(1, &quadVAO);
+    glGenBuffers(1, &quadVBO);
+    glBindVertexArray(quadVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(planeVertices), &quadVertices, GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>然后：</strong></p>
+<ul>
+<li>创建帧缓冲:</li>
+</ul>
+<p>在<code>glBindFramebuffer(GL_FRAMEBUFFER, fbo)</code>绑定到<code>GL_FRAMEBUFFER</code>目标之后，所有的<strong>读取</strong>和<strong>写入</strong>帧缓冲的操作将会影响当前绑定的帧缓冲。</p>
+<ul>
+<li>创建用于保存要绘制的帧信息的纹理:</li>
+</ul>
+<p>当把一个纹理附加到帧缓冲的时候，所有的渲染指令将会写入到这个纹理中，就想它是一个普通的颜色/深度或模板缓冲一样。使用纹理的优点是，所有渲染操作的结果将会被储存在一个纹理图像中，我们之后可以在着色器中很方便地使用它。</p>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorbuffer, 0);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>创建一个渲染缓冲：</li>
+</ul>
+<ol>
+<li>将新的帧缓冲绑定为激活的帧缓冲，和往常一样渲染场景</li>
+<li>绑定默认的帧缓冲</li>
+<li>绘制一个横跨整个屏幕的四边形，将帧缓冲的颜色缓冲作为它的纹理。</li>
+</ol>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">    //创建一个帧缓冲
+    unsigned int framebuffer;
+    glGenFramebuffers(1, &framebuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+    //创建一个颜色纹理
+    unsigned int textureColorbuffer;
+    glGenTextures(1, &textureColorbuffer);
+    glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCR_WIDTH, SCR_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorbuffer, 0);
+    //创建一个渲染缓冲
+    unsigned int rbo;
+    glGenRenderbuffers(1, &rbo);
+    glBindRenderbuffer(GL_RENDERBUFFER, rbo);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, SCR_WIDTH, SCR_HEIGHT);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+        std:cout << "ERROR::FRAMEBUFFER:: Framebuffer is not complete!" << std::endl;
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>再在每一帧中：</strong></p>
+<p>首先绑定帧缓冲并开启深度测试，并将要绘制的场景信息写入到用于保存帧缓冲信息的纹理中：</p>
+<pre class="line-numbers language-lang-c++"><code class="language-lang-c++">        glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+        glEnable(GL_DEPTH_TEST);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>然后绘制帧缓冲中的纹理信息：</p>
+<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        glDisable(GL_DEPTH_TEST);
+        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        screenShader.use();
+        glBindVertexArray(quadVAO);
+        glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="10-高级GLSL"><a href="#10-高级GLSL" class="headerlink" title="10.高级GLSL"></a>10.高级GLSL</h1><pre class="line-numbers language-lang-GLSL"><code class="language-lang-GLSL">gl_FragCoord;
+gl_FrontFacing;
+gl_FragDepth;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h1 id="11-接口块"><a href="#11-接口块" class="headerlink" title="11. 接口块"></a>11. 接口块</h1><p>​    到目前为止，每当我们希望从顶点着色器向片段着色器发送数据时，我们都声明了几个对应的输入/输出变量。将它们一个一个声明是着色器间发送数据最简单的方式了，但当程序变得更大时，你希望发送的可能就不只是几个变量了，它还可能包括数组和结构体。</p>
+<p>为了帮助我们管理这些变量，GLSL为我们提供了一个叫做接口块(Interface Block)的东西，来方便我们组合这些变量。接口块的声明和struct的声明有点相像，不同的是，现在根据它是一个输入还是输出块(Block)，使用in或out关键字来定义的。</p>
+<pre class="line-numbers language-lang-GLSL"><code class="language-lang-GLSL">#version 330 core
+layout (location = 0) in vec3 aPos;
+layout (location = 1) in vec2 aTexCoords;
+
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+
+out VS_OUT
+{
+    vec2 TexCoords;
+} vs_out;
+
+void main()
+{
+    gl_Position = projection * view * model * vec4(aPos, 1.0);    
+    vs_out.TexCoords = aTexCoords;
+}
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="2-内存管理表方法"><a href="#2-内存管理表方法" class="headerlink" title="2.内存管理表方法"></a>2.内存管理表方法</h1><p>暂时不太明白反汇编部分，待后续完善，这里的论证方法来自百度得到的一篇博客，但是我得到的和作者的结果不一致，所以暂时不做论证，先挖坑，后面有时间看了汇编再来补充</p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">int main(void)
+<pre class="line-numbers language-lang-GLSL"><code class="language-lang-GLSL">#version 330 core
+out vec4 FragColor;
 
+in VS_OUT
 {
+    vec2 TexCoords;
+} fs_in;
 
-int *pI = new int;
+uniform sampler2D texture;
 
-int *pArray = new int[10];
-
-int size = *(pArray-1);
-
-delete pI;
-
-delete [] pArray; 
-
-return 0;
-
+void main()
+{             
+    FragColor = texture(texture, fs_in.TexCoords);   
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>查看反汇编后代码得到：</p>
-<pre class="line-numbers language-lang-C++"><code class="language-lang-C++">int main(void)
-
-{
-00007FF799591840  push        rbp  
-00007FF799591842  push        rdi  
-00007FF799591843  sub         rsp,1C8h  
-00007FF79959184A  lea         rbp,[rsp+20h]  
-00007FF79959184F  mov         rdi,rsp  
-00007FF799591852  mov         ecx,72h  
-00007FF799591857  mov         eax,0CCCCCCCCh  
-00007FF79959185C  rep stos    dword ptr [rdi]  
-00007FF79959185E  lea         rcx,[__89D24A3F_main@cpp (07FF7995A1000h)]  
-00007FF799591865  call        __CheckForDebuggerJustMyCode (07FF7995910A5h)  
-
-    int *pI = new int;
-00007FF79959186A  mov         ecx,4  
-00007FF79959186F  call        operator new (07FF799591195h)  
-00007FF799591874  mov         qword ptr [rbp+128h],rax  
-00007FF79959187B  mov         rax,qword ptr [rbp+128h]  
-00007FF799591882  mov         qword ptr [pI],rax  
-
-    int *pArray = new int[10];
-00007FF799591886  mov         ecx,28h  
-00007FF79959188B  call        operator new[] (07FF799591375h)  
-00007FF799591890  mov         qword ptr [rbp+148h],rax  
-00007FF799591897  mov         rax,qword ptr [rbp+148h]  
-00007FF79959189E  mov         qword ptr [pArray],rax  
-
-    int size = *(pArray - 1);
-00007FF7995918A2  mov         rax,qword ptr [pArray]  
-00007FF7995918A6  mov         eax,dword ptr [rax-4]  
-00007FF7995918A9  mov         dword ptr [size],eax  
-
-    delete pI;
-00007FF7995918AC  mov         rax,qword ptr [pI]  
-00007FF7995918B0  mov         qword ptr [rbp+168h],rax  
-00007FF7995918B7  mov         edx,4  
-00007FF7995918BC  mov         rcx,qword ptr [rbp+168h]  
-00007FF7995918C3  call        operator delete (07FF799591087h)  
-00007FF7995918C8  cmp         qword ptr [rbp+168h],0  
-00007FF7995918D0  jne         main+9Fh (07FF7995918DFh)  
-00007FF7995918D2  mov         qword ptr [rbp+198h],0  
-00007FF7995918DD  jmp         main+0B2h (07FF7995918F2h)  
-00007FF7995918DF  mov         qword ptr [pI],8123h  
-00007FF7995918E7  mov         rax,qword ptr [pI]  
-00007FF7995918EB  mov         qword ptr [rbp+198h],rax  
-
-    delete[] pArray;
-00007FF7995918F2  mov         rax,qword ptr [pArray]  
-00007FF7995918F6  mov         qword ptr [rbp+188h],rax  
-00007FF7995918FD  mov         rcx,qword ptr [rbp+188h]  
-00007FF799591904  call        operator delete[] (07FF799591294h)  
-00007FF799591909  cmp         qword ptr [rbp+188h],0  
-00007FF799591911  jne         main+0E0h (07FF799591920h)  
-00007FF799591913  mov         qword ptr [rbp+198h],0  
-00007FF79959191E  jmp         main+0F3h (07FF799591933h)  
-00007FF799591920  mov         qword ptr [pArray],8123h  
-00007FF799591928  mov         rax,qword ptr [pArray]  
-00007FF79959192C  mov         qword ptr [rbp+198h],rax  
-
-
-    return 0;
-00007FF799591933  xor         eax,eax  
-
-}
-00007FF799591935  lea         rsp,[rbp+1A8h]  
-00007FF79959193C  pop         rdi  
-00007FF79959193D  pop         rbp  
-00007FF79959193E  ret
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在写冯氏光照算法时发现了一个问题，如果不通过接口块传递数据，渲染出来的效果如下有一些奇怪：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/OpenGL/phone_withoutblock.png" alt></p>
+<p>而使用接口块传递数据时：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/PostPic/OpenGL/phone_withblock.png" alt></p>
+<h1 id="12-环境光贴图的地方有个BUG没有解决"><a href="#12-环境光贴图的地方有个BUG没有解决" class="headerlink" title="12. 环境光贴图的地方有个BUG没有解决"></a>12. 环境光贴图的地方有个BUG没有解决</h1><h1 id="13-AA（离屏MSAA的地方没太明白）"><a href="#13-AA（离屏MSAA的地方没太明白）" class="headerlink" title="13. AA（离屏MSAA的地方没太明白）"></a>13. AA（离屏MSAA的地方没太明白）</h1><h1 id="14-点阴影-重要！"><a href="#14-点阴影-重要！" class="headerlink" title="14. 点阴影**重要！"></a>14. 点阴影**重要！</h1>
             </div>
             <hr/>
 
@@ -1015,7 +1087,7 @@ return 0;
                     </span>
                     <a href="https://www.mnxd.site" class="b-link-green">Ricardo's Blog</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/archives/8104acb6.html" class="b-link-green">delete[]和delete</a>
+                    <a href="/archives/43f218bb.html" class="b-link-green">OpenGL笔记杂记</a>
                 </p>
             </div>
 
@@ -1335,58 +1407,44 @@ return 0;
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/archives/38a918c7.html">
+                <a href="/archives/43f218bb.html">
                     <div class="card-image">
                         
                         
-                        <img src="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/cover.jpg" class="responsive-img" alt="智能指针">
+                        <img src="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/Coronation.jpg" class="responsive-img" alt="OpenGL笔记杂记">
                         
-                        <span class="card-title">智能指针</span>
+                        <span class="card-title">OpenGL笔记杂记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            STL 的智能指针为了减少出现内存泄露的情况，STL中使用智能指针来减少泄露。STL中一般有四种智能指针:
-
-
-
-
-指针类别
-支持
-备注
-
-
-
-
-unique_ptr
-C++ 11
-拥有独有对象所有权语义的智能指针
-
-
-shared_ptr
+                            0. 法线矩阵​    如果模型矩阵执行了不等比缩放，顶点的改变会导致法向量不再垂直于表面了。
+所以有一个专门为法向量定制的模型矩阵：法线矩阵，定义为「模型矩阵左上角的逆矩阵的转置矩阵。在顶点着色器中，可以使用inverse和transpo
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-01-12
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-01-30
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/C-基础/" class="post-category" target="_blank">
-                                    C++基础
+                            <a href="/categories/OpenGL/" class="post-category" target="_blank">
+                                    OpenGL
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -1394,16 +1452,8 @@ shared_ptr
                         <span class="chip bg-color">C++</span>
                     </a>
                     
-                    <a href="/tags/智能指针/" target="_blank">
-                        <span class="chip bg-color">智能指针</span>
-                    </a>
-                    
-                    <a href="/tags/unique-ptr/" target="_blank">
-                        <span class="chip bg-color">unique_ptr</span>
-                    </a>
-                    
-                    <a href="/tags/shared-ptr/" target="_blank">
-                        <span class="chip bg-color">shared_ptr</span>
+                    <a href="/tags/OpenGL/" target="_blank">
+                        <span class="chip bg-color">OpenGL</span>
                     </a>
                     
                 </div>
@@ -1417,27 +1467,24 @@ shared_ptr
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/archives/ea0b20c.html">
+                <a href="/archives/3445ed2d.html">
                     <div class="card-image">
                         
                         
-                        <img src="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/Princess%20PSD%20file.jpg" class="responsive-img" alt="Lambda和Mutable">
+                        <img src="https://blog-1257951283.cos.ap-chengdu.myqcloud.com/MainPic/coverimg/nightmare_by_wlop-d84nslc.jpg" class="responsive-img" alt="调试方法">
                         
-                        <span class="card-title">Lambda和Mutable</span>
+                        <span class="card-title">调试方法</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            0. Lambda表达式lambda表达式是C++11引入的”新”技术，之所以加引号是因为实际上其他语言如C#、Python中已经有了，只是C++在11版本中才刚刚推出而已。
-1. 声明Lambda表达式先上实际代码：
-#include 
-
+                            
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-01-08
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-01-14
                             </span>
                         <span class="publish-author">
                             
@@ -1458,12 +1505,8 @@ shared_ptr
                         <span class="chip bg-color">C++</span>
                     </a>
                     
-                    <a href="/tags/Lambda/" target="_blank">
-                        <span class="chip bg-color">Lambda</span>
-                    </a>
-                    
-                    <a href="/tags/Mutable/" target="_blank">
-                        <span class="chip bg-color">Mutable</span>
+                    <a href="/tags/Debug/" target="_blank">
+                        <span class="chip bg-color">Debug</span>
                     </a>
                     
                 </div>
