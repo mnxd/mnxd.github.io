@@ -3,32 +3,31 @@
     <id>http://example.com</id>
     <title>mnxd&#39;s blog</title>
     <link href="http://example.com" />
-    <updated>2023-07-12T15:34:47.271Z</updated>
+    <updated>2023-07-12T15:37:59.398Z</updated>
     <entry>
-        <id>http://example.com/2023/07/12/Optional/Variant/Any/</id>
+        <id>http://example.com/2023/07/12/Test/</id>
         <title></title>
-        <link rel="alternate" href="http://example.com/2023/07/12/Optional/Variant/Any/"/>
+        <link rel="alternate" href="http://example.com/2023/07/12/Test/"/>
         <content type="html">&lt;p&gt;在做一些类似文件读取类的工作时，可能需要判断文件是否成功被读取，并获得所读取到的值，常见实现如下：&lt;br&gt;
 但是实际上，data 等于空字符串的情况也不止一种，可能是文件读取失败，也可能是文件本身就没有内容&lt;br&gt;
-&lt;img data-src=&#34;image.png&#34; alt=&#34;Alt text&#34;&gt;&lt;/p&gt;
-&lt;p&gt;此时为了判断文件读取状态，也许会新增一个 bool 变量 如下&lt;br&gt;
-&lt;img data-src=&#34;image-1.png&#34; alt=&#34;Alt text&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;stdoptional&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#stdoptional&#34;&gt;#&lt;/a&gt; std::optional&lt;/h2&gt;
-&lt;p&gt;但是这样代码看起来有些冗余，此时可以用到 std::optional 如下&lt;br&gt;
 &lt;img data-src=&#34;image-2.png&#34; alt=&#34;Alt text&#34;&gt;&lt;/p&gt;
-&lt;p&gt;在此基础上，某些情况时我们并不是一定要从这个文件中读取，也可以直接给它默认值，这个时候可以使用.value_or () 如下，此时可以看到，在没有成功读取 data 文件数据时，将赋予了默认值，并打印出日志告知没有成功打开文件。&lt;br&gt;
-&lt;img data-src=&#34;image-3.png&#34; alt=&#34;Alt text&#34;&gt;&lt;/p&gt;
+&lt;p&gt;此时为了判断文件读取状态，也许会新增一个 bool 变量 如下&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;image-3.png&#34; alt=&#34;Alt text&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;stdoptional&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#stdoptional&#34;&gt;#&lt;/a&gt; std::optional&lt;/h2&gt;
+&lt;p&gt;但是这样代码看起来有些冗余，此时可以用到 std::optional 如下&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;image-4.png&#34; alt=&#34;Alt text&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在此基础上，某些情况时我们并不是一定要从这个文件中读取，也可以直接给它默认值，这个时候可以使用.value_or () 如下，此时可以看到，在没有成功读取 data 文件数据时，将赋予了默认值，并打印出日志告知没有成功打开文件。&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;image-5.png&#34; alt=&#34;Alt text&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;stdvariant&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#stdvariant&#34;&gt;#&lt;/a&gt; std::variant&lt;/h2&gt;
 &lt;p&gt;但是，其实在此基础上还有进一步优化空间，就是 std::Variant，这个特性使得我们可以在一个变量里储存多种类型的数据，它的使用方法如下。&lt;br&gt;
-这里其实可以将整个 std::variant 理解为一个被指定为可能是 string 也可能是 int 的变量。&lt;br&gt;
-如果我们赋值为 string，则可以通过 string 类型读取，如果赋值为 int 则可以通过 int 类型读取&lt;br&gt;
-&lt;img data-src=&#34;image-4.png&#34; alt=&#34;Alt text&#34;&gt;&lt;br&gt;
- 然后在此基础上，我们可以将前面 optional 的代码改成如下，通过 ErrorCode 来进行更多的状态判断&lt;br&gt;
-&lt;img data-src=&#34;image-5.png&#34; alt=&#34;Alt text&#34;&gt;&lt;/p&gt;
+这里其实可以将整个 std::variant 理解为一个被指定为可能是 string 也可能是 int 的变量。如果我们赋值为 string，则可以通过 string 类型读取，如果赋值为 int 则可以通过 int 类型读取&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;image-6.png&#34; alt=&#34;Alt text&#34;&gt;&lt;/p&gt;
+&lt;p&gt;然后在此基础上，我们可以将前面 optional 的代码改成如下，通过 ErrorCode 来进行更多的状态判断&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;image-7.png&#34; alt=&#34;Alt text&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;stdany&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#stdany&#34;&gt;#&lt;/a&gt; std::any&lt;/h2&gt;
-&lt;p&gt;相比较于 std::variant，std::any 更加简单。可以直接存储任何类型的数据，但同样 std::variant 要求你在使用时列举出所有可能的类型，这样更能保证类型安全，variant 是一个类型安全的 union，而 Any，阅读源码可以看出，在类型较少时，它是和 variant 一样的通过 union 的存储方式，而当类型更多时，则是 void* 的存储，以便动态分配内存&lt;br&gt;
-&lt;img data-src=&#34;image-6.png&#34; alt=&#34;Alt text&#34;&gt;&lt;/p&gt;
+&lt;p&gt;相比较于 std::variant，std::any 更加简单。可以直接存储任何类型的数据，但同样 std::variant 要求你在使用时列举出所有可能的类型，这样更能保证类型安全，variant 是一个类型安全的 union，而 Any，阅读源码可以看出，在类型较少时，它是和 variant 一样的通过 union 的存储方式，而当类型更多时，则是 void* 的存储，以便动态分配内存&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;image.png&#34; alt=&#34;Alt text&#34;&gt;&lt;/p&gt;
 </content>
-        <updated>2023-07-12T15:34:47.271Z</updated>
+        <updated>2023-07-12T15:37:59.398Z</updated>
     </entry>
 </feed>

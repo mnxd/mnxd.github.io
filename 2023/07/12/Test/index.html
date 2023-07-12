@@ -25,7 +25,7 @@
 
   
 
-<link rel="canonical" href="http://example.com/2023/07/12/Optional/Variant/Any/">
+<link rel="canonical" href="http://example.com/2023/07/12/Test/">
 
 
 
@@ -62,12 +62,12 @@ mnxd = mnxd's blog</title>
   </h1>
   
 <div class="meta">
-  <span class="item" title="Created: 2023-07-12 23:34:47">
+  <span class="item" title="Created: 2023-07-12 23:37:59">
     <span class="icon">
       <i class="ic i-calendar"></i>
     </span>
     <span class="text">Posted on</span>
-    <time itemprop="dateCreated datePublished" datetime="2023-07-12T23:34:47+08:00">2023-07-12</time>
+    <time itemprop="dateCreated datePublished" datetime="2023-07-12T23:37:59+08:00">2023-07-12</time>
   </span>
   <span class="item" title="Symbols count in article">
     <span class="icon">
@@ -115,12 +115,12 @@ mnxd = mnxd's blog</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclgi503lj20zk0m8hdt.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclimtf7dj20zk0m8qav.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipetlbztpj20zk0m84qp.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipev1x5e4j20zk0m8b29.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclhtuo6nj20zk0m8ttm.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipexe4oykj20zk0m87ji.jpg"></li>
+          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1giclh5u05ej20zk0m87df.jpg"></li>
+          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1giciukx8a7j20zk0m8aio.jpg"></li>
+          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1giclimtf7dj20zk0m8qav.jpg"></li>
+          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1gipewkhf1zj20zk0m81kx.jpg"></li>
+          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1giclhfehz7j20zk0m8u0x.jpg"></li>
+          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1gicitf0kl1j20zk0m87fe.jpg"></li>
         </ul>
       </div>
     </header>
@@ -149,7 +149,7 @@ mnxd = mnxd's blog</title>
 </div>
 
     <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
-  <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/12/Optional/Variant/Any/">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/12/Test/">
 
   <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="image" content="/images/Cats.png">
@@ -166,24 +166,23 @@ mnxd = mnxd's blog</title>
 
     <p>在做一些类似文件读取类的工作时，可能需要判断文件是否成功被读取，并获得所读取到的值，常见实现如下：<br>
 但是实际上，data 等于空字符串的情况也不止一种，可能是文件读取失败，也可能是文件本身就没有内容<br>
-<img data-src="image.png" alt="Alt text"></p>
-<p>此时为了判断文件读取状态，也许会新增一个 bool 变量 如下<br>
-<img data-src="image-1.png" alt="Alt text"></p>
-<h2 id="stdoptional"><a class="markdownIt-Anchor" href="#stdoptional">#</a> std::optional</h2>
-<p>但是这样代码看起来有些冗余，此时可以用到 std::optional 如下<br>
 <img data-src="image-2.png" alt="Alt text"></p>
-<p>在此基础上，某些情况时我们并不是一定要从这个文件中读取，也可以直接给它默认值，这个时候可以使用.value_or () 如下，此时可以看到，在没有成功读取 data 文件数据时，将赋予了默认值，并打印出日志告知没有成功打开文件。<br>
-<img data-src="image-3.png" alt="Alt text"></p>
+<p>此时为了判断文件读取状态，也许会新增一个 bool 变量 如下</p>
+<p><img data-src="image-3.png" alt="Alt text"></p>
+<h2 id="stdoptional"><a class="markdownIt-Anchor" href="#stdoptional">#</a> std::optional</h2>
+<p>但是这样代码看起来有些冗余，此时可以用到 std::optional 如下</p>
+<p><img data-src="image-4.png" alt="Alt text"></p>
+<p>在此基础上，某些情况时我们并不是一定要从这个文件中读取，也可以直接给它默认值，这个时候可以使用.value_or () 如下，此时可以看到，在没有成功读取 data 文件数据时，将赋予了默认值，并打印出日志告知没有成功打开文件。</p>
+<p><img data-src="image-5.png" alt="Alt text"></p>
 <h2 id="stdvariant"><a class="markdownIt-Anchor" href="#stdvariant">#</a> std::variant</h2>
 <p>但是，其实在此基础上还有进一步优化空间，就是 std::Variant，这个特性使得我们可以在一个变量里储存多种类型的数据，它的使用方法如下。<br>
-这里其实可以将整个 std::variant 理解为一个被指定为可能是 string 也可能是 int 的变量。<br>
-如果我们赋值为 string，则可以通过 string 类型读取，如果赋值为 int 则可以通过 int 类型读取<br>
-<img data-src="image-4.png" alt="Alt text"><br>
- 然后在此基础上，我们可以将前面 optional 的代码改成如下，通过 ErrorCode 来进行更多的状态判断<br>
-<img data-src="image-5.png" alt="Alt text"></p>
+这里其实可以将整个 std::variant 理解为一个被指定为可能是 string 也可能是 int 的变量。如果我们赋值为 string，则可以通过 string 类型读取，如果赋值为 int 则可以通过 int 类型读取</p>
+<p><img data-src="image-6.png" alt="Alt text"></p>
+<p>然后在此基础上，我们可以将前面 optional 的代码改成如下，通过 ErrorCode 来进行更多的状态判断</p>
+<p><img data-src="image-7.png" alt="Alt text"></p>
 <h2 id="stdany"><a class="markdownIt-Anchor" href="#stdany">#</a> std::any</h2>
-<p>相比较于 std::variant，std::any 更加简单。可以直接存储任何类型的数据，但同样 std::variant 要求你在使用时列举出所有可能的类型，这样更能保证类型安全，variant 是一个类型安全的 union，而 Any，阅读源码可以看出，在类型较少时，它是和 variant 一样的通过 union 的存储方式，而当类型更多时，则是 void* 的存储，以便动态分配内存<br>
-<img data-src="image-6.png" alt="Alt text"></p>
+<p>相比较于 std::variant，std::any 更加简单。可以直接存储任何类型的数据，但同样 std::variant 要求你在使用时列举出所有可能的类型，这样更能保证类型安全，variant 是一个类型安全的 union，而 Any，阅读源码可以看出，在类型较少时，它是和 variant 一样的通过 union 的存储方式，而当类型更多时，则是 void* 的存储，以便动态分配内存</p>
+<p><img data-src="image.png" alt="Alt text"></p>
 
   </div>
 
@@ -195,9 +194,9 @@ mnxd = mnxd's blog</title>
       <i class="ic i-calendar-check"></i>
     </span>
     <span class="text">Edited on</span>
-    <time title="Modified: 2023-07-12 23:36:39" itemprop="dateModified" datetime="2023-07-12T23:36:39+08:00">2023-07-12</time>
+    <time title="Modified: 2023-07-12 23:40:12" itemprop="dateModified" datetime="2023-07-12T23:40:12+08:00">2023-07-12</time>
   </span>
-  <span id="2023/07/12/Optional/Variant/Any/" class="item leancloud_visitors" data-flag-title="" title="Views">
+  <span id="2023/07/12/Test/" class="item leancloud_visitors" data-flag-title="" title="Views">
       <span class="icon">
         <i class="ic i-eye"></i>
       </span>
@@ -239,7 +238,7 @@ mnxd = mnxd's blog</title>
   </li>
   <li class="link">
     <strong>Post link: </strong>
-    <a href="http://example.com/2023/07/12/Optional/Variant/Any/" title="">http://example.com/2023/07/12/Optional/Variant/Any/</a>
+    <a href="http://example.com/2023/07/12/Test/" title="">http://example.com/2023/07/12/Test/</a>
   </li>
   <li class="license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> unless stating additionally.
@@ -378,7 +377,7 @@ mnxd = mnxd's blog</title>
 <div class="breadcrumb">
 </div>
 
-    <span><a href="/2023/07/12/Optional/Variant/Any/" title="Untitled">Untitled</a></span>
+    <span><a href="/2023/07/12/Test/" title="Untitled">Untitled</a></span>
   </li>
 
   </ul>
@@ -421,7 +420,7 @@ mnxd = mnxd's blog</title>
   </div>
 <script data-config type="text/javascript">
   var LOCAL = {
-    path: '2023/07/12/Optional/Variant/Any/',
+    path: '2023/07/12/Test/',
     favicon: {
       show: "（●´3｀●）Goooood",
       hide: "(´Д｀)Booooom"
