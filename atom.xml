@@ -5,28 +5,27 @@
     <link href="http://example.com" />
     <updated>2023-07-12T15:37:59.398Z</updated>
     <entry>
-        <id>http://example.com/2023/07/12/Test/</id>
+        <id>http://example.com/2023/07/12/Event%20Dispatchers/</id>
         <title></title>
-        <link rel="alternate" href="http://example.com/2023/07/12/Test/"/>
-        <content type="html">&lt;p&gt;在做一些类似文件读取类的工作时，可能需要判断文件是否成功被读取，并获得所读取到的值，常见实现如下：&lt;br&gt;
-但是实际上，data 等于空字符串的情况也不止一种，可能是文件读取失败，也可能是文件本身就没有内容&lt;br&gt;
-&lt;img data-src=&#34;image-2.png&#34; alt=&#34;Alt text&#34;&gt;&lt;/p&gt;
-&lt;p&gt;此时为了判断文件读取状态，也许会新增一个 bool 变量 如下&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;image-3.png&#34; alt=&#34;Alt text&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;stdoptional&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#stdoptional&#34;&gt;#&lt;/a&gt; std::optional&lt;/h2&gt;
-&lt;p&gt;但是这样代码看起来有些冗余，此时可以用到 std::optional 如下&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;image-4.png&#34; alt=&#34;Alt text&#34;&gt;&lt;/p&gt;
-&lt;p&gt;在此基础上，某些情况时我们并不是一定要从这个文件中读取，也可以直接给它默认值，这个时候可以使用.value_or () 如下，此时可以看到，在没有成功读取 data 文件数据时，将赋予了默认值，并打印出日志告知没有成功打开文件。&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;image-5.png&#34; alt=&#34;Alt text&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;stdvariant&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#stdvariant&#34;&gt;#&lt;/a&gt; std::variant&lt;/h2&gt;
-&lt;p&gt;但是，其实在此基础上还有进一步优化空间，就是 std::Variant，这个特性使得我们可以在一个变量里储存多种类型的数据，它的使用方法如下。&lt;br&gt;
-这里其实可以将整个 std::variant 理解为一个被指定为可能是 string 也可能是 int 的变量。如果我们赋值为 string，则可以通过 string 类型读取，如果赋值为 int 则可以通过 int 类型读取&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;image-6.png&#34; alt=&#34;Alt text&#34;&gt;&lt;/p&gt;
-&lt;p&gt;然后在此基础上，我们可以将前面 optional 的代码改成如下，通过 ErrorCode 来进行更多的状态判断&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;image-7.png&#34; alt=&#34;Alt text&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;stdany&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#stdany&#34;&gt;#&lt;/a&gt; std::any&lt;/h2&gt;
-&lt;p&gt;相比较于 std::variant，std::any 更加简单。可以直接存储任何类型的数据，但同样 std::variant 要求你在使用时列举出所有可能的类型，这样更能保证类型安全，variant 是一个类型安全的 union，而 Any，阅读源码可以看出，在类型较少时，它是和 variant 一样的通过 union 的存储方式，而当类型更多时，则是 void* 的存储，以便动态分配内存&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;image.png&#34; alt=&#34;Alt text&#34;&gt;&lt;/p&gt;
+        <link rel="alternate" href="http://example.com/2023/07/12/Event%20Dispatchers/"/>
+        <content type="html">&lt;p&gt;事件分发器是一种常用的设计模式，它可以将事件的发送者和接收者解耦，从而提高代码的可维护性和可扩展性。在 UE4 中，事件分发器是一种在不同对象或蓝图之间通信的方式。它们允许一个对象广播事件，任何已注册以侦听该事件的其他对象都将收到它。事件分发器通常用于处理游戏中的各种事件，比如玩家输入、碰撞检测、动画播放等等。&lt;/p&gt;
+&lt;p&gt;UE4 中的事件分发器通常由两部分组成：事件发送者和事件接收者。事件发送者通常是一个 Actor 或者 Component，它负责发送事件。事件接收者通常是一个 Actor 或者 Component，它负责接收事件并做出相应的响应。&lt;/p&gt;
+&lt;p&gt;UE4 中的事件分发器通常使用委托（Delegate）来实现。委托是一种特殊的函数指针，它可以指向一个或多个函数，并且可以在运行时动态添加或删除函数。在 UE4 中，委托通常用于事件的注册和响应。&lt;/p&gt;
+&lt;p&gt;下面是一个简单的示例，演示了如何在 UE4 中使用事件分发器：&lt;/p&gt;
+&lt;p&gt;首先，在事件发送者中定义一个委托：&lt;/p&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;DECLARE_EVENT(FMyEventSender, FMyEvent);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;然后，在事件发送者中定义一个事件：&lt;/p&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;FMyEvent MyEvent;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;接着，在事件发送者中定义一个函数，用于触发事件：&lt;/p&gt;
+&lt;p MyEvent.Broadcast();=&#34;&#34;&gt;void FMyEventSender::TriggerEvent()&lt;/p&gt;
+&lt;p&gt;在这个函数中，我们调用了 MyEvent.Broadcast () 函数，这个函数会触发事件，并将事件发送给所有注册了这个事件的委托。&lt;/p&gt;
+&lt;p&gt;最后，在事件接收者中注册事件：&lt;/p&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;MyEventSender-&amp;gt;MyEvent.AddUObject(this, &amp;amp;AFoo::OnMyEvent);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;在这个函数中，我们调用了 MyEventSender-&amp;gt;MyEvent.AddUObject () 函数，这个函数会将当前对象的 OnMyEvent () 函数注册到 MyEvent 事件中。当事件触发时，所有注册了这个事件的委托都会被调用。在事件接收者中，我们可以定义一个函数，用于响应事件：&lt;/p&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;void AFoo::OnMyEvent() &amp;#123; // Do something &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;在这个函数中，我们可以编写相应的逻辑，用于处理事件。&lt;/p&gt;
+&lt;p&gt;总的来说，UE4 中的事件分发器是一种非常强大的工具，它可以帮助我们实现复杂的游戏逻辑，并且提高代码的可维护性和可扩展性&lt;/p&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;// 在您的头文件中： DECLARE_EVENT(AMyActor, FMyEvent); FMyEvent MyEvent; &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;// 在您的源文件中： void AMyActor::SomeFunction() &amp;#123; // 广播事件 MyEvent.Broadcast(); &amp;#125; &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;// 在另一个想要侦听事件的对象中：&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;void AMyOtherActor::BeginPlay()&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#123; &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	AMyActor* MyActor = ...;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	// 获取将广播事件的参考 &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	MyActor-&amp;gt;MyEvent.AddDynamic(this, &amp;amp;AMyOtherActor::OnMyEvent);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125; &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;void AMyOtherActor::OnMyEvent() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;// 当事件广播时，将调用此函数 &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 </content>
         <updated>2023-07-12T15:37:59.398Z</updated>
     </entry>

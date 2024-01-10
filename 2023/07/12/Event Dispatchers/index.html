@@ -25,7 +25,7 @@
 
   
 
-<link rel="canonical" href="http://example.com/2023/07/12/Test/">
+<link rel="canonical" href="http://example.com/2023/07/12/Event%20Dispatchers/">
 
 
 
@@ -74,7 +74,7 @@ mnxd = mnxd's blog</title>
       <i class="ic i-pen"></i>
     </span>
     <span class="text">Symbols count in article</span>
-    <span>711</span>
+    <span>1.3k</span>
     <span class="text">words</span>
   </span>
   <span class="item" title="Reading time">
@@ -115,12 +115,12 @@ mnxd = mnxd's blog</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1giclh5u05ej20zk0m87df.jpg"></li>
-          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1giciukx8a7j20zk0m8aio.jpg"></li>
-          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1giclimtf7dj20zk0m8qav.jpg"></li>
-          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1gipewkhf1zj20zk0m81kx.jpg"></li>
-          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1giclhfehz7j20zk0m8u0x.jpg"></li>
-          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1gicitf0kl1j20zk0m87fe.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipeyhsblkj20zk0m81kx.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipeuv80yoj20zk0m8kjl.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipeudstjqj20zk0m8k3r.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipew8gmvyj20zk0m87wh.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicitzannuj20zk0m8b29.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipexbei4hj20zk0m8npd.jpg"></li>
         </ul>
       </div>
     </header>
@@ -149,7 +149,7 @@ mnxd = mnxd's blog</title>
 </div>
 
     <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
-  <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/12/Test/">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/12/Event%20Dispatchers/">
 
   <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="image" content="/images/Cats.png">
@@ -164,25 +164,24 @@ mnxd = mnxd's blog</title>
   <div class="body md" itemprop="articleBody">
     
 
-    <p>在做一些类似文件读取类的工作时，可能需要判断文件是否成功被读取，并获得所读取到的值，常见实现如下：<br>
-但是实际上，data 等于空字符串的情况也不止一种，可能是文件读取失败，也可能是文件本身就没有内容<br>
-<img data-src="image-2.png" alt="Alt text"></p>
-<p>此时为了判断文件读取状态，也许会新增一个 bool 变量 如下</p>
-<p><img data-src="image-3.png" alt="Alt text"></p>
-<h2 id="stdoptional"><a class="markdownIt-Anchor" href="#stdoptional">#</a> std::optional</h2>
-<p>但是这样代码看起来有些冗余，此时可以用到 std::optional 如下</p>
-<p><img data-src="image-4.png" alt="Alt text"></p>
-<p>在此基础上，某些情况时我们并不是一定要从这个文件中读取，也可以直接给它默认值，这个时候可以使用.value_or () 如下，此时可以看到，在没有成功读取 data 文件数据时，将赋予了默认值，并打印出日志告知没有成功打开文件。</p>
-<p><img data-src="image-5.png" alt="Alt text"></p>
-<h2 id="stdvariant"><a class="markdownIt-Anchor" href="#stdvariant">#</a> std::variant</h2>
-<p>但是，其实在此基础上还有进一步优化空间，就是 std::Variant，这个特性使得我们可以在一个变量里储存多种类型的数据，它的使用方法如下。<br>
-这里其实可以将整个 std::variant 理解为一个被指定为可能是 string 也可能是 int 的变量。如果我们赋值为 string，则可以通过 string 类型读取，如果赋值为 int 则可以通过 int 类型读取</p>
-<p><img data-src="image-6.png" alt="Alt text"></p>
-<p>然后在此基础上，我们可以将前面 optional 的代码改成如下，通过 ErrorCode 来进行更多的状态判断</p>
-<p><img data-src="image-7.png" alt="Alt text"></p>
-<h2 id="stdany"><a class="markdownIt-Anchor" href="#stdany">#</a> std::any</h2>
-<p>相比较于 std::variant，std::any 更加简单。可以直接存储任何类型的数据，但同样 std::variant 要求你在使用时列举出所有可能的类型，这样更能保证类型安全，variant 是一个类型安全的 union，而 Any，阅读源码可以看出，在类型较少时，它是和 variant 一样的通过 union 的存储方式，而当类型更多时，则是 void* 的存储，以便动态分配内存</p>
-<p><img data-src="image.png" alt="Alt text"></p>
+    <p>事件分发器是一种常用的设计模式，它可以将事件的发送者和接收者解耦，从而提高代码的可维护性和可扩展性。在 UE4 中，事件分发器是一种在不同对象或蓝图之间通信的方式。它们允许一个对象广播事件，任何已注册以侦听该事件的其他对象都将收到它。事件分发器通常用于处理游戏中的各种事件，比如玩家输入、碰撞检测、动画播放等等。</p>
+<p>UE4 中的事件分发器通常由两部分组成：事件发送者和事件接收者。事件发送者通常是一个 Actor 或者 Component，它负责发送事件。事件接收者通常是一个 Actor 或者 Component，它负责接收事件并做出相应的响应。</p>
+<p>UE4 中的事件分发器通常使用委托（Delegate）来实现。委托是一种特殊的函数指针，它可以指向一个或多个函数，并且可以在运行时动态添加或删除函数。在 UE4 中，委托通常用于事件的注册和响应。</p>
+<p>下面是一个简单的示例，演示了如何在 UE4 中使用事件分发器：</p>
+<p>首先，在事件发送者中定义一个委托：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DECLARE_EVENT(FMyEventSender, FMyEvent);</span><br></pre></td></tr></table></figure>
+<p>然后，在事件发送者中定义一个事件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FMyEvent MyEvent;</span><br></pre></td></tr></table></figure>
+<p>接着，在事件发送者中定义一个函数，用于触发事件：</p>
+<p MyEvent.Broadcast();="">void FMyEventSender::TriggerEvent()</p>
+<p>在这个函数中，我们调用了 MyEvent.Broadcast () 函数，这个函数会触发事件，并将事件发送给所有注册了这个事件的委托。</p>
+<p>最后，在事件接收者中注册事件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MyEventSender-&gt;MyEvent.AddUObject(this, &amp;AFoo::OnMyEvent);</span><br></pre></td></tr></table></figure>
+<p>在这个函数中，我们调用了 MyEventSender-&gt;MyEvent.AddUObject () 函数，这个函数会将当前对象的 OnMyEvent () 函数注册到 MyEvent 事件中。当事件触发时，所有注册了这个事件的委托都会被调用。在事件接收者中，我们可以定义一个函数，用于响应事件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void AFoo::OnMyEvent() &#123; // Do something &#125;</span><br></pre></td></tr></table></figure>
+<p>在这个函数中，我们可以编写相应的逻辑，用于处理事件。</p>
+<p>总的来说，UE4 中的事件分发器是一种非常强大的工具，它可以帮助我们实现复杂的游戏逻辑，并且提高代码的可维护性和可扩展性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 在您的头文件中： DECLARE_EVENT(AMyActor, FMyEvent); FMyEvent MyEvent; </span><br><span class="line"></span><br><span class="line">// 在您的源文件中： void AMyActor::SomeFunction() &#123; // 广播事件 MyEvent.Broadcast(); &#125; </span><br><span class="line"></span><br><span class="line">// 在另一个想要侦听事件的对象中：</span><br><span class="line">void AMyOtherActor::BeginPlay()</span><br><span class="line">&#123; </span><br><span class="line">	AMyActor* MyActor = ...;</span><br><span class="line">	// 获取将广播事件的参考 </span><br><span class="line">	MyActor-&gt;MyEvent.AddDynamic(this, &amp;AMyOtherActor::OnMyEvent);</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">void AMyOtherActor::OnMyEvent() &#123;</span><br><span class="line">// 当事件广播时，将调用此函数 </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
   </div>
 
@@ -194,9 +193,9 @@ mnxd = mnxd's blog</title>
       <i class="ic i-calendar-check"></i>
     </span>
     <span class="text">Edited on</span>
-    <time title="Modified: 2023-07-12 23:40:12" itemprop="dateModified" datetime="2023-07-12T23:40:12+08:00">2023-07-12</time>
+    <time title="Modified: 2024-01-11 00:51:16" itemprop="dateModified" datetime="2024-01-11T00:51:16+08:00">2024-01-11</time>
   </span>
-  <span id="2023/07/12/Test/" class="item leancloud_visitors" data-flag-title="" title="Views">
+  <span id="2023/07/12/Event Dispatchers/" class="item leancloud_visitors" data-flag-title="" title="Views">
       <span class="icon">
         <i class="ic i-eye"></i>
       </span>
@@ -238,7 +237,7 @@ mnxd = mnxd's blog</title>
   </li>
   <li class="link">
     <strong>Post link: </strong>
-    <a href="http://example.com/2023/07/12/Test/" title="">http://example.com/2023/07/12/Test/</a>
+    <a href="http://example.com/2023/07/12/Event%20Dispatchers/" title="">http://example.com/2023/07/12/Event Dispatchers/</a>
   </li>
   <li class="license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> unless stating additionally.
@@ -273,7 +272,6 @@ mnxd = mnxd's blog</title>
   <div class="panels">
     <div class="inner">
       <div class="contents panel pjax" data-title="Contents">
-          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#stdoptional"><span class="toc-number">1.</span> <span class="toc-text"> std::optional</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#stdvariant"><span class="toc-number">2.</span> <span class="toc-text"> std::variant</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#stdany"><span class="toc-number">3.</span> <span class="toc-text"> std::any</span></a></li></ol>
       </div>
       <div class="related panel pjax" data-title="Related">
       </div>
@@ -377,7 +375,7 @@ mnxd = mnxd's blog</title>
 <div class="breadcrumb">
 </div>
 
-    <span><a href="/2023/07/12/Test/" title="Untitled">Untitled</a></span>
+    <span><a href="/2023/07/12/Event%20Dispatchers/" title="Untitled">Untitled</a></span>
   </li>
 
   </ul>
@@ -392,7 +390,7 @@ mnxd = mnxd's blog</title>
   <div class="copyright">
     
     &copy; 2010 – 
-    <span itemprop="copyrightYear">2023</span>
+    <span itemprop="copyrightYear">2024</span>
     <span class="with-love">
       <i class="ic i-sakura rotate"></i>
     </span>
@@ -420,7 +418,7 @@ mnxd = mnxd's blog</title>
   </div>
 <script data-config type="text/javascript">
   var LOCAL = {
-    path: '2023/07/12/Test/',
+    path: '2023/07/12/Event Dispatchers/',
     favicon: {
       show: "（●´3｀●）Goooood",
       hide: "(´Д｀)Booooom"
