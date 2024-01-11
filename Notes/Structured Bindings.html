@@ -25,13 +25,11 @@
 
   
 
-<link rel="canonical" href="http://example.com/archives/2023/">
+<link rel="canonical" href="http://example.com/Notes/Structured%20Bindings">
 
 
 
-  <title>
-2023 Y -
-Archive |
+  <title> |
 mnxd = mnxd's blog</title>
 <meta name="generator" content="Hexo 6.3.0"></head>
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -60,7 +58,6 @@ mnxd = mnxd's blog</title>
           <div class="pjax">
           
   <h1 itemprop="name headline">
-      Posted on "2023Y"
   </h1>
 
           </div>
@@ -91,12 +88,12 @@ mnxd = mnxd's blog</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gipexj2jgzj20zk0m8b09.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giciuja1j1j20zk0m8kjl.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gipeu1usa7j20zk0m8b29.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giclize41wj20zk0m87gk.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giclxfdlttj20zk0m8npd.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gicitht3xtj20zk0m8k5v.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipet8c1a2j20zk0m8kct.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicit4jrvuj20zk0m8785.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipewf5l51j20zk0m8b29.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giciryrr3rj20zk0m8nhk.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipevarprfj20zk0m8npd.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giciuja1j1j20zk0m8kjl.jpg"></li>
         </ul>
       </div>
     </header>
@@ -117,37 +114,100 @@ mnxd = mnxd's blog</title>
       <div class="inner">
         <div id="main" class="pjax">
           
-  <div class="collapse wrap">
-    <h2 class="item header">
-          <a href="/archives">All</a> <small>/</small> 2023 Y <small>Archive</small>
-        
-    </h2>
-          <h3 class="item section"><a href="/archives/2023/07">07 M</a></h3>
+  <div class="page wrap">
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
+  <link itemprop="mainEntityOfPage" href="http://example.com/Notes/Structured%20Bindings.html">
 
-        <article class="item normal" itemscope itemtype="http://schema.org/Article">
-          <div class="meta">
-            <time itemprop="dateCreated"
-                  datetime="2023-07-12T23:37:59+08:00"
-                  content="2023-07-12">
-              07-12
-            </time>
-          </div>
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/Cats.png">
+    <meta itemprop="name" content="Arron">
+    <meta itemprop="description" content=", ">
+  </span>
 
-          <div class="title">
-              <a href="/2023/07/12/Event%20Dispatchers/" itemprop="url">
-                <span itemprop="name">Untitled</span>
-              </a>
-          </div>
-        </article>
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="mnxd's blog">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <p>在 C++ 中如果某个函数需要多个返回值，一般会采用 tuple 或者 pair 等方式，或者自定一个结构体作为返回值，如下所示<br>
+！[[source/Img/Pasted image 20240111200136.png]]<br>
+ 这里的 get (0) 看起来可读性就比较差，因此，有了 std:: tie.，可以改成如下代码取得所 Create 的 Person 的 name 和 age。也具有一定的可读性<br>
+！[[source/Img/Pasted image 20240111200138.png]]</p>
+<p>![[source/Img/Pasted image 20240111200141.png]]<br>
+ 但是 有了 Structured bindings 之后 可以更简单，代码如下，可以简单的通过一行代码实现，并且具有较强的可读性。<br>
+![[source/Img/Pasted image 20240111200201.png]]</p>
+<p>唯一需要注意的是，这个特性只在 C<ins>17 及以上版本支持，要开启的话需要将属性里的 C</ins> 语言设置为 C++17 以上！[[source/Img/Pasted image 20240111200204.png]]</p>
+
   </div>
 
-  
+   <footer>
 
+    <div class="meta">
+  <span id="Notes/Structured Bindings.html" class="item leancloud_visitors" data-flag-title="" title="Views">
+      <span class="icon">
+        <i class="ic i-eye"></i>
+      </span>
+      <span class="text">Views</span>
+      <span class="leancloud-visitors-count"></span>
+      <span class="text">times</span>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> Donate</button>
+  <p>Give me a cup of [coffee]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="Arron WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.png" alt="Arron Alipay">
+        <p>Alipay</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/paypal.png" alt="Arron PayPal">
+        <p>PayPal</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>Post author:  </strong>Arron <i class="ic i-at"><em>@</em></i>mnxd's blog
+  </li>
+  <li class="link">
+    <strong>Post link: </strong>
+    <a href="http://example.com/Notes/Structured%20Bindings.html" title="">http://example.com/Notes/Structured Bindings.html</a>
+  </li>
+  <li class="license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+  <div class="wrap" id="comments"></div>
 
 
         </div>
         <div id="sidebar">
           
+
 <div class="inner">
 
   <div class="panels">
@@ -165,18 +225,6 @@ mnxd = mnxd's blog</title>
 </div>
 
 <nav class="state">
-    <div class="item posts">
-      <a href="/archives/">
-        <span class="count">7</span>
-        <span class="name">posts</span>
-      </a>
-    </div>
-    <div class="item tags">
-      <a href="/tags/">
-        <span class="count">2</span>
-        <span class="name">tags</span>
-      </a>
-    </div>
 </nav>
 
 <div class="social">
@@ -244,6 +292,7 @@ mnxd = mnxd's blog</title>
   </ul>
 </div>
 
+
         </div>
         <div class="dimmer"></div>
       </div>
@@ -255,69 +304,6 @@ mnxd = mnxd's blog</title>
 <div class="rpost pjax">
   <h2>Random Posts</h2>
   <ul>
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/11/Structured%20Bindings/" title="Untitled">Untitled</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2023/07/12/Event%20Dispatchers/" title="Untitled">Untitled</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/11/STD%20Optional%20And%20STD%20Variant%20And%20STD%20Any/" title="Untitled">Untitled</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/11/%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8A%A8%E6%80%81%E5%88%87%E6%8D%A2Mesh%E6%9D%90%E8%B4%A8/" title="Untitled">Untitled</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/11/Radom%20Function/" title="Untitled">Untitled</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/11/Timer%20And%20Benchmark/" title="Untitled">Untitled</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/11/Anisotropic%20Filtering/" title="Untitled">Untitled</a></span>
-  </li>
-
   </ul>
 </div>
 <div>
@@ -340,13 +326,13 @@ mnxd = mnxd's blog</title>
     <span class="post-meta-item-icon">
       <i class="ic i-chart-area"></i>
     </span>
-    <span title="Symbols count total">6k words</span>
+    <span title="Symbols count total">0k words</span>
 
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="ic i-coffee"></i>
     </span>
-    <span title="Reading time total">5 mins.</span>
+    <span title="Reading time total">1 mins.</span>
   </div>
   <div class="powered-by">
     Powered by <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
@@ -358,7 +344,7 @@ mnxd = mnxd's blog</title>
   </div>
 <script data-config type="text/javascript">
   var LOCAL = {
-    path: 'archives/2023/',
+    path: 'Notes/Structured Bindings',
     favicon: {
       show: "（●´3｀●）Goooood",
       hide: "(´Д｀)Booooom"

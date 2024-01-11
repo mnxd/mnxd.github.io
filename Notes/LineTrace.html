@@ -88,12 +88,12 @@ mnxd = mnxd's blog</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gicli3sbvtj20zk0m8x6p.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giph47e9vtj20zk0m8x6l.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gicivghyooj20zk0m8dir.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gicmnywqgpj20zk0m8dwx.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giph4wqtg4j20zk0m8x6p.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gipewkhf1zj20zk0m81kx.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipew8gmvyj20zk0m87wh.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclhpw3lwj20zk0m8gvw.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclwuom7cj20zk0m8dvn.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giph4lm9i7j20zk0m84qp.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicitf0kl1j20zk0m87fe.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipexe4oykj20zk0m87ji.jpg"></li>
         </ul>
       </div>
     </header>
@@ -155,11 +155,11 @@ mnxd = mnxd's blog</title>
 <h1 id="二-ukismetsystemlibrary-中的-trace"><a class="markdownIt-Anchor" href="#二-ukismetsystemlibrary-中的-trace">#</a> 二、UKismetSystemLibrary 中的 Trace</h1>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">bool UKismetSystemLibrary::LineTraceSingle(UObject* WorldContextObject, const FVector Start, const FVector End, ETraceTypeQuery TraceChannel, bool bTraceComplex, const TArray&lt;AActor*&gt;&amp; ActorsToIgnore, EDrawDebugTrace::Type DrawDebugType, FHitResult&amp; OutHit, bool bIgnoreSelf, FLinearColor TraceColor, FLinearColor TraceHitColor, float DrawTime)</span><br><span class="line">&#123;</span><br><span class="line">    ECollisionChannel CollisionChannel = UEngineTypes::ConvertToCollisionChannel(TraceChannel);</span><br><span class="line"></span><br><span class="line">    static const FName LineTraceSingleName(TEXT(&quot;LineTraceSingle&quot;));</span><br><span class="line">    FCollisionQueryParams Params = ConfigureCollisionParams(LineTraceSingleName, bTraceComplex, ActorsToIgnore, bIgnoreSelf, WorldContextObject);</span><br><span class="line"></span><br><span class="line">    UWorld* World = GEngine-&gt;GetWorldFromContextObject(WorldContextObject, EGetWorldErrorMode::LogAndReturnNull);</span><br><span class="line">    bool const bHit = World ? World-&gt;LineTraceSingleByChannel(OutHit, Start, End, CollisionChannel, Params) : false;</span><br><span class="line"></span><br><span class="line">#if ENABLE_DRAW_DEBUG</span><br><span class="line">    DrawDebugLineTraceSingle(World, Start, End, DrawDebugType, bHit, OutHit, TraceColor, TraceHitColor, DrawTime);</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">    return bHit;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>可以看到，其实最后还是调的 World-&gt;LineTraceSingleByChannel，UKismetSystemLibrary 里的 Trace 都是调用的 World 里的 Trace。从代码上看，调用对应关系如下（Single 和 Multi 对应关系显然）：</p>
-<p>![[…/Img/Pasted image 20240111204626.png]]</p>
+<p>![[source/Img/Pasted image 20240111204626.png]]</p>
 <p>也就是 UKismetSystemLibrary 里默认是 ByChannel，也有对应其他方式的，比如 UKismetSystemLibrary:: LineTraceSingleForObjects 对应 World-&gt;LineTraceSingleByObjectType，其他同理。</p>
 <p>即 Line 对应 Line，其他对应 Sweep。</p>
 <p>UKismetSystemLibrary 的好处就是可以直接画出 Trace 的起点、终点以及 Trace 的线：<br>
-  ![[…/Img/Pasted image 20240111204645.png]]<br>
+  ![[source/Img/Pasted image 20240111204645.png]]<br>
  例如：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">if (UKismetSystemLibrary::LineTraceSingleForObjects(</span><br><span class="line">    GetWorld(),</span><br><span class="line">    Location,                                /** Start            */</span><br><span class="line">    FVector(Location.X, Location.Y, 0),        /** End                */</span><br><span class="line">    TArray&lt;TEnumAsByte&lt;EObjectTypeQuery&gt;&gt;&#123; UEngineTypes::ConvertToObjectType(ECC_WorldStatic) &#125;,</span><br><span class="line">    false,                                    /** bTraceComplex    */</span><br><span class="line">    &#123;&#125;,                                        /** ActorsToIgnore    */</span><br><span class="line">    EDrawDebugTrace::Persistent,            /** DrawDebugType    */</span><br><span class="line">    OUT HitResult,                            /** OutHit            */</span><br><span class="line">    true))                                    /** bIgnoreSelf        */</span><br><span class="line">&#123;</span><br><span class="line">    if (HitResult.bBlockingHit)</span><br><span class="line">    &#123;</span><br><span class="line">        TargetLocation = HitResult.Location;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
   </div>
@@ -167,13 +167,6 @@ mnxd = mnxd's blog</title>
    <footer>
 
     <div class="meta">
-  <span class="item">
-    <span class="icon">
-      <i class="ic i-calendar-check"></i>
-    </span>
-    <span class="text">Edited on</span>
-    <time title="Modified: 2024-01-11 20:57:02" itemprop="dateModified" datetime="2024-01-11T20:57:02+08:00">2024-01-11</time>
-  </span>
   <span id="Notes/LineTrace.html" class="item leancloud_visitors" data-flag-title="" title="Views">
       <span class="icon">
         <i class="ic i-eye"></i>
@@ -255,18 +248,6 @@ mnxd = mnxd's blog</title>
 </div>
 
 <nav class="state">
-    <div class="item posts">
-      <a href="/archives/">
-        <span class="count">7</span>
-        <span class="name">posts</span>
-      </a>
-    </div>
-    <div class="item tags">
-      <a href="/tags/">
-        <span class="count">2</span>
-        <span class="name">tags</span>
-      </a>
-    </div>
 </nav>
 
 <div class="social">
@@ -346,69 +327,6 @@ mnxd = mnxd's blog</title>
 <div class="rpost pjax">
   <h2>Random Posts</h2>
   <ul>
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/11/Anisotropic%20Filtering/" title="Untitled">Untitled</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/11/%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8A%A8%E6%80%81%E5%88%87%E6%8D%A2Mesh%E6%9D%90%E8%B4%A8/" title="Untitled">Untitled</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/11/Structured%20Bindings/" title="Untitled">Untitled</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2023/07/12/Event%20Dispatchers/" title="Untitled">Untitled</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/11/STD%20Optional%20And%20STD%20Variant%20And%20STD%20Any/" title="Untitled">Untitled</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/11/Timer%20And%20Benchmark/" title="Untitled">Untitled</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/11/Radom%20Function/" title="Untitled">Untitled</a></span>
-  </li>
-
   </ul>
 </div>
 <div>
@@ -431,13 +349,13 @@ mnxd = mnxd's blog</title>
     <span class="post-meta-item-icon">
       <i class="ic i-chart-area"></i>
     </span>
-    <span title="Symbols count total">6k words</span>
+    <span title="Symbols count total">0k words</span>
 
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="ic i-coffee"></i>
     </span>
-    <span title="Reading time total">5 mins.</span>
+    <span title="Reading time total">1 mins.</span>
   </div>
   <div class="powered-by">
     Powered by <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>

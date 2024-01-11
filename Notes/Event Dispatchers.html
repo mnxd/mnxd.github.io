@@ -25,12 +25,11 @@
 
   
 
-<link rel="canonical" href="http://example.com/2024/01/11/Timer%20And%20Benchmark/">
+<link rel="canonical" href="http://example.com/Notes/Event%20Dispatchers">
 
 
 
-  <title>
- |
+  <title> |
 mnxd = mnxd's blog</title>
 <meta name="generator" content="Hexo 6.3.0"></head>
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -60,32 +59,6 @@ mnxd = mnxd's blog</title>
           
   <h1 itemprop="name headline">
   </h1>
-  
-<div class="meta">
-  <span class="item" title="Created: 2024-01-11 22:18:19">
-    <span class="icon">
-      <i class="ic i-calendar"></i>
-    </span>
-    <span class="text">Posted on</span>
-    <time itemprop="dateCreated datePublished" datetime="2024-01-11T22:18:19+08:00">2024-01-11</time>
-  </span>
-  <span class="item" title="Symbols count in article">
-    <span class="icon">
-      <i class="ic i-pen"></i>
-    </span>
-    <span class="text">Symbols count in article</span>
-    <span>384</span>
-    <span class="text">words</span>
-  </span>
-  <span class="item" title="Reading time">
-    <span class="icon">
-      <i class="ic i-clock"></i>
-    </span>
-    <span class="text">Reading time</span>
-    <span>1 mins.</span>
-  </span>
-</div>
-
 
           </div>
         </div>
@@ -115,12 +88,12 @@ mnxd = mnxd's blog</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gipeyonbf9j20zk0m8e81.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giclhpw3lwj20zk0m8gvw.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giclgrvbd6j20zk0m8qv5.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gipew8gmvyj20zk0m87wh.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gipewkhf1zj20zk0m81kx.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gicit31ffoj20zk0m8naf.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclgrvbd6j20zk0m8qv5.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicitzannuj20zk0m8b29.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giciub8ja1j20zk0m81ky.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipet8c1a2j20zk0m8kct.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipet4bz0yj20zk0m8e81.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicis081o9j20zk0m8dmr.jpg"></li>
         </ul>
       </div>
     </header>
@@ -141,15 +114,9 @@ mnxd = mnxd's blog</title>
       <div class="inner">
         <div id="main" class="pjax">
           
-  <div class="article wrap">
-    
-<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-<i class="ic i-home"></i>
-<span><a href="/">Home</a></span>
-</div>
-
+  <div class="page wrap">
     <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
-  <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/11/Timer%20And%20Benchmark/">
+  <link itemprop="mainEntityOfPage" href="http://example.com/Notes/Event%20Dispatchers.html">
 
   <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="image" content="/images/Cats.png">
@@ -164,21 +131,24 @@ mnxd = mnxd's blog</title>
   <div class="body md" itemprop="articleBody">
     
 
-    <p>Benchmark 并无确定的完全正确的方法，需要自己评判标准</p>
-<p>可以通过如下方式定义一个 Timer 来查看某个指定代码块的执行时间，但是需要注意以下几点：</p>
-<ol>
-<li>
-<p>Debug 模式下编译器会添加许多额外的代码，因此此时的 Timer 计时并不能用作参考，应用 Release 模式</p>
-</li>
-<li>
-<p>Release 会主动对代码进行部分优化，比如会将一些简单的循环直接输出结果等。</p>
-</li>
-</ol>
-<p>![[…/Img/Pasted image 20240111195929.png]]</p>
-<p>Visual Benchmarking</p>
-<p><span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj14bEFINGRiTVZuVSZhbXA7bGlzdD1QTGxyQVRmQk5aOThkdWRuTTQ4eWZHVWxkcUdEMFM0RkZiJmFtcDtpbmRleD04MQ==">https://www.youtube.com/watch?v=xlAH4dbMVnU&amp;list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb&amp;index=81</span></p>
-<p>chrome://tracing</p>
-<p>Code:<span class="exturl" data-url="aHR0cHM6Ly9naXN0LmdpdGh1Yi5jb20vVGhlQ2hlcm5vLzMxZjEzNWVlYTZlZTcyOWFiNWYyNmE2OTA4ZWIzYTVlI2ZpbGUtaW5zdHJ1bWVudG9yLWg=">Instrumentor.h</span>![[…/Img/Instrumentor.h]]</p>
+    <p>事件分发器是一种常用的设计模式，它可以将事件的发送者和接收者解耦，从而提高代码的可维护性和可扩展性。在 UE4 中，事件分发器是一种在不同对象或蓝图之间通信的方式。它们允许一个对象广播事件，任何已注册以侦听该事件的其他对象都将收到它。事件分发器通常用于处理游戏中的各种事件，比如玩家输入、碰撞检测、动画播放等等。</p>
+<p>UE4 中的事件分发器通常由两部分组成：事件发送者和事件接收者。事件发送者通常是一个 Actor 或者 Component，它负责发送事件。事件接收者通常是一个 Actor 或者 Component，它负责接收事件并做出相应的响应。</p>
+<p>UE4 中的事件分发器通常使用委托（Delegate）来实现。委托是一种特殊的函数指针，它可以指向一个或多个函数，并且可以在运行时动态添加或删除函数。在 UE4 中，委托通常用于事件的注册和响应。</p>
+<p>下面是一个简单的示例，演示了如何在 UE4 中使用事件分发器：</p>
+<p>首先，在事件发送者中定义一个委托：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DECLARE_EVENT(FMyEventSender, FMyEvent);</span><br></pre></td></tr></table></figure>
+<p>然后，在事件发送者中定义一个事件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FMyEvent MyEvent;</span><br></pre></td></tr></table></figure>
+<p>接着，在事件发送者中定义一个函数，用于触发事件：</p>
+<p MyEvent.Broadcast();="">void FMyEventSender::TriggerEvent()</p>
+<p>在这个函数中，我们调用了 MyEvent.Broadcast () 函数，这个函数会触发事件，并将事件发送给所有注册了这个事件的委托。</p>
+<p>最后，在事件接收者中注册事件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MyEventSender-&gt;MyEvent.AddUObject(this, &amp;AFoo::OnMyEvent);</span><br></pre></td></tr></table></figure>
+<p>在这个函数中，我们调用了 MyEventSender-&gt;MyEvent.AddUObject () 函数，这个函数会将当前对象的 OnMyEvent () 函数注册到 MyEvent 事件中。当事件触发时，所有注册了这个事件的委托都会被调用。在事件接收者中，我们可以定义一个函数，用于响应事件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void AFoo::OnMyEvent() &#123; // Do something &#125;</span><br></pre></td></tr></table></figure>
+<p>在这个函数中，我们可以编写相应的逻辑，用于处理事件。</p>
+<p>总的来说，UE4 中的事件分发器是一种非常强大的工具，它可以帮助我们实现复杂的游戏逻辑，并且提高代码的可维护性和可扩展性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 在您的头文件中： DECLARE_EVENT(AMyActor, FMyEvent); FMyEvent MyEvent; </span><br><span class="line"></span><br><span class="line">// 在您的源文件中： void AMyActor::SomeFunction() &#123; // 广播事件 MyEvent.Broadcast(); &#125; </span><br><span class="line"></span><br><span class="line">// 在另一个想要侦听事件的对象中：</span><br><span class="line">void AMyOtherActor::BeginPlay()</span><br><span class="line">&#123; </span><br><span class="line">	AMyActor* MyActor = ...;</span><br><span class="line">	// 获取将广播事件的参考 </span><br><span class="line">	MyActor-&gt;MyEvent.AddDynamic(this, &amp;AMyOtherActor::OnMyEvent);</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">void AMyOtherActor::OnMyEvent() &#123;</span><br><span class="line">// 当事件广播时，将调用此函数 </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
   </div>
 
@@ -192,7 +162,7 @@ mnxd = mnxd's blog</title>
     <span class="text">Edited on</span>
     <time title="Modified: 2024-01-11 20:01:55" itemprop="dateModified" datetime="2024-01-11T20:01:55+08:00">2024-01-11</time>
   </span>
-  <span id="2024/01/11/Timer And Benchmark/" class="item leancloud_visitors" data-flag-title="" title="Views">
+  <span id="Notes/Event Dispatchers.html" class="item leancloud_visitors" data-flag-title="" title="Views">
       <span class="icon">
         <i class="ic i-eye"></i>
       </span>
@@ -234,7 +204,7 @@ mnxd = mnxd's blog</title>
   </li>
   <li class="link">
     <strong>Post link: </strong>
-    <a href="http://example.com/2024/01/11/Timer%20And%20Benchmark/" title="">http://example.com/2024/01/11/Timer And Benchmark/</a>
+    <a href="http://example.com/Notes/Event%20Dispatchers.html" title="">http://example.com/Notes/Event Dispatchers.html</a>
   </li>
   <li class="license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> unless stating additionally.
@@ -247,31 +217,6 @@ mnxd = mnxd's blog</title>
 </article>
 
   </div>
-  
-
-<div class="post-nav">
-    <div class="item left">
-      
-
-  <a href="/2024/01/11/Structured%20Bindings/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva1.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipewkhf1zj20zk0m81kx.jpg" title="Untitled">
-  <span class="type">Previous Post</span>
-  <span class="category"><i class="ic i-flag"></i> </span>
-  <h3>Untitled</h3>
-  </a>
-
-    </div>
-    <div class="item right">
-      
-
-  <a href="/2024/01/11/Radom%20Function/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva1.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipexj2jgzj20zk0m8b09.jpg" title="Untitled">
-  <span class="type">Next Post</span>
-  <span class="category"><i class="ic i-flag"></i> </span>
-  <h3>Untitled</h3>
-  </a>
-
-    </div>
-</div>
-
   
   <div class="wrap" id="comments"></div>
 
@@ -297,18 +242,6 @@ mnxd = mnxd's blog</title>
 </div>
 
 <nav class="state">
-    <div class="item posts">
-      <a href="/archives/">
-        <span class="count">7</span>
-        <span class="name">posts</span>
-      </a>
-    </div>
-    <div class="item tags">
-      <a href="/tags/">
-        <span class="count">2</span>
-        <span class="name">tags</span>
-      </a>
-    </div>
 </nav>
 
 <div class="social">
@@ -367,12 +300,10 @@ mnxd = mnxd's blog</title>
 
   <ul id="quick">
     <li class="prev pjax">
-        <a href="/2024/01/11/Structured%20Bindings/" rel="prev" title="Previous Post"><i class="ic i-chevron-left"></i></a>
     </li>
     <li class="up"><i class="ic i-arrow-up"></i></li>
     <li class="down"><i class="ic i-arrow-down"></i></li>
     <li class="next pjax">
-        <a href="/2024/01/11/Radom%20Function/" rel="next" title="Next Post"><i class="ic i-chevron-right"></i></a>
     </li>
     <li class="percent"></li>
   </ul>
@@ -390,69 +321,6 @@ mnxd = mnxd's blog</title>
 <div class="rpost pjax">
   <h2>Random Posts</h2>
   <ul>
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/11/Structured%20Bindings/" title="Untitled">Untitled</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/11/Anisotropic%20Filtering/" title="Untitled">Untitled</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/11/Radom%20Function/" title="Untitled">Untitled</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2023/07/12/Event%20Dispatchers/" title="Untitled">Untitled</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/11/Timer%20And%20Benchmark/" title="Untitled">Untitled</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/11/STD%20Optional%20And%20STD%20Variant%20And%20STD%20Any/" title="Untitled">Untitled</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/11/%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8A%A8%E6%80%81%E5%88%87%E6%8D%A2Mesh%E6%9D%90%E8%B4%A8/" title="Untitled">Untitled</a></span>
-  </li>
-
   </ul>
 </div>
 <div>
@@ -475,13 +343,13 @@ mnxd = mnxd's blog</title>
     <span class="post-meta-item-icon">
       <i class="ic i-chart-area"></i>
     </span>
-    <span title="Symbols count total">6k words</span>
+    <span title="Symbols count total">0k words</span>
 
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="ic i-coffee"></i>
     </span>
-    <span title="Reading time total">5 mins.</span>
+    <span title="Reading time total">1 mins.</span>
   </div>
   <div class="powered-by">
     Powered by <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
@@ -493,7 +361,7 @@ mnxd = mnxd's blog</title>
   </div>
 <script data-config type="text/javascript">
   var LOCAL = {
-    path: '2024/01/11/Timer And Benchmark/',
+    path: 'Notes/Event Dispatchers',
     favicon: {
       show: "（●´3｀●）Goooood",
       hide: "(´Д｀)Booooom"

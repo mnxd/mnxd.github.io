@@ -88,12 +88,12 @@ mnxd = mnxd's blog</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gipey84bjtj20zk0m8hdt.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gipetv6p75j20zk0m8x6p.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giclhnx9glj20zk0m8npd.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gicm0n457cj20zk0m8e81.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giclip4jbpj20zk0m87cv.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giclx6phq6j20zk0m8e36.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicitf0kl1j20zk0m87fe.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipew8gmvyj20zk0m87wh.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipexbei4hj20zk0m8npd.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipevuctzzj20zk0m84qp.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipevo9j1jj20zk0m8e81.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclx29mstj20zk0m8hdt.jpg"></li>
         </ul>
       </div>
     </header>
@@ -135,7 +135,7 @@ mnxd = mnxd's blog</title>
 <p><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yNjk0OTMyODE=">UE4 场景流送机制：（一）场景加载 - 知乎 (zhihu.com)</span></p>
 <p><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yNzAxNzI1MDY=">UE4 场景流送机制：（二）LevelStreamingVolume&amp;WorldComposition - 知乎 (zhihu.com)</span></p>
 <h1 id="场景加载机制"><a class="markdownIt-Anchor" href="#场景加载机制">#</a> 场景加载机制</h1>
-<p>![[…/Img/Pasted image 20240111205339.png]]</p>
+<p>![[source/Img/Pasted image 20240111205339.png]]</p>
 <h2 id="uworldupdatelevelstreaming"><a class="markdownIt-Anchor" href="#uworldupdatelevelstreaming">#</a> UWorld::UpdateLevelStreaming</h2>
 <p>场景加载主要入口，这里主要是遍历 StreamingLevelsToConsider，通过 FStreamingLevelPrivateAccessor::UpdateStreamingState，调用对应 StreamingLevel 的</p>
 <p>ULevelStreaming::UpdateStreamingState，根据 StreamingLevel 的状态机，处理它的加 / 卸载、可见性。</p>
@@ -143,33 +143,33 @@ mnxd = mnxd's blog</title>
 <p>1.levelStreamingVolume</p>
 <p>2.WorldComposition （没开启 WorldComposition 的情况下，StreamingLevelsToConsider 数组初值为空）</p>
 <p>这两个也是 UE4 主要的场景流送机制</p>
-<p>![[…/Img/Pasted image 20240111205354.png]]</p>
+<p>![[source/Img/Pasted image 20240111205354.png]]</p>
 <h2 id="ulevelstreaming-updatestreamingstate"><a class="markdownIt-Anchor" href="#ulevelstreaming-updatestreamingstate">#</a> ULevelStreaming ::UpdateStreamingState</h2>
 <p>void ULevelStreaming::UpdateStreamingState (bool&amp; bOutUpdateAgain, bool&amp; bOutRedetermineTarget) 里面通过 CurrentState 来判断当前关卡状态从而执行不同的 add 或者 remove 操作</p>
-<p>![[…/Img/Pasted image 20240111205612.png]]<br>
+<p>![[source/Img/Pasted image 20240111205612.png]]<br>
  在执行这个 switch case 判断之前要先判断当前 streaming 状态，是否有未完成 GC 的其他关卡，这其中的 LevelStreaming:: RequestLevel 就是关卡加载的入口代码，这里面会传入 PersistantWorld 和期望的加载方式，这里会用上面提到的 Package 加载逻辑，发起 Level Package 的加载，并注册加载完成回调 ——ULevelStreaming::AsyncLevelLoadComplete 。<br>
-![[…/Img/Pasted image 20240111205623.png]]</p>
+![[source/Img/Pasted image 20240111205623.png]]</p>
 <h2 id="ulevelstreaming-asynclevelloadcomplete"><a class="markdownIt-Anchor" href="#ulevelstreaming-asynclevelloadcomplete">#</a> ULevelStreaming ::AsyncLevelLoadComplete</h2>
 <p>这个是 Requestlevel 加载完成的回调函数。关键是 ULevelStreaming :: SetLoadedLevel。</p>
 <p>其中主要是根据加载出来的 Level 的可见性，设置 CurrentState 为可见 ECurrentState:: LoadedVisible 或者不可见 ECurrentState:: LoadedNotVisible，并标记更新 UWorld:: UpdateStreamingLevelShouldBeConsidered，以便下一帧更新状态。UpdateStreamingLevelShouldBeConsidered 里其实就是往 StreamingLevelsToConsider 数组中添加 streaminglevel<br>
-![[…/Img/Pasted image 20240111205634.png]]</p>
+![[source/Img/Pasted image 20240111205634.png]]</p>
 <h2 id="levelstreaming-状态机"><a class="markdownIt-Anchor" href="#levelstreaming-状态机">#</a> LevelStreaming 状态机</h2>
 <p>为了更好的组织 LevelStreaming 的状态逻辑，这里用了状态机的思想，在 LevelStreaming.cpp 中根据当前状态和目标状态（可选）跑对应的逻辑。<br>
-![[…/Img/Pasted image 20240111205639.png]]![[…/Img/Pasted image 20240111205645.png]]</p>
+![[source/Img/Pasted image 20240111205639.png]]![[source/Img/Pasted image 20240111205645.png]]</p>
 <h2 id="level-位置"><a class="markdownIt-Anchor" href="#level-位置">#</a> Level 位置</h2>
 <p>在加载完 Level 后，如果 Level 标记为 Visible，会在 ULevelStreaming:: UpdateStreamingState 中将 Level 加入到 World。在其中会设置 Level 的位置。<br>
-![[…/Img/Pasted image 20240111205651.png]]<br>
-![[…/Img/Pasted image 20240111205654.png]]<br>
-![[…/Img/Pasted image 20240111205658.png]]</p>
+![[source/Img/Pasted image 20240111205651.png]]<br>
+![[source/Img/Pasted image 20240111205654.png]]<br>
+![[source/Img/Pasted image 20240111205658.png]]</p>
 <h1 id="场景流送机制"><a class="markdownIt-Anchor" href="#场景流送机制">#</a> 场景流送机制</h1>
 <p>UE4 主要的两种流送机制：</p>
 <ul>
 <li>LevelStreamingVolume</li>
 <li>WorldComposition<br>
-![[…/Img/Pasted image 20240111205702.png]]<br>
+![[source/Img/Pasted image 20240111205702.png]]<br>
  工作原理：</li>
 </ul>
-<p>![[…/Img/Pasted image 20240111205705.png]]</p>
+<p>![[source/Img/Pasted image 20240111205705.png]]</p>
 <h2 id="levelstreamingvolume"><a class="markdownIt-Anchor" href="#levelstreamingvolume">#</a> LevelStreamingVolume</h2>
 <p>这部分可以直接参见知乎文章，暂时没有仔细看</p>
 <h2 id="worldcomposition"><a class="markdownIt-Anchor" href="#worldcomposition">#</a> WorldComposition</h2>
@@ -181,9 +181,9 @@ mnxd = mnxd's blog</title>
 <li>遍历每一个 Tile Level，看是否在某个玩家的对应 TileStreamingDistance 内。</li>
 <li>加入可见的 Levels 集合或者不可见的 Levels 集合。</li>
 <li>CommitTileStreamingState 提交可见的和不可见的 Levels。<br>
-![[…/Img/Pasted image 20240111205717.png]]<br>
-![[…/Img/Pasted image 20240111205721.png]]<br>
-![[…/Img/Pasted image 20240111205724.png]]</li>
+![[source/Img/Pasted image 20240111205717.png]]<br>
+![[source/Img/Pasted image 20240111205721.png]]<br>
+![[source/Img/Pasted image 20240111205724.png]]</li>
 </ol>
 <h2 id="补充"><a class="markdownIt-Anchor" href="#补充">#</a> 补充：</h2>
 <p>WorldComposition 大概配置方法，具体方法见官方文档</p>
@@ -234,13 +234,6 @@ mnxd = mnxd's blog</title>
    <footer>
 
     <div class="meta">
-  <span class="item">
-    <span class="icon">
-      <i class="ic i-calendar-check"></i>
-    </span>
-    <span class="text">Edited on</span>
-    <time title="Modified: 2024-01-11 21:07:07" itemprop="dateModified" datetime="2024-01-11T21:07:07+08:00">2024-01-11</time>
-  </span>
   <span id="Notes/关卡加载和场景流送机制.html" class="item leancloud_visitors" data-flag-title="" title="Views">
       <span class="icon">
         <i class="ic i-eye"></i>
@@ -322,18 +315,6 @@ mnxd = mnxd's blog</title>
 </div>
 
 <nav class="state">
-    <div class="item posts">
-      <a href="/archives/">
-        <span class="count">7</span>
-        <span class="name">posts</span>
-      </a>
-    </div>
-    <div class="item tags">
-      <a href="/tags/">
-        <span class="count">2</span>
-        <span class="name">tags</span>
-      </a>
-    </div>
 </nav>
 
 <div class="social">
@@ -413,69 +394,6 @@ mnxd = mnxd's blog</title>
 <div class="rpost pjax">
   <h2>Random Posts</h2>
   <ul>
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/11/Structured%20Bindings/" title="Untitled">Untitled</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/11/STD%20Optional%20And%20STD%20Variant%20And%20STD%20Any/" title="Untitled">Untitled</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/11/Anisotropic%20Filtering/" title="Untitled">Untitled</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/11/%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8A%A8%E6%80%81%E5%88%87%E6%8D%A2Mesh%E6%9D%90%E8%B4%A8/" title="Untitled">Untitled</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2023/07/12/Event%20Dispatchers/" title="Untitled">Untitled</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/11/Timer%20And%20Benchmark/" title="Untitled">Untitled</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/11/Radom%20Function/" title="Untitled">Untitled</a></span>
-  </li>
-
   </ul>
 </div>
 <div>
@@ -498,13 +416,13 @@ mnxd = mnxd's blog</title>
     <span class="post-meta-item-icon">
       <i class="ic i-chart-area"></i>
     </span>
-    <span title="Symbols count total">6k words</span>
+    <span title="Symbols count total">0k words</span>
 
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="ic i-coffee"></i>
     </span>
-    <span title="Reading time total">5 mins.</span>
+    <span title="Reading time total">1 mins.</span>
   </div>
   <div class="powered-by">
     Powered by <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
