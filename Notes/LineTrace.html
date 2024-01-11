@@ -1,0 +1,485 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="mnxd's blog" href="http://example.com/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="mnxd's blog" href="http://example.com/atom.xml" />
+<link rel="alternate" type="application/json" title="mnxd's blog" href="http://example.com/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+
+<link rel="canonical" href="http://example.com/Notes/LineTrace">
+
+
+
+  <title> |
+mnxd = mnxd's blog</title>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">
+  </h1>
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="Toggle navigation bar">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">mnxd</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gicli3sbvtj20zk0m8x6p.jpg"></li>
+          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giph47e9vtj20zk0m8x6l.jpg"></li>
+          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gicivghyooj20zk0m8dir.jpg"></li>
+          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gicmnywqgpj20zk0m8dwx.jpg"></li>
+          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giph4wqtg4j20zk0m8x6p.jpg"></li>
+          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gipewkhf1zj20zk0m81kx.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="page wrap">
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
+  <link itemprop="mainEntityOfPage" href="http://example.com/Notes/LineTrace.html">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/Cats.png">
+    <meta itemprop="name" content="Arron">
+    <meta itemprop="description" content=", ">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="mnxd's blog">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <p>UKismetSystemLibrary</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0JvYl9feXVhbi9hcnRpY2xlL2RldGFpbHMvMTA4MzQyNTk1">(18 条消息) 【UE4】LineTrace 功能详解_Bob__yuan 的博客 - CSDN 博客</span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC81OTUwNzU1Mw==">UE4 [C++] 自定义 Object/Trace Channel - 知乎 (zhihu.com)</span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vc2hpcm9lL3AvMTQ3MzIwNTkuaHRtbA==">【UE4 C++】UKismetSystemLibrary 源代码 - 砥才人 - 博客园 (cnblogs.com)</span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vc2hpcm9lL3AvMTQ3NDI4MjIuaHRtbA==">【UE4 C++】 射线检测 LineTrace 及 BoxTrace、SphereTrace、CapsuleTrace API - 砥才人 - 博客园 (cnblogs.com)</span></p>
+<h1 id="一-worldh-中的-trace"><a class="markdownIt-Anchor" href="#一-worldh-中的-trace">#</a> 一、World.h 中的 Trace</h1>
+<p>在引擎 World.h 中，</p>
+<p>Trace 类型有两种：LineTrace、SweepTrace（射线方式、扫掠方式）；</p>
+<p>Trace 数量有两种： TraceSingle、TraceMulti（也就是射到一个就停止，还是可以射穿多个）；</p>
+<p>Trace 方式有三种：ByChannel、ByObjectType、ByProfile（通过不同方式选择哪些东西可以 Trace）。</p>
+<p>下边这个函数就是 “射线方式、射一个停止、通过 Channel 查找射到谁” 的一个 LineTrace 方法。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">     *  Trace a ray against the world using a specific channel and return the first blocking hit</span><br><span class="line">     *  @param  OutHit          First blocking hit found</span><br><span class="line">     *  @param  Start           Start location of the ray</span><br><span class="line">     *  @param  End             End location of the ray</span><br><span class="line">     *  @param  TraceChannel    The &#x27;channel&#x27; that this ray is in, used to determine which components to hit</span><br><span class="line">     *  @param  Params          Additional parameters used for the trace</span><br><span class="line">     *     @param     ResponseParam    ResponseContainer to be used for this trace     </span><br><span class="line">     *  @return TRUE if a blocking hit is found</span><br><span class="line">     */</span><br><span class="line">    bool LineTraceSingleByChannel(struct FHitResult&amp; OutHit,const FVector&amp; Start,const FVector&amp; End,ECollisionChannel TraceChannel,const FCollisionQueryParams&amp; Params = FCollisionQueryParams::DefaultQueryParam, const FCollisionResponseParams&amp; ResponseParam = FCollisionResponseParams::DefaultResponseParam) const;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>重点分析上边第三条：Trace 的方式。</p>
+<h2 id="1-bychannel"><a class="markdownIt-Anchor" href="#1-bychannel">#</a> 1 . ByChannel</h2>
+<p>这个名称比较迷惑，通过 Channel 来控制那些东西可以 Trace，比如想只 Trace WorldStatic 的 Object，但其实 TraceChannel 参数不是 “只与 WorldStatic 交互” 的意思，而是 The ‘channel’ that this ray is in（源码注释），也就是这根射线的 Collision Type 是 WorldStatic，所有与 WorldStatic 类型有 Block 的，都会挡住射线，就会出现想发出一根只与 WorldStatic Object 交互的射线，但是却被怪物挡住的情况！</p>
+<p>上边这种需求应该用下边这种 ByObjectType 的 LineTrace 方法。</p>
+<h2 id="2-byobjecttype"><a class="markdownIt-Anchor" href="#2-byobjecttype">#</a> 2 . ByObjectType</h2>
+<p>如果想发出射线，与碰到场景（一般地面、不动的物体等场景物体都是 WorldStatic）就停止，可以用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FHitResult HitResult;</span><br><span class="line">GetWorld()-&gt;LineTraceSingleByObjectType(HitResult, Location, FVector(Location.X, Location.Y, 0), ECC_WorldStatic);</span><br></pre></td></tr></table></figure>
+<h2 id="3-byprofile"><a class="markdownIt-Anchor" href="#3-byprofile">#</a> 3 . ByProfile</h2>
+<p>看参数和注释应该是通过 FName ProfileName 确定射线会射到的物体，还没用过，用到再说～</p>
+<h1 id="二-ukismetsystemlibrary-中的-trace"><a class="markdownIt-Anchor" href="#二-ukismetsystemlibrary-中的-trace">#</a> 二、UKismetSystemLibrary 中的 Trace</h1>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">bool UKismetSystemLibrary::LineTraceSingle(UObject* WorldContextObject, const FVector Start, const FVector End, ETraceTypeQuery TraceChannel, bool bTraceComplex, const TArray&lt;AActor*&gt;&amp; ActorsToIgnore, EDrawDebugTrace::Type DrawDebugType, FHitResult&amp; OutHit, bool bIgnoreSelf, FLinearColor TraceColor, FLinearColor TraceHitColor, float DrawTime)</span><br><span class="line">&#123;</span><br><span class="line">    ECollisionChannel CollisionChannel = UEngineTypes::ConvertToCollisionChannel(TraceChannel);</span><br><span class="line"></span><br><span class="line">    static const FName LineTraceSingleName(TEXT(&quot;LineTraceSingle&quot;));</span><br><span class="line">    FCollisionQueryParams Params = ConfigureCollisionParams(LineTraceSingleName, bTraceComplex, ActorsToIgnore, bIgnoreSelf, WorldContextObject);</span><br><span class="line"></span><br><span class="line">    UWorld* World = GEngine-&gt;GetWorldFromContextObject(WorldContextObject, EGetWorldErrorMode::LogAndReturnNull);</span><br><span class="line">    bool const bHit = World ? World-&gt;LineTraceSingleByChannel(OutHit, Start, End, CollisionChannel, Params) : false;</span><br><span class="line"></span><br><span class="line">#if ENABLE_DRAW_DEBUG</span><br><span class="line">    DrawDebugLineTraceSingle(World, Start, End, DrawDebugType, bHit, OutHit, TraceColor, TraceHitColor, DrawTime);</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">    return bHit;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>可以看到，其实最后还是调的 World-&gt;LineTraceSingleByChannel，UKismetSystemLibrary 里的 Trace 都是调用的 World 里的 Trace。从代码上看，调用对应关系如下（Single 和 Multi 对应关系显然）：</p>
+<p>![[…/Img/Pasted image 20240111204626.png]]</p>
+<p>也就是 UKismetSystemLibrary 里默认是 ByChannel，也有对应其他方式的，比如 UKismetSystemLibrary:: LineTraceSingleForObjects 对应 World-&gt;LineTraceSingleByObjectType，其他同理。</p>
+<p>即 Line 对应 Line，其他对应 Sweep。</p>
+<p>UKismetSystemLibrary 的好处就是可以直接画出 Trace 的起点、终点以及 Trace 的线：<br>
+  ![[…/Img/Pasted image 20240111204645.png]]<br>
+ 例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">if (UKismetSystemLibrary::LineTraceSingleForObjects(</span><br><span class="line">    GetWorld(),</span><br><span class="line">    Location,                                /** Start            */</span><br><span class="line">    FVector(Location.X, Location.Y, 0),        /** End                */</span><br><span class="line">    TArray&lt;TEnumAsByte&lt;EObjectTypeQuery&gt;&gt;&#123; UEngineTypes::ConvertToObjectType(ECC_WorldStatic) &#125;,</span><br><span class="line">    false,                                    /** bTraceComplex    */</span><br><span class="line">    &#123;&#125;,                                        /** ActorsToIgnore    */</span><br><span class="line">    EDrawDebugTrace::Persistent,            /** DrawDebugType    */</span><br><span class="line">    OUT HitResult,                            /** OutHit            */</span><br><span class="line">    true))                                    /** bIgnoreSelf        */</span><br><span class="line">&#123;</span><br><span class="line">    if (HitResult.bBlockingHit)</span><br><span class="line">    &#123;</span><br><span class="line">        TargetLocation = HitResult.Location;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">Edited on</span>
+    <time title="Modified: 2024-01-11 20:57:02" itemprop="dateModified" datetime="2024-01-11T20:57:02+08:00">2024-01-11</time>
+  </span>
+  <span id="Notes/LineTrace.html" class="item leancloud_visitors" data-flag-title="" title="Views">
+      <span class="icon">
+        <i class="ic i-eye"></i>
+      </span>
+      <span class="text">Views</span>
+      <span class="leancloud-visitors-count"></span>
+      <span class="text">times</span>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> Donate</button>
+  <p>Give me a cup of [coffee]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="Arron WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.png" alt="Arron Alipay">
+        <p>Alipay</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/paypal.png" alt="Arron PayPal">
+        <p>PayPal</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>Post author:  </strong>Arron <i class="ic i-at"><em>@</em></i>mnxd's blog
+  </li>
+  <li class="link">
+    <strong>Post link: </strong>
+    <a href="http://example.com/Notes/LineTrace.html" title="">http://example.com/Notes/LineTrace.html</a>
+  </li>
+  <li class="license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="Contents">
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80-worldh-%E4%B8%AD%E7%9A%84-trace"><span class="toc-number">1.</span> <span class="toc-text"> 一、World.h 中的 Trace</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-bychannel"><span class="toc-number">1.1.</span> <span class="toc-text"> 1 . ByChannel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-byobjecttype"><span class="toc-number">1.2.</span> <span class="toc-text"> 2 . ByObjectType</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-byprofile"><span class="toc-number">1.3.</span> <span class="toc-text"> 3 . ByProfile</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C-ukismetsystemlibrary-%E4%B8%AD%E7%9A%84-trace"><span class="toc-number">2.</span> <span class="toc-text"> 二、UKismetSystemLibrary 中的 Trace</span></a></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="Related">
+      </div>
+      <div class="overview panel" data-title="Overview">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Arron"
+      data-src="/images/Cats.png">
+  <p class="name" itemprop="name">Arron</p>
+  <div class="description" itemprop="description"></div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">7</span>
+        <span class="name">posts</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">2</span>
+        <span class="name">tags</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL3lvdXJuYW1l" title="https:&#x2F;&#x2F;github.com&#x2F;yourname"><i class="ic i-github"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>Home</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>About</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>Posts</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>Archives</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>Categories</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>Tags</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-heart"></i>friends</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/links/" rel="section"><i class="ic i-magic"></i>links</a>
+  </li>
+
+  </ul>
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>Random Posts</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2024/01/11/Anisotropic%20Filtering/" title="Untitled">Untitled</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2024/01/11/%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8A%A8%E6%80%81%E5%88%87%E6%8D%A2Mesh%E6%9D%90%E8%B4%A8/" title="Untitled">Untitled</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2024/01/11/Structured%20Bindings/" title="Untitled">Untitled</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2023/07/12/Event%20Dispatchers/" title="Untitled">Untitled</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2024/01/11/STD%20Optional%20And%20STD%20Variant%20And%20STD%20Any/" title="Untitled">Untitled</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2024/01/11/Timer%20And%20Benchmark/" title="Untitled">Untitled</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2024/01/11/Radom%20Function/" title="Untitled">Untitled</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>Recent Comments</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2010 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Arron @ mnxd</span>
+  </div>
+  <div class="count">
+    <span class="post-meta-item-icon">
+      <i class="ic i-chart-area"></i>
+    </span>
+    <span title="Symbols count total">6k words</span>
+
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="ic i-coffee"></i>
+    </span>
+    <span title="Reading time total">5 mins.</span>
+  </div>
+  <div class="powered-by">
+    Powered by <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: 'Notes/LineTrace',
+    favicon: {
+      show: "（●´3｀●）Goooood",
+      hide: "(´Д｀)Booooom"
+    },
+    search : {
+      placeholder: "Search for Posts",
+      empty: "We didn't find any results for the search: ${query}",
+      stats: "${hits} results found in ${time} ms"
+    },
+    valine: true,fancybox: true,
+    copyright: 'Copied to clipboard successfully! <br> All articles in this blog are licensed under <i class="ic i-creative-commons"></i>BY-NC-SA.',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>

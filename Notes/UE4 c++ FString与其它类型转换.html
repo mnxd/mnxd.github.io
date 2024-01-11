@@ -25,12 +25,11 @@
 
   
 
-<link rel="canonical" href="http://example.com/2023/07/12/Event%20Dispatchers/">
+<link rel="canonical" href="http://example.com/Notes/UE4%20c++%20FString%E4%B8%8E%E5%85%B6%E5%AE%83%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2">
 
 
 
-  <title>
- |
+  <title> |
 mnxd = mnxd's blog</title>
 <meta name="generator" content="Hexo 6.3.0"></head>
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -60,32 +59,6 @@ mnxd = mnxd's blog</title>
           
   <h1 itemprop="name headline">
   </h1>
-  
-<div class="meta">
-  <span class="item" title="Created: 2023-07-12 23:37:59">
-    <span class="icon">
-      <i class="ic i-calendar"></i>
-    </span>
-    <span class="text">Posted on</span>
-    <time itemprop="dateCreated datePublished" datetime="2023-07-12T23:37:59+08:00">2023-07-12</time>
-  </span>
-  <span class="item" title="Symbols count in article">
-    <span class="icon">
-      <i class="ic i-pen"></i>
-    </span>
-    <span class="text">Symbols count in article</span>
-    <span>1.3k</span>
-    <span class="text">words</span>
-  </span>
-  <span class="item" title="Reading time">
-    <span class="icon">
-      <i class="ic i-clock"></i>
-    </span>
-    <span class="text">Reading time</span>
-    <span>1 mins.</span>
-  </span>
-</div>
-
 
           </div>
         </div>
@@ -115,12 +88,12 @@ mnxd = mnxd's blog</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giclxp31goj20zk0m8qv5.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giclxxcb6rj20zk0m8b29.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gipeudstjqj20zk0m8k3r.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gipetlbztpj20zk0m84qp.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gipesng5oej20zk0m87d4.jpg"></li>
+          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gipeuv80yoj20zk0m8kjl.jpg"></li>
+          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giclga70tsj20zk0m84mr.jpg"></li>
+          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giclx6phq6j20zk0m8e36.jpg"></li>
+          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gipeyvx1d4j20zk0m8hdt.jpg"></li>
           <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gipevuctzzj20zk0m84qp.jpg"></li>
+          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gicit31ffoj20zk0m8naf.jpg"></li>
         </ul>
       </div>
     </header>
@@ -141,15 +114,9 @@ mnxd = mnxd's blog</title>
       <div class="inner">
         <div id="main" class="pjax">
           
-  <div class="article wrap">
-    
-<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-<i class="ic i-home"></i>
-<span><a href="/">Home</a></span>
-</div>
-
+  <div class="page wrap">
     <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
-  <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/12/Event%20Dispatchers/">
+  <link itemprop="mainEntityOfPage" href="http://example.com/Notes/UE4%20c++%20FString%E4%B8%8E%E5%85%B6%E5%AE%83%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2.html">
 
   <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="image" content="/images/Cats.png">
@@ -164,25 +131,22 @@ mnxd = mnxd's blog</title>
   <div class="body md" itemprop="articleBody">
     
 
-    <p>事件分发器是一种常用的设计模式，它可以将事件的发送者和接收者解耦，从而提高代码的可维护性和可扩展性。在 UE4 中，事件分发器是一种在不同对象或蓝图之间通信的方式。它们允许一个对象广播事件，任何已注册以侦听该事件的其他对象都将收到它。事件分发器通常用于处理游戏中的各种事件，比如玩家输入、碰撞检测、动画播放等等。</p>
-<p>UE4 中的事件分发器通常由两部分组成：事件发送者和事件接收者。事件发送者通常是一个 Actor 或者 Component，它负责发送事件。事件接收者通常是一个 Actor 或者 Component，它负责接收事件并做出相应的响应。</p>
-<p>UE4 中的事件分发器通常使用委托（Delegate）来实现。委托是一种特殊的函数指针，它可以指向一个或多个函数，并且可以在运行时动态添加或删除函数。在 UE4 中，委托通常用于事件的注册和响应。</p>
-<p>下面是一个简单的示例，演示了如何在 UE4 中使用事件分发器：</p>
-<p>首先，在事件发送者中定义一个委托：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DECLARE_EVENT(FMyEventSender, FMyEvent);</span><br></pre></td></tr></table></figure>
-<p>然后，在事件发送者中定义一个事件：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FMyEvent MyEvent;</span><br></pre></td></tr></table></figure>
-<p>接着，在事件发送者中定义一个函数，用于触发事件：</p>
-<p MyEvent.Broadcast();="">void FMyEventSender::TriggerEvent()</p>
-<p>在这个函数中，我们调用了 MyEvent.Broadcast () 函数，这个函数会触发事件，并将事件发送给所有注册了这个事件的委托。</p>
-<p>最后，在事件接收者中注册事件：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MyEventSender-&gt;MyEvent.AddUObject(this, &amp;AFoo::OnMyEvent);</span><br></pre></td></tr></table></figure>
-<p>在这个函数中，我们调用了 MyEventSender-&gt;MyEvent.AddUObject () 函数，这个函数会将当前对象的 OnMyEvent () 函数注册到 MyEvent 事件中。当事件触发时，所有注册了这个事件的委托都会被调用。在事件接收者中，我们可以定义一个函数，用于响应事件：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void AFoo::OnMyEvent() &#123; // Do something &#125;</span><br></pre></td></tr></table></figure>
-<p>在这个函数中，我们可以编写相应的逻辑，用于处理事件。</p>
-<p>总的来说，UE4 中的事件分发器是一种非常强大的工具，它可以帮助我们实现复杂的游戏逻辑，并且提高代码的可维护性和可扩展性</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 在您的头文件中： DECLARE_EVENT(AMyActor, FMyEvent); FMyEvent MyEvent; </span><br><span class="line"></span><br><span class="line">// 在您的源文件中： void AMyActor::SomeFunction() &#123; // 广播事件 MyEvent.Broadcast(); &#125; </span><br><span class="line"></span><br><span class="line">// 在另一个想要侦听事件的对象中：</span><br><span class="line">void AMyOtherActor::BeginPlay()</span><br><span class="line">&#123; </span><br><span class="line">	AMyActor* MyActor = ...;</span><br><span class="line">	// 获取将广播事件的参考 </span><br><span class="line">	MyActor-&gt;MyEvent.AddDynamic(this, &amp;AMyOtherActor::OnMyEvent);</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">void AMyOtherActor::OnMyEvent() &#123;</span><br><span class="line">// 当事件广播时，将调用此函数 </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+    <ul>
+<li>FString to bool, int, float</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//to bool</span><br><span class="line">bool MyBool = MyFString.ToBool();</span><br><span class="line"></span><br><span class="line">//to int</span><br><span class="line">int MyInt = FCString::Atoi(*MyFString);</span><br><span class="line"></span><br><span class="line">//to float</span><br><span class="line">float MyFloat = FCString::Atof(*MyFString);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Float, int, bool, FVector, FVector 2 D, FRotator, FlinearColor, UObject to FString</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//float</span><br><span class="line">FString MyFString = FString::SanitizeFloat(MyFloat);</span><br><span class="line"></span><br><span class="line">//int</span><br><span class="line">FString MyFString = FString::FromInt(MyInt);</span><br><span class="line"></span><br><span class="line">//bool</span><br><span class="line">FString MyFString = MyBool ?TEXT(&quot;true&quot;) :TEXT(&quot;false&quot;);</span><br><span class="line"></span><br><span class="line">//FVector</span><br><span class="line">FString MyFString = MyVector.ToString();</span><br><span class="line"></span><br><span class="line">//FVector2D</span><br><span class="line">FString MyFString = MyVector2D.ToString();</span><br><span class="line"></span><br><span class="line">//FRotator</span><br><span class="line">FString MyFString = MyRotator.ToString();</span><br><span class="line"></span><br><span class="line">//FLinearColor</span><br><span class="line">FString MyFString = MyLinearColor.ToString();</span><br><span class="line"></span><br><span class="line">//UObject</span><br><span class="line">FString MyFString = (MyObj != NULL) ? MyObj-&gt;GetName() : FString(TEXT(&quot;None&quot;));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>FName, FText, char*, std:: string to FString</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//FName</span><br><span class="line">FString MyFString = MyFName.ToString();</span><br><span class="line"></span><br><span class="line">//FText</span><br><span class="line">//注：不可靠，在一些语言中存在损耗</span><br><span class="line">FString MyFString = MyFText.ToString();</span><br><span class="line"></span><br><span class="line">//char*</span><br><span class="line">FString MyFString = FString(MyCharPtr);</span><br><span class="line"></span><br><span class="line">//std::string</span><br><span class="line">FString MyFString = FString(MyStdString.c_str());</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>FString to FName, FText, char*, std::string</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//to FName</span><br><span class="line">//注：不可靠，FName不区分大小写</span><br><span class="line">FName MyFName= FName(*MyFString);</span><br><span class="line"></span><br><span class="line">//to FText    </span><br><span class="line">FText MyFText = FText::FromString(MyFString);</span><br><span class="line"></span><br><span class="line">//to char*</span><br><span class="line">char* MyCharPtr = TCHAR_TO_UTF8(*MyFString);</span><br><span class="line"></span><br><span class="line">//to std::string</span><br><span class="line">std::string MyStdString = TCHAR_TO_UTF8(*MyFString);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
   </div>
 
    <footer>
@@ -193,9 +157,9 @@ mnxd = mnxd's blog</title>
       <i class="ic i-calendar-check"></i>
     </span>
     <span class="text">Edited on</span>
-    <time title="Modified: 2024-01-11 20:01:55" itemprop="dateModified" datetime="2024-01-11T20:01:55+08:00">2024-01-11</time>
+    <time title="Modified: 2024-01-11 20:57:02" itemprop="dateModified" datetime="2024-01-11T20:57:02+08:00">2024-01-11</time>
   </span>
-  <span id="2023/07/12/Event Dispatchers/" class="item leancloud_visitors" data-flag-title="" title="Views">
+  <span id="Notes/UE4 c++ FString与其它类型转换.html" class="item leancloud_visitors" data-flag-title="" title="Views">
       <span class="icon">
         <i class="ic i-eye"></i>
       </span>
@@ -237,7 +201,7 @@ mnxd = mnxd's blog</title>
   </li>
   <li class="link">
     <strong>Post link: </strong>
-    <a href="http://example.com/2023/07/12/Event%20Dispatchers/" title="">http://example.com/2023/07/12/Event Dispatchers/</a>
+    <a href="http://example.com/Notes/UE4%20c++%20FString%E4%B8%8E%E5%85%B6%E5%AE%83%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2.html" title="">http://example.com/Notes/UE4 c++ FString与其它类型转换.html</a>
   </li>
   <li class="license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> unless stating additionally.
@@ -250,23 +214,6 @@ mnxd = mnxd's blog</title>
 </article>
 
   </div>
-  
-
-<div class="post-nav">
-    <div class="item left">
-    </div>
-    <div class="item right">
-      
-
-  <a href="/2024/01/11/STD%20Optional%20And%20STD%20Variant%20And%20STD%20Any/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva1.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giclj61ylzj20zk0m8b29.jpg" title="Untitled">
-  <span class="type">Next Post</span>
-  <span class="category"><i class="ic i-flag"></i> </span>
-  <h3>Untitled</h3>
-  </a>
-
-    </div>
-</div>
-
   
   <div class="wrap" id="comments"></div>
 
@@ -389,7 +336,7 @@ mnxd = mnxd's blog</title>
 <div class="breadcrumb">
 </div>
 
-    <span><a href="/2023/07/12/Event%20Dispatchers/" title="Untitled">Untitled</a></span>
+    <span><a href="/2024/01/11/Radom%20Function/" title="Untitled">Untitled</a></span>
   </li>
 
       
@@ -398,7 +345,7 @@ mnxd = mnxd's blog</title>
 <div class="breadcrumb">
 </div>
 
-    <span><a href="/2024/01/11/Radom%20Function/" title="Untitled">Untitled</a></span>
+    <span><a href="/2023/07/12/Event%20Dispatchers/" title="Untitled">Untitled</a></span>
   </li>
 
       
@@ -425,6 +372,15 @@ mnxd = mnxd's blog</title>
 <div class="breadcrumb">
 </div>
 
+    <span><a href="/2024/01/11/%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8A%A8%E6%80%81%E5%88%87%E6%8D%A2Mesh%E6%9D%90%E8%B4%A8/" title="Untitled">Untitled</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
     <span><a href="/2024/01/11/Structured%20Bindings/" title="Untitled">Untitled</a></span>
   </li>
 
@@ -435,15 +391,6 @@ mnxd = mnxd's blog</title>
 </div>
 
     <span><a href="/2024/01/11/Anisotropic%20Filtering/" title="Untitled">Untitled</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/11/%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8A%A8%E6%80%81%E5%88%87%E6%8D%A2Mesh%E6%9D%90%E8%B4%A8/" title="Untitled">Untitled</a></span>
   </li>
 
   </ul>
@@ -486,7 +433,7 @@ mnxd = mnxd's blog</title>
   </div>
 <script data-config type="text/javascript">
   var LOCAL = {
-    path: '2023/07/12/Event Dispatchers/',
+    path: 'Notes/UE4 c++ FString与其它类型转换',
     favicon: {
       show: "（●´3｀●）Goooood",
       hide: "(´Д｀)Booooom"

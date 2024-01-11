@@ -5,6 +5,57 @@
     "home_page_url": "http://example.com",
     "items": [
         {
+            "id": "http://example.com/2024/01/11/%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8A%A8%E6%80%81%E5%88%87%E6%8D%A2Mesh%E6%9D%90%E8%B4%A8/",
+            "url": "http://example.com/2024/01/11/%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8A%A8%E6%80%81%E5%88%87%E6%8D%A2Mesh%E6%9D%90%E8%B4%A8/",
+            "title": "",
+            "date_published": "2024-01-11T14:18:44.981Z",
+            "content_html": "<p>最终采用方法 4，最简单，合理且对场景的修改最小</p>\n<p>参考下文的实现：</p>\n<p><span class=\"exturl\" data-url=\"aHR0cHM6Ly93d3cuY3h5empkLmNvbS9hcnRpY2xlL3FxXzMwNzIyMzgzLzEwMjUyMDA4OA==\">UE4_ 在游戏中 通过按键或事件 动态修改物体材质_UE4_杨一鸣的博客 - 程序员宅基地_ue4 触碰到的地方变材质 - 程序员宅基地 (cxyzjd.com)</span></p>\n<p>方法 1，2：可以从 static mesh 新建蓝图控制，也可以在已有蓝图中添加 static mesh，从而实现。见上文</p>\n<p>方法 3：还可以在 farmland_area_indoor 中，已经存在的 staticmeshactor，可以直接在 actor 上添加蓝图脚本，在 event tick 中添加如下逻辑</p>\n<p>![[…/Img/Pasted image 20240111005217.png]]<br>\n![[…/Img/Pasted image 20240111005227.png]]</p>\n<p>方法 4： 最简单的办法，直接在子关卡的 Level Blueprint 中添加逻辑，之前的问题是在关卡蓝图中找不到 static mesh component ，但实际上可以直接在世界大纲视图中选中 static mesh 拖到关卡蓝图中，得到如下节点即可。</p>\n<p>![[…/Img/Pasted image 20240111005243.png]]</p>\n<p>![[…/Img/Pasted image 20240111005248.png]]</p>\n",
+            "tags": []
+        },
+        {
+            "id": "http://example.com/2024/01/11/Radom%20Function/",
+            "url": "http://example.com/2024/01/11/Radom%20Function/",
+            "title": "",
+            "date_published": "2024-01-11T14:18:42.005Z",
+            "content_html": "<p>Wang_hash Radom function<br>\n![[…/Img/Pasted image 20240111195749.png]]</p>\n<p>pcg_hash Random function &gt; wang_hash</p>\n<p>![[…/Img/Pasted image 20240111195801.png]]</p>\n<p><span class=\"exturl\" data-url=\"aHR0cHM6Ly93d3cucmVlZGJldGEuY29tL2Jsb2cvcXVpY2stYW5kLWVhc3ktZ3B1LXJhbmRvbS1udW1iZXJzLWluLWQzZDExLw==\">https://www.reedbeta.com/blog/quick-and-easy-gpu-random-numbers-in-d3d11/</span></p>\n<p><span class=\"exturl\" data-url=\"aHR0cHM6Ly93d3cucmVlZGJldGEuY29tL2Jsb2cvaGFzaC1mdW5jdGlvbnMtZm9yLWdwdS1yZW5kZXJpbmcv\">https://www.reedbeta.com/blog/hash-functions-for-gpu-rendering/</span></p>\n",
+            "tags": []
+        },
+        {
+            "id": "http://example.com/2024/01/11/Timer%20And%20Benchmark/",
+            "url": "http://example.com/2024/01/11/Timer%20And%20Benchmark/",
+            "title": "",
+            "date_published": "2024-01-11T14:18:19.594Z",
+            "content_html": "<p>Benchmark 并无确定的完全正确的方法，需要自己评判标准</p>\n<p>可以通过如下方式定义一个 Timer 来查看某个指定代码块的执行时间，但是需要注意以下几点：</p>\n<ol>\n<li>\n<p>Debug 模式下编译器会添加许多额外的代码，因此此时的 Timer 计时并不能用作参考，应用 Release 模式</p>\n</li>\n<li>\n<p>Release 会主动对代码进行部分优化，比如会将一些简单的循环直接输出结果等。</p>\n</li>\n</ol>\n<p>![[…/Img/Pasted image 20240111195929.png]]</p>\n<p>Visual Benchmarking</p>\n<p><span class=\"exturl\" data-url=\"aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj14bEFINGRiTVZuVSZhbXA7bGlzdD1QTGxyQVRmQk5aOThkdWRuTTQ4eWZHVWxkcUdEMFM0RkZiJmFtcDtpbmRleD04MQ==\">https://www.youtube.com/watch?v=xlAH4dbMVnU&amp;list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb&amp;index=81</span></p>\n<p>chrome://tracing</p>\n<p>Code:<span class=\"exturl\" data-url=\"aHR0cHM6Ly9naXN0LmdpdGh1Yi5jb20vVGhlQ2hlcm5vLzMxZjEzNWVlYTZlZTcyOWFiNWYyNmE2OTA4ZWIzYTVlI2ZpbGUtaW5zdHJ1bWVudG9yLWg=\">Instrumentor.h</span>![[…/Img/Instrumentor.h]]</p>\n",
+            "tags": []
+        },
+        {
+            "id": "http://example.com/2024/01/11/Structured%20Bindings/",
+            "url": "http://example.com/2024/01/11/Structured%20Bindings/",
+            "title": "",
+            "date_published": "2024-01-11T14:18:19.569Z",
+            "content_html": "<p>在 C++ 中如果某个函数需要多个返回值，一般会采用 tuple 或者 pair 等方式，或者自定一个结构体作为返回值，如下所示<br>\n！[[…/Img/Pasted image 20240111200136.png]]<br>\n 这里的 get (0) 看起来可读性就比较差，因此，有了 std:: tie.，可以改成如下代码取得所 Create 的 Person 的 name 和 age。也具有一定的可读性<br>\n！[[…/Img/Pasted image 20240111200138.png]]</p>\n<p>![[…/Img/Pasted image 20240111200141.png]]<br>\n 但是 有了 Structured bindings 之后 可以更简单，代码如下，可以简单的通过一行代码实现，并且具有较强的可读性。<br>\n![[…/Img/Pasted image 20240111200201.png]]</p>\n<p>唯一需要注意的是，这个特性只在 C<ins>17 及以上版本支持，要开启的话需要将属性里的 C</ins> 语言设置为 C++17 以上！[[…/Img/Pasted image 20240111200204.png]]</p>\n",
+            "tags": []
+        },
+        {
+            "id": "http://example.com/2024/01/11/Anisotropic%20Filtering/",
+            "url": "http://example.com/2024/01/11/Anisotropic%20Filtering/",
+            "title": "",
+            "date_published": "2024-01-11T14:18:08.619Z",
+            "content_html": "<h2 id=\"texture-filter纹理过滤\"><a class=\"markdownIt-Anchor\" href=\"#texture-filter纹理过滤\">#</a> <strong>texture filter（纹理过滤）：</strong></h2>\n<p>​\t纹理是要贴到三维图形表面的，而如下图所示，三维图形上的 pixel 中心和纹理上的 texel 中心并不一至（pixel 不一定对应 texture 上的采样中心 texel），大小也不一定相同。</p>\n<p><img data-src=\"https://upload-images.jianshu.io/upload_images/3868925-6ec9bca4b9995d38.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240\" alt=\"点采样纹理贴图模型.png\"></p>\n<p>​\t当纹理大于三维图形表面时，导至一个像素被映射到许多纹理像素上；当维理小于三维图形表面时，许多个象素都映射到同一纹理。<br>\n​\t当这些情况发生时，贴图就会变得模糊或发生错位，马赛克。要解决此类问题，必须通过技术平滑 texel 和 pixel 之间的对应。这种技术就是纹理滤波。<br>\n​\t不同的过滤模式，计算复杂度不一样，会得到不同的效果。过滤模式由简单到复杂包括：Nearest Point Sampling（最近点采样），Bilinear（双线性过滤）、Trilinear（三线性过滤）、Anisotropic Filtering（各向异性过滤）。<br>\n​\t本文主要是关于各向异性过滤的课堂报告总结，更多针对各向异性过滤（AF）做介绍。</p>\n<h2 id=\"nearest-point-sampling最近点采样\"><a class=\"markdownIt-Anchor\" href=\"#nearest-point-sampling最近点采样\">#</a> <strong>Nearest Point Sampling（最近点采样）</strong></h2>\n<p>​\t如纹理过滤中所示，每个像素的纹理坐标，并不是刚好对应 Texture 上的一个采样点 texel，为了解决这个问题，可以采用最近点采样方法。</p>\n<p>​\t当纹理的大小与贴图的三维图形的大小差不多时，这种方法非常有效和快捷。如果大小不同，纹理就需要进行放大或缩小，这样，结果就会变得矮胖、变形或模糊</p>\n<p><img data-src=\"https://upload-images.jianshu.io/upload_images/3868925-f60c4de20ed7b1a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240\" alt=\"点采样与双线性.png\"></p>\n<h2 id=\"bilinear双线性过滤\"><a class=\"markdownIt-Anchor\" href=\"#bilinear双线性过滤\">#</a> <strong>Bilinear（双线性过滤）</strong></h2>\n<p>​\t双线性过滤以 pixel 对应的纹理坐标为中心，采该纹理坐标周围 4 个 texel 的像素，再取平均，以平均值作为采样值。</p>\n<p>​\t双线性过滤像素之间的过渡更加平滑，但是它只作用于一个 MipMap Level, 它选取 texel 和 pixel 之间大小最接近的那一层 MipMap 进行采样。当和 pixel 大小匹配的 texel 大小在两层 Mipmap level 之间时，双线性过滤在有些情况效果就不太好。于是就有了三线性过滤。</p>\n<h2 id=\"trilinear三线性过滤\"><a class=\"markdownIt-Anchor\" href=\"#trilinear三线性过滤\">#</a> Trilinear（三线性过滤）</h2>\n<p>三线性过滤以双线性过滤为基础。会对 pixel 大小与 texel 大小最接近的两层 Mipmap level 分别进行双线性过滤，然后再对两层得到的结果进生线性插值。</p>\n<p>三线性过滤在一般情况下效果非常理想了。但是到目前为止，我们均是假设是 texture 投射到屏幕空间是各向同性的。但是当各向异性的情况时，效果仍然不理想，于是产生了 Anisotropic Filtering（各向异性过滤）。</p>\n<p><img data-src=\"https://upload-images.jianshu.io/upload_images/3868925-cfd5bd2244b1c2fa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240\" alt=\"双线性与三线性.png\"></p>\n<h2 id=\"anisotropic各向异性\"><a class=\"markdownIt-Anchor\" href=\"#anisotropic各向异性\">#</a> Anisotropic（各向异性） ：</h2>\n<p>​\tThe physical or chemical properties of all or part of an object that vary with direction.</p>\n<h2 id=\"anisotropic-filtering各向异性过滤\"><a class=\"markdownIt-Anchor\" href=\"#anisotropic-filtering各向异性过滤\">#</a> Anisotropic Filtering（各向异性过滤）：</h2>\n<p>​\tA general texture quality enhancement technique that affects the appearance of textures in certain viewing angles.</p>\n<p>​\t各向异性本身是指物体的部分或者全部的物理或化学性质会随着方向的不同而有所变化的特性。而在图形学（纹理）中，我们认为，当所要贴图的像素点与屏幕成一定夹角时则为各向异性，否则为各向同性。也可以这样理解，当一个 texture 贴到三维表面上从 Camera 看来没有变形，投射到屏幕空间中后 U 方向和 V 方向比例仍然是一样的，便可以理解成各向同性。反之则认为是各向异性。如下图机场道路所示，</p>\n<p><img data-src=\"https://upload-images.jianshu.io/upload_images/3868925-566ac43af829efc8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240\" alt=\"三线性与各向异性对比.jpg\"></p>\n<p>可以近似的将道路尽头远处看作向屏幕远处的延申，亦即与屏幕成一定的夹角，此时则为各向异性，纹理贴图时远处的像素点 piexl 与屏幕成一定夹角，可以明显得见道路远处的像素细节较差，纹理整体较为模糊。这是由于线性过滤（双线性与三线性）纹理贴图方式本身的缺陷所导致的。<br>\n​\t而各向异性过滤把纹理与屏幕空间的角度这个因素考虑时去。简单地说，它会考滤一个 pixel (x:y=1:1) 对应到纹理空间中在 u 和 v 方向上 u 和 v 的比例关系，当 u: v 不是 1:1 时，将会按比例在各方向上采样不同数量的点来计算最终的结果 (这时采样就有可能是长方形区域)。<br>\n​\t注：事实上各向异性过滤具体还是由硬件实现，这里所讲的还是他的采样方法。各向异性过滤本身相对于双线性与三线性来说并非相互独立的关系，各向异性过滤是在线性过滤的基础上。对采样方法的一种改进。</p>\n",
+            "tags": [
+                "各向异性",
+                "纹理"
+            ]
+        },
+        {
+            "id": "http://example.com/2024/01/11/STD%20Optional%20And%20STD%20Variant%20And%20STD%20Any/",
+            "url": "http://example.com/2024/01/11/STD%20Optional%20And%20STD%20Variant%20And%20STD%20Any/",
+            "title": "",
+            "date_published": "2024-01-11T14:16:45.110Z",
+            "content_html": "<p>在做一些类似文件读取类的工作时，可能需要判断文件是否成功被读取，并获得所读取到的值，常见实现如下：</p>\n<p>但是实际上，data 等于空字符串的情况也不止一种，可能是文件读取失败，也可能是文件本身就没有内容<br>\n！[[…/Img/Pasted image 20240111193828.png]]</p>\n<p>此时为了判断文件读取状态，也许会新增一个 bool 变量如下<br>\n！[[…/Img/Pasted image 20240111193842.png]]</p>\n<h1 id=\"std-optional\"><a class=\"markdownIt-Anchor\" href=\"#std-optional\">#</a> std ::optional</h1>\n<p>但是这样代码看起来有些冗余，此时可以用到 std:: optional 如下</p>\n<p>![[…/Img/Pasted image 20240111193855.png]]</p>\n<p>在此基础上，某些情况时我们并不是一定要从这个文件中读取，也可以直接给它默认值，这个时候可以使用.value_or () 如下，此时可以看到，在没有成功读取 data 文件数据时，将赋予了默认值，并打印出日志告知没有成功打开文件。<br>\n![[…/Img/Pasted image 20240111193906.png]]</p>\n<h1 id=\"stdvariant\"><a class=\"markdownIt-Anchor\" href=\"#stdvariant\">#</a> std::variant</h1>\n<p>但是，其实在此基础上还有进一步优化空间，就是 std::Variant，这个特性使得我们可以在一个变量里储存多种类型的数据，它的使用方法如下。</p>\n<p>这里其实可以将整个 std::variant 理解为一个被指定为可能是 string 也可能是 int 的变量。</p>\n<p>如果我们赋值为 string，则可以通过 string 类型读取，如果赋值为 int 则可以通过 int 类型读取</p>\n<p>![[…/Img/Pasted image 20240111193918.png]]</p>\n<p>然后在此基础上，我们可以将前面 optional 的代码改成如下，通过 ErrorCode 来进行更多的状态判断</p>\n<p>![[…/Img/Pasted image 20240111193931.png]]</p>\n<h1 id=\"stdany\"><a class=\"markdownIt-Anchor\" href=\"#stdany\">#</a> std::any</h1>\n<p>相比较于 std:: variant，std:: any 更加简单。可以直接存储任何类型的数据，但同样 std:: variant 要求你在使用时列举出所有可能的类型，这样更能保证类型安全，variant 是一个类型安全的 union，而 Any，阅读源码可以看出，在类型较少时，它是和 variant 一样的通过 union 的存储方式，而当类型更多时，则是 void* 的存储，以便动态分配内存<br>\n！[[…/Img/Pasted image 20240111193940.png]]</p>\n",
+            "tags": []
+        },
+        {
             "id": "http://example.com/2023/07/12/Event%20Dispatchers/",
             "url": "http://example.com/2023/07/12/Event%20Dispatchers/",
             "title": "",

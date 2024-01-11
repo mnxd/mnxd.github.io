@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://example.com</id>
+    <title>mnxd&#39;s blog • Posts by &#34;各向异性&#34; tag</title>
+    <link href="http://example.com" />
+    <updated>2024-01-11T14:18:08.619Z</updated>
+    <category term="各向异性" />
+    <category term="纹理" />
+    <entry>
+        <id>http://example.com/2024/01/11/Anisotropic%20Filtering/</id>
+        <title></title>
+        <link rel="alternate" href="http://example.com/2024/01/11/Anisotropic%20Filtering/"/>
+        <content type="html">&lt;h2 id=&#34;texture-filter纹理过滤&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#texture-filter纹理过滤&#34;&gt;#&lt;/a&gt; &lt;strong&gt;texture filter（纹理过滤）：&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;​	纹理是要贴到三维图形表面的，而如下图所示，三维图形上的 pixel 中心和纹理上的 texel 中心并不一至（pixel 不一定对应 texture 上的采样中心 texel），大小也不一定相同。&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://upload-images.jianshu.io/upload_images/3868925-6ec9bca4b9995d38.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;点采样纹理贴图模型.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;​	当纹理大于三维图形表面时，导至一个像素被映射到许多纹理像素上；当维理小于三维图形表面时，许多个象素都映射到同一纹理。&lt;br&gt;
+​	当这些情况发生时，贴图就会变得模糊或发生错位，马赛克。要解决此类问题，必须通过技术平滑 texel 和 pixel 之间的对应。这种技术就是纹理滤波。&lt;br&gt;
+​	不同的过滤模式，计算复杂度不一样，会得到不同的效果。过滤模式由简单到复杂包括：Nearest Point Sampling（最近点采样），Bilinear（双线性过滤）、Trilinear（三线性过滤）、Anisotropic Filtering（各向异性过滤）。&lt;br&gt;
+​	本文主要是关于各向异性过滤的课堂报告总结，更多针对各向异性过滤（AF）做介绍。&lt;/p&gt;
+&lt;h2 id=&#34;nearest-point-sampling最近点采样&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#nearest-point-sampling最近点采样&#34;&gt;#&lt;/a&gt; &lt;strong&gt;Nearest Point Sampling（最近点采样）&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;​	如纹理过滤中所示，每个像素的纹理坐标，并不是刚好对应 Texture 上的一个采样点 texel，为了解决这个问题，可以采用最近点采样方法。&lt;/p&gt;
+&lt;p&gt;​	当纹理的大小与贴图的三维图形的大小差不多时，这种方法非常有效和快捷。如果大小不同，纹理就需要进行放大或缩小，这样，结果就会变得矮胖、变形或模糊&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://upload-images.jianshu.io/upload_images/3868925-f60c4de20ed7b1a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;点采样与双线性.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;bilinear双线性过滤&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#bilinear双线性过滤&#34;&gt;#&lt;/a&gt; &lt;strong&gt;Bilinear（双线性过滤）&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;​	双线性过滤以 pixel 对应的纹理坐标为中心，采该纹理坐标周围 4 个 texel 的像素，再取平均，以平均值作为采样值。&lt;/p&gt;
+&lt;p&gt;​	双线性过滤像素之间的过渡更加平滑，但是它只作用于一个 MipMap Level, 它选取 texel 和 pixel 之间大小最接近的那一层 MipMap 进行采样。当和 pixel 大小匹配的 texel 大小在两层 Mipmap level 之间时，双线性过滤在有些情况效果就不太好。于是就有了三线性过滤。&lt;/p&gt;
+&lt;h2 id=&#34;trilinear三线性过滤&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#trilinear三线性过滤&#34;&gt;#&lt;/a&gt; Trilinear（三线性过滤）&lt;/h2&gt;
+&lt;p&gt;三线性过滤以双线性过滤为基础。会对 pixel 大小与 texel 大小最接近的两层 Mipmap level 分别进行双线性过滤，然后再对两层得到的结果进生线性插值。&lt;/p&gt;
+&lt;p&gt;三线性过滤在一般情况下效果非常理想了。但是到目前为止，我们均是假设是 texture 投射到屏幕空间是各向同性的。但是当各向异性的情况时，效果仍然不理想，于是产生了 Anisotropic Filtering（各向异性过滤）。&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://upload-images.jianshu.io/upload_images/3868925-cfd5bd2244b1c2fa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;双线性与三线性.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;anisotropic各向异性&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#anisotropic各向异性&#34;&gt;#&lt;/a&gt; Anisotropic（各向异性） ：&lt;/h2&gt;
+&lt;p&gt;​	The physical or chemical properties of all or part of an object that vary with direction.&lt;/p&gt;
+&lt;h2 id=&#34;anisotropic-filtering各向异性过滤&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#anisotropic-filtering各向异性过滤&#34;&gt;#&lt;/a&gt; Anisotropic Filtering（各向异性过滤）：&lt;/h2&gt;
+&lt;p&gt;​	A general texture quality enhancement technique that affects the appearance of textures in certain viewing angles.&lt;/p&gt;
+&lt;p&gt;​	各向异性本身是指物体的部分或者全部的物理或化学性质会随着方向的不同而有所变化的特性。而在图形学（纹理）中，我们认为，当所要贴图的像素点与屏幕成一定夹角时则为各向异性，否则为各向同性。也可以这样理解，当一个 texture 贴到三维表面上从 Camera 看来没有变形，投射到屏幕空间中后 U 方向和 V 方向比例仍然是一样的，便可以理解成各向同性。反之则认为是各向异性。如下图机场道路所示，&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://upload-images.jianshu.io/upload_images/3868925-566ac43af829efc8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;三线性与各向异性对比.jpg&#34;&gt;&lt;/p&gt;
+&lt;p&gt;可以近似的将道路尽头远处看作向屏幕远处的延申，亦即与屏幕成一定的夹角，此时则为各向异性，纹理贴图时远处的像素点 piexl 与屏幕成一定夹角，可以明显得见道路远处的像素细节较差，纹理整体较为模糊。这是由于线性过滤（双线性与三线性）纹理贴图方式本身的缺陷所导致的。&lt;br&gt;
+​	而各向异性过滤把纹理与屏幕空间的角度这个因素考虑时去。简单地说，它会考滤一个 pixel (x:y=1:1) 对应到纹理空间中在 u 和 v 方向上 u 和 v 的比例关系，当 u: v 不是 1:1 时，将会按比例在各方向上采样不同数量的点来计算最终的结果 (这时采样就有可能是长方形区域)。&lt;br&gt;
+​	注：事实上各向异性过滤具体还是由硬件实现，这里所讲的还是他的采样方法。各向异性过滤本身相对于双线性与三线性来说并非相互独立的关系，各向异性过滤是在线性过滤的基础上。对采样方法的一种改进。&lt;/p&gt;
+</content>
+        <category term="各向异性" />
+        <category term="纹理" />
+        <updated>2024-01-11T14:18:08.619Z</updated>
+    </entry>
+</feed>

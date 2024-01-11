@@ -24,8 +24,10 @@
 <link rel="stylesheet" href="/css/app.css?v=0.2.5">
 
   
+  <meta name="keywords" content="各向异性,纹理" />
 
-<link rel="canonical" href="http://example.com/2023/07/12/Event%20Dispatchers/">
+
+<link rel="canonical" href="http://example.com/2024/01/11/Anisotropic%20Filtering/">
 
 
 
@@ -62,19 +64,19 @@ mnxd = mnxd's blog</title>
   </h1>
   
 <div class="meta">
-  <span class="item" title="Created: 2023-07-12 23:37:59">
+  <span class="item" title="Created: 2024-01-11 22:18:08">
     <span class="icon">
       <i class="ic i-calendar"></i>
     </span>
     <span class="text">Posted on</span>
-    <time itemprop="dateCreated datePublished" datetime="2023-07-12T23:37:59+08:00">2023-07-12</time>
+    <time itemprop="dateCreated datePublished" datetime="2024-01-11T22:18:08+08:00">2024-01-11</time>
   </span>
   <span class="item" title="Symbols count in article">
     <span class="icon">
       <i class="ic i-pen"></i>
     </span>
     <span class="text">Symbols count in article</span>
-    <span>1.3k</span>
+    <span>1.8k</span>
     <span class="text">words</span>
   </span>
   <span class="item" title="Reading time">
@@ -82,7 +84,7 @@ mnxd = mnxd's blog</title>
       <i class="ic i-clock"></i>
     </span>
     <span class="text">Reading time</span>
-    <span>1 mins.</span>
+    <span>2 mins.</span>
   </span>
 </div>
 
@@ -115,12 +117,12 @@ mnxd = mnxd's blog</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giclxp31goj20zk0m8qv5.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giclxxcb6rj20zk0m8b29.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gipeudstjqj20zk0m8k3r.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gipetlbztpj20zk0m84qp.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gipesng5oej20zk0m87d4.jpg"></li>
-          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gipevuctzzj20zk0m84qp.jpg"></li>
+          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giclhnx9glj20zk0m8npd.jpg"></li>
+          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giciszlczyj20zk0m816d.jpg"></li>
+          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gipeybxm1pj20zk0m8niv.jpg"></li>
+          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giclip4jbpj20zk0m87cv.jpg"></li>
+          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gipesrnqv3j20zk0m8ava.jpg"></li>
+          <li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gipex2cdtbj20zk0m8x6p.jpg"></li>
         </ul>
       </div>
     </header>
@@ -149,7 +151,7 @@ mnxd = mnxd's blog</title>
 </div>
 
     <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
-  <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/12/Event%20Dispatchers/">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/11/Anisotropic%20Filtering/">
 
   <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="image" content="/images/Cats.png">
@@ -164,25 +166,38 @@ mnxd = mnxd's blog</title>
   <div class="body md" itemprop="articleBody">
     
 
-    <p>事件分发器是一种常用的设计模式，它可以将事件的发送者和接收者解耦，从而提高代码的可维护性和可扩展性。在 UE4 中，事件分发器是一种在不同对象或蓝图之间通信的方式。它们允许一个对象广播事件，任何已注册以侦听该事件的其他对象都将收到它。事件分发器通常用于处理游戏中的各种事件，比如玩家输入、碰撞检测、动画播放等等。</p>
-<p>UE4 中的事件分发器通常由两部分组成：事件发送者和事件接收者。事件发送者通常是一个 Actor 或者 Component，它负责发送事件。事件接收者通常是一个 Actor 或者 Component，它负责接收事件并做出相应的响应。</p>
-<p>UE4 中的事件分发器通常使用委托（Delegate）来实现。委托是一种特殊的函数指针，它可以指向一个或多个函数，并且可以在运行时动态添加或删除函数。在 UE4 中，委托通常用于事件的注册和响应。</p>
-<p>下面是一个简单的示例，演示了如何在 UE4 中使用事件分发器：</p>
-<p>首先，在事件发送者中定义一个委托：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DECLARE_EVENT(FMyEventSender, FMyEvent);</span><br></pre></td></tr></table></figure>
-<p>然后，在事件发送者中定义一个事件：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FMyEvent MyEvent;</span><br></pre></td></tr></table></figure>
-<p>接着，在事件发送者中定义一个函数，用于触发事件：</p>
-<p MyEvent.Broadcast();="">void FMyEventSender::TriggerEvent()</p>
-<p>在这个函数中，我们调用了 MyEvent.Broadcast () 函数，这个函数会触发事件，并将事件发送给所有注册了这个事件的委托。</p>
-<p>最后，在事件接收者中注册事件：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MyEventSender-&gt;MyEvent.AddUObject(this, &amp;AFoo::OnMyEvent);</span><br></pre></td></tr></table></figure>
-<p>在这个函数中，我们调用了 MyEventSender-&gt;MyEvent.AddUObject () 函数，这个函数会将当前对象的 OnMyEvent () 函数注册到 MyEvent 事件中。当事件触发时，所有注册了这个事件的委托都会被调用。在事件接收者中，我们可以定义一个函数，用于响应事件：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void AFoo::OnMyEvent() &#123; // Do something &#125;</span><br></pre></td></tr></table></figure>
-<p>在这个函数中，我们可以编写相应的逻辑，用于处理事件。</p>
-<p>总的来说，UE4 中的事件分发器是一种非常强大的工具，它可以帮助我们实现复杂的游戏逻辑，并且提高代码的可维护性和可扩展性</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 在您的头文件中： DECLARE_EVENT(AMyActor, FMyEvent); FMyEvent MyEvent; </span><br><span class="line"></span><br><span class="line">// 在您的源文件中： void AMyActor::SomeFunction() &#123; // 广播事件 MyEvent.Broadcast(); &#125; </span><br><span class="line"></span><br><span class="line">// 在另一个想要侦听事件的对象中：</span><br><span class="line">void AMyOtherActor::BeginPlay()</span><br><span class="line">&#123; </span><br><span class="line">	AMyActor* MyActor = ...;</span><br><span class="line">	// 获取将广播事件的参考 </span><br><span class="line">	MyActor-&gt;MyEvent.AddDynamic(this, &amp;AMyOtherActor::OnMyEvent);</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">void AMyOtherActor::OnMyEvent() &#123;</span><br><span class="line">// 当事件广播时，将调用此函数 </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <h2 id="texture-filter纹理过滤"><a class="markdownIt-Anchor" href="#texture-filter纹理过滤">#</a> <strong>texture filter（纹理过滤）：</strong></h2>
+<p>​	纹理是要贴到三维图形表面的，而如下图所示，三维图形上的 pixel 中心和纹理上的 texel 中心并不一至（pixel 不一定对应 texture 上的采样中心 texel），大小也不一定相同。</p>
+<p><img data-src="https://upload-images.jianshu.io/upload_images/3868925-6ec9bca4b9995d38.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="点采样纹理贴图模型.png"></p>
+<p>​	当纹理大于三维图形表面时，导至一个像素被映射到许多纹理像素上；当维理小于三维图形表面时，许多个象素都映射到同一纹理。<br>
+​	当这些情况发生时，贴图就会变得模糊或发生错位，马赛克。要解决此类问题，必须通过技术平滑 texel 和 pixel 之间的对应。这种技术就是纹理滤波。<br>
+​	不同的过滤模式，计算复杂度不一样，会得到不同的效果。过滤模式由简单到复杂包括：Nearest Point Sampling（最近点采样），Bilinear（双线性过滤）、Trilinear（三线性过滤）、Anisotropic Filtering（各向异性过滤）。<br>
+​	本文主要是关于各向异性过滤的课堂报告总结，更多针对各向异性过滤（AF）做介绍。</p>
+<h2 id="nearest-point-sampling最近点采样"><a class="markdownIt-Anchor" href="#nearest-point-sampling最近点采样">#</a> <strong>Nearest Point Sampling（最近点采样）</strong></h2>
+<p>​	如纹理过滤中所示，每个像素的纹理坐标，并不是刚好对应 Texture 上的一个采样点 texel，为了解决这个问题，可以采用最近点采样方法。</p>
+<p>​	当纹理的大小与贴图的三维图形的大小差不多时，这种方法非常有效和快捷。如果大小不同，纹理就需要进行放大或缩小，这样，结果就会变得矮胖、变形或模糊</p>
+<p><img data-src="https://upload-images.jianshu.io/upload_images/3868925-f60c4de20ed7b1a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="点采样与双线性.png"></p>
+<h2 id="bilinear双线性过滤"><a class="markdownIt-Anchor" href="#bilinear双线性过滤">#</a> <strong>Bilinear（双线性过滤）</strong></h2>
+<p>​	双线性过滤以 pixel 对应的纹理坐标为中心，采该纹理坐标周围 4 个 texel 的像素，再取平均，以平均值作为采样值。</p>
+<p>​	双线性过滤像素之间的过渡更加平滑，但是它只作用于一个 MipMap Level, 它选取 texel 和 pixel 之间大小最接近的那一层 MipMap 进行采样。当和 pixel 大小匹配的 texel 大小在两层 Mipmap level 之间时，双线性过滤在有些情况效果就不太好。于是就有了三线性过滤。</p>
+<h2 id="trilinear三线性过滤"><a class="markdownIt-Anchor" href="#trilinear三线性过滤">#</a> Trilinear（三线性过滤）</h2>
+<p>三线性过滤以双线性过滤为基础。会对 pixel 大小与 texel 大小最接近的两层 Mipmap level 分别进行双线性过滤，然后再对两层得到的结果进生线性插值。</p>
+<p>三线性过滤在一般情况下效果非常理想了。但是到目前为止，我们均是假设是 texture 投射到屏幕空间是各向同性的。但是当各向异性的情况时，效果仍然不理想，于是产生了 Anisotropic Filtering（各向异性过滤）。</p>
+<p><img data-src="https://upload-images.jianshu.io/upload_images/3868925-cfd5bd2244b1c2fa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="双线性与三线性.png"></p>
+<h2 id="anisotropic各向异性"><a class="markdownIt-Anchor" href="#anisotropic各向异性">#</a> Anisotropic（各向异性） ：</h2>
+<p>​	The physical or chemical properties of all or part of an object that vary with direction.</p>
+<h2 id="anisotropic-filtering各向异性过滤"><a class="markdownIt-Anchor" href="#anisotropic-filtering各向异性过滤">#</a> Anisotropic Filtering（各向异性过滤）：</h2>
+<p>​	A general texture quality enhancement technique that affects the appearance of textures in certain viewing angles.</p>
+<p>​	各向异性本身是指物体的部分或者全部的物理或化学性质会随着方向的不同而有所变化的特性。而在图形学（纹理）中，我们认为，当所要贴图的像素点与屏幕成一定夹角时则为各向异性，否则为各向同性。也可以这样理解，当一个 texture 贴到三维表面上从 Camera 看来没有变形，投射到屏幕空间中后 U 方向和 V 方向比例仍然是一样的，便可以理解成各向同性。反之则认为是各向异性。如下图机场道路所示，</p>
+<p><img data-src="https://upload-images.jianshu.io/upload_images/3868925-566ac43af829efc8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="三线性与各向异性对比.jpg"></p>
+<p>可以近似的将道路尽头远处看作向屏幕远处的延申，亦即与屏幕成一定的夹角，此时则为各向异性，纹理贴图时远处的像素点 piexl 与屏幕成一定夹角，可以明显得见道路远处的像素细节较差，纹理整体较为模糊。这是由于线性过滤（双线性与三线性）纹理贴图方式本身的缺陷所导致的。<br>
+​	而各向异性过滤把纹理与屏幕空间的角度这个因素考虑时去。简单地说，它会考滤一个 pixel (x:y=1:1) 对应到纹理空间中在 u 和 v 方向上 u 和 v 的比例关系，当 u: v 不是 1:1 时，将会按比例在各方向上采样不同数量的点来计算最终的结果 (这时采样就有可能是长方形区域)。<br>
+​	注：事实上各向异性过滤具体还是由硬件实现，这里所讲的还是他的采样方法。各向异性过滤本身相对于双线性与三线性来说并非相互独立的关系，各向异性过滤是在线性过滤的基础上。对采样方法的一种改进。</p>
 
+      <div class="tags">
+          <a href="/tags/%E5%90%84%E5%90%91%E5%BC%82%E6%80%A7/" rel="tag"><i class="ic i-tag"></i> 各向异性</a>
+          <a href="/tags/%E7%BA%B9%E7%90%86/" rel="tag"><i class="ic i-tag"></i> 纹理</a>
+      </div>
   </div>
 
    <footer>
@@ -193,9 +208,9 @@ mnxd = mnxd's blog</title>
       <i class="ic i-calendar-check"></i>
     </span>
     <span class="text">Edited on</span>
-    <time title="Modified: 2024-01-11 20:01:55" itemprop="dateModified" datetime="2024-01-11T20:01:55+08:00">2024-01-11</time>
+    <time title="Modified: 2024-01-11 20:47:01" itemprop="dateModified" datetime="2024-01-11T20:47:01+08:00">2024-01-11</time>
   </span>
-  <span id="2023/07/12/Event Dispatchers/" class="item leancloud_visitors" data-flag-title="" title="Views">
+  <span id="2024/01/11/Anisotropic Filtering/" class="item leancloud_visitors" data-flag-title="" title="Views">
       <span class="icon">
         <i class="ic i-eye"></i>
       </span>
@@ -237,7 +252,7 @@ mnxd = mnxd's blog</title>
   </li>
   <li class="link">
     <strong>Post link: </strong>
-    <a href="http://example.com/2023/07/12/Event%20Dispatchers/" title="">http://example.com/2023/07/12/Event Dispatchers/</a>
+    <a href="http://example.com/2024/01/11/Anisotropic%20Filtering/" title="">http://example.com/2024/01/11/Anisotropic Filtering/</a>
   </li>
   <li class="license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> unless stating additionally.
@@ -254,11 +269,19 @@ mnxd = mnxd's blog</title>
 
 <div class="post-nav">
     <div class="item left">
+      
+
+  <a href="/2024/01/11/STD%20Optional%20And%20STD%20Variant%20And%20STD%20Any/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva1.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giciryrr3rj20zk0m8nhk.jpg" title="Untitled">
+  <span class="type">Previous Post</span>
+  <span class="category"><i class="ic i-flag"></i> </span>
+  <h3>Untitled</h3>
+  </a>
+
     </div>
     <div class="item right">
       
 
-  <a href="/2024/01/11/STD%20Optional%20And%20STD%20Variant%20And%20STD%20Any/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva1.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giclj61ylzj20zk0m8b29.jpg" title="Untitled">
+  <a href="/2024/01/11/Structured%20Bindings/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva1.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giclhnx9glj20zk0m8npd.jpg" title="Untitled">
   <span class="type">Next Post</span>
   <span class="category"><i class="ic i-flag"></i> </span>
   <h3>Untitled</h3>
@@ -280,6 +303,7 @@ mnxd = mnxd's blog</title>
   <div class="panels">
     <div class="inner">
       <div class="contents panel pjax" data-title="Contents">
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#texture-filter%E7%BA%B9%E7%90%86%E8%BF%87%E6%BB%A4"><span class="toc-number">1.</span> <span class="toc-text"> texture filter（纹理过滤）：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nearest-point-sampling%E6%9C%80%E8%BF%91%E7%82%B9%E9%87%87%E6%A0%B7"><span class="toc-number">2.</span> <span class="toc-text"> Nearest Point Sampling（最近点采样）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bilinear%E5%8F%8C%E7%BA%BF%E6%80%A7%E8%BF%87%E6%BB%A4"><span class="toc-number">3.</span> <span class="toc-text"> Bilinear（双线性过滤）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#trilinear%E4%B8%89%E7%BA%BF%E6%80%A7%E8%BF%87%E6%BB%A4"><span class="toc-number">4.</span> <span class="toc-text"> Trilinear（三线性过滤）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#anisotropic%E5%90%84%E5%90%91%E5%BC%82%E6%80%A7"><span class="toc-number">5.</span> <span class="toc-text"> Anisotropic（各向异性） ：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#anisotropic-filtering%E5%90%84%E5%90%91%E5%BC%82%E6%80%A7%E8%BF%87%E6%BB%A4"><span class="toc-number">6.</span> <span class="toc-text"> Anisotropic Filtering（各向异性过滤）：</span></a></li></ol>
       </div>
       <div class="related panel pjax" data-title="Related">
       </div>
@@ -362,10 +386,12 @@ mnxd = mnxd's blog</title>
 
   <ul id="quick">
     <li class="prev pjax">
+        <a href="/2024/01/11/STD%20Optional%20And%20STD%20Variant%20And%20STD%20Any/" rel="prev" title="Previous Post"><i class="ic i-chevron-left"></i></a>
     </li>
     <li class="up"><i class="ic i-arrow-up"></i></li>
     <li class="down"><i class="ic i-arrow-down"></i></li>
     <li class="next pjax">
+        <a href="/2024/01/11/Structured%20Bindings/" rel="next" title="Next Post"><i class="ic i-chevron-right"></i></a>
     </li>
     <li class="percent"></li>
   </ul>
@@ -398,7 +424,7 @@ mnxd = mnxd's blog</title>
 <div class="breadcrumb">
 </div>
 
-    <span><a href="/2024/01/11/Radom%20Function/" title="Untitled">Untitled</a></span>
+    <span><a href="/2024/01/11/%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8A%A8%E6%80%81%E5%88%87%E6%8D%A2Mesh%E6%9D%90%E8%B4%A8/" title="Untitled">Untitled</a></span>
   </li>
 
       
@@ -407,7 +433,16 @@ mnxd = mnxd's blog</title>
 <div class="breadcrumb">
 </div>
 
-    <span><a href="/2024/01/11/STD%20Optional%20And%20STD%20Variant%20And%20STD%20Any/" title="Untitled">Untitled</a></span>
+    <span><a href="/2024/01/11/Anisotropic%20Filtering/" title="Untitled">Untitled</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2024/01/11/Radom%20Function/" title="Untitled">Untitled</a></span>
   </li>
 
       
@@ -434,16 +469,7 @@ mnxd = mnxd's blog</title>
 <div class="breadcrumb">
 </div>
 
-    <span><a href="/2024/01/11/Anisotropic%20Filtering/" title="Untitled">Untitled</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/11/%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8A%A8%E6%80%81%E5%88%87%E6%8D%A2Mesh%E6%9D%90%E8%B4%A8/" title="Untitled">Untitled</a></span>
+    <span><a href="/2024/01/11/STD%20Optional%20And%20STD%20Variant%20And%20STD%20Any/" title="Untitled">Untitled</a></span>
   </li>
 
   </ul>
@@ -486,7 +512,7 @@ mnxd = mnxd's blog</title>
   </div>
 <script data-config type="text/javascript">
   var LOCAL = {
-    path: '2023/07/12/Event Dispatchers/',
+    path: '2024/01/11/Anisotropic Filtering/',
     favicon: {
       show: "（●´3｀●）Goooood",
       hide: "(´Д｀)Booooom"
